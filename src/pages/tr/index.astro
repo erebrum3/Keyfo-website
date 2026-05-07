@@ -1,0 +1,297 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import InfoBar from '../../components/InfoBar.astro';
+import PopularDishes from '../../components/PopularDishes.astro';
+import MenuSection from '../../components/MenuSection.astro';
+import Gallery from '../../components/Gallery.astro';
+import Reviews from '../../components/Reviews.astro';
+import Location from '../../components/Location.astro';
+import FAQ from '../../components/FAQ.astro';
+import Footer from '../../components/Footer.astro';
+
+import { BUSINESS } from '../../data/business';
+import { MENU, formatPriceEurNl } from '../../data/menu';
+import { CONTENT_TR } from '../../data/content.tr';
+
+const featured = MENU.categories
+  .flatMap((c) => c.items.filter((i) => i.featured).map((i) => ({ ...i, categoryTitle: c.titleTr })))
+  .slice(0, 4)
+  .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur) }));
+
+const hoursRange = `${BUSINESS.openingHours.opens}-${BUSINESS.openingHours.closes}`;
+const hoursLineTr = `Her gün ${hoursRange}`;
+const hoursCompactTr = `Her gün ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes}`;
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`;
+
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: BUSINESS.canonicalName,
+  url: BUSINESS.website.trUrl,
+  image: [
+    `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`,
+    `${SITE_ORIGIN}/assets/keyfo/sign.jpg`,
+    `${SITE_ORIGIN}/assets/keyfo/interior-wide.jpg`
+  ],
+  telephone: BUSINESS.phone,
+  email: BUSINESS.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    postalCode: BUSINESS.address.postalCode,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressCountry: BUSINESS.address.addressCountry
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [...BUSINESS.openingHours.days],
+    opens: BUSINESS.openingHours.opens,
+    closes: BUSINESS.openingHours.closes
+  },
+  priceRange: BUSINESS.priceRange,
+  servesCuisine: BUSINESS.servesCuisine,
+  areaServed: {
+    '@type': BUSINESS.areaServed.type,
+    name: BUSINESS.areaServed.name
+  },
+  currenciesAccepted: BUSINESS.currency,
+  menu: `${BUSINESS.website.nlUrl}#menu`,
+  sameAs: [
+    BUSINESS.social.instagram,
+    BUSINESS.social.facebook,
+    BUSINESS.social.thuisbezorgd
+  ],
+  acceptsReservations: false
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: CONTENT_TR.faq.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: it.a
+    }
+  }))
+};
+---
+
+<BaseLayout
+  lang="tr"
+  title={CONTENT_TR.pageTitle}
+  description={CONTENT_TR.pageDescription}
+  skipLinkLabel={CONTENT_TR.skipLinkLabel}
+  canonicalUrl={BUSINESS.website.trUrl}
+  alternateLanguages={[
+    { hreflang: 'nl-NL', href: BUSINESS.website.nlUrl },
+    { hreflang: 'tr-TR', href: BUSINESS.website.trUrl },
+    { hreflang: 'x-default', href: BUSINESS.website.nlUrl }
+  ]}
+  openGraph={{
+    type: 'website',
+    locale: 'tr_TR',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO Restaurant & Cafe iç mekan'
+  }}
+  jsonLd={[restaurantSchema, faqSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_TR.mobileCtaAriaLabel,
+    labels: CONTENT_TR.mobileCtaShort,
+    hrefs: {
+      menu: '#menu',
+      whatsapp: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill),
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="NL"
+    langAriaLabel="Hollandacaya geç"
+    langHref="/"
+    navAriaLabel={CONTENT_TR.navAriaLabel}
+    nav={{
+      menu: CONTENT_TR.nav.menu,
+      popular: 'Popüler',
+      gallery: 'Galeri',
+      location: CONTENT_TR.nav.konum
+    }}
+    cta={{
+      whatsapp: { label: 'Sipariş', href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill) },
+      phone: { label: 'Ara', href: BUSINESS.phoneTel }
+    }}
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-hero-container">
+        <Hero
+          heading={BUSINESS.canonicalName}
+          subheading={CONTENT_TR.heroSubheading}
+          kicker={CONTENT_TR.heroKicker}
+          rating={{
+            value: BUSINESS.googleRating,
+            count: BUSINESS.googleReviewCount,
+            label: CONTENT_TR.heroRatingLabel,
+            ariaLabel: CONTENT_TR.heroRatingAriaLabel,
+            url: BUSINESS.googleReviewsUrl
+          }}
+          ctas={{
+            viewMenu: { label: CONTENT_TR.ctas.viewMenu, href: '#menu' },
+            whatsapp: { label: CONTENT_TR.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill) },
+            phone: { label: CONTENT_TR.ctas.callNow, href: BUSINESS.phoneTel },
+            route: { label: CONTENT_TR.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl },
+            delivery: { label: CONTENT_TR.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd }
+          }}
+        />
+      </div>
+    </section>
+
+    <InfoBar
+      ariaLabel="Temel bilgiler"
+      items={[
+        { icon: 'clock', label: hoursCompactTr, accent: 'amber' },
+        { icon: 'check', label: CONTENT_TR.halalWording, accent: 'green' },
+        { icon: 'flame', label: 'Türk grill & cafe', accent: 'amber' },
+        { icon: 'bag', label: 'Gel-al WhatsApp ile', accent: 'amber' }
+      ]}
+    />
+
+    <section id="populair" class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <PopularDishes
+          heading={CONTENT_TR.featuredHeading}
+          eyebrow={CONTENT_TR.featuredEyebrow}
+          lead={CONTENT_TR.featuredLead}
+          ctaLabel={CONTENT_TR.ctas.viewMenu}
+          ctaHref="#menu"
+          items={featured}
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <MenuSection
+          heading={CONTENT_TR.menuHeading}
+          categories={MENU.categories.map((c) => ({ ...c, title: c.titleTr }))}
+          formatPrice={formatPriceEurNl}
+          lastUpdatedLabel={CONTENT_TR.menuLastUpdatedLabel}
+          lastUpdated={MENU.lastUpdated}
+          notes={[CONTENT_TR.priceNote, CONTENT_TR.allergenNote]}
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Reviews
+          eyebrow="Misafir yorumları"
+          heading="Konuklarımız ne diyor?"
+          intro="Schiedam’daki Keyfo hakkında son Google yorumlarından bir kesit."
+          ratingAriaLabel="Puan"
+          reviews={[
+            {
+              name: 'Mücahid Sert',
+              initial: 'M',
+              rating: 5,
+              date: 'Ara 2025',
+              source: 'Google',
+              quote: 'Yemekler harikaydı! Tavuk yumuşak ve güzel baharatlanmış, pilav tam kıvamında, salata da çok tazeydi. Yanında Türk çayı her şeyi tamamladı. Kesinlikle tavsiye ederim.'
+            },
+            {
+              name: 'Jeremiah',
+              initial: 'J',
+              rating: 5,
+              date: 'Ara 2025',
+              source: 'Google',
+              quote: 'Schiedam’daki Keyfo’da harika bir deneyim! Lezzetli yemekler, otantik tatlar ve güleryüzlü servis. Ortam sıcak ve samimi — kendinizi hemen evinizde hissediyorsunuz.'
+            },
+            {
+              name: 'Hicham',
+              initial: 'H',
+              rating: 5,
+              date: 'Eyl 2025',
+              source: 'Google',
+              quote: 'Schiedam’ın en lezzetli tavuğu! Düzenli olarak geliyorum. Yemekler her gün taze, lezzetli ve ev yapımı şekilde hazırlanıyor. Servis de çok iyi — sizi her zaman güleryüzle karşılıyorlar.'
+            }
+          ]}
+          cta={{ label: 'Tüm Google yorumlarını gör', href: BUSINESS.googleReviewsUrl }}
+        />
+      </div>
+    </section>
+
+    <section id="gallery" class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Gallery heading={CONTENT_TR.galleryHeading} introText={CONTENT_TR.galleryIntro} items={CONTENT_TR.galleryItems} />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Location
+          heading={CONTENT_TR.locationHeading}
+          addressLabel="Adres"
+          hoursLabel="Saatler"
+          contactLabel="İşlemler"
+          addressLines={[
+            `${BUSINESS.canonicalName}`,
+            `${BUSINESS.address.streetAddress}`,
+            `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
+          ]}
+          hoursLine={hoursLineTr}
+          links={[
+            { label: CONTENT_TR.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill), isExternal: true, variant: 'primary' },
+            { label: CONTENT_TR.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },
+            { label: 'E-posta', href: BUSINESS.emailMailto },
+            { label: CONTENT_TR.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' },
+            { label: CONTENT_TR.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true, variant: 'tertiary' }
+          ]}
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading={CONTENT_TR.faqHeading} items={CONTENT_TR.faq} />
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_TR.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefon/WhatsApp: ${BUSINESS.phone}`,
+      `E-posta: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'İşlemler',
+        links: [
+          { label: CONTENT_TR.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill), isExternal: true },
+          { label: CONTENT_TR.ctas.callNow, href: BUSINESS.phoneTel },
+          { label: CONTENT_TR.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
+          { label: CONTENT_TR.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true }
+        ]
+      },
+      {
+        label: 'Sosyal',
+        links: [
+          { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>

@@ -1,0 +1,71 @@
+---
+type Props = {
+  heading: string;
+  addressLines: string[];
+  hoursLine?: string;
+  hoursLabel?: string;
+  addressLabel?: string;
+  contactLabel?: string;
+  links: Array<{ label: string; href: string; isExternal?: boolean; variant?: 'primary' | 'secondary' | 'tertiary' }>;
+};
+
+const {
+  heading,
+  addressLines,
+  hoursLine,
+  hoursLabel = 'Openingstijden',
+  addressLabel = 'Adres',
+  contactLabel = 'Acties',
+  links
+} = Astro.props;
+---
+
+<section id="location" aria-labelledby="location-heading" class="keyfo-location">
+  <div class="keyfo-location-card">
+    <header class="keyfo-location-head">
+      <h2 id="location-heading" class="keyfo-section-title text-white">{heading}</h2>
+    </header>
+
+    <div class="keyfo-location-grid">
+      <div class="keyfo-location-block">
+        <span class="keyfo-location-label">{addressLabel}</span>
+        <address class="keyfo-location-address">
+          {addressLines.map((line) => (
+            <span class="keyfo-location-line">{line}</span>
+          ))}
+        </address>
+      </div>
+
+      {hoursLine ? (
+        <div class="keyfo-location-block">
+          <span class="keyfo-location-label">{hoursLabel}</span>
+          <p class="keyfo-location-hours">{hoursLine}</p>
+        </div>
+      ) : null}
+
+      <div class="keyfo-location-block keyfo-location-actions-block">
+        <span class="keyfo-location-label">{contactLabel}</span>
+        <ul class="keyfo-location-actions">
+          {links.map((l) => (
+            <li>
+              <a
+                class={
+                  l.variant === 'tertiary'
+                    ? 'keyfo-btn-ghost text-zinc-300'
+                    : l.variant === 'primary'
+                      ? 'keyfo-btn-primary keyfo-glow-amber'
+                      : 'keyfo-btn-secondary'
+                }
+                href={l.href}
+                target={l.isExternal ? '_blank' : undefined}
+                rel={l.isExternal ? 'noopener noreferrer' : undefined}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

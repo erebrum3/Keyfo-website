@@ -17,6 +17,15 @@ Build a production-quality, mobile-first, SEO-friendly and AI-readable one-page 
 - Facebook: https://www.facebook.com/hanife.isleyen.1/photos
 - Thuisbezorgd: https://www.thuisbezorgd.nl/da/menu/keyfo
 
+## Canonical Business Name
+Use this canonical name everywhere:
+KEYFO Restaurant & Cafe
+
+Also known as:
+Keyfo kip&grill
+
+Use the canonical name in title, footer, schema, business.json and visible NAP blocks.
+
 ## Positioning
 Dutch:
 KEYFO Restaurant & Cafe
@@ -64,3 +73,19 @@ Pickup orders are handled through phone or WhatsApp.
 Delivery is only offered externally through Thuisbezorgd.
 The website links to Thuisbezorgd as a secondary external CTA.
 Do not build a cart, checkout, payment flow, account system or internal ordering system.
+
+## Links
+WhatsApp:
+https://wa.me/31641014926?text=Hallo%20KEYFO%2C%20ik%20wil%20graag%20een%20bestelling%20plaatsen%20voor%20afhalen.
+
+Phone:
+tel:+31641014926
+
+Email:
+mailto:keyfo-grill@hotmail.com
+
+Route:
+https://www.google.com/maps/dir/?api=1&destination=Broersveld%20103%2C%203111%20LE%20Schiedam
+
+Thuisbezorgd:
+https://www.thuisbezorgd.nl/da/menu/keyfo

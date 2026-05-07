@@ -1,0 +1,64 @@
+---
+type Props = {
+  brand: string;
+  langLabel: string;
+  langAriaLabel?: string;
+  langHref: string;
+  navAriaLabel: string;
+  nav: {
+    menu: string;
+    popular: string;
+    gallery: string;
+    location: string;
+  };
+  cta: {
+    whatsapp: { label: string; href: string };
+    phone: { label: string; href: string };
+  };
+};
+
+const { brand, langLabel, langAriaLabel, langHref, navAriaLabel, nav, cta } = Astro.props;
+const langSwitchAriaLabel = langAriaLabel ?? langLabel;
+const brandMain = brand.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || brand;
+const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
+---
+
+<header class="keyfo-site-header sticky top-0 z-50">
+  <span aria-hidden="true" class="keyfo-header-rule"></span>
+
+  <div class="keyfo-hero-container">
+    <div class="keyfo-header-inner">
+      <a href="#" class="keyfo-brand-lockup" aria-label={`${brand} - top`}>
+        <span class="keyfo-brand-name keyfo-brand">{brandMain}</span>
+        {brandSub ? <span class="keyfo-brand-sub">{brandSub}</span> : null}
+      </a>
+
+      <nav aria-label={navAriaLabel} class="keyfo-header-nav">
+        <a href="#menu" class="keyfo-header-link">{nav.menu}</a>
+        <a href="#populair" class="keyfo-header-link">{nav.popular}</a>
+        <a href="#gallery" class="keyfo-header-link">{nav.gallery}</a>
+        <a href="#location" class="keyfo-header-link">{nav.location}</a>
+      </nav>
+
+      <div class="keyfo-header-actions">
+        <a href={cta.whatsapp.href} class="keyfo-header-cta-primary hidden sm:inline-flex">
+          <span aria-hidden="true" class="keyfo-header-cta-icon">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.37 0 .02 5.36.02 11.99a11.94 11.94 0 0 0 1.6 5.99L0 24l6.18-1.62a11.97 11.97 0 0 0 5.82 1.49h.01c6.62 0 11.98-5.36 11.98-11.99 0-3.2-1.25-6.21-3.47-8.4zM12 21.79h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.67.96.98-3.58-.23-.37a9.81 9.81 0 0 1-1.5-5.23c0-5.43 4.42-9.85 9.85-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.96c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.37c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.16-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.45-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.91-2.18-.24-.57-.49-.49-.66-.5h-.56c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.09 3.2 5.07 4.49.71.3 1.26.49 1.69.62.71.23 1.35.2 1.86.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.27.17-1.4-.07-.13-.27-.2-.57-.34z"/>
+            </svg>
+          </span>
+          <span>{cta.whatsapp.label}</span>
+        </a>
+        <a href={cta.phone.href} class="keyfo-header-cta-secondary">
+          <span aria-hidden="true" class="keyfo-header-cta-icon">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.91.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </span>
+          <span>{cta.phone.label}</span>
+        </a>
+        <a href={langHref} class="keyfo-lang-switch" aria-label={langSwitchAriaLabel}>{langLabel}</a>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,61 @@
+{
+  "name": "KEYFO Restaurant & Cafe",
+  "alsoKnownAs": ["Keyfo kip&grill"],
+  "url": "https://keyfo.nl/",
+  "languages": [
+    { "lang": "nl", "url": "https://keyfo.nl/" },
+    { "lang": "tr", "url": "https://keyfo.nl/tr/" }
+  ],
+  "address": {
+    "streetAddress": "Broersveld 103",
+    "postalCode": "3111 LE",
+    "addressLocality": "Schiedam",
+    "addressCountry": "NL"
+  },
+  "telephone": "+31 6 41014926",
+  "phoneTel": "tel:+31641014926",
+  "whatsappPhoneDigits": "31641014926",
+  "email": "keyfo-grill@hotmail.com",
+  "emailMailto": "mailto:keyfo-grill@hotmail.com",
+  "googleMapsDirectionsUrl": "https://www.google.com/maps/dir/?api=1&destination=Broersveld%20103%2C%203111%20LE%20Schiedam",
+  "website": {
+    "nlUrl": "https://keyfo.nl/",
+    "trUrl": "https://keyfo.nl/tr/"
+  },
+  "openingHours": {
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "12:00",
+    "closes": "22:00"
+  },
+  "priceRange": "€10-20",
+  "servesCuisine": ["Turkish", "Grill"],
+  "areaServed": {
+    "@type": "City",
+    "name": "Schiedam"
+  },
+  "currency": "EUR",
+  "halal": "Halal options available",
+  "acceptsReservations": false,
+  "services": {
+    "pickup": {
+      "available": true,
+      "channels": ["WhatsApp", "phone"]
+    },
+    "delivery": {
+      "available": true,
+      "via": "Thuisbezorgd",
+      "url": "https://www.thuisbezorgd.nl/da/menu/keyfo",
+      "external": true
+    },
+    "dineIn": {
+      "available": true
+    }
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/keyfokipgrill_/",
+    "facebook": "https://www.facebook.com/hanife.isleyen.1/photos",
+    "thuisbezorgd": "https://www.thuisbezorgd.nl/da/menu/keyfo"
+  },
+  "menuUrl": "https://keyfo.nl/#menu",
+  "menuJsonUrl": "https://keyfo.nl/menu.json"
+}

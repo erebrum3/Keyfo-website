@@ -1,0 +1,63 @@
+---
+type Review = {
+  name: string;
+  initial: string;
+  quote: string;
+  date: string;
+  rating: number;
+  source?: string;
+};
+
+type Props = {
+  eyebrow: string;
+  heading: string;
+  intro?: string;
+  attributionLabel?: string;
+  ratingAriaLabel: string;
+  reviews: Review[];
+  cta?: { label: string; href: string } | null;
+};
+
+const { eyebrow, heading, intro, attributionLabel, ratingAriaLabel, reviews, cta } = Astro.props;
+---
+
+<section id="reviews" aria-labelledby="reviews-title" class="keyfo-reviews">
+  <div class="keyfo-reviews-head">
+    <span class="keyfo-reviews-eyebrow">{eyebrow}</span>
+    <h2 id="reviews-title" class="keyfo-reviews-title">{heading}</h2>
+    {intro ? <p class="keyfo-reviews-intro">{intro}</p> : null}
+    {attributionLabel ? <span class="keyfo-reviews-placeholder">{attributionLabel}</span> : null}
+  </div>
+
+  <ul class="keyfo-reviews-grid" role="list">
+    {reviews.map((r) => (
+      <li class="keyfo-review-card">
+        <div class="keyfo-review-stars" aria-label={`${ratingAriaLabel}: ${r.rating} / 5`}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <span aria-hidden="true" class={i < r.rating ? 'is-on' : 'is-off'}>★</span>
+          ))}
+        </div>
+        <blockquote class="keyfo-review-quote">
+          <p>{r.quote}</p>
+        </blockquote>
+        <figcaption class="keyfo-review-meta">
+          <span aria-hidden="true" class="keyfo-review-avatar">{r.initial}</span>
+          <span class="keyfo-review-who">
+            <span class="keyfo-review-name">{r.name}</span>
+            <span class="keyfo-review-date">
+              {r.date}{r.source ? <> · <span class="keyfo-review-source">{r.source}</span></> : null}
+            </span>
+          </span>
+        </figcaption>
+      </li>
+    ))}
+  </ul>
+
+  {cta ? (
+    <div class="keyfo-reviews-cta-wrap">
+      <a class="keyfo-btn-secondary" href={cta.href} target="_blank" rel="noopener noreferrer">
+        {cta.label}
+      </a>
+    </div>
+  ) : null}
+</section>

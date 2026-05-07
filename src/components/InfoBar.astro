@@ -1,0 +1,54 @@
+---
+type Icon = 'clock' | 'check' | 'flame' | 'bag';
+type Accent = 'amber' | 'green' | 'red';
+
+type Item = {
+  icon: Icon;
+  label: string;
+  accent?: Accent;
+};
+
+type Props = {
+  items: Item[];
+  ariaLabel?: string;
+};
+
+const { items, ariaLabel = 'Kerninfo' } = Astro.props;
+---
+
+<section aria-label={ariaLabel} class="keyfo-info-bar-section keyfo-band-dark">
+  <div class="keyfo-container">
+    <ul class="keyfo-info-bar">
+      {items.map((it) => (
+        <li class:list={['keyfo-info-bar-item', it.accent && `keyfo-info-accent-${it.accent}`]}>
+          <span aria-hidden="true" class="keyfo-info-bar-icon">
+            {it.icon === 'clock' ? (
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+            ) : null}
+            {it.icon === 'check' ? (
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M8.5 12.5l2.5 2.5L16 9.5" />
+              </svg>
+            ) : null}
+            {it.icon === 'flame' ? (
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3c1 3-1 4-1 6a3 3 0 0 0 6 0c0-1 .5-2 1-2 1 2 2 4 2 6a8 8 0 1 1-16 0c0-3 2-5 4-7 0 2 1 3 2 3 1 0 2-1 2-3 0-2 0-3 0-3z" />
+              </svg>
+            ) : null}
+            {it.icon === 'bag' ? (
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 8h14l-1 12H6L5 8z" />
+                <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+              </svg>
+            ) : null}
+          </span>
+          <span class="keyfo-info-bar-label">{it.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

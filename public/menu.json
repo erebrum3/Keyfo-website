@@ -1,0 +1,112 @@
+{
+  "lastUpdated": "2026-05-06",
+  "currency": "EUR",
+  "source": "https://keyfo.nl/#menu",
+  "notes": [
+    "Menu prices and availability may change.",
+    "For pickup, contact via WhatsApp or phone.",
+    "Delivery via Thuisbezorgd; their prices and conditions may differ.",
+    "For allergen information, ask before ordering."
+  ],
+  "categories": [
+    {
+      "id": "starters-sides",
+      "title": {
+        "nl": "Starters & bijgerechten",
+        "tr": "Başlangıçlar & yan ürünler"
+      },
+      "items": [
+        { "name": "Lentil Soup", "priceEur": 7.0 },
+        { "name": "Manti", "priceEur": 11.0 },
+        { "name": "Rice", "priceEur": 7.0 },
+        { "name": "Pasta", "priceEur": 5.0 },
+        { "name": "Chips", "priceEur": 5.0 },
+        { "name": "Vegetable mix", "priceEur": 7.0 },
+        { "name": "Salad", "priceEur": 4.0 }
+      ]
+    },
+    {
+      "id": "doner",
+      "title": { "nl": "Döner", "tr": "Döner" },
+      "items": [
+        { "name": "Döner sandwich", "priceEur": 8.5 },
+        { "name": "Dürüm döner (wrap)", "priceEur": 11.5 },
+        { "name": "Keyfo special döner sandwich", "priceEur": 10.0 },
+        { "name": "Dürüm döner Keyfo special", "priceEur": 12.5 },
+        { "name": "Kapsalon large", "priceEur": 13.5 }
+      ]
+    },
+    {
+      "id": "bbq-grill",
+      "title": { "nl": "BBQ Grill", "tr": "BBQ Grill" },
+      "items": [
+        { "name": "Chicken Breast", "priceEur": 6.5 },
+        { "name": "Wings (6x)", "priceEur": 9.75 },
+        { "name": "Chicken Fillet (3x)", "priceEur": 9.75 },
+        { "name": "Köfte (3x)", "priceEur": 9.75 },
+        { "name": "Chicken Carbonade (2x)", "priceEur": 10.0 }
+      ]
+    },
+    {
+      "id": "grill-sandwiches",
+      "title": { "nl": "Grill sandwiches", "tr": "Grill sandviçler" },
+      "items": [
+        { "name": "Kofta Sandwich", "priceEur": 11.5 },
+        { "name": "Chicken sandwich", "priceEur": 11.5 }
+      ]
+    },
+    {
+      "id": "turkish-pizza",
+      "title": { "nl": "Turkse pizza", "tr": "Türk pizzası" },
+      "items": [
+        { "name": "Turkish pizza", "priceEur": 4.75 },
+        { "name": "Turkish pizza + döner", "priceEur": 11.5 }
+      ]
+    },
+    {
+      "id": "menus",
+      "title": { "nl": "Menu's (gerechten)", "tr": "Menüler (yemekler)" },
+      "items": [
+        { "name": "Chicken stew menu", "priceEur": 21.0 },
+        { "name": "Köfte menu", "priceEur": 22.0 },
+        { "name": "Chicken Fillet Menu", "priceEur": 22.0 },
+        { "name": "Chicken Carbonade Menu", "priceEur": 22.0 },
+        { "name": "Döner menu", "priceEur": 21.0 },
+        { "name": "Chicken Wings Menu", "priceEur": 21.0 }
+      ]
+    },
+    {
+      "id": "desserts",
+      "title": { "nl": "Desserts", "tr": "Tatlılar" },
+      "items": [
+        { "name": "Large pancake", "priceEur": 6.5 },
+        { "name": "Chocolate pancake", "priceEur": 8.5 },
+        { "name": "Künefe", "priceEur": 9.5 }
+      ]
+    },
+    {
+      "id": "sauces",
+      "title": { "nl": "Sauzen", "tr": "Soslar" },
+      "items": [
+        { "name": "Sambal", "priceEur": 1.0 },
+        { "name": "Fried Sauce", "priceEur": 1.0 },
+        { "name": "Andalouse", "priceEur": 1.0 },
+        { "name": "Garlic Sauce", "priceEur": 1.0 },
+        { "name": "Samurai Saus", "priceEur": 1.0 }
+      ]
+    },
+    {
+      "id": "drinks",
+      "title": { "nl": "Dranken", "tr": "İçecekler" },
+      "items": [
+        { "name": "Water 500ml", "priceEur": 2.1 },
+        { "name": "Ayran 200ml", "priceEur": 2.1 },
+        { "name": "Redbull 250ml", "priceEur": 4.25 },
+        { "name": "Redbull light 250ml", "priceEur": 4.25 },
+        { "name": "Coca-Cola", "priceEur": 3.2 },
+        { "name": "Coca-Cola Zero", "priceEur": 3.75 },
+        { "name": "Fanta", "priceEur": 3.75 }
+      ]
+    }
+  ]
+}

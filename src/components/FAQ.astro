@@ -1,0 +1,31 @@
+---
+type Props = {
+  heading: string;
+  eyebrow?: string;
+  items: readonly { q: string; a: string }[];
+};
+
+const { heading, eyebrow, items } = Astro.props;
+---
+
+<section id="faq" aria-labelledby="faq-heading" class="keyfo-faq">
+  <header class="keyfo-faq-head">
+    {eyebrow ? <span class="keyfo-faq-eyebrow">{eyebrow}</span> : null}
+    <h2 id="faq-heading" class="keyfo-faq-title keyfo-brand">{heading}</h2>
+  </header>
+
+  <div class="keyfo-faq-list">
+    {items.map((it, idx) => (
+      <details class="keyfo-faq-item">
+        <summary class="keyfo-faq-summary">
+          <span class="keyfo-faq-num keyfo-tabular">{String(idx + 1).padStart(2, '0')}</span>
+          <span class="keyfo-faq-q">{it.q}</span>
+          <span aria-hidden="true" class="keyfo-faq-toggle"></span>
+        </summary>
+        <div class="keyfo-faq-answer">
+          <p>{it.a}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

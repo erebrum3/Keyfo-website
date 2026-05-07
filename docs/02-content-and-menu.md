@@ -10,6 +10,13 @@ Primary:
 Secondary:
 - Bestel via Thuisbezorgd / Thuisbezorgd üzerinden sipariş ver
 
+## WhatsApp Prefill Messages
+NL:
+Hallo KEYFO, ik wil graag een bestelling plaatsen voor afhalen.
+
+TR:
+Merhaba KEYFO, gel-al sipariş vermek istiyorum.
+
 ## Service Copy
 NL:
 Binnen eten, afhalen via telefoon of WhatsApp, en bezorgen via Thuisbezorgd.
@@ -41,8 +48,25 @@ Do not use:
 - Halal gecertificeerd
 - Certified halal
 
+## Featured / Popular Dishes
+Use these as featured items:
+- Lentil Soup
+- Kapsalon large
+- Manti
+- Döner sandwich
+- Dürüm döner (wrap)
+- Köfte menu
+- Künefe
+
+In menu data, mark them with featured: true.
+
 ## Menu Source
 Use current visible Thuisbezorgd menu screenshots for now.
+
+## Menu Update Rule
+src/data/menu.ts is the main menu source.
+When prices or products change, update menu.ts first, then sync public/menu.json.
+Add a lastUpdated field to menu data.
 
 ## Menu
 

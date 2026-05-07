@@ -4,6 +4,19 @@
 - Dutch: https://keyfo.nl/
 - Turkish: https://keyfo.nl/tr/
 
+## Canonical and Hreflang
+Dutch page:
+canonical: https://keyfo.nl/
+hreflang nl-NL: https://keyfo.nl/
+hreflang tr-TR: https://keyfo.nl/tr/
+hreflang x-default: https://keyfo.nl/
+
+Turkish page:
+canonical: https://keyfo.nl/tr/
+hreflang nl-NL: https://keyfo.nl/
+hreflang tr-TR: https://keyfo.nl/tr/
+hreflang x-default: https://keyfo.nl/
+
 ## Required SEO
 - Static HTML content
 - Semantic HTML
@@ -18,6 +31,26 @@
 - robots.txt
 - sitemap.xml
 - accessible image alt text
+
+## Sitemap
+Include only:
+- https://keyfo.nl/
+- https://keyfo.nl/tr/
+
+Use build date as lastmod if generated automatically.
+
+## Robots.txt
+Use:
+User-agent: *
+Allow: /
+
+Sitemap: https://keyfo.nl/sitemap.xml
+
+## Open Graph Image
+Use a 1200x630 image:
+public/assets/keyfo/og-image.jpg
+
+If missing, create a designed fallback using KEYFO brand colors.
 
 ## Structured Data
 Add:
@@ -46,6 +79,12 @@ Use:
 - menu
 - sameAs: Instagram, Facebook, Thuisbezorgd
 - acceptsReservations: false
+
+## Schema Menu Rule
+For Restaurant JSON-LD, set menu to:
+https://keyfo.nl/#menu
+
+Do not attempt complex MenuItem schema unless it stays maintainable and uses the same menu source.
 
 ## AI Visibility
 Add:

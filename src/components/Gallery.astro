@@ -1,0 +1,58 @@
+---
+type Props = {
+  heading: string;
+  introText: string;
+  items: Array<{ src: string; alt: string }>;
+};
+
+const { heading, introText, items } = Astro.props;
+
+const slots = [
+  { span: 'lg:col-span-4', aspect: 'aspect-[16/10]' },
+  { span: 'lg:col-span-2', aspect: 'aspect-[4/5]' },
+  { span: 'lg:col-span-2', aspect: 'aspect-[4/5]' },
+  { span: 'lg:col-span-4', aspect: 'aspect-[16/10]' },
+  { span: 'lg:col-span-3', aspect: 'aspect-[4/3]' },
+  { span: 'lg:col-span-3', aspect: 'aspect-[4/3]' }
+];
+
+const imageDimensions: Record<string, { width: number; height: number }> = {
+  '/assets/keyfo/sign.jpg': { width: 735, height: 1600 },
+  '/assets/keyfo/menu-board.jpg': { width: 1200, height: 1600 },
+  '/assets/keyfo/interior-wide.jpg': { width: 1200, height: 1600 },
+  '/assets/keyfo/table-detail.jpg': { width: 1600, height: 1196 },
+  '/assets/keyfo/drinks-corner.jpg': { width: 1200, height: 1600 },
+  '/assets/keyfo/hero-interior.jpg': { width: 1200, height: 1600 }
+};
+---
+
+<section aria-labelledby="gallery-heading" class="keyfo-gallery">
+  <header class="keyfo-gallery-head">
+    <h2 id="gallery-heading" class="keyfo-section-title">{heading}</h2>
+    <p class="keyfo-gallery-intro">{introText}</p>
+  </header>
+
+  <div class="keyfo-gallery-grid">
+    {items.map((slot, idx) => {
+      const cfg = slots[idx % slots.length];
+      const dimensions = imageDimensions[slot.src];
+      return (
+        <figure class:list={['keyfo-gallery-cell', cfg.span]}>
+          <div class:list={['keyfo-gallery-frame', cfg.aspect]}>
+            <img
+              src={slot.src}
+              alt={slot.alt}
+              width={dimensions?.width}
+              height={dimensions?.height}
+              loading="lazy"
+              decoding="async"
+              class="keyfo-gallery-img"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <figcaption class="sr-only">{slot.alt}</figcaption>
+        </figure>
+      );
+    })}
+  </div>
+</section>

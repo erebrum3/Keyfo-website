@@ -1,17 +1,294 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import InfoBar from '../components/InfoBar.astro';
+import PopularDishes from '../components/PopularDishes.astro';
+import MenuSection from '../components/MenuSection.astro';
+import Gallery from '../components/Gallery.astro';
+import Reviews from '../components/Reviews.astro';
+import Location from '../components/Location.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
 
+import { BUSINESS } from '../data/business';
+import { MENU, formatPriceEurNl } from '../data/menu';
+import { CONTENT_NL } from '../data/content.nl';
+
+const featured = MENU.categories
+  .flatMap((c) => c.items.filter((i) => i.featured).map((i) => ({ ...i, categoryTitle: c.titleNl })))
+  .slice(0, 4)
+  .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur) }));
+
+const hoursRange = `${BUSINESS.openingHours.opens}-${BUSINESS.openingHours.closes}`;
+const hoursLineNl = `Elke dag ${hoursRange}`;
+const hoursCompactNl = `Elke dag ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes}`;
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`;
+
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: BUSINESS.canonicalName,
+  url: BUSINESS.website.nlUrl,
+  image: [
+    `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`,
+    `${SITE_ORIGIN}/assets/keyfo/sign.jpg`,
+    `${SITE_ORIGIN}/assets/keyfo/interior-wide.jpg`
+  ],
+  telephone: BUSINESS.phone,
+  email: BUSINESS.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    postalCode: BUSINESS.address.postalCode,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressCountry: BUSINESS.address.addressCountry
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [...BUSINESS.openingHours.days],
+    opens: BUSINESS.openingHours.opens,
+    closes: BUSINESS.openingHours.closes
+  },
+  priceRange: BUSINESS.priceRange,
+  servesCuisine: BUSINESS.servesCuisine,
+  areaServed: {
+    '@type': BUSINESS.areaServed.type,
+    name: BUSINESS.areaServed.name
+  },
+  currenciesAccepted: BUSINESS.currency,
+  menu: `${BUSINESS.website.nlUrl}#menu`,
+  sameAs: [
+    BUSINESS.social.instagram,
+    BUSINESS.social.facebook,
+    BUSINESS.social.thuisbezorgd
+  ],
+  acceptsReservations: false
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: CONTENT_NL.faq.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: it.a
+    }
+  }))
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  lang="nl"
+  title={CONTENT_NL.pageTitle}
+  description={CONTENT_NL.pageDescription}
+  skipLinkLabel={CONTENT_NL.skipLinkLabel}
+  canonicalUrl={BUSINESS.website.nlUrl}
+  alternateLanguages={[
+    { hreflang: 'nl-NL', href: BUSINESS.website.nlUrl },
+    { hreflang: 'tr-TR', href: BUSINESS.website.trUrl },
+    { hreflang: 'x-default', href: BUSINESS.website.nlUrl }
+  ]}
+  openGraph={{
+    type: 'website',
+    locale: 'nl_NL',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO Restaurant & Cafe interieur'
+  }}
+  jsonLd={[restaurantSchema, faqSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
+    labels: CONTENT_NL.mobileCtaShort,
+    hrefs: {
+      menu: '#menu',
+      whatsapp: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill),
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="TR"
+    langAriaLabel="Wissel naar Turks"
+    langHref="/tr/"
+    navAriaLabel={CONTENT_NL.navAriaLabel}
+    nav={{
+      menu: CONTENT_NL.nav.menu,
+      popular: 'Populair',
+      gallery: 'Galerij',
+      location: CONTENT_NL.nav.locatie
+    }}
+    cta={{
+      whatsapp: { label: 'Bestellen', href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill) },
+      phone: { label: 'Bellen', href: BUSINESS.phoneTel }
+    }}
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-hero-container">
+        <Hero
+          heading={BUSINESS.canonicalName}
+          subheading={CONTENT_NL.heroSubheading}
+          kicker={CONTENT_NL.heroKicker}
+          rating={{
+            value: BUSINESS.googleRating,
+            count: BUSINESS.googleReviewCount,
+            label: CONTENT_NL.heroRatingLabel,
+            ariaLabel: CONTENT_NL.heroRatingAriaLabel,
+            url: BUSINESS.googleReviewsUrl
+          }}
+          ctas={{
+            viewMenu: { label: CONTENT_NL.ctas.viewMenu, href: '#menu' },
+            whatsapp: { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill) },
+            phone: { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel },
+            route: { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl },
+            delivery: { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd }
+          }}
+        />
+      </div>
+    </section>
+
+    <InfoBar
+      ariaLabel="Kerninfo"
+      items={[
+        { icon: 'clock', label: hoursCompactNl, accent: 'amber' },
+        { icon: 'check', label: CONTENT_NL.halalWording, accent: 'green' },
+        { icon: 'flame', label: 'Turkse grill & cafe', accent: 'amber' },
+        { icon: 'bag', label: 'Afhalen via WhatsApp', accent: 'amber' }
+      ]}
+    />
+
+    <section id="populair" class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <PopularDishes
+          heading={CONTENT_NL.featuredHeading}
+          eyebrow={CONTENT_NL.featuredEyebrow}
+          lead={CONTENT_NL.featuredLead}
+          ctaLabel={CONTENT_NL.ctas.viewMenu}
+          ctaHref="#menu"
+          items={featured}
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <MenuSection
+          heading={CONTENT_NL.menuHeading}
+          categories={MENU.categories.map((c) => ({ ...c, title: c.titleNl }))}
+          formatPrice={formatPriceEurNl}
+          lastUpdatedLabel={CONTENT_NL.menuLastUpdatedLabel}
+          lastUpdated={MENU.lastUpdated}
+          notes={[CONTENT_NL.priceNote, CONTENT_NL.allergenNote]}
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Reviews
+          eyebrow="Gasten aan het woord"
+          heading="Wat onze gasten zeggen"
+          intro="Een greep uit recente Google reviews over Keyfo in Schiedam."
+          ratingAriaLabel="Beoordeling"
+          reviews={[
+            {
+              name: 'Mücahid Sert',
+              initial: 'M',
+              rating: 5,
+              date: 'Dec 2025',
+              source: 'Google',
+              quote: 'Het eten was heerlijk! De kip mals en goed gekruid, de rijst perfect bereid en de salade lekker vers. De Turkse thee erbij maakte het helemaal compleet. Zeker een aanrader.'
+            },
+            {
+              name: 'Jeremiah',
+              initial: 'J',
+              rating: 5,
+              date: 'Dec 2025',
+              source: 'Google',
+              quote: 'Fantastische ervaring bij Keyfo in Schiedam! Heerlijk eten, authentieke smaken en supervriendelijke bediening. De sfeer is warm en gastvrij — je voelt je direct thuis.'
+            },
+            {
+              name: 'Hicham',
+              initial: 'H',
+              rating: 5,
+              date: 'Sep 2025',
+              source: 'Google',
+              quote: 'De lekkerste kip van Schiedam! Ik kom hier regelmatig eten. Het eten wordt elke dag vers, smaakvol en huisgemaakt bereid. Daarnaast is de service ook goed — je wordt geholpen met een grote glimlach.'
+            }
+          ]}
+          cta={{ label: 'Lees alle Google reviews', href: BUSINESS.googleReviewsUrl }}
+        />
+      </div>
+    </section>
+
+    <section id="gallery" class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Gallery heading={CONTENT_NL.galleryHeading} introText={CONTENT_NL.galleryIntro} items={CONTENT_NL.galleryItems} />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Location
+          heading={CONTENT_NL.locationHeading}
+          addressLines={[
+            `${BUSINESS.canonicalName}`,
+            `${BUSINESS.address.streetAddress}`,
+            `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
+          ]}
+          hoursLine={hoursLineNl}
+          links={[
+            { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill), isExternal: true, variant: 'primary' },
+            { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },
+            { label: 'E-mail', href: BUSINESS.emailMailto },
+            { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' },
+            { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true, variant: 'tertiary' }
+          ]}
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading={CONTENT_NL.faqHeading} items={CONTENT_NL.faq} />
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_NL.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefoon/WhatsApp: ${BUSINESS.phone}`,
+      `E-mail: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'Acties',
+        links: [
+          { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill), isExternal: true },
+          { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel },
+          { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
+          { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true }
+        ]
+      },
+      {
+        label: 'Sociaal',
+        links: [
+          { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>

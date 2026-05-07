@@ -1,0 +1,64 @@
+---
+type Props = {
+  brand: string;
+  napLines: string[];
+  tagline?: string;
+  columns?: Array<{
+    label: string;
+    links: Array<{ label: string; href: string; isExternal?: boolean }>;
+  }>;
+  legalLine?: string;
+};
+
+const { brand, napLines, tagline, columns = [], legalLine } = Astro.props;
+const brandMain = brand.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || brand;
+const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
+---
+
+<footer class="keyfo-footer keyfo-band-dark">
+  <span aria-hidden="true" class="keyfo-footer-rule"></span>
+  <div class="keyfo-container keyfo-footer-inner">
+    <div class="keyfo-footer-grid">
+      <div class="keyfo-footer-brand-col">
+        <div class="keyfo-footer-lockup">
+          <div>
+            <span class="keyfo-footer-brand">{brandMain}</span>
+            {brandSub ? <span class="keyfo-footer-subbrand">{brandSub}</span> : null}
+          </div>
+        </div>
+        {tagline ? <p class="keyfo-footer-tagline">{tagline}</p> : null}
+      </div>
+
+      <div class="keyfo-footer-nap-col">
+        <span class="keyfo-footer-label">NAP</span>
+        <div class="keyfo-footer-nap">
+          {napLines.map((l) => (
+            <span class="keyfo-footer-nap-line">{l}</span>
+          ))}
+        </div>
+      </div>
+
+      {columns.map((col) => (
+        <div class="keyfo-footer-col">
+          <span class="keyfo-footer-label">{col.label}</span>
+          <ul class="keyfo-footer-links">
+            {col.links.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  target={l.isExternal ? '_blank' : undefined}
+                  rel={l.isExternal ? 'noopener noreferrer' : undefined}
+                  class="keyfo-footer-link"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    {legalLine ? <p class="keyfo-footer-legal">{legalLine}</p> : null}
+  </div>
+</footer>

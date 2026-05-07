@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+
+type MobileCta = {
+  ariaLabel: string;
+  labels: { menu: string; whatsapp: string; call: string; route: string };
+  hrefs: { menu: string; whatsapp: string; call: string; route: string };
+};
+
+type AlternateLanguage = {
+  hreflang: string;
+  href: string;
+};
+
+type OpenGraph = {
+  type?: string;
+  locale?: string;
+  siteName?: string;
+  image?: string;
+  imageAlt?: string;
+};
+
+type Props = {
+  lang: string;
+  title: string;
+  description: string;
+  skipLinkLabel: string;
+  canonicalUrl?: string;
+  alternateLanguages?: AlternateLanguage[];
+  openGraph?: OpenGraph;
+  jsonLd?: unknown[];
+  mobileCta?: MobileCta;
+};
+
+const {
+  lang,
+  title,
+  description,
+  skipLinkLabel,
+  canonicalUrl,
+  alternateLanguages = [],
+  openGraph,
+  jsonLd = [],
+  mobileCta
+} = Astro.props;
+
+const ogType = openGraph?.type ?? 'website';
+const ogLocale = openGraph?.locale ?? (lang === 'tr' ? 'tr_TR' : 'nl_NL');
+const ogSiteName = openGraph?.siteName ?? 'KEYFO Restaurant & Cafe';
+const ogImage = openGraph?.image;
+const ogImageAlt = openGraph?.imageAlt ?? title;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+
+    {alternateLanguages.map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+    ))}
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={ogSiteName} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+    {ogImage ? <meta property="og:image" content={ogImage} /> : null}
+    {ogImage ? <meta property="og:image:alt" content={ogImageAlt} /> : null}
+
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    {jsonLd.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+  </head>
+  <body class="min-h-screen pb-24 sm:pb-0">
+    <a
+      class="sr-only focus:not-sr-only fixed left-4 top-4 z-[60] rounded bg-white px-3 py-2 text-sm text-zinc-950 shadow"
+      href="#main"
+    >
+      {skipLinkLabel}
+    </a>
+    <slot />
+
+    {mobileCta ? (
+      <nav
+        aria-label={mobileCta.ariaLabel}
+        class="keyfo-mobile-cta fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-zinc-950/95 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/78 sm:hidden"
+      >
+        <div class="grid grid-cols-4 divide-x divide-white/10">
+          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.menu}>{mobileCta.labels.menu}</a>
+          <a class="keyfo-mobile-cta-link keyfo-mobile-cta-primary" href={mobileCta.hrefs.whatsapp}>{mobileCta.labels.whatsapp}</a>
+          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.call}>{mobileCta.labels.call}</a>
+          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.route}>{mobileCta.labels.route}</a>
+        </div>
+      </nav>
+    ) : null}
+  </body>
+</html>

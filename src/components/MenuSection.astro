@@ -1,0 +1,55 @@
+---
+import type { MenuCategory } from '../data/menu';
+
+type Props = {
+  heading: string;
+  eyebrow?: string;
+  categories: Array<MenuCategory & { title: string }>;
+  formatPrice: (priceEur: number) => string;
+  lastUpdatedLabel: string;
+  lastUpdated: string;
+  notes: string[];
+};
+
+const { heading, eyebrow, categories, formatPrice, lastUpdatedLabel, lastUpdated, notes } = Astro.props;
+---
+
+<section id="menu" aria-labelledby="menu-heading" class="keyfo-menu">
+  <div class="keyfo-menu-head">
+    <div>
+      {eyebrow ? <span class="keyfo-menu-eyebrow">{eyebrow}</span> : null}
+      <h2 id="menu-heading" class="keyfo-menu-title keyfo-brand">{heading}</h2>
+    </div>
+    <span class="keyfo-menu-meta">{lastUpdatedLabel}: {lastUpdated}</span>
+  </div>
+
+  <div class="keyfo-menu-grid">
+    {categories.map((cat, idx) => (
+      <section aria-labelledby={`cat-${cat.id}`} class="keyfo-menu-cat">
+        <header class="keyfo-menu-cat-head">
+          <span class="keyfo-menu-cat-num keyfo-tabular">{String(idx + 1).padStart(2, '0')}</span>
+          <h3 id={`cat-${cat.id}`} class="keyfo-menu-cat-title keyfo-brand">{cat.title}</h3>
+          <span aria-hidden="true" class="keyfo-menu-cat-rule"></span>
+        </header>
+
+        <ul class="keyfo-menu-list">
+          {cat.items.map((item) => (
+            <li class="keyfo-menu-row">
+              <span class="keyfo-menu-name">{item.name}</span>
+              <span aria-hidden="true" class="keyfo-menu-leader"></span>
+              <span class="keyfo-menu-price keyfo-tabular">{formatPrice(item.priceEur)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  {notes.length > 0 ? (
+    <div class="keyfo-menu-notes">
+      {notes.map((n) => (
+        <p class="keyfo-menu-note">{n}</p>
+      ))}
+    </div>
+  ) : null}
+</section>

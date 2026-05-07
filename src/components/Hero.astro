@@ -1,0 +1,88 @@
+---
+type Props = {
+  heading: string;
+  subheading: string;
+  kicker: string;
+  rating?: {
+    value: number;
+    count: number;
+    label: string;
+    ariaLabel: string;
+    url?: string | null;
+  };
+  ctas: {
+    viewMenu: { label: string; href: string };
+    whatsapp: { label: string; href: string };
+    phone: { label: string; href: string };
+    route: { label: string; href: string };
+    delivery: { label: string; href: string };
+  };
+};
+
+const { heading, subheading, kicker, rating, ctas } = Astro.props;
+const ratingValueLabel = rating ? rating.value.toFixed(1) : '';
+
+const heroMain = heading.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || heading;
+const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').trim();
+---
+
+<section aria-labelledby="hero-title" class="keyfo-hero relative">
+  <span aria-hidden="true" class="keyfo-hero-rule"></span>
+
+  <div class="keyfo-hero-inner">
+    <p class="keyfo-hero-kicker">
+      <span class="inline-block size-1.5 rounded-full bg-amber-400"></span>
+      {kicker}
+    </p>
+
+    {rating ? (
+      rating.url ? (
+        <a
+          href={rating.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="keyfo-hero-rating"
+          aria-label={`${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count})`}
+        >
+          <span aria-hidden="true" class="keyfo-hero-rating-star">★</span>
+          <span class="keyfo-hero-rating-value">{ratingValueLabel}</span>
+          <span aria-hidden="true" class="keyfo-hero-rating-sep">·</span>
+          <span class="keyfo-hero-rating-meta">{rating.count} {rating.label}</span>
+        </a>
+      ) : (
+        <span
+          class="keyfo-hero-rating"
+          aria-label={`${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count})`}
+        >
+          <span aria-hidden="true" class="keyfo-hero-rating-star">★</span>
+          <span class="keyfo-hero-rating-value">{ratingValueLabel}</span>
+          <span aria-hidden="true" class="keyfo-hero-rating-sep">·</span>
+          <span class="keyfo-hero-rating-meta">{rating.count} {rating.label}</span>
+        </span>
+      )
+    ) : null}
+
+    <h1 id="hero-title" class="keyfo-brand keyfo-hero-title">
+      {heroMain}
+    </h1>
+
+    {heroSubbrand ? (
+      <div class="keyfo-hero-subbrand">
+        <span aria-hidden="true" class="keyfo-hero-subbrand-rule"></span>
+        <span>{heroSubbrand}</span>
+      </div>
+    ) : null}
+
+    <p class="keyfo-hero-sub">{subheading}</p>
+
+    <div class="keyfo-hero-ctas">
+      <a href={ctas.whatsapp.href} class="keyfo-btn-primary keyfo-btn-hero keyfo-glow-amber keyfo-motion">
+        {ctas.whatsapp.label}
+      </a>
+      <a href={ctas.viewMenu.href} class="keyfo-btn-secondary keyfo-motion">{ctas.viewMenu.label}</a>
+      <a href={ctas.phone.href} class="keyfo-btn-secondary keyfo-motion">{ctas.phone.label}</a>
+      <a href={ctas.route.href} class="keyfo-btn-secondary keyfo-motion">{ctas.route.label}</a>
+      <a href={ctas.delivery.href} class="keyfo-delivery-link keyfo-motion">{ctas.delivery.label}</a>
+    </div>
+  </div>
+</section>
