@@ -6,6 +6,8 @@ type Props = {
   hoursLabel?: string;
   addressLabel?: string;
   contactLabel?: string;
+  parkingLine?: string;
+  parkingLabel?: string;
   links: Array<{ label: string; href: string; isExternal?: boolean; variant?: 'primary' | 'secondary' | 'tertiary' }>;
 };
 
@@ -16,6 +18,8 @@ const {
   hoursLabel = 'Openingstijden',
   addressLabel = 'Adres',
   contactLabel = 'Acties',
+  parkingLine,
+  parkingLabel = 'Parkeren',
   links
 } = Astro.props;
 ---
@@ -40,6 +44,13 @@ const {
         <div class="keyfo-location-block">
           <span class="keyfo-location-label">{hoursLabel}</span>
           <p class="keyfo-location-hours">{hoursLine}</p>
+        </div>
+      ) : null}
+
+      {parkingLine ? (
+        <div class="keyfo-location-block">
+          <span class="keyfo-location-label">{parkingLabel}</span>
+          <p class="keyfo-location-parking">{parkingLine}</p>
         </div>
       ) : null}
 

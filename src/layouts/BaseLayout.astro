@@ -18,6 +18,10 @@ type OpenGraph = {
   siteName?: string;
   image?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageType?: string;
+  imageSecureUrl?: string;
 };
 
 type Props = {
@@ -49,6 +53,10 @@ const ogLocale = openGraph?.locale ?? (lang === 'tr' ? 'tr_TR' : 'nl_NL');
 const ogSiteName = openGraph?.siteName ?? 'KEYFO Restaurant & Cafe';
 const ogImage = openGraph?.image;
 const ogImageAlt = openGraph?.imageAlt ?? title;
+const ogImageWidth = openGraph?.imageWidth;
+const ogImageHeight = openGraph?.imageHeight;
+const ogImageType = openGraph?.imageType;
+const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.startsWith('https://') ? ogImage : undefined);
 ---
 
 <!doctype html>
@@ -58,6 +66,7 @@ const ogImageAlt = openGraph?.imageAlt ?? title;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#09090b" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -75,6 +84,10 @@ const ogImageAlt = openGraph?.imageAlt ?? title;
     <meta property="og:description" content={description} />
     {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
     {ogImage ? <meta property="og:image" content={ogImage} /> : null}
+    {ogImageSecureUrl ? <meta property="og:image:secure_url" content={ogImageSecureUrl} /> : null}
+    {ogImage && ogImageType ? <meta property="og:image:type" content={ogImageType} /> : null}
+    {ogImage && ogImageWidth ? <meta property="og:image:width" content={String(ogImageWidth)} /> : null}
+    {ogImage && ogImageHeight ? <meta property="og:image:height" content={String(ogImageHeight)} /> : null}
     {ogImage ? <meta property="og:image:alt" content={ogImageAlt} /> : null}
 
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />

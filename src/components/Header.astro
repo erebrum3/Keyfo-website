@@ -23,7 +23,7 @@ const brandMain = brand.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || br
 const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
 ---
 
-<header class="keyfo-site-header sticky top-0 z-50">
+<header class="keyfo-site-header fixed inset-x-0 top-0 z-50" data-scrolled="false">
   <span aria-hidden="true" class="keyfo-header-rule"></span>
 
   <div class="keyfo-hero-container">
@@ -62,3 +62,15 @@ const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const header = document.querySelector('.keyfo-site-header');
+    if (!header) return;
+    const update = () => {
+      header.dataset.scrolled = window.scrollY > 24 ? 'true' : 'false';
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+</script>

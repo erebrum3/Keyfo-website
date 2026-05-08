@@ -1,5 +1,5 @@
 ---
-type Icon = 'clock' | 'check' | 'flame' | 'bag';
+type Icon = 'clock' | 'check' | 'flame' | 'bag' | 'user' | 'sparkle' | 'car';
 type Accent = 'amber' | 'green' | 'red';
 
 type Item = {
@@ -43,6 +43,25 @@ const { items, ariaLabel = 'Kerninfo' } = Astro.props;
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 8h14l-1 12H6L5 8z" />
                 <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+              </svg>
+            ) : null}
+            {it.icon === 'user' ? (
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="3.5" />
+                <path d="M5 20c1.2-3.4 4-5 7-5s5.8 1.6 7 5" />
+              </svg>
+            ) : null}
+            {it.icon === 'sparkle' ? (
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 4v4M12 16v4M4 12h4M16 12h4M6.5 6.5l2.5 2.5M15 15l2.5 2.5M17.5 6.5L15 9M9 15l-2.5 2.5" />
+              </svg>
+            ) : null}
+            {it.icon === 'car' ? (
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 16v2a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2" />
+                <path d="M16 16v2a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-2" />
+                <path d="M4 16h16v-4l-2-5H6l-2 5v4z" />
+                <path d="M7 13h2M15 13h2" />
               </svg>
             ) : null}
           </span>

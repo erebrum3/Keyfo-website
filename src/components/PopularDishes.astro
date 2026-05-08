@@ -23,13 +23,18 @@ const { heading, eyebrow, lead, ctaLabel, ctaHref, items } = Astro.props;
   <ul class="keyfo-popular-grid">
     {items.map((item) => (
       <li class="keyfo-popular-card">
-        <div class="keyfo-popular-tile" aria-hidden="true">
-          {item.categoryTitle ? <span class="keyfo-popular-badge">{item.categoryTitle}</span> : null}
-          <span class="keyfo-popular-tile-emblem">KEYFO</span>
-        </div>
         <div class="keyfo-popular-card-body">
+          {item.categoryTitle ? (
+            <span class="keyfo-popular-badge">
+              <span aria-hidden="true" class="keyfo-popular-badge-dot"></span>
+              {item.categoryTitle}
+            </span>
+          ) : null}
           <h3 class="keyfo-popular-name keyfo-brand">{item.name}</h3>
-          <span class="keyfo-popular-price keyfo-tabular">{item.priceLabel}</span>
+          <div class="keyfo-popular-price-row">
+            <span aria-hidden="true" class="keyfo-popular-rule"></span>
+            <span class="keyfo-popular-price keyfo-brand keyfo-tabular">{item.priceLabel}</span>
+          </div>
         </div>
       </li>
     ))}

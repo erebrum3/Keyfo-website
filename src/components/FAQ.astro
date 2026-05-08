@@ -15,10 +15,10 @@ const { heading, eyebrow, items } = Astro.props;
   </header>
 
   <div class="keyfo-faq-list">
-    {items.map((it, idx) => (
+    {items.map((it) => (
       <details class="keyfo-faq-item">
         <summary class="keyfo-faq-summary">
-          <span class="keyfo-faq-num keyfo-tabular">{String(idx + 1).padStart(2, '0')}</span>
+          <span aria-hidden="true" class="keyfo-faq-num keyfo-tabular"></span>
           <span class="keyfo-faq-q">{it.q}</span>
           <span aria-hidden="true" class="keyfo-faq-toggle"></span>
         </summary>

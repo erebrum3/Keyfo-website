@@ -30,6 +30,7 @@ const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`;
 const restaurantSchema = {
   '@context': 'https://schema.org',
   '@type': 'Restaurant',
+  '@id': `${SITE_ORIGIN}/#restaurant`,
   name: BUSINESS.canonicalName,
   url: BUSINESS.website.nlUrl,
   image: [
@@ -60,6 +61,7 @@ const restaurantSchema = {
   },
   currenciesAccepted: BUSINESS.currency,
   menu: `${BUSINESS.website.nlUrl}#menu`,
+  hasMap: BUSINESS.googleMapsDirectionsUrl,
   sameAs: [
     BUSINESS.social.instagram,
     BUSINESS.social.facebook,
@@ -98,7 +100,11 @@ const faqSchema = {
     locale: 'nl_NL',
     siteName: BUSINESS.canonicalName,
     image: ogImageUrl,
-    imageAlt: 'KEYFO Restaurant & Cafe interieur'
+    imageAlt: 'KEYFO Restaurant & Cafe interieur',
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 1600,
+    imageSecureUrl: ogImageUrl
   }}
   jsonLd={[restaurantSchema, faqSchema]}
   mobileCta={{
@@ -152,16 +158,17 @@ const faqSchema = {
             delivery: { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd }
           }}
         />
+        <p class="keyfo-hero-intro">{CONTENT_NL.heroIntro}</p>
       </div>
     </section>
 
     <InfoBar
       ariaLabel="Kerninfo"
       items={[
-        { icon: 'clock', label: hoursCompactNl, accent: 'amber' },
-        { icon: 'check', label: CONTENT_NL.halalWording, accent: 'green' },
-        { icon: 'flame', label: 'Turkse grill & cafe', accent: 'amber' },
-        { icon: 'bag', label: 'Afhalen via WhatsApp', accent: 'amber' }
+        { icon: 'user', label: 'Vrouwelijke eigenaar', accent: 'amber' },
+        { icon: 'sparkle', label: 'Schoon & zorgvuldig', accent: 'amber' },
+        { icon: 'car', label: 'Garage Nieuwe Passage · 3 min lopen', accent: 'amber' },
+        { icon: 'check', label: CONTENT_NL.halalWording, accent: 'green' }
       ]}
     />
 
@@ -245,6 +252,8 @@ const faqSchema = {
             `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
           ]}
           hoursLine={hoursLineNl}
+          parkingLabel="Parkeren"
+          parkingLine="Garage Nieuwe Passage, ingang Koemarkt. Eerste uur gratis, ongeveer 3 minuten lopen naar KEYFO."
           links={[
             { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill), isExternal: true, variant: 'primary' },
             { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },

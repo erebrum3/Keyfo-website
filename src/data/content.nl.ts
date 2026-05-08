@@ -4,6 +4,8 @@ export const CONTENT_NL = {
   pageDescription:
     'Bekijk het menu van KEYFO Restaurant & Cafe in Schiedam. Afhalen via WhatsApp of telefoon. Bezorging via Thuisbezorgd (extern).',
   heroSubheading: 'Turkse grill en döner in Schiedam.',
+  heroIntro:
+    'Turkse grill en döner in Schiedam. Bekijk het menu en bestel afhalen via WhatsApp of telefoon. Broersveld 103, dagelijks 12:00–22:00.',
   heroKicker: 'Turkse grill & döner',
   heroRatingLabel: 'Google reviews',
   heroRatingAriaLabel: 'Google reviews beoordeling',
@@ -54,6 +56,10 @@ export const CONTENT_NL = {
     {
       q: 'Waar is KEYFO gevestigd?',
       a: 'Broersveld 103, 3111 LE Schiedam.'
+    },
+    {
+      q: 'Waar kan ik parkeren?',
+      a: 'Je kunt parkeren bij Garage Nieuwe Passage, ingang Koemarkt. Het eerste uur is gratis; vanaf daar is het ongeveer 3 minuten lopen naar KEYFO.'
     },
     {
       q: 'Wat zijn de openingstijden?',

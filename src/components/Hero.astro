@@ -30,37 +30,39 @@ const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').t
   <span aria-hidden="true" class="keyfo-hero-rule"></span>
 
   <div class="keyfo-hero-inner">
-    <p class="keyfo-hero-kicker">
-      <span class="inline-block size-1.5 rounded-full bg-amber-400"></span>
-      {kicker}
-    </p>
-
-    {rating ? (
-      rating.url ? (
-        <a
-          href={rating.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="keyfo-hero-rating"
-          aria-label={`${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count})`}
-        >
-          <span aria-hidden="true" class="keyfo-hero-rating-star">★</span>
-          <span class="keyfo-hero-rating-value">{ratingValueLabel}</span>
-          <span aria-hidden="true" class="keyfo-hero-rating-sep">·</span>
-          <span class="keyfo-hero-rating-meta">{rating.count} {rating.label}</span>
-        </a>
-      ) : (
-        <span
-          class="keyfo-hero-rating"
-          aria-label={`${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count})`}
-        >
-          <span aria-hidden="true" class="keyfo-hero-rating-star">★</span>
-          <span class="keyfo-hero-rating-value">{ratingValueLabel}</span>
-          <span aria-hidden="true" class="keyfo-hero-rating-sep">·</span>
-          <span class="keyfo-hero-rating-meta">{rating.count} {rating.label}</span>
-        </span>
-      )
-    ) : null}
+    <div class="keyfo-hero-meta">
+      <span aria-hidden="true" class="keyfo-hero-meta-dot"></span>
+      <span class="keyfo-hero-meta-kicker">{kicker}</span>
+      {rating ? (
+        <>
+          <span aria-hidden="true" class="keyfo-hero-meta-sep">·</span>
+          {rating.url ? (
+            <a
+              href={rating.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="keyfo-hero-meta-rating"
+              aria-label={`${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count})`}
+            >
+              <span aria-hidden="true" class="keyfo-hero-meta-star">★</span>
+              <span class="keyfo-hero-meta-value">{ratingValueLabel}</span>
+              <span aria-hidden="true" class="keyfo-hero-meta-mid">·</span>
+              <span class="keyfo-hero-meta-count">{rating.count} {rating.label}</span>
+            </a>
+          ) : (
+            <span
+              class="keyfo-hero-meta-rating"
+              aria-label={`${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count})`}
+            >
+              <span aria-hidden="true" class="keyfo-hero-meta-star">★</span>
+              <span class="keyfo-hero-meta-value">{ratingValueLabel}</span>
+              <span aria-hidden="true" class="keyfo-hero-meta-mid">·</span>
+              <span class="keyfo-hero-meta-count">{rating.count} {rating.label}</span>
+            </span>
+          )}
+        </>
+      ) : null}
+    </div>
 
     <h1 id="hero-title" class="keyfo-brand keyfo-hero-title">
       {heroMain}
@@ -79,9 +81,11 @@ const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').t
       <a href={ctas.whatsapp.href} class="keyfo-btn-primary keyfo-btn-hero keyfo-glow-amber keyfo-motion">
         {ctas.whatsapp.label}
       </a>
-      <a href={ctas.viewMenu.href} class="keyfo-btn-secondary keyfo-motion">{ctas.viewMenu.label}</a>
-      <a href={ctas.phone.href} class="keyfo-btn-secondary keyfo-motion">{ctas.phone.label}</a>
-      <a href={ctas.route.href} class="keyfo-btn-secondary keyfo-motion">{ctas.route.label}</a>
+      <div class="keyfo-hero-cta-group">
+        <a href={ctas.viewMenu.href} class="keyfo-btn-secondary keyfo-motion">{ctas.viewMenu.label}</a>
+        <a href={ctas.phone.href} class="keyfo-btn-secondary keyfo-motion">{ctas.phone.label}</a>
+        <a href={ctas.route.href} class="keyfo-btn-secondary keyfo-motion">{ctas.route.label}</a>
+      </div>
       <a href={ctas.delivery.href} class="keyfo-delivery-link keyfo-motion">{ctas.delivery.label}</a>
     </div>
   </div>
