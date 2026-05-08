@@ -38,14 +38,16 @@ export const CONTENT_NL = {
   galleryHeading: 'Foto’s',
   galleryIntro: 'Een kijkje bij KEYFO Restaurant & Cafe.',
   galleryItems: [
-    { src: '/assets/keyfo/sign.jpg', alt: 'KEYFO sign in Schiedam' },
-    { src: '/assets/keyfo/menu-board.jpg', alt: 'Menu board bij KEYFO' },
     { src: '/assets/keyfo/interior-wide.jpg', alt: 'Interieur van KEYFO Restaurant & Cafe' },
-    { src: '/assets/keyfo/table-detail.jpg', alt: 'Tafel detail bij KEYFO' },
+    { src: '/assets/keyfo/hero-interior.jpg', alt: 'Zithoek bij KEYFO' },
+    { src: '/assets/keyfo/interior-wall-art.jpg', alt: 'Decoratie aan de muur bij KEYFO' },
+    { src: '/assets/keyfo/family-corner.jpg', alt: 'Kinderstoel en speelhoek bij KEYFO' },
     { src: '/assets/keyfo/drinks-corner.jpg', alt: 'Drankenhoek bij KEYFO' },
-    { src: '/assets/keyfo/hero-interior.jpg', alt: 'KEYFO interieur (hero)' }
+    { src: '/assets/keyfo/table-detail.jpg', alt: 'Tafel detail bij KEYFO' }
   ],
   locationHeading: 'Adres & route',
+  locationIntro:
+    'KEYFO ligt aan Broersveld 103 in Schiedam Centrum, ongeveer 3 minuten lopen vanaf Garage Nieuwe Passage.',
   faqHeading: 'Veelgestelde vragen',
   mobileCtaAriaLabel: 'Snelle acties',
   faq: [
@@ -72,6 +74,18 @@ export const CONTENT_NL = {
     {
       q: 'Is bezorgen mogelijk?',
       a: 'Bezorging gaat via Thuisbezorgd (extern).'
+    },
+    {
+      q: 'Kan ik reserveren?',
+      a: 'Ja, reserveren is mogelijk via telefoon of WhatsApp.'
+    },
+    {
+      q: 'Welke betaalmethoden accepteren jullie?',
+      a: 'Pin en contant.'
+    },
+    {
+      q: 'Hebben jullie vegetarische opties?',
+      a: 'Ja. Linzen Soep, Salade, Pasta, Patat, Groenten mix, Rijst en Turkse pizza zijn vegetarisch. Manti bevat vlees.'
     },
     {
       q: 'Zijn er halal opties?',

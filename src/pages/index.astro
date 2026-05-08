@@ -14,6 +14,7 @@ import Footer from '../components/Footer.astro';
 import { BUSINESS } from '../data/business';
 import { MENU, formatPriceEurNl } from '../data/menu';
 import { CONTENT_NL } from '../data/content.nl';
+import { REVIEWS } from '../data/reviews';
 
 const featured = MENU.categories
   .flatMap((c) => c.items.filter((i) => i.featured).map((i) => ({ ...i, categoryTitle: c.titleNl })))
@@ -67,7 +68,8 @@ const restaurantSchema = {
     BUSINESS.social.facebook,
     BUSINESS.social.thuisbezorgd
   ],
-  acceptsReservations: false
+  acceptsReservations: BUSINESS.acceptsReservations,
+  paymentAccepted: BUSINESS.paymentAccepted
 };
 
 const faqSchema = {
@@ -202,36 +204,18 @@ const faqSchema = {
       <div class="keyfo-container">
         <Reviews
           eyebrow="Gasten aan het woord"
-          heading="Wat onze gasten zeggen"
-          intro="Een greep uit recente Google reviews over Keyfo in Schiedam."
+          heading="Echte Google reviews van gasten die KEYFO bezochten."
+          intro="Een doorlopende stroom recente Google reviews over Keyfo in Schiedam."
+          ratingValue={BUSINESS.googleRating}
+          reviewCount={BUSINESS.googleReviewCount}
+          reviewCountLabel="Google reviews"
+          ratingSummaryNote="Gebaseerd op Google reviews"
           ratingAriaLabel="Beoordeling"
-          reviews={[
-            {
-              name: 'Mücahid Sert',
-              initial: 'M',
-              rating: 5,
-              date: 'Dec 2025',
-              source: 'Google',
-              quote: 'Het eten was heerlijk! De kip mals en goed gekruid, de rijst perfect bereid en de salade lekker vers. De Turkse thee erbij maakte het helemaal compleet. Zeker een aanrader.'
-            },
-            {
-              name: 'Jeremiah',
-              initial: 'J',
-              rating: 5,
-              date: 'Dec 2025',
-              source: 'Google',
-              quote: 'Fantastische ervaring bij Keyfo in Schiedam! Heerlijk eten, authentieke smaken en supervriendelijke bediening. De sfeer is warm en gastvrij — je voelt je direct thuis.'
-            },
-            {
-              name: 'Hicham',
-              initial: 'H',
-              rating: 5,
-              date: 'Sep 2025',
-              source: 'Google',
-              quote: 'De lekkerste kip van Schiedam! Ik kom hier regelmatig eten. Het eten wordt elke dag vers, smaakvol en huisgemaakt bereid. Daarnaast is de service ook goed — je wordt geholpen met een grote glimlach.'
-            }
-          ]}
-          cta={{ label: 'Lees alle Google reviews', href: BUSINESS.googleReviewsUrl }}
+          reviews={REVIEWS}
+          lang="nl"
+          prevLabel="Vorige review"
+          nextLabel="Volgende review"
+          cta={{ label: 'Alle Google reviews bekijken', href: BUSINESS.googleReviewsUrl }}
         />
       </div>
     </section>
@@ -246,6 +230,7 @@ const faqSchema = {
       <div class="keyfo-container">
         <Location
           heading={CONTENT_NL.locationHeading}
+          intro={CONTENT_NL.locationIntro}
           addressLines={[
             `${BUSINESS.canonicalName}`,
             `${BUSINESS.address.streetAddress}`,

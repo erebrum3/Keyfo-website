@@ -38,14 +38,16 @@ export const CONTENT_TR = {
   galleryHeading: 'Fotoğraflar',
   galleryIntro: 'KEYFO Restaurant & Cafe’den kareler.',
   galleryItems: [
-    { src: '/assets/keyfo/sign.jpg', alt: 'KEYFO tabelası (Schiedam)' },
-    { src: '/assets/keyfo/menu-board.jpg', alt: 'KEYFO menü panosu' },
     { src: '/assets/keyfo/interior-wide.jpg', alt: 'KEYFO restoran iç mekânı' },
-    { src: '/assets/keyfo/table-detail.jpg', alt: 'Masa detayı (KEYFO)' },
-    { src: '/assets/keyfo/drinks-corner.jpg', alt: 'İçecek köşesi (KEYFO)' },
-    { src: '/assets/keyfo/hero-interior.jpg', alt: 'KEYFO iç mekân (hero)' }
+    { src: '/assets/keyfo/hero-interior.jpg', alt: 'KEYFO oturma alanı' },
+    { src: '/assets/keyfo/interior-wall-art.jpg', alt: 'KEYFO’da duvar dekorasyonu' },
+    { src: '/assets/keyfo/family-corner.jpg', alt: 'KEYFO’da çocuk sandalyesi ve oyun köşesi' },
+    { src: '/assets/keyfo/drinks-corner.jpg', alt: 'KEYFO içecek köşesi' },
+    { src: '/assets/keyfo/table-detail.jpg', alt: 'KEYFO masa detayı' }
   ],
   locationHeading: 'Adres & yol tarifi',
+  locationIntro:
+    "KEYFO, Schiedam merkezde Broersveld 103 adresinde; Garage Nieuwe Passage'dan yaklaşık 3 dakika yürüyüş mesafesinde.",
   faqHeading: 'Sıkça sorulan sorular',
   mobileCtaAriaLabel: 'Hızlı işlemler',
   faq: [
@@ -72,6 +74,18 @@ export const CONTENT_TR = {
     {
       q: 'Paket servis var mı?',
       a: 'Adrese teslim Thuisbezorgd üzerinden yapılır (harici).'
+    },
+    {
+      q: 'Rezervasyon yapabilir miyim?',
+      a: 'Evet, telefon veya WhatsApp ile rezervasyon yapılabilir.'
+    },
+    {
+      q: 'Hangi ödeme yöntemleri kabul ediliyor?',
+      a: 'Pin ve nakit.'
+    },
+    {
+      q: 'Vejetaryen seçenekler var mı?',
+      a: 'Evet. Mercimek çorbası, salata, makarna, patates, sebze karışımı, pirinç ve Türk pizzası vejetaryendir. Mantı et içerir.'
     },
     {
       q: 'Helal seçenekler var mı?',

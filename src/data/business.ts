@@ -24,13 +24,15 @@ export const BUSINESS = {
     'https://www.google.com/maps/dir/?api=1&destination=Broersveld%20103%2C%203111%20LE%20Schiedam',
   priceRange: '€10-20',
   servesCuisine: ['Turkish', 'Grill'],
+  acceptsReservations: true,
+  paymentAccepted: 'Cash, Debit Card',
   areaServed: {
     type: 'City',
     name: 'Schiedam'
   },
   currency: 'EUR',
   googleRating: 4.9,
-  googleReviewCount: 22,
+  googleReviewCount: 23,
   googleReviewsUrl: 'https://www.google.com/search?q=Keyfo+Reviews&rldimm=6959290857801238836&tbm=lcl#lkt=LocalPoiReviews',
   social: {
     instagram: 'https://www.instagram.com/keyfokipgrill_/',

@@ -7,22 +7,29 @@ type Props = {
 
 const { heading, introText, items } = Astro.props;
 
+// Mosaic slots — visitor walking flow:
+// 0 interior-wide (anchor, mobile full-width, desktop 2x2)
+// 1 hero-interior (seating, desktop tall column)
+// 2 interior-wall-art (wall decor, desktop tall column)
+// 3 family-corner (horizontal wide row)
+// 4 drinks-corner (small)
+// 5 table-detail (small, closing detail)
 const slots = [
-  { span: 'lg:col-span-4', aspect: 'aspect-[16/10]' },
-  { span: 'lg:col-span-2', aspect: 'aspect-[4/5]' },
-  { span: 'lg:col-span-2', aspect: 'aspect-[4/5]' },
-  { span: 'lg:col-span-4', aspect: 'aspect-[16/10]' },
-  { span: 'lg:col-span-3', aspect: 'aspect-[4/3]' },
-  { span: 'lg:col-span-3', aspect: 'aspect-[4/3]' }
+  'col-span-2 lg:col-span-2 lg:row-span-2',
+  'lg:col-span-1 lg:row-span-2',
+  'lg:col-span-1 lg:row-span-2',
+  'col-span-2 lg:col-span-2 lg:row-span-1',
+  'lg:col-span-1 lg:row-span-1',
+  'lg:col-span-1 lg:row-span-1'
 ];
 
 const imageDimensions: Record<string, { width: number; height: number }> = {
-  '/assets/keyfo/sign.jpg': { width: 735, height: 1600 },
-  '/assets/keyfo/menu-board.jpg': { width: 1200, height: 1600 },
   '/assets/keyfo/interior-wide.jpg': { width: 1200, height: 1600 },
-  '/assets/keyfo/table-detail.jpg': { width: 1600, height: 1196 },
+  '/assets/keyfo/hero-interior.jpg': { width: 1200, height: 1600 },
+  '/assets/keyfo/interior-wall-art.jpg': { width: 1200, height: 1600 },
+  '/assets/keyfo/family-corner.jpg': { width: 1600, height: 1200 },
   '/assets/keyfo/drinks-corner.jpg': { width: 1200, height: 1600 },
-  '/assets/keyfo/hero-interior.jpg': { width: 1200, height: 1600 }
+  '/assets/keyfo/table-detail.jpg': { width: 1600, height: 1196 }
 };
 ---
 
@@ -34,11 +41,11 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
 
   <div class="keyfo-gallery-grid">
     {items.map((slot, idx) => {
-      const cfg = slots[idx % slots.length];
+      const span = slots[idx % slots.length];
       const dimensions = imageDimensions[slot.src];
       return (
-        <figure class:list={['keyfo-gallery-cell', cfg.span]}>
-          <div class:list={['keyfo-gallery-frame', cfg.aspect]}>
+        <figure class:list={['keyfo-gallery-cell', span]}>
+          <div class="keyfo-gallery-frame">
             <img
               src={slot.src}
               alt={slot.alt}

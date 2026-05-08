@@ -14,6 +14,7 @@ import Footer from '../../components/Footer.astro';
 import { BUSINESS } from '../../data/business';
 import { MENU, formatPriceEurNl } from '../../data/menu';
 import { CONTENT_TR } from '../../data/content.tr';
+import { REVIEWS } from '../../data/reviews';
 
 const featured = MENU.categories
   .flatMap((c) => c.items.filter((i) => i.featured).map((i) => ({ ...i, categoryTitle: c.titleTr })))
@@ -67,7 +68,8 @@ const restaurantSchema = {
     BUSINESS.social.facebook,
     BUSINESS.social.thuisbezorgd
   ],
-  acceptsReservations: false
+  acceptsReservations: BUSINESS.acceptsReservations,
+  paymentAccepted: BUSINESS.paymentAccepted
 };
 
 const faqSchema = {
@@ -202,35 +204,17 @@ const faqSchema = {
       <div class="keyfo-container">
         <Reviews
           eyebrow="Misafir yorumları"
-          heading="Konuklarımız ne diyor?"
-          intro="Schiedam’daki Keyfo hakkında son Google yorumlarından bir kesit."
+          heading="KEYFO’yu ziyaret eden misafirlerin gerçek Google yorumları."
+          intro="Schiedam’daki Keyfo hakkında son Google yorumlarından bir akış."
+          ratingValue={BUSINESS.googleRating}
+          reviewCount={BUSINESS.googleReviewCount}
+          reviewCountLabel="Google yorumu"
+          ratingSummaryNote="Google yorumlarına dayanmaktadır"
           ratingAriaLabel="Puan"
-          reviews={[
-            {
-              name: 'Mücahid Sert',
-              initial: 'M',
-              rating: 5,
-              date: 'Ara 2025',
-              source: 'Google',
-              quote: 'Yemekler harikaydı! Tavuk yumuşak ve güzel baharatlanmış, pilav tam kıvamında, salata da çok tazeydi. Yanında Türk çayı her şeyi tamamladı. Kesinlikle tavsiye ederim.'
-            },
-            {
-              name: 'Jeremiah',
-              initial: 'J',
-              rating: 5,
-              date: 'Ara 2025',
-              source: 'Google',
-              quote: 'Schiedam’daki Keyfo’da harika bir deneyim! Lezzetli yemekler, otantik tatlar ve güleryüzlü servis. Ortam sıcak ve samimi — kendinizi hemen evinizde hissediyorsunuz.'
-            },
-            {
-              name: 'Hicham',
-              initial: 'H',
-              rating: 5,
-              date: 'Eyl 2025',
-              source: 'Google',
-              quote: 'Schiedam’ın en lezzetli tavuğu! Düzenli olarak geliyorum. Yemekler her gün taze, lezzetli ve ev yapımı şekilde hazırlanıyor. Servis de çok iyi — sizi her zaman güleryüzle karşılıyorlar.'
-            }
-          ]}
+          reviews={REVIEWS}
+          lang="tr"
+          prevLabel="Önceki yorum"
+          nextLabel="Sonraki yorum"
           cta={{ label: 'Tüm Google yorumlarını gör', href: BUSINESS.googleReviewsUrl }}
         />
       </div>
@@ -246,6 +230,7 @@ const faqSchema = {
       <div class="keyfo-container">
         <Location
           heading={CONTENT_TR.locationHeading}
+          intro={CONTENT_TR.locationIntro}
           addressLabel="Adres"
           hoursLabel="Saatler"
           contactLabel="İşlemler"

@@ -1,6 +1,7 @@
 ---
 type Props = {
   heading: string;
+  intro?: string;
   addressLines: string[];
   hoursLine?: string;
   hoursLabel?: string;
@@ -13,6 +14,7 @@ type Props = {
 
 const {
   heading,
+  intro,
   addressLines,
   hoursLine,
   hoursLabel = 'Openingstijden',
@@ -28,6 +30,7 @@ const {
   <div class="keyfo-location-card">
     <header class="keyfo-location-head">
       <h2 id="location-heading" class="keyfo-section-title text-white">{heading}</h2>
+      {intro ? <p class="keyfo-location-intro">{intro}</p> : null}
     </header>
 
     <div class="keyfo-location-grid">

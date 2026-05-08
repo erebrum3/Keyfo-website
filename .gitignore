@@ -20,5 +20,11 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# local QA artifacts
+.qa/
+
+# accidental nested checkout
+keyfowebsite/
+
 # jetbrains setting folder
 .idea/

@@ -1,63 +1,201 @@
 ---
-type Review = {
-  name: string;
-  initial: string;
-  quote: string;
-  date: string;
-  rating: number;
-  source?: string;
-};
+import type { Review } from '../data/reviews';
 
 type Props = {
   eyebrow: string;
   heading: string;
   intro?: string;
-  attributionLabel?: string;
+  ratingValue: number;
+  reviewCount: number;
+  reviewCountLabel: string; // e.g. "Google reviews"
+  ratingSummaryNote: string; // e.g. "Gebaseerd op Google reviews"
   ratingAriaLabel: string;
   reviews: Review[];
-  cta?: { label: string; href: string } | null;
+  lang: 'nl' | 'tr';
+  prevLabel: string;
+  nextLabel: string;
+  cta: { label: string; href: string };
 };
 
-const { eyebrow, heading, intro, attributionLabel, ratingAriaLabel, reviews, cta } = Astro.props;
+const {
+  eyebrow,
+  heading,
+  intro,
+  ratingValue,
+  reviewCount,
+  reviewCountLabel,
+  ratingSummaryNote,
+  ratingAriaLabel,
+  reviews,
+  lang,
+  prevLabel,
+  nextLabel,
+  cta
+} = Astro.props;
+
+const ratingDisplay = lang === 'nl'
+  ? ratingValue.toString().replace('.', ',')
+  : ratingValue.toString().replace('.', ',');
+const fullStars = Math.round(ratingValue);
 ---
 
 <section id="reviews" aria-labelledby="reviews-title" class="keyfo-reviews">
-  <div class="keyfo-reviews-head">
-    <span class="keyfo-reviews-eyebrow">{eyebrow}</span>
-    <h2 id="reviews-title" class="keyfo-reviews-title">{heading}</h2>
-    {intro ? <p class="keyfo-reviews-intro">{intro}</p> : null}
-    {attributionLabel ? <span class="keyfo-reviews-placeholder">{attributionLabel}</span> : null}
+  <div class="keyfo-reviews-top">
+    <div class="keyfo-reviews-head">
+      <span class="keyfo-reviews-eyebrow">{eyebrow}</span>
+      <h2 id="reviews-title" class="keyfo-reviews-title">{heading}</h2>
+      {intro ? <p class="keyfo-reviews-intro">{intro}</p> : null}
+    </div>
+
+    <aside
+      class="keyfo-reviews-summary"
+      aria-label={`${ratingAriaLabel}: ${ratingDisplay} / 5`}
+    >
+      <div class="keyfo-reviews-summary-rating">
+        <span class="keyfo-reviews-summary-value">{ratingDisplay}</span>
+        <span class="keyfo-reviews-summary-max">/ 5</span>
+      </div>
+      <div class="keyfo-reviews-summary-stars" aria-hidden="true">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <span class={i < fullStars ? 'is-on' : 'is-off'}>★</span>
+        ))}
+      </div>
+      <div class="keyfo-reviews-summary-count">
+        <strong>{reviewCount}</strong> {reviewCountLabel}
+      </div>
+      <p class="keyfo-reviews-summary-note">{ratingSummaryNote}</p>
+      <a
+        class="keyfo-reviews-summary-cta"
+        href={cta.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {cta.label}
+        <span aria-hidden="true">→</span>
+      </a>
+    </aside>
   </div>
 
-  <ul class="keyfo-reviews-grid" role="list">
-    {reviews.map((r) => (
-      <li class="keyfo-review-card">
-        <div class="keyfo-review-stars" aria-label={`${ratingAriaLabel}: ${r.rating} / 5`}>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <span aria-hidden="true" class={i < r.rating ? 'is-on' : 'is-off'}>★</span>
-          ))}
-        </div>
-        <blockquote class="keyfo-review-quote">
-          <p>{r.quote}</p>
-        </blockquote>
-        <figcaption class="keyfo-review-meta">
-          <span aria-hidden="true" class="keyfo-review-avatar">{r.initial}</span>
-          <span class="keyfo-review-who">
-            <span class="keyfo-review-name">{r.name}</span>
-            <span class="keyfo-review-date">
-              {r.date}{r.source ? <> · <span class="keyfo-review-source">{r.source}</span></> : null}
-            </span>
-          </span>
-        </figcaption>
-      </li>
-    ))}
-  </ul>
+  <div
+    class="keyfo-reviews-carousel"
+    data-reviews-carousel
+    role="region"
+    aria-roledescription="carousel"
+    aria-label={heading}
+  >
+    <button
+      type="button"
+      class="keyfo-reviews-arrow keyfo-reviews-arrow-prev"
+      data-reviews-prev
+      aria-label={prevLabel}
+    >
+      <span aria-hidden="true">‹</span>
+    </button>
 
-  {cta ? (
-    <div class="keyfo-reviews-cta-wrap">
-      <a class="keyfo-btn-secondary" href={cta.href} target="_blank" rel="noopener noreferrer">
-        {cta.label}
-      </a>
-    </div>
-  ) : null}
+    <ul
+      class="keyfo-reviews-track"
+      data-reviews-track
+      tabindex="0"
+      role="list"
+      aria-label={heading}
+    >
+      {reviews.map((r) => (
+        <li class="keyfo-review-card">
+          <span class="keyfo-review-quote-glyph" aria-hidden="true">“</span>
+          <div class="keyfo-review-card-top">
+            <div
+              class="keyfo-review-stars"
+              aria-label={`${ratingAriaLabel}: ${r.rating} / 5`}
+            >
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span aria-hidden="true" class={i < r.rating ? 'is-on' : 'is-off'}>★</span>
+              ))}
+            </div>
+            <span class="keyfo-review-source-badge">
+              <span aria-hidden="true" class="keyfo-review-source-g">G</span>
+              {r.source}
+            </span>
+          </div>
+          <blockquote class="keyfo-review-quote" lang={r.quoteLang ?? lang}>
+            <p>{r.quote}</p>
+          </blockquote>
+          <figcaption class="keyfo-review-meta">
+            <span aria-hidden="true" class="keyfo-review-avatar">{r.initial}</span>
+            <span class="keyfo-review-who">
+              <span class="keyfo-review-name">{r.name}</span>
+              <span class="keyfo-review-date">{r.date[lang]}</span>
+            </span>
+          </figcaption>
+        </li>
+      ))}
+    </ul>
+
+    <button
+      type="button"
+      class="keyfo-reviews-arrow keyfo-reviews-arrow-next"
+      data-reviews-next
+      aria-label={nextLabel}
+    >
+      <span aria-hidden="true">›</span>
+    </button>
+  </div>
+
+  <div class="keyfo-reviews-cta-wrap">
+    <a
+      class="keyfo-btn-secondary keyfo-reviews-cta-main"
+      href={cta.href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {cta.label}
+    </a>
+  </div>
 </section>
+
+<script>
+  function setupReviewsCarousel(root: HTMLElement) {
+    const track = root.querySelector<HTMLElement>('[data-reviews-track]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-reviews-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-reviews-next]');
+    if (!track || !prev || !next) return;
+
+    const stepSize = () => {
+      const card = track.querySelector<HTMLElement>('.keyfo-review-card');
+      if (!card) return track.clientWidth;
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    const updateArrows = () => {
+      const max = track.scrollWidth - track.clientWidth - 1;
+      prev.disabled = track.scrollLeft <= 0;
+      next.disabled = track.scrollLeft >= max;
+    };
+
+    prev.addEventListener('click', () => {
+      track.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+    });
+    next.addEventListener('click', () => {
+      track.scrollBy({ left: stepSize(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        track.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        track.scrollBy({ left: stepSize(), behavior: 'smooth' });
+      }
+    });
+
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
+  }
+
+  document
+    .querySelectorAll<HTMLElement>('[data-reviews-carousel]')
+    .forEach(setupReviewsCarousel);
+</script>
