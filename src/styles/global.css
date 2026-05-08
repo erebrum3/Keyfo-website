@@ -914,7 +914,26 @@
 
   /* Menu — classic premium rhythm */
   .keyfo-menu {
-    @apply space-y-10;
+    @apply relative space-y-10 overflow-hidden rounded-2xl p-6 sm:p-10 lg:p-14;
+    background-image: url('/assets/keyfo/menu-paper-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 20px 60px -30px rgba(60, 25, 10, 0.35);
+  }
+
+  .keyfo-menu::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(252, 244, 228, 0.55), rgba(252, 244, 228, 0.35));
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .keyfo-menu > * {
+    position: relative;
+    z-index: 1;
   }
 
   .keyfo-menu-head {
