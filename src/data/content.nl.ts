@@ -36,6 +36,11 @@ export const CONTENT_NL = {
   featuredLead: 'Een greep uit ons aanbod.',
   menuHeading: 'Menu',
   menuLastUpdatedLabel: 'Laatste update',
+  menuCta: {
+    heading: 'Klaar om af te halen? Stuur je bestelling via WhatsApp.',
+    whatsappLabel: 'WhatsApp voor afhalen',
+    callLabel: 'Bel direct'
+  },
   galleryHeading: 'Foto’s',
   galleryIntro: 'Een kijkje bij KEYFO Restaurant & Cafe.',
   galleryItems: [
@@ -62,7 +67,7 @@ export const CONTENT_NL = {
     },
     {
       q: 'Waar kan ik parkeren?',
-      a: 'Je kunt parkeren bij Garage Nieuwe Passage, ingang Koemarkt. Het eerste uur is gratis; vanaf daar is het ongeveer 3 minuten lopen naar KEYFO.'
+      a: 'Je kunt parkeren bij Garage Nieuwe Passage, ingang Koemarkt. Het eerste uur is gratis; vanaf daar is het ongeveer 3 minuten lopen naar KEYFO. Controleer altijd de actuele parkeervoorwaarden.'
     },
     {
       q: 'Wat zijn de openingstijden?',

@@ -204,8 +204,47 @@
   }
 
   .keyfo-hero {
-    @apply relative;
+    @apply relative isolate;
     padding-top: clamp(2.5rem, 4.5vw, 3.5rem);
+  }
+
+  .keyfo-hero-bg {
+    @apply pointer-events-none absolute inset-y-0 -z-10 block overflow-hidden;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+  }
+
+  .keyfo-hero-bg img {
+    @apply h-full w-full;
+    object-fit: cover;
+    object-position: center right;
+  }
+
+  .keyfo-hero-bg::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      90deg,
+      rgba(20, 12, 8, 0.78) 0%,
+      rgba(20, 12, 8, 0.55) 45%,
+      rgba(20, 12, 8, 0.15) 100%
+    );
+  }
+
+  @media (max-width: 767px) {
+    .keyfo-hero-bg::after {
+      background: linear-gradient(
+        180deg,
+        rgba(12, 8, 6, 0.72) 0%,
+        rgba(12, 8, 6, 0.45) 35%,
+        rgba(12, 8, 6, 0.25) 70%,
+        rgba(12, 8, 6, 0.55) 100%
+      );
+    }
+    .keyfo-hero-bg img {
+      object-position: 65% center;
+    }
   }
 
   .keyfo-hero-rule {
@@ -318,15 +357,19 @@
     flex-shrink: 0;
   }
 
+  .keyfo-hero-foot {
+    @apply mt-8 grid gap-6 sm:mt-10 lg:grid-cols-2 lg:items-start lg:gap-8;
+  }
+
   .keyfo-hero-intro {
-    @apply mt-8 max-w-2xl text-sm leading-relaxed sm:mt-10 sm:text-base;
+    @apply max-w-2xl text-sm leading-relaxed sm:text-base;
     color: rgba(255, 247, 232, 0.7);
   }
 
   /* Temporary development notice — remove when site is fully launched. */
   .keyfo-dev-notice {
     border-radius: var(--keyfo-radius);
-    @apply mt-6 block w-full max-w-[620px] border-l-2 px-4 py-3 sm:px-5 sm:py-4;
+    @apply block w-full max-w-[620px] border-l-2 px-4 py-3 sm:px-5 sm:py-4;
     border-color: rgb(var(--keyfo-amber) / 0.45);
     background-color: rgba(20, 12, 8, 0.45);
   }
@@ -1043,7 +1086,7 @@
   /* Menu — classic premium rhythm */
   .keyfo-menu {
     @apply relative space-y-10 overflow-hidden rounded-2xl p-6 sm:p-10 lg:p-14;
-    background-image: url('/assets/keyfo/menu-paper-bg.png');
+    background-image: url('/assets/keyfo/menu-paper-bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1151,6 +1194,25 @@
 
   .keyfo-menu-note {
     color: rgba(34, 24, 18, 0.72);
+  }
+
+  .keyfo-menu-cta {
+    @apply mt-6 flex flex-col items-start gap-3 border-t pt-5 sm:mt-7 sm:flex-row sm:items-center sm:justify-between sm:gap-5 sm:pt-6;
+    border-color: rgba(34, 24, 18, 0.14);
+  }
+
+  .keyfo-menu-cta-heading {
+    @apply text-[0.98rem] font-semibold leading-snug sm:text-[1.02rem];
+    color: rgba(34, 24, 18, 0.88);
+    max-width: 36ch;
+  }
+
+  .keyfo-menu-cta-actions {
+    @apply flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:gap-3;
+  }
+
+  .keyfo-menu-cta-actions > a {
+    @apply w-full sm:w-auto;
   }
 
   /* Gallery — mosaic + designed fallback */

@@ -43,19 +43,26 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
     {items.map((slot, idx) => {
       const span = slots[idx % slots.length];
       const dimensions = imageDimensions[slot.src];
+      const stem = slot.src.replace(/\.jpe?g$/i, '');
+      const avifSrc = `${stem}.avif`;
+      const webpSrc = `${stem}.webp`;
       return (
         <figure class:list={['keyfo-gallery-cell', span]}>
           <div class="keyfo-gallery-frame">
-            <img
-              src={slot.src}
-              alt={slot.alt}
-              width={dimensions?.width}
-              height={dimensions?.height}
-              loading="lazy"
-              decoding="async"
-              class="keyfo-gallery-img"
-              onerror="this.style.display='none'"
-            />
+            <picture>
+              <source srcset={avifSrc} type="image/avif" />
+              <source srcset={webpSrc} type="image/webp" />
+              <img
+                src={slot.src}
+                alt={slot.alt}
+                width={dimensions?.width}
+                height={dimensions?.height}
+                loading="lazy"
+                decoding="async"
+                class="keyfo-gallery-img"
+                onerror="this.style.display='none'"
+              />
+            </picture>
           </div>
           <figcaption class="sr-only">{slot.alt}</figcaption>
         </figure>

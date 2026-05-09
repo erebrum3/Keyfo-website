@@ -36,6 +36,11 @@ export const CONTENT_TR = {
   featuredLead: 'Menümüzden seçkiler.',
   menuHeading: 'Menü',
   menuLastUpdatedLabel: 'Son güncelleme',
+  menuCta: {
+    heading: 'Sipariş vermeye hazır mısın? WhatsApp ile gel-al siparişini ilet.',
+    whatsappLabel: 'WhatsApp ile Gel-Al',
+    callLabel: 'Hemen Ara'
+  },
   galleryHeading: 'Fotoğraflar',
   galleryIntro: 'KEYFO Restaurant & Cafe’den kareler.',
   galleryItems: [
@@ -62,7 +67,7 @@ export const CONTENT_TR = {
     },
     {
       q: 'Nerede park edebilirim?',
-      a: "Garage Nieuwe Passage'da park edebilirsiniz, giriş Koemarkt tarafındadır. İlk saat ücretsizdir; KEYFO'ya yürüyerek yaklaşık 3 dakikadır."
+      a: "Garage Nieuwe Passage'da park edebilirsiniz, giriş Koemarkt tarafındadır. İlk saat ücretsizdir; KEYFO'ya yürüyerek yaklaşık 3 dakikadır. Güncel park koşullarını her zaman kontrol edin."
     },
     {
       q: 'Açılış saatleri nedir?',

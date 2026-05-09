@@ -28,6 +28,28 @@ const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').t
 ---
 
 <section aria-labelledby="hero-title" class="keyfo-hero relative">
+  <picture class="keyfo-hero-bg" aria-hidden="true">
+    <source
+      media="(max-width: 767px)"
+      srcset="/assets/keyfo/hero/hero-bg-mobile.webp"
+      type="image/webp"
+    />
+    <source
+      media="(min-width: 768px)"
+      srcset="/assets/keyfo/hero/hero-bg-desktop-1600.webp 1600w, /assets/keyfo/hero/hero-bg-desktop-2400.webp 2400w"
+      sizes="100vw"
+      type="image/webp"
+    />
+    <img
+      src="/assets/keyfo/hero/hero-bg-desktop-1600.webp"
+      alt=""
+      width="1600"
+      height="683"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </picture>
+
   <span aria-hidden="true" class="keyfo-hero-rule"></span>
 
   <div class="keyfo-hero-inner">

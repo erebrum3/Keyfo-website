@@ -161,13 +161,15 @@ const faqSchema = {
             delivery: { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd }
           }}
         />
-        <p class="keyfo-hero-intro">{CONTENT_NL.heroIntro}</p>
-        <aside class="keyfo-dev-notice" aria-label="Tijdelijke melding">
-          <span class="keyfo-dev-notice__label">Tijdelijke melding</span>
-          <p class="keyfo-dev-notice__body">
-            Deze website is in ontwikkeling door Erebrum AI Agency. Technische infrastructuur, ontwerp, bedrijfsgegevens, menu-informatie en lokale vindbaarheid worden nog gecontroleerd en kunnen wijzigen. Contact: <a href="mailto:info@erebrum.com" class="keyfo-dev-notice__link">info@erebrum.com</a>
-          </p>
-        </aside>
+        <div class="keyfo-hero-foot">
+          <p class="keyfo-hero-intro">{CONTENT_NL.heroIntro}</p>
+          <aside class="keyfo-dev-notice" aria-label="Tijdelijke melding">
+            <span class="keyfo-dev-notice__label">Tijdelijke melding</span>
+            <p class="keyfo-dev-notice__body">
+              Deze website is in ontwikkeling door Erebrum AI Agency. Technische infrastructuur, ontwerp, bedrijfsgegevens, menu-informatie en lokale vindbaarheid worden nog gecontroleerd en kunnen wijzigen. Contact: <a href="mailto:info@erebrum.com" class="keyfo-dev-notice__link">info@erebrum.com</a>
+            </p>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -244,7 +246,7 @@ const faqSchema = {
             `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
           ]}
           hoursLine={hoursLineNl}
-          parkingLine="Garage Nieuwe Passage dichtbij · controleer actuele parkeervoorwaarden"
+          parkingLine="Garage Nieuwe Passage, ingang Koemarkt · eerste uur gratis · ongeveer 3 minuten lopen"
           links={[
             { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill), isExternal: true, variant: 'primary' },
             { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },

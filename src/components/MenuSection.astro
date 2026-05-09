@@ -1,5 +1,8 @@
 ---
 import type { MenuCategory } from '../data/menu';
+import { BUSINESS } from '../data/business';
+import { CONTENT_NL } from '../data/content.nl';
+import { CONTENT_TR } from '../data/content.tr';
 
 type Props = {
   heading: string;
@@ -12,6 +15,12 @@ type Props = {
 };
 
 const { heading, eyebrow, categories, formatPrice, lastUpdatedLabel, lastUpdated, notes } = Astro.props;
+
+const isTr = Astro.url.pathname.startsWith('/tr');
+const localeContent = isTr ? CONTENT_TR : CONTENT_NL;
+const menuCta = localeContent.menuCta;
+const whatsappHref = BUSINESS.getWhatsAppUrl(localeContent.whatsappPrefill);
+const callHref = BUSINESS.phoneTel;
 ---
 
 <section id="menu" aria-labelledby="menu-heading" class="keyfo-menu">
@@ -52,4 +61,12 @@ const { heading, eyebrow, categories, formatPrice, lastUpdatedLabel, lastUpdated
       ))}
     </div>
   ) : null}
+
+  <div class="keyfo-menu-cta" role="group" aria-label={menuCta.heading}>
+    <p class="keyfo-menu-cta-heading">{menuCta.heading}</p>
+    <div class="keyfo-menu-cta-actions">
+      <a class="keyfo-btn-primary" href={whatsappHref} target="_blank" rel="noopener noreferrer">{menuCta.whatsappLabel}</a>
+      <a class="keyfo-btn-secondary" href={callHref}>{menuCta.callLabel}</a>
+    </div>
+  </div>
 </section>

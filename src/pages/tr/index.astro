@@ -161,13 +161,15 @@ const faqSchema = {
             delivery: { label: CONTENT_TR.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd }
           }}
         />
-        <p class="keyfo-hero-intro">{CONTENT_TR.heroIntro}</p>
-        <aside class="keyfo-dev-notice" aria-label="Geçici bildirim">
-          <span class="keyfo-dev-notice__label">Geçici bildirim</span>
-          <p class="keyfo-dev-notice__body">
-            Bu web sitesi Erebrum AI Agency tarafından geliştirilmektedir. Teknik altyapı, tasarım, işletme bilgileri, menü içeriği ve yerel görünürlük hâlâ kontrol edilmekte olup değişebilir. İletişim: <a href="mailto:info@erebrum.com" class="keyfo-dev-notice__link">info@erebrum.com</a>
-          </p>
-        </aside>
+        <div class="keyfo-hero-foot">
+          <p class="keyfo-hero-intro">{CONTENT_TR.heroIntro}</p>
+          <aside class="keyfo-dev-notice" aria-label="Geçici bildirim">
+            <span class="keyfo-dev-notice__label">Geçici bildirim</span>
+            <p class="keyfo-dev-notice__body">
+              Bu web sitesi Erebrum AI Agency tarafından geliştirilmektedir. Teknik altyapı, tasarım, işletme bilgileri, menü içeriği ve yerel görünürlük hâlâ kontrol edilmekte olup değişebilir. İletişim: <a href="mailto:info@erebrum.com" class="keyfo-dev-notice__link">info@erebrum.com</a>
+            </p>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -247,7 +249,7 @@ const faqSchema = {
             `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
           ]}
           hoursLine={hoursLineTr}
-          parkingLine="Garage Nieuwe Passage yakında · güncel park koşullarını kontrol edin"
+          parkingLine="Garage Nieuwe Passage, Koemarkt girişi · ilk saat ücretsiz · yaklaşık 3 dk yürüyüş"
           links={[
             { label: CONTENT_TR.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill), isExternal: true, variant: 'primary' },
             { label: CONTENT_TR.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },
