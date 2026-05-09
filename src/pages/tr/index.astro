@@ -21,12 +21,12 @@ const featured = MENU.categories
   .slice(0, 4)
   .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur) }));
 
-const hoursRange = `${BUSINESS.openingHours.opens}-${BUSINESS.openingHours.closes}`;
+const hoursRange = `${BUSINESS.openingHours.opens}–${BUSINESS.openingHours.closes}`;
 const hoursLineTr = `Salı hariç her gün ${hoursRange}`;
 const hoursCompactTr = `Çarşamba-Pazartesi ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes} · Salı kapalı`;
 
 const SITE_ORIGIN = 'https://keyfo.nl';
-const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`;
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
 
 const restaurantSchema = {
   '@context': 'https://schema.org',
@@ -102,10 +102,10 @@ const faqSchema = {
     locale: 'tr_TR',
     siteName: BUSINESS.canonicalName,
     image: ogImageUrl,
-    imageAlt: 'KEYFO Restaurant & Cafe iç mekan',
+    imageAlt: 'KEYFO Restaurant & Cafe Schiedam',
     imageType: 'image/jpeg',
     imageWidth: 1200,
-    imageHeight: 1600,
+    imageHeight: 630,
     imageSecureUrl: ogImageUrl
   }}
   jsonLd={[restaurantSchema, faqSchema]}
@@ -162,6 +162,12 @@ const faqSchema = {
           }}
         />
         <p class="keyfo-hero-intro">{CONTENT_TR.heroIntro}</p>
+        <aside class="keyfo-dev-notice" aria-label="Geçici bildirim">
+          <span class="keyfo-dev-notice__label">Geçici bildirim</span>
+          <p class="keyfo-dev-notice__body">
+            Bu web sitesi Erebrum AI Agency tarafından geliştirilmektedir. Teknik altyapı, tasarım, işletme bilgileri, menü içeriği ve yerel görünürlük hâlâ kontrol edilmekte olup değişebilir. İletişim: <a href="mailto:info@erebrum.com" class="keyfo-dev-notice__link">info@erebrum.com</a>
+          </p>
+        </aside>
       </div>
     </section>
 
