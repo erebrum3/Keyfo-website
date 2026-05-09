@@ -237,8 +237,7 @@ const faqSchema = {
             `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
           ]}
           hoursLine={hoursLineNl}
-          parkingLabel="Parkeren"
-          parkingLine="Garage Nieuwe Passage, ingang Koemarkt. Eerste uur gratis, ongeveer 3 minuten lopen naar KEYFO."
+          parkingLine="Garage Nieuwe Passage dichtbij · controleer actuele parkeervoorwaarden"
           links={[
             { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill), isExternal: true, variant: 'primary' },
             { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },
@@ -246,6 +245,9 @@ const faqSchema = {
             { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' },
             { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true, variant: 'tertiary' }
           ]}
+          mapEmbedUrl={BUSINESS.googleMapsEmbedUrl}
+          mapDirectionsUrl={BUSINESS.googleMapsDirectionsUrl}
+          mapCtaLabel="Route openen in Google Maps"
         />
       </div>
     </section>

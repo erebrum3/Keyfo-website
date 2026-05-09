@@ -240,8 +240,7 @@ const faqSchema = {
             `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
           ]}
           hoursLine={hoursLineTr}
-          parkingLabel="Otopark"
-          parkingLine="Garage Nieuwe Passage, Koemarkt girişi. İlk saat ücretsiz, KEYFO'ya yaklaşık 3 dk yürüyüş."
+          parkingLine="Garage Nieuwe Passage yakında · güncel park koşullarını kontrol edin"
           links={[
             { label: CONTENT_TR.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill), isExternal: true, variant: 'primary' },
             { label: CONTENT_TR.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },
@@ -249,6 +248,9 @@ const faqSchema = {
             { label: CONTENT_TR.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' },
             { label: CONTENT_TR.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true, variant: 'tertiary' }
           ]}
+          mapEmbedUrl={BUSINESS.googleMapsEmbedUrl}
+          mapDirectionsUrl={BUSINESS.googleMapsDirectionsUrl}
+          mapCtaLabel="Yol tarifini Google Maps'te aç"
         />
       </div>
     </section>

@@ -4,12 +4,14 @@ type Props = {
   intro?: string;
   addressLines: string[];
   hoursLine?: string;
-  hoursLabel?: string;
   addressLabel?: string;
   contactLabel?: string;
   parkingLine?: string;
-  parkingLabel?: string;
   links: Array<{ label: string; href: string; isExternal?: boolean; variant?: 'primary' | 'secondary' | 'tertiary' }>;
+  mapEmbedUrl: string;
+  mapDirectionsUrl: string;
+  mapTitle?: string;
+  mapCtaLabel: string;
 };
 
 const {
@@ -17,12 +19,14 @@ const {
   intro,
   addressLines,
   hoursLine,
-  hoursLabel = 'Openingstijden',
   addressLabel = 'Adres',
   contactLabel = 'Acties',
   parkingLine,
-  parkingLabel = 'Parkeren',
-  links
+  links,
+  mapEmbedUrl,
+  mapDirectionsUrl,
+  mapTitle = 'KEYFO',
+  mapCtaLabel
 } = Astro.props;
 ---
 
@@ -34,51 +38,63 @@ const {
     </header>
 
     <div class="keyfo-location-grid">
-      <div class="keyfo-location-block">
-        <span class="keyfo-location-label">{addressLabel}</span>
-        <address class="keyfo-location-address">
-          {addressLines.map((line) => (
-            <span class="keyfo-location-line">{line}</span>
-          ))}
-        </address>
+      <div class="keyfo-location-info">
+        <div class="keyfo-location-block">
+          <span class="keyfo-location-label">{addressLabel}</span>
+          <address class="keyfo-location-address">
+            {addressLines.map((line) => (
+              <span class="keyfo-location-line">{line}</span>
+            ))}
+          </address>
+          {hoursLine ? <span class="keyfo-location-meta">{hoursLine}</span> : null}
+          {parkingLine ? <span class="keyfo-location-meta keyfo-location-meta--muted">{parkingLine}</span> : null}
+        </div>
+
+        <div class="keyfo-location-block keyfo-location-actions-block">
+          <span class="keyfo-location-label">{contactLabel}</span>
+          <ul class="keyfo-location-actions">
+            {links.map((l) => (
+              <li>
+                <a
+                  class={
+                    l.variant === 'tertiary'
+                      ? 'keyfo-btn-ghost text-zinc-300'
+                      : l.variant === 'primary'
+                        ? 'keyfo-btn-primary keyfo-glow-amber'
+                        : 'keyfo-btn-secondary'
+                  }
+                  href={l.href}
+                  target={l.isExternal ? '_blank' : undefined}
+                  rel={l.isExternal ? 'noopener noreferrer' : undefined}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      {hoursLine ? (
-        <div class="keyfo-location-block">
-          <span class="keyfo-location-label">{hoursLabel}</span>
-          <p class="keyfo-location-hours">{hoursLine}</p>
-        </div>
-      ) : null}
-
-      {parkingLine ? (
-        <div class="keyfo-location-block">
-          <span class="keyfo-location-label">{parkingLabel}</span>
-          <p class="keyfo-location-parking">{parkingLine}</p>
-        </div>
-      ) : null}
-
-      <div class="keyfo-location-block keyfo-location-actions-block">
-        <span class="keyfo-location-label">{contactLabel}</span>
-        <ul class="keyfo-location-actions">
-          {links.map((l) => (
-            <li>
-              <a
-                class={
-                  l.variant === 'tertiary'
-                    ? 'keyfo-btn-ghost text-zinc-300'
-                    : l.variant === 'primary'
-                      ? 'keyfo-btn-primary keyfo-glow-amber'
-                      : 'keyfo-btn-secondary'
-                }
-                href={l.href}
-                target={l.isExternal ? '_blank' : undefined}
-                rel={l.isExternal ? 'noopener noreferrer' : undefined}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <div class="keyfo-location-map">
+        <iframe
+          src={mapEmbedUrl}
+          title={`${mapTitle} — ${addressLines.join(', ')}`}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+        <a
+          class="keyfo-location-map-cta"
+          href={mapDirectionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={mapCtaLabel}
+        >
+          <span aria-hidden="true">{mapCtaLabel}</span>
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M9.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414-1.414L11.586 9H3a1 1 0 1 1 0-2h8.586L9.293 4.707a1 1 0 0 1 0-1.414Z"/>
+          </svg>
+        </a>
       </div>
     </div>
   </div>

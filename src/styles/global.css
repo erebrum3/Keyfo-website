@@ -1239,7 +1239,11 @@
   }
 
   .keyfo-location-grid {
-    @apply grid gap-7 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10;
+    @apply grid gap-7 lg:grid-cols-2 lg:gap-10;
+  }
+
+  .keyfo-location-info {
+    @apply flex flex-col gap-7;
   }
 
   .keyfo-location-block {
@@ -1247,7 +1251,7 @@
   }
 
   .keyfo-location-actions-block {
-    @apply sm:col-span-2 lg:col-span-1;
+    @apply gap-3;
   }
 
   .keyfo-location-label {
@@ -1267,20 +1271,65 @@
     letter-spacing: -0.005em;
   }
 
-  .keyfo-location-hours {
-    @apply text-base leading-snug sm:text-lg;
-    color: rgba(255, 247, 232, 0.94);
-    font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-    letter-spacing: -0.005em;
+  .keyfo-location-meta {
+    @apply mt-1 text-sm leading-snug;
+    color: rgba(255, 247, 232, 0.78);
   }
 
-  .keyfo-location-parking {
-    @apply text-sm leading-relaxed sm:text-base;
-    color: rgba(255, 247, 232, 0.82);
+  .keyfo-location-meta--muted {
+    color: rgba(255, 247, 232, 0.58);
   }
 
   .keyfo-location-actions {
     @apply flex flex-wrap gap-2;
+  }
+
+  .keyfo-location-map {
+    @apply relative overflow-hidden;
+    border-radius: calc(var(--keyfo-radius) - 4px);
+    border: 1px solid rgba(255, 247, 232, 0.12);
+    background: rgba(255, 247, 232, 0.04);
+    aspect-ratio: 4 / 3;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+  }
+
+  @media (min-width: 1024px) {
+    .keyfo-location-map {
+      aspect-ratio: auto;
+      min-height: 320px;
+      height: 100%;
+    }
+  }
+
+  .keyfo-location-map iframe {
+    @apply absolute inset-0 h-full w-full;
+    border: 0;
+    filter: saturate(0.9) contrast(0.96);
+  }
+
+  .keyfo-location-map-cta {
+    @apply absolute inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    border-radius: 999px;
+    background: rgba(20, 14, 10, 0.92);
+    color: rgb(var(--keyfo-text-light));
+    border: 1px solid rgba(242, 176, 43, 0.45);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    transition: transform 200ms ease, background-color 200ms ease, border-color 200ms ease;
+  }
+
+  .keyfo-location-map-cta:hover,
+  .keyfo-location-map-cta:focus-visible {
+    transform: translateY(-1px);
+    background: rgba(188, 32, 26, 0.92);
+    border-color: rgba(242, 176, 43, 0.85);
+    outline: none;
+  }
+
+  .keyfo-location-map-cta svg {
+    @apply shrink-0;
   }
 
   /* FAQ — refined accordion on cream */
