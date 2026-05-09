@@ -294,7 +294,7 @@ export default function TrustStrip() {
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm">
           <div className="flex items-center gap-2 text-white/70">
             <ClockIcon />
-            <span>Elke dag 12:00 – 22:00</span>
+            <span>Wo-ma 11:30 – 22:00 · di gesloten</span>
           </div>
           <div className="flex items-center gap-2 text-white/70">
             <CheckIcon />
@@ -1000,13 +1000,13 @@ export default function LocationSection() {
                 {days.map((day) => (
                   <div key={day} className="flex items-center justify-between text-sm">
                     <span className="text-keyfo-charcoal/60">{day}</span>
-                    <span className="text-keyfo-charcoal font-medium">12:00 – 22:00</span>
+                    <span className="text-keyfo-charcoal font-medium">{day === "Dinsdag" ? "Gesloten" : "11:30 – 22:00"}</span>
                   </div>
                 ))}
               </div>
               <div className="mt-4 pt-3 border-t border-keyfo-border/50 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-green-500" />
-                <span className="text-keyfo-charcoal/50 text-xs">Elke dag open, ook op feestdagen</span>
+                <span className="text-keyfo-charcoal/50 text-xs">Dinsdag gesloten</span>
               </div>
             </div>
 
@@ -1114,7 +1114,7 @@ const faqs = [
   },
   {
     q: "Wat zijn jullie openingstijden?",
-    a: "Wij zijn elke dag open van 12:00 tot 22:00 uur, inclusief weekenden en feestdagen. Kom gezellig langs of bestel van tevoren!",
+    a: "Wij zijn elke dag behalve dinsdag open van 11:30 tot 22:00 uur. Dinsdag gesloten.",
   },
   {
     q: "Kan ik ook ter plaatse eten bij KEYFO?",
@@ -1276,7 +1276,7 @@ export default function Footer() {
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
-                Elke dag 12:00 – 22:00
+                Wo-ma 11:30 – 22:00 · di gesloten
               </div>
             </div>
           </div>
@@ -1364,4 +1364,3 @@ export default function MobileBottomBar() {
     </nav>
   )
 }
-

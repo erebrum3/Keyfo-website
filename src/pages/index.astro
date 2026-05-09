@@ -22,8 +22,8 @@ const featured = MENU.categories
   .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur) }));
 
 const hoursRange = `${BUSINESS.openingHours.opens}-${BUSINESS.openingHours.closes}`;
-const hoursLineNl = `Elke dag ${hoursRange}`;
-const hoursCompactNl = `Elke dag ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes}`;
+const hoursLineNl = `Elke dag behalve dinsdag ${hoursRange}`;
+const hoursCompactNl = `Wo-ma ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes} · di gesloten`;
 
 const SITE_ORIGIN = 'https://keyfo.nl';
 const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`;
@@ -145,6 +145,7 @@ const faqSchema = {
           heading={BUSINESS.canonicalName}
           subheading={CONTENT_NL.heroSubheading}
           kicker={CONTENT_NL.heroKicker}
+          ops={CONTENT_NL.heroOps}
           rating={{
             value: BUSINESS.googleRating,
             count: BUSINESS.googleReviewCount,
@@ -161,6 +162,12 @@ const faqSchema = {
           }}
         />
         <p class="keyfo-hero-intro">{CONTENT_NL.heroIntro}</p>
+        <aside class="keyfo-dev-notice" aria-label="Tijdelijke melding">
+          <span class="keyfo-dev-notice__label">Tijdelijke melding</span>
+          <p class="keyfo-dev-notice__body">
+            Deze website is in ontwikkeling door Erebrum AI Agency. Technische infrastructuur, ontwerp, bedrijfsgegevens, menu-informatie en lokale vindbaarheid worden nog gecontroleerd en kunnen wijzigen. Contact: <a href="mailto:info@erebrum.com" class="keyfo-dev-notice__link">info@erebrum.com</a>
+          </p>
+        </aside>
       </div>
     </section>
 

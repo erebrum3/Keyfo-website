@@ -5,7 +5,8 @@ export const CONTENT_NL = {
     'Bekijk het menu van KEYFO Restaurant & Cafe in Schiedam. Afhalen via WhatsApp of telefoon. Bezorging via Thuisbezorgd (extern).',
   heroSubheading: 'Turkse grill en döner in Schiedam.',
   heroIntro:
-    'Turkse grill en döner in Schiedam. Bekijk het menu en bestel afhalen via WhatsApp of telefoon. Broersveld 103, dagelijks 12:00–22:00.',
+    'KEYFO Restaurant & Cafe is een lokaal Turks restaurant aan Broersveld 103 in Schiedam Centrum. Op het menu staan döner, grillgerechten, Turkse pizza, desserts en drankjes. Afhalen kan via WhatsApp of telefoon.',
+  heroOps: 'Broersveld 103 · Schiedam Centrum · Behalve dinsdag 11:30–22:00',
   heroKicker: 'Turkse grill & döner',
   heroRatingLabel: 'Google reviews',
   heroRatingAriaLabel: 'Google reviews beoordeling',
@@ -65,7 +66,7 @@ export const CONTENT_NL = {
     },
     {
       q: 'Wat zijn de openingstijden?',
-      a: 'Elke dag 12:00-22:00.'
+      a: 'Elke dag behalve dinsdag 11:30-22:00. Dinsdag gesloten.'
     },
     {
       q: 'Kan ik afhalen?',
@@ -101,4 +102,3 @@ export const CONTENT_NL = {
     }
   ]
 } as const;
-

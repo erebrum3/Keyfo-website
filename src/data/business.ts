@@ -16,8 +16,9 @@ export const BUSINESS = {
   email: 'keyfo-grill@hotmail.com',
   emailMailto: 'mailto:keyfo-grill@hotmail.com',
   openingHours: {
-    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '12:00',
+    days: ['Monday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    closedDays: ['Tuesday'],
+    opens: '11:30',
     closes: '22:00'
   },
   googleMapsDirectionsUrl:

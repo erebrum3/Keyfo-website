@@ -22,8 +22,8 @@ const featured = MENU.categories
   .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur) }));
 
 const hoursRange = `${BUSINESS.openingHours.opens}-${BUSINESS.openingHours.closes}`;
-const hoursLineTr = `Her gün ${hoursRange}`;
-const hoursCompactTr = `Her gün ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes}`;
+const hoursLineTr = `Salı hariç her gün ${hoursRange}`;
+const hoursCompactTr = `Çarşamba-Pazartesi ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes} · Salı kapalı`;
 
 const SITE_ORIGIN = 'https://keyfo.nl';
 const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`;
@@ -145,6 +145,7 @@ const faqSchema = {
           heading={BUSINESS.canonicalName}
           subheading={CONTENT_TR.heroSubheading}
           kicker={CONTENT_TR.heroKicker}
+          ops={CONTENT_TR.heroOps}
           rating={{
             value: BUSINESS.googleRating,
             count: BUSINESS.googleReviewCount,

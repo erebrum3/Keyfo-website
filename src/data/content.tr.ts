@@ -5,7 +5,8 @@ export const CONTENT_TR = {
     "Schiedam’daki KEYFO Restaurant & Cafe menüsünü görüntüleyin. Gel-al için WhatsApp veya telefon. Adrese teslim Thuisbezorgd üzerinden (harici).",
   heroSubheading: "Schiedam’da Türk grill ve döner.",
   heroIntro:
-    "Schiedam’da Türk grill ve döner. Menüyü inceleyin ve gel-al için WhatsApp veya telefonla sipariş verin. Broersveld 103, her gün 12:00–22:00.",
+    "KEYFO Restaurant & Cafe, Schiedam Centrum’da Broersveld 103 adresinde yerel bir Türk restoranıdır. Menüde döner, ızgara, Türk pizzası, tatlılar ve içecekler bulunur. Gel-al için WhatsApp veya telefonla iletişime geçebilirsiniz.",
+  heroOps: 'Broersveld 103 · Schiedam Centrum · Salı hariç her gün 11:30–22:00',
   heroKicker: 'Türk grill & döner',
   heroRatingLabel: 'Google yorumları',
   heroRatingAriaLabel: 'Google yorumları puanı',
@@ -65,7 +66,7 @@ export const CONTENT_TR = {
     },
     {
       q: 'Açılış saatleri nedir?',
-      a: 'Her gün 12:00-22:00.'
+      a: 'Salı hariç her gün 11:30-22:00. Salı kapalı.'
     },
     {
       q: 'Gel-al mümkün mü?',
@@ -101,4 +102,3 @@ export const CONTENT_TR = {
     }
   ]
 } as const;
-

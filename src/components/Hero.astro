@@ -3,6 +3,7 @@ type Props = {
   heading: string;
   subheading: string;
   kicker: string;
+  ops?: string;
   rating?: {
     value: number;
     count: number;
@@ -19,7 +20,7 @@ type Props = {
   };
 };
 
-const { heading, subheading, kicker, rating, ctas } = Astro.props;
+const { heading, subheading, kicker, ops, rating, ctas } = Astro.props;
 const ratingValueLabel = rating ? rating.value.toFixed(1) : '';
 
 const heroMain = heading.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || heading;
@@ -76,6 +77,27 @@ const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').t
     ) : null}
 
     <p class="keyfo-hero-sub">{subheading}</p>
+
+    {ops ? (
+      <p class="keyfo-hero-ops">
+        <svg
+          aria-hidden="true"
+          class="keyfo-hero-ops-icon"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <span>{ops}</span>
+      </p>
+    ) : null}
 
     <div class="keyfo-hero-ctas">
       <a href={ctas.whatsapp.href} class="keyfo-btn-primary keyfo-btn-hero keyfo-glow-amber keyfo-motion">

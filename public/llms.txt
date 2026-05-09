@@ -4,7 +4,7 @@
 - Business name: KEYFO Restaurant & Cafe
 - Address: Broersveld 103, 3111 LE Schiedam, Netherlands
 - Phone / WhatsApp: +31 6 41014926
-- Opening hours: Daily 12:00-22:00 (Monday through Sunday)
+- Opening hours: 11:30-22:00 Wednesday through Monday; closed Tuesday
 - Cuisine: Turkish, Grill
 - Halal: Halal options available
 - Services: pickup by WhatsApp or phone, delivery via Thuisbezorgd, dine-in available
@@ -21,7 +21,7 @@ Türk grill ve döner, Schiedam.
 Broersveld 103, 3111 LE Schiedam, Netherlands
 
 ## Hours
-Daily 12:00-22:00 (Monday through Sunday)
+11:30-22:00 Wednesday through Monday; closed Tuesday
 
 ## Contact
 - Phone / WhatsApp: +31 6 41014926

@@ -40,40 +40,39 @@ const fullStars = Math.round(ratingValue);
 ---
 
 <section id="reviews" aria-labelledby="reviews-title" class="keyfo-reviews">
-  <div class="keyfo-reviews-top">
-    <div class="keyfo-reviews-head">
-      <span class="keyfo-reviews-eyebrow">{eyebrow}</span>
-      <h2 id="reviews-title" class="keyfo-reviews-title">{heading}</h2>
-      {intro ? <p class="keyfo-reviews-intro">{intro}</p> : null}
-    </div>
+  <div class="keyfo-reviews-head">
+    <span class="keyfo-reviews-eyebrow">{eyebrow}</span>
+    <h2 id="reviews-title" class="keyfo-reviews-title">{heading}</h2>
+    {intro ? <p class="keyfo-reviews-intro">{intro}</p> : null}
+  </div>
 
-    <aside
-      class="keyfo-reviews-summary"
+  <div class="keyfo-reviews-summary-bar">
+    <div
+      class="keyfo-reviews-summary-inline"
       aria-label={`${ratingAriaLabel}: ${ratingDisplay} / 5`}
     >
-      <div class="keyfo-reviews-summary-rating">
-        <span class="keyfo-reviews-summary-value">{ratingDisplay}</span>
-        <span class="keyfo-reviews-summary-max">/ 5</span>
-      </div>
-      <div class="keyfo-reviews-summary-stars" aria-hidden="true">
+      <span class="keyfo-reviews-summary-stars" aria-hidden="true">
         {Array.from({ length: 5 }).map((_, i) => (
           <span class={i < fullStars ? 'is-on' : 'is-off'}>★</span>
         ))}
-      </div>
-      <div class="keyfo-reviews-summary-count">
+      </span>
+      <span class="keyfo-reviews-summary-value">{ratingDisplay}</span>
+      <span class="keyfo-reviews-summary-max">/ 5</span>
+      <span class="keyfo-reviews-summary-sep" aria-hidden="true">·</span>
+      <span class="keyfo-reviews-summary-count">
         <strong>{reviewCount}</strong> {reviewCountLabel}
-      </div>
-      <p class="keyfo-reviews-summary-note">{ratingSummaryNote}</p>
-      <a
-        class="keyfo-reviews-summary-cta"
-        href={cta.href}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {cta.label}
-        <span aria-hidden="true">→</span>
-      </a>
-    </aside>
+      </span>
+    </div>
+
+    <a
+      class="keyfo-reviews-summary-cta"
+      href={cta.href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {cta.label}
+      <span aria-hidden="true">→</span>
+    </a>
   </div>
 
   <div

@@ -9,7 +9,7 @@ Build a production-quality, mobile-first, SEO-friendly and AI-readable one-page 
 - Address: Broersveld 103, 3111 LE Schiedam
 - Phone / WhatsApp: +31 6 41014926
 - Email: keyfo-grill@hotmail.com
-- Opening hours: every day 12:00-22:00
+- Opening hours: 11:30-22:00 Wednesday through Monday; closed Tuesday
 - Google score: 4.9
 - Google reviews: 22
 - Price range: €10-20

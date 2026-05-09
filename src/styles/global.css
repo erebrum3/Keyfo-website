@@ -307,9 +307,48 @@
     color: rgba(255, 247, 232, 0.88);
   }
 
+  .keyfo-hero-ops {
+    @apply mt-4 inline-flex items-center gap-2 text-[0.82rem] sm:text-sm;
+    color: rgba(255, 247, 232, 0.78);
+    letter-spacing: 0.01em;
+  }
+
+  .keyfo-hero-ops-icon {
+    color: rgb(var(--keyfo-amber));
+    flex-shrink: 0;
+  }
+
   .keyfo-hero-intro {
     @apply mt-8 max-w-2xl text-sm leading-relaxed sm:mt-10 sm:text-base;
     color: rgba(255, 247, 232, 0.7);
+  }
+
+  /* Temporary development notice — remove when site is fully launched. */
+  .keyfo-dev-notice {
+    border-radius: var(--keyfo-radius);
+    @apply mt-6 block w-full max-w-[620px] border-l-2 px-4 py-3 sm:px-5 sm:py-4;
+    border-color: rgb(var(--keyfo-amber) / 0.45);
+    background-color: rgba(20, 12, 8, 0.45);
+  }
+
+  .keyfo-dev-notice__label {
+    @apply mb-1 block text-[0.65rem] font-semibold uppercase tracking-[0.16em];
+    color: rgb(var(--keyfo-amber) / 0.85);
+  }
+
+  .keyfo-dev-notice__body {
+    @apply text-xs leading-relaxed sm:text-[0.8125rem];
+    color: rgba(255, 247, 232, 0.62);
+    overflow-wrap: anywhere;
+  }
+
+  .keyfo-dev-notice__link {
+    @apply underline underline-offset-2;
+    color: rgba(255, 247, 232, 0.82);
+  }
+
+  .keyfo-dev-notice__link:hover {
+    color: rgba(255, 247, 232, 0.95);
   }
 
   .keyfo-hero-ctas {
@@ -755,12 +794,23 @@
     @apply space-y-8;
   }
 
-  .keyfo-reviews-top {
-    @apply grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-10;
+  .keyfo-reviews-head {
+    @apply flex flex-col gap-2 max-w-3xl;
   }
 
-  .keyfo-reviews-head {
-    @apply flex flex-col gap-2 max-w-2xl;
+  .keyfo-reviews-summary-bar {
+    @apply flex flex-wrap items-center justify-between gap-4 border-y py-4;
+    border-color: rgba(242, 176, 43, 0.18);
+  }
+
+  .keyfo-reviews-summary-inline {
+    @apply inline-flex flex-wrap items-baseline gap-x-2 gap-y-1;
+    color: rgb(var(--keyfo-text-light));
+  }
+
+  .keyfo-reviews-summary-sep {
+    color: rgba(255, 247, 232, 0.30);
+    @apply px-1;
   }
 
   .keyfo-reviews-eyebrow {
@@ -781,23 +831,22 @@
     color: rgba(255, 247, 232, 0.78);
   }
 
-  .keyfo-reviews-summary {
-    border-radius: var(--keyfo-radius);
-    @apply flex w-full flex-col gap-2 p-5 lg:w-[300px] lg:p-6;
-    border: 1px solid rgba(242, 176, 43, 0.22);
-    background-color: rgba(36, 22, 16, 0.85);
-    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.32);
+  .keyfo-reviews-summary-stars {
+    @apply inline-flex items-center gap-0.5 text-lg sm:text-xl;
+    color: rgb(var(--keyfo-amber));
+    letter-spacing: 0.06em;
+    margin-right: 0.4rem;
   }
 
-  .keyfo-reviews-summary-rating {
-    @apply flex items-baseline gap-1;
-    color: rgb(var(--keyfo-text-light));
+  .keyfo-reviews-summary-stars .is-off {
+    color: rgba(255, 247, 232, 0.18);
   }
 
   .keyfo-reviews-summary-value {
-    @apply text-4xl font-semibold sm:text-5xl;
+    @apply text-2xl font-semibold sm:text-3xl;
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+    color: rgb(var(--keyfo-text-light));
   }
 
   .keyfo-reviews-summary-max {
@@ -805,18 +854,8 @@
     color: rgba(255, 247, 232, 0.55);
   }
 
-  .keyfo-reviews-summary-stars {
-    @apply inline-flex items-center gap-0.5 text-lg;
-    color: rgb(var(--keyfo-amber));
-    letter-spacing: 0.04em;
-  }
-
-  .keyfo-reviews-summary-stars .is-off {
-    color: rgba(255, 247, 232, 0.18);
-  }
-
   .keyfo-reviews-summary-count {
-    @apply text-sm;
+    @apply text-sm sm:text-base;
     color: rgba(255, 247, 232, 0.85);
   }
 
@@ -825,13 +864,8 @@
     color: rgb(var(--keyfo-text-light));
   }
 
-  .keyfo-reviews-summary-note {
-    @apply m-0 text-xs;
-    color: rgba(255, 247, 232, 0.55);
-  }
-
   .keyfo-reviews-summary-cta {
-    @apply mt-1 inline-flex items-center gap-1.5 text-sm font-semibold;
+    @apply inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold sm:text-base;
     color: rgb(var(--keyfo-amber));
     text-decoration: none;
     transition: color 150ms ease;
