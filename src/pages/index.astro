@@ -21,12 +21,12 @@ const featured = MENU.categories
   .slice(0, 4)
   .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur) }));
 
-const hoursRange = `${BUSINESS.openingHours.opens}-${BUSINESS.openingHours.closes}`;
+const hoursRange = `${BUSINESS.openingHours.opens}–${BUSINESS.openingHours.closes}`;
 const hoursLineNl = `Elke dag behalve dinsdag ${hoursRange}`;
 const hoursCompactNl = `Wo-ma ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes} · di gesloten`;
 
 const SITE_ORIGIN = 'https://keyfo.nl';
-const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/hero-interior.jpg`;
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
 
 const restaurantSchema = {
   '@context': 'https://schema.org',
@@ -102,10 +102,10 @@ const faqSchema = {
     locale: 'nl_NL',
     siteName: BUSINESS.canonicalName,
     image: ogImageUrl,
-    imageAlt: 'KEYFO Restaurant & Cafe interieur',
+    imageAlt: 'KEYFO Restaurant & Cafe in Schiedam',
     imageType: 'image/jpeg',
     imageWidth: 1200,
-    imageHeight: 1600,
+    imageHeight: 630,
     imageSecureUrl: ogImageUrl
   }}
   jsonLd={[restaurantSchema, faqSchema]}

@@ -66,7 +66,8 @@ const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.starts
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#09090b" />
+    <meta name="theme-color" content="#0c0806" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fff6e5" media="(prefers-color-scheme: light)" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -80,6 +81,13 @@ const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.starts
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={ogSiteName} />
     <meta property="og:locale" content={ogLocale} />
+    {alternateLanguages
+      .filter((alt) => alt.hreflang !== 'x-default')
+      .map((alt) => {
+        const altLocale = alt.hreflang === 'tr-TR' ? 'tr_TR' : alt.hreflang === 'nl-NL' ? 'nl_NL' : null;
+        if (!altLocale || altLocale === ogLocale) return null;
+        return <meta property="og:locale:alternate" content={altLocale} />;
+      })}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
@@ -94,9 +102,20 @@ const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.starts
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {ogImage ? <meta name="twitter:image" content={ogImage} /> : null}
+    {ogImage ? <meta name="twitter:image:alt" content={ogImageAlt} /> : null}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/keyfo/hero/hero-bg-desktop-1600.webp"
+      imagesrcset="/assets/keyfo/hero/hero-bg-mobile.webp 900w, /assets/keyfo/hero/hero-bg-desktop-1600.webp 1600w, /assets/keyfo/hero/hero-bg-desktop-2400.webp 2400w"
+      imagesizes="(max-width: 767px) 100vw, 100vw"
+      fetchpriority="high"
+    />
 
     {jsonLd.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />

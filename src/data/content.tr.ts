@@ -66,7 +66,7 @@ export const CONTENT_TR = {
     },
     {
       q: 'Açılış saatleri nedir?',
-      a: 'Salı hariç her gün 11:30-22:00. Salı kapalı.'
+      a: 'Salı hariç her gün 11:30–22:00. Salı kapalı.'
     },
     {
       q: 'Gel-al mümkün mü?',
