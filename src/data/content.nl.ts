@@ -36,6 +36,8 @@ export const CONTENT_NL = {
   featuredLead: 'Een greep uit ons aanbod.',
   menuHeading: 'Menu',
   menuLastUpdatedLabel: 'Laatste update',
+  menuIntro: 'Döner, grillgerechten, Turkse pizza, desserts en drankjes. Afhalen via WhatsApp of telefoon; bezorging via Thuisbezorgd (extern).',
+  menuShortcutLabel: 'Snel naar categorie',
   menuCta: {
     heading: 'Klaar om af te halen? Stuur je bestelling via WhatsApp.',
     whatsappLabel: 'WhatsApp voor afhalen',

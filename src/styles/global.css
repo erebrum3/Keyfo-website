@@ -1235,6 +1235,42 @@
     opacity: 0.18;
   }
 
+  .keyfo-menu-intro {
+    @apply max-w-3xl text-sm leading-relaxed sm:text-[0.95rem];
+    color: rgba(34, 24, 18, 0.78);
+  }
+
+  .keyfo-menu-shortcuts {
+    @apply -mx-2 overflow-x-auto sm:mx-0;
+    scrollbar-width: none;
+  }
+
+  .keyfo-menu-shortcuts::-webkit-scrollbar {
+    display: none;
+  }
+
+  .keyfo-menu-shortcuts-list {
+    @apply flex w-max gap-2 px-2 sm:w-auto sm:flex-wrap sm:px-0;
+  }
+
+  .keyfo-menu-shortcut {
+    @apply inline-flex items-center whitespace-nowrap rounded-full border px-3 py-1.5 text-[0.78rem] font-semibold transition-colors sm:text-[0.82rem];
+    border-color: rgba(34, 24, 18, 0.18);
+    background-color: rgba(255, 247, 231, 0.6);
+    color: rgba(34, 24, 18, 0.86);
+  }
+
+  .keyfo-menu-shortcut:hover,
+  .keyfo-menu-shortcut:focus-visible {
+    border-color: rgba(var(--keyfo-amber), 0.6);
+    background-color: rgba(var(--keyfo-amber), 0.12);
+    color: rgb(var(--keyfo-text-dark));
+  }
+
+  .keyfo-menu-cat {
+    scroll-margin-top: 96px;
+  }
+
   /* Gallery — mosaic + designed fallback */
   section#gallery.keyfo-section {
     @apply py-10 sm:py-12 lg:py-14;

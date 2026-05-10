@@ -33,6 +33,20 @@ const callHref = BUSINESS.phoneTel;
     <span class="keyfo-menu-meta">{lastUpdatedLabel}: {lastUpdated}</span>
   </div>
 
+  {localeContent.menuIntro ? (
+    <p class="keyfo-menu-intro">{localeContent.menuIntro}</p>
+  ) : null}
+
+  <nav class="keyfo-menu-shortcuts" aria-label={localeContent.menuShortcutLabel}>
+    <ul class="keyfo-menu-shortcuts-list">
+      {categories.map((cat) => (
+        <li>
+          <a class="keyfo-menu-shortcut" href={`#cat-${cat.id}`}>{cat.title}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
   <div class="keyfo-menu-grid">
     {categories.map((cat, idx) => (
       <section aria-labelledby={`cat-${cat.id}`} class="keyfo-menu-cat">

@@ -36,6 +36,8 @@ export const CONTENT_TR = {
   featuredLead: 'Menümüzden seçkiler.',
   menuHeading: 'Menü',
   menuLastUpdatedLabel: 'Son güncelleme',
+  menuIntro: 'Döner, ızgara çeşitleri, Türk pizzası, tatlılar ve içecekler. WhatsApp veya telefonla gel-al; teslimat Thuisbezorgd üzerinden (harici).',
+  menuShortcutLabel: 'Kategoriye git',
   menuCta: {
     heading: 'Sipariş vermeye hazır mısın? WhatsApp ile gel-al siparişini ilet.',
     whatsappLabel: 'WhatsApp ile Gel-Al',
