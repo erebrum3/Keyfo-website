@@ -88,3 +88,25 @@ const callHref = BUSINESS.phoneTel;
   <p class="keyfo-menu-stamp" aria-hidden="true">KEYFO · RESTAURANT &amp; CAFE</p>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const chips = document.querySelectorAll('.keyfo-menu-shortcut');
+    if (!chips.length || !('IntersectionObserver' in window)) return;
+    const byId = new Map();
+    chips.forEach((chip) => {
+      const href = chip.getAttribute('href') || '';
+      if (href.startsWith('#')) byId.set(href.slice(1), chip);
+    });
+    const targets = Array.from(byId.keys()).map((id) => document.getElementById(id)).filter(Boolean);
+    if (!targets.length) return;
+    const setActive = (id) => {
+      chips.forEach((c) => c.classList.toggle('is-active', byId.get(id) === c));
+    };
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible.length) setActive(visible[0].target.id);
+    }, { rootMargin: '-104px 0px -55% 0px', threshold: 0 });
+    targets.forEach((t) => observer.observe(t));
+  })();
+</script>

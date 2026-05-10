@@ -1289,6 +1289,12 @@
     color: rgb(var(--keyfo-text-dark));
   }
 
+  .keyfo-menu-shortcut.is-active {
+    border-color: rgba(var(--keyfo-amber), 0.75);
+    background-color: rgba(var(--keyfo-amber), 0.2);
+    color: rgb(var(--keyfo-text-dark));
+  }
+
   .keyfo-menu [id^="cat-"] {
     scroll-margin-top: 96px;
   }
