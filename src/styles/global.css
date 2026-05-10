@@ -684,9 +684,20 @@
   }
 
   .keyfo-popular-eyebrow {
-    @apply mb-3 inline-block text-[0.7rem] font-semibold uppercase;
+    @apply mb-3 inline-flex items-center text-[0.7rem] font-semibold uppercase;
     letter-spacing: 0.32em;
     color: rgba(122, 34, 24, 0.92);
+  }
+
+  .keyfo-popular-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 0.7em;
+    background-color: currentColor;
+    transform: rotate(45deg);
+    opacity: 0.55;
   }
 
   .keyfo-popular-heading {
@@ -857,9 +868,20 @@
   }
 
   .keyfo-reviews-eyebrow {
-    @apply inline-block text-[0.7rem] font-semibold uppercase;
+    @apply inline-flex items-center text-[0.7rem] font-semibold uppercase;
     letter-spacing: 0.32em;
     color: rgba(242, 176, 43, 0.85);
+  }
+
+  .keyfo-reviews-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 0.7em;
+    background-color: currentColor;
+    transform: rotate(45deg);
+    opacity: 0.65;
   }
 
   .keyfo-reviews-title {
