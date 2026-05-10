@@ -381,7 +381,7 @@
 
   .keyfo-dev-notice__body {
     @apply text-[0.74rem] leading-relaxed sm:text-[0.78rem];
-    color: rgba(255, 247, 232, 0.5);
+    color: rgba(255, 247, 232, 0.62);
     overflow-wrap: anywhere;
   }
 
@@ -1289,7 +1289,7 @@
     color: rgb(var(--keyfo-text-dark));
   }
 
-  .keyfo-menu-cat {
+  .keyfo-menu [id^="cat-"] {
     scroll-margin-top: 96px;
   }
 
