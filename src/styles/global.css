@@ -369,19 +369,19 @@
   /* Temporary development notice — remove when site is fully launched. */
   .keyfo-dev-notice {
     border-radius: var(--keyfo-radius);
-    @apply block w-full max-w-[620px] border-l-2 px-4 py-3 sm:px-5 sm:py-4;
-    border-color: rgb(var(--keyfo-amber) / 0.45);
-    background-color: rgba(20, 12, 8, 0.45);
+    @apply block w-full max-w-[560px] border-l-2 px-4 py-3 sm:px-5 sm:py-3.5;
+    border-color: rgb(var(--keyfo-amber) / 0.32);
+    background-color: rgba(20, 12, 8, 0.32);
   }
 
   .keyfo-dev-notice__label {
-    @apply mb-1 block text-[0.65rem] font-semibold uppercase tracking-[0.16em];
-    color: rgb(var(--keyfo-amber) / 0.85);
+    @apply mb-1 block text-[0.6rem] font-semibold uppercase tracking-[0.18em];
+    color: rgb(var(--keyfo-amber) / 0.7);
   }
 
   .keyfo-dev-notice__body {
-    @apply text-xs leading-relaxed sm:text-[0.8125rem];
-    color: rgba(255, 247, 232, 0.62);
+    @apply text-[0.74rem] leading-relaxed sm:text-[0.78rem];
+    color: rgba(255, 247, 232, 0.5);
     overflow-wrap: anywhere;
   }
 
