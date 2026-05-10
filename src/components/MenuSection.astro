@@ -23,7 +23,8 @@ const whatsappHref = BUSINESS.getWhatsAppUrl(localeContent.whatsappPrefill);
 const callHref = BUSINESS.phoneTel;
 ---
 
-<section id="menu" aria-labelledby="menu-heading" class="keyfo-menu">
+<section id="menu" aria-labelledby="menu-heading" class="keyfo-menu-frame">
+  <div class="keyfo-menu">
   <div class="keyfo-menu-head">
     <div>
       {eyebrow ? <span class="keyfo-menu-eyebrow">{eyebrow}</span> : null}
@@ -68,5 +69,8 @@ const callHref = BUSINESS.phoneTel;
       <a class="keyfo-btn-primary" href={whatsappHref} target="_blank" rel="noopener noreferrer">{menuCta.whatsappLabel}</a>
       <a class="keyfo-btn-secondary" href={callHref}>{menuCta.callLabel}</a>
     </div>
+  </div>
+
+  <p class="keyfo-menu-stamp" aria-hidden="true">KEYFO · RESTAURANT &amp; CAFE</p>
   </div>
 </section>

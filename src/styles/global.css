@@ -1084,13 +1084,27 @@
   }
 
   /* Menu — classic premium rhythm */
+  .keyfo-menu-frame {
+    @apply relative overflow-hidden rounded-[24px] p-2 sm:p-3 lg:p-4;
+    background-color: rgb(var(--keyfo-text-dark));
+    box-shadow: 0 8px 22px rgba(20, 12, 8, 0.16);
+  }
+
+  @media (min-width: 640px) {
+    .keyfo-menu-frame {
+      padding: clamp(12px, 2vw, 18px);
+    }
+  }
+
   .keyfo-menu {
     @apply relative space-y-10 overflow-hidden rounded-2xl p-6 sm:p-10 lg:p-14;
     background-image: url('/assets/keyfo/menu-paper-bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    box-shadow: 0 20px 60px -30px rgba(60, 25, 10, 0.35);
+    box-shadow:
+      0 0 0 1px rgba(var(--keyfo-amber), 0.18),
+      0 20px 60px -30px rgba(60, 25, 10, 0.35);
   }
 
   .keyfo-menu::before {
@@ -1213,6 +1227,12 @@
 
   .keyfo-menu-cta-actions > a {
     @apply w-full sm:w-auto;
+  }
+
+  .keyfo-menu-stamp {
+    @apply mt-2 text-center text-[0.62rem] font-semibold uppercase tracking-[0.32em] sm:text-[0.66rem];
+    color: rgb(var(--keyfo-text-dark));
+    opacity: 0.18;
   }
 
   /* Gallery — mosaic + designed fallback */
