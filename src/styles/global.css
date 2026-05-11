@@ -1107,7 +1107,7 @@
 
   /* Menu — classic premium rhythm */
   .keyfo-menu-frame {
-    @apply relative overflow-hidden rounded-[24px] p-2 sm:p-3 lg:p-4;
+    @apply relative rounded-[24px] p-2 sm:p-3 lg:p-4;
     background-color: rgb(var(--keyfo-text-dark));
     box-shadow: 0 8px 22px rgba(20, 12, 8, 0.16);
   }
@@ -1119,7 +1119,7 @@
   }
 
   .keyfo-menu {
-    @apply relative space-y-10 overflow-hidden rounded-2xl p-6 sm:p-10 lg:p-14;
+    @apply relative space-y-10 rounded-2xl p-6 sm:p-10 lg:p-14;
     background-image: url('/assets/keyfo/menu-paper-bg.webp');
     background-size: cover;
     background-position: center;
@@ -1133,6 +1133,7 @@
     content: '';
     position: absolute;
     inset: 0;
+    border-radius: inherit;
     background: linear-gradient(180deg, rgba(252, 244, 228, 0.55), rgba(252, 244, 228, 0.35));
     pointer-events: none;
     z-index: 0;
@@ -1263,8 +1264,21 @@
   }
 
   .keyfo-menu-shortcuts {
-    @apply -mx-2 overflow-x-auto sm:mx-0;
+    @apply overflow-x-auto;
     scrollbar-width: none;
+    position: sticky;
+    top: 80px;
+    z-index: 5;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    padding: 0.45rem 0.5rem;
+    background: linear-gradient(180deg, rgba(250, 240, 218, 0.96) 0%, rgba(250, 240, 218, 0.92) 100%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 999px;
+    box-shadow:
+      0 6px 18px -10px rgba(34, 16, 12, 0.22),
+      inset 0 0 0 1px rgba(120, 70, 35, 0.08);
   }
 
   .keyfo-menu-shortcuts::-webkit-scrollbar {
