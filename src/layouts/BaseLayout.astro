@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 type MobileCta = {
   ariaLabel: string;
@@ -143,5 +145,8 @@ const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.starts
         </div>
       </nav>
     ) : null}
+
+    <Analytics />
+    <SpeedInsights />
   </body>
 </html>
