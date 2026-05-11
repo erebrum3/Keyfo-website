@@ -44,6 +44,7 @@ export const CONTENT_TR = {
     callLabel: 'Hemen Ara'
   },
   galleryHeading: 'Fotoğraflar',
+  galleryEyebrow: 'KEYFO’dan',
   galleryIntro: 'KEYFO Restaurant & Cafe’den kareler.',
   galleryItems: [
     { src: '/assets/keyfo/interior-wide.jpg', alt: 'KEYFO restoran iç mekânı' },

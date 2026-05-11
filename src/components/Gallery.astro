@@ -2,10 +2,11 @@
 type Props = {
   heading: string;
   introText: string;
+  eyebrow?: string;
   items: Array<{ src: string; alt: string }>;
 };
 
-const { heading, introText, items } = Astro.props;
+const { heading, introText, eyebrow, items } = Astro.props;
 
 // Mosaic slots — visitor walking flow:
 // 0 interior-wide (anchor, mobile full-width, desktop 2x2)
@@ -35,6 +36,7 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
 
 <section aria-labelledby="gallery-heading" class="keyfo-gallery">
   <header class="keyfo-gallery-head">
+    {eyebrow ? <span class="keyfo-gallery-eyebrow">{eyebrow}</span> : null}
     <h2 id="gallery-heading" class="keyfo-section-title">{heading}</h2>
     <p class="keyfo-gallery-intro">{introText}</p>
   </header>

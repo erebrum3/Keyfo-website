@@ -44,6 +44,7 @@ export const CONTENT_NL = {
     callLabel: 'Bel direct'
   },
   galleryHeading: 'Foto’s',
+  galleryEyebrow: 'Bij KEYFO',
   galleryIntro: 'Een kijkje bij KEYFO Restaurant & Cafe.',
   galleryItems: [
     { src: '/assets/keyfo/interior-wide.jpg', alt: 'Interieur van KEYFO Restaurant & Cafe' },
