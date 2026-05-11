@@ -25,9 +25,7 @@ export const BUSINESS = {
     'https://www.google.com/maps/dir/?api=1&destination=Broersveld%20103%2C%203111%20LE%20Schiedam',
   googleMapsEmbedUrl:
     'https://www.google.com/maps?q=Broersveld%20103%2C%203111%20LE%20Schiedam&output=embed',
-  priceRange: '€10-20',
   servesCuisine: ['Turkish', 'Grill'],
-  acceptsReservations: true,
   paymentAccepted: 'Cash, Debit Card',
   areaServed: {
     type: 'City',

@@ -28,7 +28,6 @@
     "opens": "11:30",
     "closes": "22:00"
   },
-  "priceRange": "€10-20",
   "servesCuisine": ["Turkish", "Grill"],
   "areaServed": {
     "@type": "City",
@@ -36,7 +35,6 @@
   },
   "currency": "EUR",
   "halal": "Halal options available",
-  "acceptsReservations": false,
   "services": {
     "pickup": {
       "available": true,
