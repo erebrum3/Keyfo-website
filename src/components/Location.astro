@@ -1,6 +1,7 @@
 ---
 type Props = {
   heading: string;
+  eyebrow?: string;
   intro?: string;
   addressLines: string[];
   hoursLine?: string;
@@ -16,6 +17,7 @@ type Props = {
 
 const {
   heading,
+  eyebrow,
   intro,
   addressLines,
   hoursLine,
@@ -33,6 +35,7 @@ const {
 <section id="location" aria-labelledby="location-heading" class="keyfo-location">
   <div class="keyfo-location-card">
     <header class="keyfo-location-head">
+      {eyebrow ? <span class="keyfo-location-eyebrow">{eyebrow}</span> : null}
       <h2 id="location-heading" class="keyfo-section-title text-white">{heading}</h2>
       {intro ? <p class="keyfo-location-intro">{intro}</p> : null}
     </header>

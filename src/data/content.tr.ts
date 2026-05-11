@@ -55,6 +55,7 @@ export const CONTENT_TR = {
     { src: '/assets/keyfo/table-detail.jpg', alt: 'KEYFO masa detayı' }
   ],
   locationHeading: 'Adres & yol tarifi',
+  locationEyebrow: 'Schiedam Merkez',
   locationIntro:
     "KEYFO, Schiedam merkezde Broersveld 103 adresinde; Garage Nieuwe Passage'dan yaklaşık 3 dakika yürüyüş mesafesinde.",
   faqHeading: 'Sıkça sorulan sorular',
