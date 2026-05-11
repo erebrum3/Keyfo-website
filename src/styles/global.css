@@ -683,6 +683,18 @@
     @apply space-y-9;
   }
 
+  .keyfo-popular-card-image {
+    @apply relative overflow-hidden;
+    aspect-ratio: 4 / 3;
+    background-color: rgba(20, 12, 8, 0.04);
+  }
+
+  .keyfo-popular-card-image img {
+    @apply h-full w-full;
+    object-fit: cover;
+    object-position: center;
+  }
+
   .keyfo-popular-header {
     @apply mx-auto max-w-2xl text-center;
   }

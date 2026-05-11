@@ -23,6 +23,9 @@ const { heading, eyebrow, lead, ctaLabel, ctaHref, items } = Astro.props;
   <ul class="keyfo-popular-grid">
     {items.map((item) => (
       <li class="keyfo-popular-card">
+        <div class="keyfo-popular-card-image" aria-hidden="true">
+          <img src="/assets/keyfo/popular-hero.jpg" alt="" loading="lazy" />
+        </div>
         <div class="keyfo-popular-card-body">
           {item.categoryTitle ? (
             <span class="keyfo-popular-badge">

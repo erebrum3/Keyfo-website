@@ -34,7 +34,7 @@ export const MENU = {
       titleTr: 'Döner',
       items: [
         { name: 'Döner sandwich', priceEur: 8.5, featured: true },
-        { name: 'Dürüm döner (wrap)', priceEur: 11.5, featured: true },
+        { name: 'Dürüm döner (wrap)', priceEur: 11.5 },
         { name: 'Keyfo special döner sandwich', priceEur: 10.0 },
         { name: 'Dürüm döner Keyfo special', priceEur: 12.5 },
         { name: 'Kapsalon large', priceEur: 13.5, featured: true }
@@ -88,7 +88,7 @@ export const MENU = {
       titleNl: 'Desserts',
       titleTr: 'Tatlılar',
       items: [
-        { name: 'Large pancake', priceEur: 6.5 },
+        { name: 'Large pancake', priceEur: 6.5, featured: true },
         { name: 'Chocolate pancake', priceEur: 8.5 },
         { name: 'Künefe', priceEur: 9.5, featured: true }
       ]
