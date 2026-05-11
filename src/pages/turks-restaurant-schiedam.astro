@@ -1,0 +1,320 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FAQ from '../components/FAQ.astro';
+
+import { BUSINESS } from '../data/business';
+import { CONTENT_NL } from '../data/content.nl';
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const PAGE_PATH = '/turks-restaurant-schiedam/';
+const PAGE_URL = `${SITE_ORIGIN}${PAGE_PATH}`;
+
+const PAGE_TITLE = 'Turks restaurant in Schiedam Centrum | KEYFO Broersveld';
+const PAGE_DESCRIPTION =
+  'KEYFO Restaurant & Cafe aan Broersveld 103 in Schiedam Centrum. Döner, grillgerechten en Turkse pizza. Afhalen via WhatsApp of telefoon.';
+
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
+
+const whatsappUrl = BUSINESS.getWhatsAppUrl('Hallo KEYFO, ik wil graag afhalen');
+const mapsSearchUrl =
+  'https://www.google.com/maps/search/?api=1&query=KEYFO+Broersveld+103+Schiedam';
+
+const FAQ_ITEMS = [
+  {
+    q: 'Waar zit KEYFO precies?',
+    a: 'KEYFO Restaurant & Cafe zit aan Broersveld 103, 3111 LE Schiedam, midden in het centrum.'
+  },
+  {
+    q: 'Hoe kan ik afhalen bestellen?',
+    a: 'Het snelst is via WhatsApp of door ons te bellen. U geeft uw bestelling door en wij laten weten wanneer het klaarstaat.'
+  },
+  {
+    q: 'Bezorgen jullie ook?',
+    a: 'Bezorgen verloopt via Thuisbezorgd. Voor afhalen kunt u het beste rechtstreeks contact met ons opnemen.'
+  },
+  {
+    q: 'Hebben jullie halal opties?',
+    a: 'Ja, er zijn halal opties op de kaart. Vraag bij uw bestelling gerust naar wat voor u geschikt is.'
+  },
+  {
+    q: 'Zijn er ook gerechten zonder vlees?',
+    a: 'Op de kaart staan ook gerechten zonder vlees. Vraag gerust naar de mogelijkheden — we denken graag mee.'
+  },
+  {
+    q: 'Wat zijn jullie openingstijden?',
+    a: 'Onze actuele openingstijden vindt u op Google Maps en op de homepage. Daar staat altijd de meest recente informatie.'
+  },
+  {
+    q: 'Kan ik in de buurt parkeren?',
+    a: 'Garage Nieuwe Passage is dichtbij. Controleer ter plaatse de actuele parkeervoorwaarden en tarieven.'
+  },
+  {
+    q: 'Kunnen we met een groep langskomen?',
+    a: 'Voor grotere groepen raden we aan om vooraf te bellen of een WhatsApp te sturen, zodat we rekening met u kunnen houden.'
+  }
+] as const;
+
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  '@id': `${PAGE_URL}#restaurant`,
+  name: BUSINESS.canonicalName,
+  url: PAGE_URL,
+  image: `${SITE_ORIGIN}/assets/keyfo/hero-interior.webp`,
+  telephone: BUSINESS.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    postalCode: BUSINESS.address.postalCode,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressCountry: BUSINESS.address.addressCountry
+  },
+  servesCuisine: ['Turkish'],
+  areaServed: BUSINESS.areaServed.name,
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [...BUSINESS.openingHours.days],
+    opens: BUSINESS.openingHours.opens,
+    closes: BUSINESS.openingHours.closes
+  }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_ORIGIN}/` },
+    { '@type': 'ListItem', position: 2, name: 'Turks restaurant Schiedam', item: PAGE_URL }
+  ]
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
+};
+---
+
+<BaseLayout
+  lang="nl"
+  title={PAGE_TITLE}
+  description={PAGE_DESCRIPTION}
+  skipLinkLabel={CONTENT_NL.skipLinkLabel}
+  canonicalUrl={PAGE_URL}
+  openGraph={{
+    type: 'website',
+    locale: 'nl_NL',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO Restaurant & Cafe in Schiedam',
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageSecureUrl: ogImageUrl
+  }}
+  jsonLd={[restaurantSchema, breadcrumbSchema, faqSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
+    labels: CONTENT_NL.mobileCtaShort,
+    hrefs: {
+      menu: '/#menu',
+      whatsapp: whatsappUrl,
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="TR"
+    langAriaLabel="Wissel naar Turks"
+    langHref="/tr/"
+    navAriaLabel={CONTENT_NL.navAriaLabel}
+    nav={{
+      menu: CONTENT_NL.nav.menu,
+      popular: 'Populair',
+      gallery: 'Galerij',
+      location: CONTENT_NL.nav.locatie
+    }}
+    cta={{
+      whatsapp: { label: 'Bestellen', href: whatsappUrl },
+      phone: { label: 'Bellen', href: BUSINESS.phoneTel }
+    }}
+    linkPrefix="/"
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container pt-28 sm:pt-32">
+        <p class="text-xs uppercase tracking-[0.2em] text-amber-300/80 mb-3">Schiedam Centrum</p>
+        <h1 class="keyfo-brand text-4xl sm:text-5xl font-semibold text-white">
+          Turks restaurant in Schiedam Centrum
+        </h1>
+        <p class="keyfo-hero-intro mt-5 max-w-2xl">
+          Zoekt u een Turks restaurant in Schiedam Centrum? KEYFO Restaurant &amp; Cafe vindt u aan
+          Broersveld 103, op loopafstand van de Nieuwe Passage. Op de kaart staan onder andere
+          döner, grillgerechten, Turkse pizza, desserts en drankjes. Wilt u afhalen? Bel ons of
+          stuur een WhatsApp.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ons
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">Bel KEYFO</a>
+          <a
+            class="keyfo-btn-secondary"
+            href={BUSINESS.googleMapsDirectionsUrl}
+            target="_blank"
+            rel="noopener"
+            data-event="click_route"
+          >
+            Route in Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Welkom bij KEYFO aan Broersveld 103</h2>
+        <p>
+          KEYFO ligt midden in Schiedam Centrum, aan het Broersveld. Een rustige plek om binnen te
+          eten, of om snel iets af te halen op weg naar huis. We hechten waarde aan een verzorgde
+          keuken en een nette zaak, zodat u zich hier op uw gemak voelt.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Wat staat er op de kaart?</h2>
+        <p>
+          Bij KEYFO vindt u onder meer döner, grillgerechten, Turkse pizza, broodjes, salades,
+          desserts en warme en koude drankjes. Wilt u de volledige kaart bekijken?
+          <a class="underline" href="/#menu" data-event="click_menu">Bekijk de menukaart</a> voor het actuele aanbod.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-200">
+        <h2 class="keyfo-section-title text-white">Afhalen via WhatsApp of telefoon</h2>
+        <p>
+          Afhalen gaat het snelst via WhatsApp of telefoon. U geeft door wat u wilt bestellen en
+          wij laten weten wanneer het klaarstaat. Op die manier voorkomen we vergissingen en is uw
+          bestelling op tijd voor u klaar.
+        </p>
+        <p>
+          Liever bezorgen? Dat verloopt via Thuisbezorgd. Voor afhalen werken we het liefst direct
+          met u.
+        </p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ons
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">Bel KEYFO</a>
+          <a
+            class="keyfo-btn-ghost"
+            href={BUSINESS.social.thuisbezorgd}
+            target="_blank"
+            rel="nofollow noopener"
+            data-event="click_thuisbezorgd"
+          >
+            Bestel via Thuisbezorgd
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Halal opties bij KEYFO</h2>
+        <p>
+          Wij bieden halal opties aan. Twijfelt u of een specifiek gerecht voor u geschikt is?
+          Vraag het gerust bij uw bestelling — telefonisch, via WhatsApp of aan de balie. We
+          helpen u graag verder.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Openingstijden en contact</h2>
+        <p>
+          Onze actuele openingstijden vindt u op
+          <a class="underline" href={mapsSearchUrl} target="_blank" rel="noopener">Google Maps</a> en op de
+          <a class="underline" href="/">homepage</a>. Voor vragen of een bestelling kunt u ons direct bellen of een
+          WhatsApp sturen.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-200">
+        <h2 class="keyfo-section-title text-white">Route naar KEYFO in Schiedam Centrum</h2>
+        <address class="not-italic">
+          <strong>KEYFO Restaurant &amp; Cafe</strong><br />
+          Broersveld 103<br />
+          3111 LE Schiedam
+        </address>
+        <p>
+          Te voet bent u vanaf station Schiedam Centrum op korte loopafstand. Komt u met de auto?
+          Garage Nieuwe Passage is dichtbij — controleer ter plaatse de actuele
+          parkeervoorwaarden.
+        </p>
+        <p>
+          <a
+            class="keyfo-btn-secondary"
+            href={BUSINESS.googleMapsDirectionsUrl}
+            target="_blank"
+            rel="noopener"
+            data-event="click_route"
+          >
+            Open de route in Google Maps
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Veelgestelde vragen" items={FAQ_ITEMS} />
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_NL.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefoon/WhatsApp: ${BUSINESS.phone}`,
+      `E-mail: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'Acties',
+        links: [
+          { label: 'WhatsApp ons', href: whatsappUrl, isExternal: true },
+          { label: 'Bel KEYFO', href: BUSINESS.phoneTel },
+          { label: 'Route in Google Maps', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
+          { label: 'Bestel via Thuisbezorgd', href: BUSINESS.social.thuisbezorgd, isExternal: true }
+        ]
+      },
+      {
+        label: 'Sociaal',
+        links: [
+          { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>

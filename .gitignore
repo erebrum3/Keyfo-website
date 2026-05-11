@@ -29,3 +29,6 @@ keyfowebsite/
 
 # jetbrains setting folder
 .idea/
+
+# Claude Code local state
+.claude/

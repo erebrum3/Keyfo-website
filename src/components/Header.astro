@@ -15,9 +15,10 @@ type Props = {
     whatsapp: { label: string; href: string };
     phone: { label: string; href: string };
   };
+  linkPrefix?: string;
 };
 
-const { brand, langLabel, langAriaLabel, langHref, navAriaLabel, nav, cta } = Astro.props;
+const { brand, langLabel, langAriaLabel, langHref, navAriaLabel, nav, cta, linkPrefix = '' } = Astro.props;
 const langSwitchAriaLabel = langAriaLabel ?? langLabel;
 const brandMain = brand.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || brand;
 const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
@@ -28,16 +29,16 @@ const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
 
   <div class="keyfo-hero-container">
     <div class="keyfo-header-inner">
-      <a href="#" class="keyfo-brand-lockup" aria-label={`${brand} - top`}>
+      <a href={linkPrefix || '#'} class="keyfo-brand-lockup" aria-label={`${brand} - top`}>
         <span class="keyfo-brand-name keyfo-brand">{brandMain}</span>
         {brandSub ? <span class="keyfo-brand-sub">{brandSub}</span> : null}
       </a>
 
       <nav aria-label={navAriaLabel} class="keyfo-header-nav">
-        <a href="#menu" class="keyfo-header-link">{nav.menu}</a>
-        <a href="#populair" class="keyfo-header-link">{nav.popular}</a>
-        <a href="#gallery" class="keyfo-header-link">{nav.gallery}</a>
-        <a href="#location" class="keyfo-header-link">{nav.location}</a>
+        <a href={`${linkPrefix}#menu`} class="keyfo-header-link">{nav.menu}</a>
+        <a href={`${linkPrefix}#populair`} class="keyfo-header-link">{nav.popular}</a>
+        <a href={`${linkPrefix}#gallery`} class="keyfo-header-link">{nav.gallery}</a>
+        <a href={`${linkPrefix}#location`} class="keyfo-header-link">{nav.location}</a>
       </nav>
 
       <div class="keyfo-header-actions">
