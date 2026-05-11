@@ -1,0 +1,325 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FAQ from '../../components/FAQ.astro';
+
+import { BUSINESS } from '../../data/business';
+import { CONTENT_TR } from '../../data/content.tr';
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const PAGE_PATH = '/tr/turks-restoran-schiedam/';
+const PAGE_URL = `${SITE_ORIGIN}${PAGE_PATH}`;
+const NL_EQUIVALENT_URL = `${SITE_ORIGIN}/turks-restaurant-schiedam/`;
+
+const PAGE_TITLE = "Schiedam Merkez'de Türk Restoranı | KEYFO Broersveld";
+const PAGE_DESCRIPTION =
+  "KEYFO Restaurant & Cafe, Schiedam Merkez'de Broersveld 103 adresinde. Döner, ızgara çeşitleri ve Türk pizzası. WhatsApp veya telefonla gel-al.";
+
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
+
+const whatsappUrl = BUSINESS.getWhatsAppUrl('Merhaba KEYFO, gel-al sipariş vermek istiyorum');
+const mapsSearchUrl =
+  'https://www.google.com/maps/search/?api=1&query=KEYFO+Broersveld+103+Schiedam';
+
+const FAQ_ITEMS = [
+  {
+    q: 'KEYFO tam olarak nerede?',
+    a: 'KEYFO Restaurant & Cafe, Schiedam Merkez\'de Broersveld 103, 3111 LE Schiedam adresindedir.'
+  },
+  {
+    q: 'Gel-al sipariş nasıl veririm?',
+    a: 'En hızlısı WhatsApp veya telefon ile. Siparişinizi iletirsiniz, biz hazır olduğunda haber veririz.'
+  },
+  {
+    q: 'Adrese teslim yapıyor musunuz?',
+    a: 'Adrese teslim Thuisbezorgd üzerinden yapılır. Gel-al için bize doğrudan ulaşmanız en pratiğidir.'
+  },
+  {
+    q: 'Helal seçenekler var mı?',
+    a: 'Evet, menüde helal seçenekler bulunur. Sipariş verirken size uygun olanları sorabilirsiniz.'
+  },
+  {
+    q: 'Vejetaryen seçenekler var mı?',
+    a: 'Menüde etsiz seçenekler de yer alır. Mevcut seçenekler için bize sorabilirsiniz.'
+  },
+  {
+    q: 'Açılış saatleriniz nedir?',
+    a: 'KEYFO 11:30 ile 22:00 arasında açıktır. Salı günleri kapalıyız. Geçici değişiklikler için Google Maps\'i kontrol edebilirsiniz.'
+  },
+  {
+    q: 'Yakında park edebileceğim bir yer var mı?',
+    a: 'Garage Nieuwe Passage yakındadır. Güncel park koşullarını ve tarifeleri yerinde kontrol ediniz.'
+  },
+  {
+    q: 'Grup olarak gelebilir miyiz?',
+    a: 'Daha kalabalık gruplar için önceden telefon veya WhatsApp ile bilgi vermenizi öneririz; size uygun şekilde hazırlanabiliriz.'
+  }
+] as const;
+
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  '@id': `${PAGE_URL}#restaurant`,
+  name: BUSINESS.canonicalName,
+  url: PAGE_URL,
+  image: `${SITE_ORIGIN}/assets/keyfo/hero-interior.webp`,
+  telephone: BUSINESS.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    postalCode: BUSINESS.address.postalCode,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressCountry: BUSINESS.address.addressCountry
+  },
+  servesCuisine: ['Turkish'],
+  areaServed: BUSINESS.areaServed.name,
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [...BUSINESS.openingHours.days],
+    opens: BUSINESS.openingHours.opens,
+    closes: BUSINESS.openingHours.closes
+  }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: `${SITE_ORIGIN}/tr/` },
+    { '@type': 'ListItem', position: 2, name: 'Schiedam\'da Türk restoranı', item: PAGE_URL }
+  ]
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
+};
+---
+
+<BaseLayout
+  lang="tr"
+  title={PAGE_TITLE}
+  description={PAGE_DESCRIPTION}
+  skipLinkLabel={CONTENT_TR.skipLinkLabel}
+  canonicalUrl={PAGE_URL}
+  alternateLanguages={[
+    { hreflang: 'nl-NL', href: NL_EQUIVALENT_URL },
+    { hreflang: 'tr-TR', href: PAGE_URL },
+    { hreflang: 'x-default', href: NL_EQUIVALENT_URL }
+  ]}
+  openGraph={{
+    type: 'website',
+    locale: 'tr_TR',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO Restaurant & Cafe Schiedam',
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageSecureUrl: ogImageUrl
+  }}
+  jsonLd={[restaurantSchema, breadcrumbSchema, faqSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_TR.mobileCtaAriaLabel,
+    labels: CONTENT_TR.mobileCtaShort,
+    hrefs: {
+      menu: '/tr/#menu',
+      whatsapp: whatsappUrl,
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="NL"
+    langAriaLabel="Hollandacaya geç"
+    langHref={NL_EQUIVALENT_URL}
+    navAriaLabel={CONTENT_TR.navAriaLabel}
+    nav={{
+      menu: CONTENT_TR.nav.menu,
+      popular: 'Popüler',
+      gallery: 'Galeri',
+      location: CONTENT_TR.nav.konum
+    }}
+    cta={{
+      whatsapp: { label: 'Sipariş', href: whatsappUrl },
+      phone: { label: 'Ara', href: BUSINESS.phoneTel }
+    }}
+    linkPrefix="/tr/"
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container pt-28 sm:pt-32">
+        <p class="text-xs uppercase tracking-[0.2em] text-amber-300/80 mb-3">Schiedam Merkez</p>
+        <h1 class="keyfo-brand text-4xl sm:text-5xl font-semibold text-white">
+          Schiedam Merkez'de Türk Restoranı
+        </h1>
+        <p class="keyfo-hero-intro mt-5 max-w-2xl">
+          Schiedam Merkez'de bir Türk restoranı mı arıyorsunuz? KEYFO Restaurant &amp; Cafe,
+          Broersveld 103 adresinde, Nieuwe Passage'ya yürüme mesafesindedir. Menüde döner,
+          ızgara çeşitleri, Türk pizzası, tatlılar ve içecekler bulunur. Gel-al için bizi
+          arayabilir veya WhatsApp gönderebilirsiniz.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ile yaz
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">KEYFO'yu ara</a>
+          <a
+            class="keyfo-btn-secondary"
+            href={BUSINESS.googleMapsDirectionsUrl}
+            target="_blank"
+            rel="noopener"
+            data-event="click_route"
+          >
+            Google Maps'te yol tarifi
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">KEYFO, Broersveld 103</h2>
+        <p>
+          KEYFO, Schiedam Merkez'de Broersveld'tedir. İçeride sakin bir ortamda yemek yiyebileceğiniz
+          ya da yolda hızlıca sipariş alabileceğiniz bir mekândır. Özenli bir mutfak ve düzenli bir
+          salon önemsediğimiz için kendinizi rahat hissedeceğiniz bir ortam sunmaya çalışıyoruz.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Menüde neler var?</h2>
+        <p>
+          KEYFO'da döner, ızgara çeşitleri, Türk pizzası, sandviçler, salatalar, tatlılar, sıcak ve
+          soğuk içecekler bulabilirsiniz. Tam menüyü görmek isterseniz
+          <a class="underline" href="/tr/#menu" data-event="click_menu">menüye göz atabilirsiniz</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-200">
+        <h2 class="keyfo-section-title text-white">WhatsApp veya telefonla gel-al</h2>
+        <p>
+          Gel-al için en hızlı yol WhatsApp veya telefon. Siparişinizi iletirsiniz, biz hazır
+          olduğunda size haber veririz. Bu şekilde yanlış anlaşılmaları önler ve siparişiniz
+          tam zamanında hazır olur.
+        </p>
+        <p>
+          Adrese teslim mi tercih edersiniz? Bu Thuisbezorgd üzerinden yapılır. Gel-al için bizimle
+          doğrudan iletişime geçmeniz en iyi yoldur.
+        </p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ile yaz
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">KEYFO'yu ara</a>
+          <a
+            class="keyfo-btn-ghost"
+            href={BUSINESS.social.thuisbezorgd}
+            target="_blank"
+            rel="nofollow noopener"
+            data-event="click_thuisbezorgd"
+          >
+            Thuisbezorgd üzerinden sipariş
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">KEYFO'da helal seçenekler</h2>
+        <p>
+          Menüde helal seçenekler bulunur. Belirli bir ürünün size uygun olup olmadığından emin
+          değilseniz sipariş verirken çekinmeden sorabilirsiniz — telefon, WhatsApp veya tezgâhta.
+          Yardımcı olmaktan memnuniyet duyarız.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Açılış saatleri ve iletişim</h2>
+        <p>
+          KEYFO 11:30 ile 22:00 arasında açıktır. Salı günleri kapalıyız. Geçici değişiklikler için
+          <a class="underline" href={mapsSearchUrl} target="_blank" rel="noopener">Google Maps</a>
+          kontrol edebilirsiniz. Sorularınız veya siparişiniz için bizi doğrudan arayabilir ya da
+          WhatsApp gönderebilirsiniz.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-200">
+        <h2 class="keyfo-section-title text-white">KEYFO'ya yol tarifi (Schiedam Merkez)</h2>
+        <address class="not-italic">
+          <strong>KEYFO Restaurant &amp; Cafe</strong><br />
+          Broersveld 103<br />
+          3111 LE Schiedam
+        </address>
+        <p>
+          Schiedam Centrum istasyonundan yürüyerek kısa bir mesafedeyiz. Arabayla mı geliyorsunuz?
+          Garage Nieuwe Passage yakındadır — güncel park koşullarını yerinde kontrol etmenizi öneririz.
+        </p>
+        <p>
+          <a
+            class="keyfo-btn-secondary"
+            href={BUSINESS.googleMapsDirectionsUrl}
+            target="_blank"
+            rel="noopener"
+            data-event="click_route"
+          >
+            Google Maps'te yol tarifini aç
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Sıkça sorulan sorular" items={FAQ_ITEMS} />
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_TR.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefon/WhatsApp: ${BUSINESS.phone}`,
+      `E-posta: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'İşlemler',
+        links: [
+          { label: 'WhatsApp ile yaz', href: whatsappUrl, isExternal: true },
+          { label: 'KEYFO\'yu ara', href: BUSINESS.phoneTel },
+          { label: 'Google Maps\'te yol tarifi', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
+          { label: 'Thuisbezorgd üzerinden sipariş', href: BUSINESS.social.thuisbezorgd, isExternal: true }
+        ]
+      },
+      {
+        label: 'Sosyal',
+        links: [
+          { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>

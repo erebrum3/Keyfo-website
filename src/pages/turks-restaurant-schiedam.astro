@@ -10,6 +10,7 @@ import { CONTENT_NL } from '../data/content.nl';
 const SITE_ORIGIN = 'https://keyfo.nl';
 const PAGE_PATH = '/turks-restaurant-schiedam/';
 const PAGE_URL = `${SITE_ORIGIN}${PAGE_PATH}`;
+const TR_EQUIVALENT_URL = `${SITE_ORIGIN}/tr/turks-restoran-schiedam/`;
 
 const PAGE_TITLE = 'Turks restaurant in Schiedam Centrum | KEYFO Broersveld';
 const PAGE_DESCRIPTION =
@@ -107,6 +108,11 @@ const faqSchema = {
   description={PAGE_DESCRIPTION}
   skipLinkLabel={CONTENT_NL.skipLinkLabel}
   canonicalUrl={PAGE_URL}
+  alternateLanguages={[
+    { hreflang: 'nl-NL', href: PAGE_URL },
+    { hreflang: 'tr-TR', href: TR_EQUIVALENT_URL },
+    { hreflang: 'x-default', href: PAGE_URL }
+  ]}
   openGraph={{
     type: 'website',
     locale: 'nl_NL',
@@ -134,7 +140,7 @@ const faqSchema = {
     brand={BUSINESS.canonicalName}
     langLabel="TR"
     langAriaLabel="Wissel naar Turks"
-    langHref="/tr/"
+    langHref={TR_EQUIVALENT_URL}
     navAriaLabel={CONTENT_NL.navAriaLabel}
     nav={{
       menu: CONTENT_NL.nav.menu,

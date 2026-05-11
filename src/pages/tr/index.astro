@@ -161,6 +161,9 @@ const faqSchema = {
         />
         <div class="keyfo-hero-foot">
           <p class="keyfo-hero-intro">{CONTENT_TR.heroIntro}</p>
+          <p class="keyfo-hero-intro">
+            <a class="underline" href="/tr/turks-restoran-schiedam/">Schiedam Merkez'de Türk restoranı</a> hakkında daha fazla bilgi mi istiyorsunuz?
+          </p>
           <aside class="keyfo-dev-notice" aria-label="Geçici bildirim">
             <span class="keyfo-dev-notice__label">Geçici bildirim</span>
             <p class="keyfo-dev-notice__body">
@@ -260,6 +263,9 @@ const faqSchema = {
           mapDirectionsUrl={BUSINESS.googleMapsDirectionsUrl}
           mapCtaLabel="Yol tarifini Google Maps'te aç"
         />
+        <p class="mt-6 text-center text-zinc-300">
+          <a class="underline" href="/tr/turks-restoran-schiedam/">Schiedam Merkez'de Türk yemekleri</a> sayfamıza da göz atın.
+        </p>
       </div>
     </section>
 
@@ -293,6 +299,12 @@ const faqSchema = {
         links: [
           { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
           { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true }
+        ]
+      },
+      {
+        label: 'Yerel',
+        links: [
+          { label: "Schiedam'da Türk restoranı", href: '/tr/turks-restoran-schiedam/' }
         ]
       }
     ]}
