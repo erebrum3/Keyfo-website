@@ -23,6 +23,8 @@ pnpm-debug.log*
 # local QA artifacts
 .qa/
 .qa-screens/
+.qa-*.jpeg
+.qa-*.png
 
 # accidental nested checkout
 keyfowebsite/
