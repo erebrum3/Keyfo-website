@@ -136,7 +136,7 @@ export const CONTENT_NL = {
     messagePickupLabel: 'Gewenste afhaaltijd',
     messageListLabel: 'Lijst',
     messageNoteLabel: 'Opmerking',
-    messageTotalLabel: 'Indicatief totaal',
+    messageTotalLabel: 'Totaal',
     messageDisclaimer:
       'Pas definitief na bevestiging van KEYFO via WhatsApp.'
   }

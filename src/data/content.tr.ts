@@ -136,7 +136,7 @@ export const CONTENT_TR = {
     messagePickupLabel: 'Almak istediğim saat',
     messageListLabel: 'Liste',
     messageNoteLabel: 'Not',
-    messageTotalLabel: 'Yaklaşık toplam',
+    messageTotalLabel: 'Toplam',
     messageDisclaimer:
       'KEYFO WhatsApp üzerinden onayından sonra kesinleşir.'
   }
