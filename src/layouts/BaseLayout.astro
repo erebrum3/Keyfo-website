@@ -59,6 +59,9 @@ const ogImageWidth = openGraph?.imageWidth;
 const ogImageHeight = openGraph?.imageHeight;
 const ogImageType = openGraph?.imageType;
 const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.startsWith('https://') ? ogImage : undefined);
+
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 ---
 
 <!doctype html>
@@ -68,6 +71,8 @@ const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.starts
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index, follow" />
+    {googleSiteVerification ? <meta name="google-site-verification" content={googleSiteVerification} /> : null}
+    {bingSiteVerification ? <meta name="msvalidate.01" content={bingSiteVerification} /> : null}
     <meta name="theme-color" content="#0c0806" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fff6e5" media="(prefers-color-scheme: light)" />
 
