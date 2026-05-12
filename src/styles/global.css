@@ -520,10 +520,6 @@
     position: relative;
     isolation: isolate;
     background-color: rgb(255, 246, 229);
-    background-image: url('/assets/keyfo/menu-kilim-band.webp');
-    background-position: center top;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
   }
 
   .keyfo-kilim-band > .keyfo-band-cream {
@@ -551,12 +547,6 @@
       linear-gradient(180deg, rgba(188, 32, 26, 0.07) 0%, transparent 65%),
       radial-gradient(70% 100% at 50% 0%, rgba(242, 176, 43, 0.10) 0%, transparent 70%);
     z-index: 1;
-  }
-
-  @media (max-width: 768px) {
-    .keyfo-kilim-band {
-      background-image: url('/assets/keyfo/menu-kilim-band-mobile.webp');
-    }
   }
 
   /* Limewash plaster band — warm off-white wall, low contrast, no pattern */
