@@ -12,12 +12,12 @@ import FAQ from '../../components/FAQ.astro';
 import Footer from '../../components/Footer.astro';
 
 import { BUSINESS } from '../../data/business';
-import { MENU, formatPriceEurNl } from '../../data/menu';
+import { MENU, formatPriceEurNl, type MenuItem } from '../../data/menu';
 import { CONTENT_TR } from '../../data/content.tr';
 import { REVIEWS } from '../../data/reviews';
 
 const featured = MENU.categories
-  .flatMap((c) => c.items.filter((i) => i.featured).map((i) => ({ ...i, categoryTitle: c.titleTr })))
+  .flatMap((c) => (c.items as MenuItem[]).filter((i) => i.featured).map((i) => ({ ...i, categoryTitle: c.titleTr })))
   .slice(0, 4)
   .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur), description: i.descriptionTr }));
 
