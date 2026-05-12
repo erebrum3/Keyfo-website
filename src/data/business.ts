@@ -41,6 +41,7 @@ export const BUSINESS = {
   googleReviewsUrl: 'https://maps.google.com/?cid=6959290857801238836',
   social: {
     instagram: 'https://www.instagram.com/keyfo.schiedam/',
+    // TODO: Replace Facebook numeric page URL with clean username when claimed.
     facebook: 'https://www.facebook.com/profile.php?id=61589404211645',
     tiktok: 'https://www.tiktok.com/@keyfo.schiedam',
     twitter: 'https://x.com/KeyfoRestaurant',

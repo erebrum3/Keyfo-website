@@ -1886,6 +1886,12 @@
     gap: 0.5rem;
   }
 
+  @media (max-width: 767px) {
+    .keyfo-social-rail {
+      display: none;
+    }
+  }
+
   .keyfo-footer-link:hover {
     color: rgb(var(--keyfo-amber));
     text-decoration: underline;
