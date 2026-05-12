@@ -47,5 +47,15 @@ export const BUSINESS = {
   website: {
     nlUrl: 'https://keyfo.nl/',
     trUrl: 'https://keyfo.nl/tr/'
+  },
+  // Afhaal (gel-al) message builder defaults. NOT an online order system —
+  // the site only prepares a WhatsApp message; the order is finalized after
+  // KEYFO confirms via WhatsApp. Values are placeholders until owner sign-off.
+  afhaal: {
+    minLeadMinutes: 20,
+    pickupSlotStepMinutes: 15,
+    lastOrderBeforeCloseMinutes: 30,
+    maxQuantityPerItem: 20,
+    extraClosedDates: [] as readonly string[]
   }
 } as const;
