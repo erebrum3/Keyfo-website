@@ -35,7 +35,7 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
 ---
 
 <section aria-labelledby="gallery-heading" class="keyfo-gallery">
-  <header class="keyfo-gallery-head">
+  <header class="keyfo-gallery-head" data-reveal>
     {eyebrow ? <span class="keyfo-gallery-eyebrow">{eyebrow}</span> : null}
     <h2 id="gallery-heading" class="keyfo-section-title">{heading}</h2>
     <p class="keyfo-gallery-intro">{introText}</p>
@@ -48,8 +48,9 @@ const imageDimensions: Record<string, { width: number; height: number }> = {
       const stem = slot.src.replace(/\.jpe?g$/i, '');
       const avifSrc = `${stem}.avif`;
       const webpSrc = `${stem}.webp`;
+      const revealDelay = String((idx % 3) + 1);
       return (
-        <figure class:list={['keyfo-gallery-cell', span]}>
+        <figure class:list={['keyfo-gallery-cell', span]} data-reveal data-reveal-delay={revealDelay}>
           <div class="keyfo-gallery-frame">
             <picture>
               <source srcset={avifSrc} type="image/avif" />

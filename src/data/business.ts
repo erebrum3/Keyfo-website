@@ -34,9 +34,13 @@ export const BUSINESS = {
   currency: 'EUR',
   googleRating: 4.9,
   googleReviewCount: 23,
-  googleReviewsUrl: 'https://www.google.com/search?q=Keyfo+Reviews&rldimm=6959290857801238836&tbm=lcl#lkt=LocalPoiReviews',
+  // TODO: Replace with official GBP review link when owner grants access.
+  // Previous value was a desktop-only Google Search deep link (#lkt=LocalPoiReviews)
+  // that did not open the Reviews tab on mobile. CID fallback routes to the
+  // correct business profile on both mobile and web.
+  googleReviewsUrl: 'https://maps.google.com/?cid=6959290857801238836',
   social: {
-    instagram: 'https://www.instagram.com/keyfokipgrill_/',
+    instagram: 'https://www.instagram.com/keyfo.schiedam/',
     facebook: 'https://www.facebook.com/hanife.isleyen.1/photos',
     thuisbezorgd: 'https://www.thuisbezorgd.nl/da/menu/keyfo'
   },

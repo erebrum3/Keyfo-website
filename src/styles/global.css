@@ -118,6 +118,23 @@
   .keyfo-brand-lockup {
     @apply inline-flex flex-col gap-0.5 leading-none;
     grid-area: brand;
+    transform-origin: left center;
+    transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .keyfo-brand-lockup:hover,
+  .keyfo-brand-lockup:focus-visible {
+    transform: rotate(-2deg) scale(1.015);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .keyfo-brand-lockup {
+      transition: none;
+    }
+    .keyfo-brand-lockup:hover,
+    .keyfo-brand-lockup:focus-visible {
+      transform: none;
+    }
   }
 
   .keyfo-brand-name {
@@ -148,11 +165,25 @@
     @apply inline-flex min-h-10 items-center justify-center px-3 py-2 text-xs font-semibold uppercase;
     color: rgba(255, 247, 232, 0.82);
     letter-spacing: 0.12em;
-    transition: color 200ms ease;
+    background-image: linear-gradient(rgb(var(--keyfo-amber)), rgb(var(--keyfo-amber)));
+    background-position: 50% calc(100% - 6px);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    transition:
+      color 200ms ease,
+      background-size 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .keyfo-header-link:hover {
+  .keyfo-header-link:hover,
+  .keyfo-header-link:focus-visible {
     color: rgb(var(--keyfo-amber));
+    background-size: 55% 1px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .keyfo-header-link {
+      transition: color 200ms ease;
+    }
   }
 
   .keyfo-header-cta-primary {
@@ -1248,6 +1279,35 @@
 
   .keyfo-menu-row {
     @apply flex items-baseline gap-3;
+    position: relative;
+  }
+
+  .keyfo-menu-row::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    width: 2px;
+    border-radius: 2px;
+    background-color: rgb(var(--keyfo-amber));
+    opacity: 0.9;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .keyfo-menu-row:hover::before,
+  .keyfo-menu-row:focus-within::before,
+  .keyfo-menu-row:active::before {
+    transform: scaleY(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .keyfo-menu-row::before {
+      transition: none;
+    }
   }
 
   .keyfo-menu-name {
@@ -1448,19 +1508,25 @@
   .keyfo-gallery-img {
     @apply relative h-full w-full object-cover;
     z-index: 1;
-    transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition:
+      transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      filter 400ms ease;
   }
 
-  .keyfo-gallery-cell:hover .keyfo-gallery-img {
-    transform: scale(1.02);
+  .keyfo-gallery-cell:hover .keyfo-gallery-img,
+  .keyfo-gallery-cell:focus-within .keyfo-gallery-img {
+    transform: scale(1.03);
+    filter: brightness(1.03);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .keyfo-gallery-img {
       transition: none !important;
     }
-    .keyfo-gallery-cell:hover .keyfo-gallery-img {
+    .keyfo-gallery-cell:hover .keyfo-gallery-img,
+    .keyfo-gallery-cell:focus-within .keyfo-gallery-img {
       transform: none !important;
+      filter: none !important;
     }
   }
 
@@ -1984,6 +2050,66 @@
   .keyfo-anim-delay-3 { animation-delay: 240ms; }
   .keyfo-anim-delay-4 { animation-delay: 320ms; }
   .keyfo-anim-delay-5 { animation-delay: 400ms; }
+
+  /* Hero WhatsApp — warm invite breath (amber/cream, slow, low opacity) */
+  .keyfo-hero-ctas > .keyfo-btn-primary {
+    position: relative;
+    isolation: isolate;
+    --keyfo-invite-spread: 6px;
+    --keyfo-invite-blur: 24px;
+    --keyfo-invite-amber: rgba(242, 176, 43, 0.12);
+    --keyfo-invite-cream: rgba(245, 230, 208, 0.14);
+    --keyfo-invite-duration: 3.6s;
+  }
+
+  .keyfo-hero-ctas > .keyfo-btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    box-shadow: 0 0 0 0 transparent;
+    animation: keyfo-warm-invite var(--keyfo-invite-duration) ease-in-out infinite;
+  }
+
+  .keyfo-hero-ctas > .keyfo-btn-primary:hover::after,
+  .keyfo-hero-ctas > .keyfo-btn-primary:focus-visible::after {
+    animation-play-state: paused;
+    box-shadow:
+      0 0 0 4px rgba(242, 176, 43, 0.20),
+      0 0 28px 2px rgba(245, 230, 208, 0.20);
+  }
+
+  @keyframes keyfo-warm-invite {
+    0%, 100% {
+      box-shadow:
+        0 0 0 0 transparent,
+        0 0 0 0 transparent;
+    }
+    50% {
+      box-shadow:
+        0 0 0 var(--keyfo-invite-spread) var(--keyfo-invite-amber),
+        0 0 var(--keyfo-invite-blur) 0 var(--keyfo-invite-cream);
+    }
+  }
+
+  @media (max-width: 639px) {
+    .keyfo-hero-ctas > .keyfo-btn-primary {
+      --keyfo-invite-spread: 4px;
+      --keyfo-invite-blur: 16px;
+      --keyfo-invite-amber: rgba(242, 176, 43, 0.07);
+      --keyfo-invite-cream: rgba(245, 230, 208, 0.08);
+      --keyfo-invite-duration: 5s;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keyfo-hero-ctas > .keyfo-btn-primary::after {
+    animation: none !important;
+    box-shadow: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
