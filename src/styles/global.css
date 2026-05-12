@@ -366,34 +366,6 @@
     color: rgba(255, 247, 232, 0.7);
   }
 
-  /* Temporary development notice — remove when site is fully launched. */
-  .keyfo-dev-notice {
-    border-radius: var(--keyfo-radius);
-    @apply block w-full max-w-[560px] border-l-2 px-4 py-3 sm:px-5 sm:py-3.5;
-    border-color: rgb(var(--keyfo-amber) / 0.32);
-    background-color: rgba(20, 12, 8, 0.32);
-  }
-
-  .keyfo-dev-notice__label {
-    @apply mb-1 block text-[0.6rem] font-semibold uppercase tracking-[0.18em];
-    color: rgb(var(--keyfo-amber) / 0.7);
-  }
-
-  .keyfo-dev-notice__body {
-    @apply text-[0.74rem] leading-relaxed sm:text-[0.78rem];
-    color: rgba(255, 247, 232, 0.62);
-    overflow-wrap: anywhere;
-  }
-
-  .keyfo-dev-notice__link {
-    @apply underline underline-offset-2;
-    color: rgba(255, 247, 232, 0.82);
-  }
-
-  .keyfo-dev-notice__link:hover {
-    color: rgba(255, 247, 232, 0.95);
-  }
-
   .keyfo-hero-ctas {
     @apply mt-7 flex flex-wrap items-center gap-3;
   }
@@ -467,11 +439,13 @@
     color: rgb(var(--keyfo-text-light));
   }
 
-  .keyfo-band-dark:has(+ .keyfo-band-cream) {
+  .keyfo-band-dark:has(+ .keyfo-band-cream),
+  .keyfo-band-dark:has(+ .keyfo-kilim-band) {
     position: relative;
   }
 
-  .keyfo-band-dark:has(+ .keyfo-band-cream)::after {
+  .keyfo-band-dark:has(+ .keyfo-band-cream)::after,
+  .keyfo-band-dark:has(+ .keyfo-kilim-band)::after {
     content: '';
     position: absolute;
     inset-inline: 0;
@@ -539,6 +513,50 @@
   main > .keyfo-band-cream + .keyfo-band-cream {
     padding-top: 0;
     background: linear-gradient(180deg, rgba(250, 239, 219, 1) 0%, rgba(250, 239, 219, 1) 100%);
+  }
+
+  /* Kilim cream band — wraps Popular + Menu, vertical Anatolian stripes on edges */
+  .keyfo-kilim-band {
+    position: relative;
+    isolation: isolate;
+    background-color: rgb(255, 246, 229);
+    background-image: url('/assets/keyfo/menu-kilim-band.webp');
+    background-position: center top;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  .keyfo-kilim-band > .keyfo-band-cream {
+    background: transparent;
+  }
+
+  .keyfo-kilim-band > .keyfo-band-cream + .keyfo-band-cream {
+    padding-top: 0;
+    background: transparent;
+  }
+
+  .keyfo-band-dark + .keyfo-kilim-band {
+    position: relative;
+    box-shadow: inset 0 18px 28px -16px rgba(30, 15, 12, 0.22);
+  }
+
+  .keyfo-band-dark + .keyfo-kilim-band::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 72px;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(188, 32, 26, 0.07) 0%, transparent 65%),
+      radial-gradient(70% 100% at 50% 0%, rgba(242, 176, 43, 0.10) 0%, transparent 70%);
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .keyfo-kilim-band {
+      background-image: url('/assets/keyfo/menu-kilim-band-mobile.webp');
+    }
   }
 
   /* Limewash plaster band — warm off-white wall, low contrast, no pattern */
@@ -693,6 +711,22 @@
     @apply h-full w-full;
     object-fit: cover;
     object-position: center;
+    transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .keyfo-popular-card:hover .keyfo-popular-card-image img,
+  .keyfo-popular-card:focus-within .keyfo-popular-card-image img {
+    transform: scale(1.045);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .keyfo-popular-card-image img {
+      transition: none;
+    }
+    .keyfo-popular-card:hover .keyfo-popular-card-image img,
+    .keyfo-popular-card:focus-within .keyfo-popular-card-image img {
+      transform: none;
+    }
   }
 
   .keyfo-popular-header {
@@ -813,6 +847,12 @@
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
+  }
+
+  .keyfo-popular-desc {
+    @apply text-[0.875rem] leading-relaxed sm:text-[0.9375rem];
+    color: rgb(var(--keyfo-text-dark) / 0.78);
+    margin: 0;
   }
 
   .keyfo-popular-price-row {
@@ -1672,6 +1712,48 @@
     @apply relative;
   }
 
+  /* Footer image layer — copper tea moment as atmospheric backdrop */
+  .keyfo-footer--with-image {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .keyfo-footer-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: url('/assets/keyfo/footer-closing.webp');
+    background-position: left center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .keyfo-footer-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(12, 8, 6, 0.45) 0%, rgba(12, 8, 6, 0.88) 45%, rgba(12, 8, 6, 0.96) 100%),
+      linear-gradient(180deg, rgba(12, 8, 6, 0.15) 0%, rgba(12, 8, 6, 1) 65%);
+  }
+
+  @media (max-width: 768px) {
+    .keyfo-footer-bg {
+      background-image: url('/assets/keyfo/footer-closing-mobile.webp');
+      background-position: 18% top;
+      background-size: 100% auto;
+      opacity: 0.35;
+    }
+    .keyfo-footer-overlay {
+      background:
+        linear-gradient(180deg, rgba(12, 8, 6, 0.35) 0%, rgba(12, 8, 6, 0.92) 35%, rgba(12, 8, 6, 1) 60%);
+    }
+  }
+
   .keyfo-footer-rule {
     @apply absolute inset-x-0 top-0 block h-px;
     background: linear-gradient(
@@ -1862,5 +1944,69 @@
     .keyfo-hero-ctas > a {
       @apply w-full;
     }
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Motion layer — reveal + micro-interactions
+     ───────────────────────────────────────────────────────────── */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  [data-reveal-delay="1"] { transition-delay: 80ms; }
+  [data-reveal-delay="2"] { transition-delay: 160ms; }
+  [data-reveal-delay="3"] { transition-delay: 240ms; }
+  [data-reveal-delay="4"] { transition-delay: 320ms; }
+  [data-reveal-delay="5"] { transition-delay: 400ms; }
+  [data-reveal-delay="6"] { transition-delay: 480ms; }
+
+  [data-reveal-variant="left"] { transform: translateX(-16px); }
+  [data-reveal-variant="left"].is-visible { transform: none; }
+  [data-reveal-variant="scale"] { transform: scale(0.96); }
+  [data-reveal-variant="scale"].is-visible { transform: none; }
+
+  @keyframes keyfo-fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes keyfo-pop-in {
+    0% { opacity: 0; transform: scale(0.6); }
+    70% { transform: scale(1.08); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .keyfo-anim-fade-up {
+    animation: keyfo-fade-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .keyfo-anim-pop {
+    animation: keyfo-pop-in 480ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .keyfo-anim-delay-1 { animation-delay: 80ms; }
+  .keyfo-anim-delay-2 { animation-delay: 160ms; }
+  .keyfo-anim-delay-3 { animation-delay: 240ms; }
+  .keyfo-anim-delay-4 { animation-delay: 320ms; }
+  .keyfo-anim-delay-5 { animation-delay: 400ms; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

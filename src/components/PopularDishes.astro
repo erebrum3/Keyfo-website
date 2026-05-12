@@ -7,22 +7,30 @@ type Props = {
   lead?: string;
   ctaLabel?: string;
   ctaHref?: string;
-  items: Array<MenuItem & { priceLabel: string; categoryTitle?: string }>;
+  items: Array<MenuItem & { priceLabel: string; categoryTitle?: string; description?: string }>;
 };
 
 const { heading, eyebrow, lead, ctaLabel, ctaHref, items } = Astro.props;
+
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 ---
 
 <section aria-labelledby="popular-heading" class="keyfo-popular">
-  <header class="keyfo-popular-header">
+  <header class="keyfo-popular-header" data-reveal>
     {eyebrow ? <span class="keyfo-popular-eyebrow">{eyebrow}</span> : null}
     <h2 id="popular-heading" class="keyfo-popular-heading keyfo-brand">{heading}</h2>
     {lead ? <p class="keyfo-popular-lead">{lead}</p> : null}
   </header>
 
   <ul class="keyfo-popular-grid">
-    {items.map((item) => (
-      <li class="keyfo-popular-card">
+    {items.map((item, idx) => (
+      <li class="keyfo-popular-card" data-reveal data-reveal-delay={String(Math.min(idx + 1, 5))}>
         <div class="keyfo-popular-card-image" aria-hidden="true">
           <img src="/assets/keyfo/popular-hero.jpg" alt="" loading="lazy" />
         </div>
@@ -33,7 +41,10 @@ const { heading, eyebrow, lead, ctaLabel, ctaHref, items } = Astro.props;
               {item.categoryTitle}
             </span>
           ) : null}
-          <h3 class="keyfo-popular-name keyfo-brand">{item.name}</h3>
+          <h3 id={`dish-${slugify(item.name)}`} class="keyfo-popular-name keyfo-brand">{item.name}</h3>
+          {item.description ? (
+            <p class="keyfo-popular-desc">{item.description}</p>
+          ) : null}
           <div class="keyfo-popular-price-row">
             <span aria-hidden="true" class="keyfo-popular-rule"></span>
             <span class="keyfo-popular-price keyfo-brand keyfo-tabular">{item.priceLabel}</span>

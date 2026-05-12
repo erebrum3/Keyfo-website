@@ -3,7 +3,7 @@ type Props = {
   heading: string;
   introText: string;
   eyebrow?: string;
-  items: Array<{ src: string; alt: string }>;
+  items: ReadonlyArray<{ src: string; alt: string }>;
 };
 
 const { heading, introText, eyebrow, items } = Astro.props;

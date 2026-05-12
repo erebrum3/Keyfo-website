@@ -15,7 +15,9 @@ const brandMain = brand.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || br
 const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
 ---
 
-<footer class="keyfo-footer keyfo-band-dark">
+<footer class="keyfo-footer keyfo-footer--with-image keyfo-band-dark">
+  <div aria-hidden="true" class="keyfo-footer-bg"></div>
+  <div aria-hidden="true" class="keyfo-footer-overlay"></div>
   <span aria-hidden="true" class="keyfo-footer-rule"></span>
   <div class="keyfo-container keyfo-footer-inner">
     <div class="keyfo-footer-grid">

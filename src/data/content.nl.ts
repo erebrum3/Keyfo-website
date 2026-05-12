@@ -71,7 +71,7 @@ export const CONTENT_NL = {
     },
     {
       q: 'Waar kan ik parkeren?',
-      a: 'Je kunt parkeren bij Garage Nieuwe Passage, ingang Koemarkt. Het eerste uur is gratis; vanaf daar is het ongeveer 3 minuten lopen naar KEYFO. Controleer altijd de actuele parkeervoorwaarden.'
+      a: 'Garage Nieuwe Passage (ingang Koemarkt) ligt dichtbij — ongeveer 3 minuten lopen naar KEYFO. Parkeervoorwaarden en tarieven kunnen wijzigen; controleer ter plaatse de actuele informatie.'
     },
     {
       q: 'Wat zijn de openingstijden?',

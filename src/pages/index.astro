@@ -19,11 +19,10 @@ import { REVIEWS } from '../data/reviews';
 const featured = MENU.categories
   .flatMap((c) => c.items.filter((i) => i.featured).map((i) => ({ ...i, categoryTitle: c.titleNl })))
   .slice(0, 4)
-  .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur) }));
+  .map((i) => ({ ...i, priceLabel: formatPriceEurNl(i.priceEur), description: i.descriptionNl }));
 
 const hoursRange = `${BUSINESS.openingHours.opens}–${BUSINESS.openingHours.closes}`;
 const hoursLineNl = `Elke dag behalve dinsdag ${hoursRange}`;
-const hoursCompactNl = `Wo-ma ${BUSINESS.openingHours.opens} – ${BUSINESS.openingHours.closes} · di gesloten`;
 
 const SITE_ORIGIN = 'https://keyfo.nl';
 const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
@@ -60,7 +59,28 @@ const restaurantSchema = {
     name: BUSINESS.areaServed.name
   },
   currenciesAccepted: BUSINESS.currency,
-  menu: `${BUSINESS.website.nlUrl}#menu`,
+  hasMenu: {
+    '@type': 'Menu',
+    '@id': `${SITE_ORIGIN}/#menu`,
+    name: 'KEYFO menu',
+    url: `${BUSINESS.website.nlUrl}#menu`,
+    inLanguage: ['nl', 'tr'],
+    hasMenuSection: {
+      '@type': 'MenuSection',
+      name: 'Populair',
+      hasMenuItem: featured.map((item) => ({
+        '@type': 'MenuItem',
+        name: item.name,
+        description: item.descriptionNl,
+        offers: {
+          '@type': 'Offer',
+          price: item.priceEur.toFixed(2),
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock'
+        }
+      }))
+    }
+  },
   hasMap: BUSINESS.googleMapsDirectionsUrl,
   sameAs: [
     BUSINESS.social.instagram,
@@ -164,12 +184,6 @@ const faqSchema = {
           <p class="keyfo-hero-intro">
             Meer weten over ons als <a class="underline" href="/turks-restaurant-schiedam/">Turks restaurant in Schiedam Centrum</a>?
           </p>
-          <aside class="keyfo-dev-notice" aria-label="Tijdelijke melding">
-            <span class="keyfo-dev-notice__label">Tijdelijke melding</span>
-            <p class="keyfo-dev-notice__body">
-              Deze website is in ontwikkeling door Erebrum AI Agency. Technische infrastructuur, ontwerp, bedrijfsgegevens, menu-informatie en lokale vindbaarheid worden nog gecontroleerd en kunnen wijzigen. Contact: <a href="mailto:info@erebrum.com" class="keyfo-dev-notice__link">info@erebrum.com</a>
-            </p>
-          </aside>
         </div>
       </div>
     </section>
@@ -184,31 +198,33 @@ const faqSchema = {
       ]}
     />
 
-    <section id="populair" class="keyfo-section keyfo-band-cream">
-      <div class="keyfo-container">
-        <PopularDishes
-          heading={CONTENT_NL.featuredHeading}
-          eyebrow={CONTENT_NL.featuredEyebrow}
-          lead={CONTENT_NL.featuredLead}
-          ctaLabel={CONTENT_NL.ctas.viewMenu}
-          ctaHref="#menu"
-          items={featured}
-        />
-      </div>
-    </section>
+    <div class="keyfo-kilim-band">
+      <section id="populair" class="keyfo-section keyfo-band-cream">
+        <div class="keyfo-container">
+          <PopularDishes
+            heading={CONTENT_NL.featuredHeading}
+            eyebrow={CONTENT_NL.featuredEyebrow}
+            lead={CONTENT_NL.featuredLead}
+            ctaLabel={CONTENT_NL.ctas.viewMenu}
+            ctaHref="#menu"
+            items={featured}
+          />
+        </div>
+      </section>
 
-    <section class="keyfo-section keyfo-band-cream">
-      <div class="keyfo-container">
-        <MenuSection
-          heading={CONTENT_NL.menuHeading}
-          categories={MENU.categories.map((c) => ({ ...c, title: c.titleNl }))}
-          formatPrice={formatPriceEurNl}
-          lastUpdatedLabel={CONTENT_NL.menuLastUpdatedLabel}
-          lastUpdated={MENU.lastUpdated}
-          notes={[CONTENT_NL.priceNote, CONTENT_NL.allergenNote]}
-        />
-      </div>
-    </section>
+      <section class="keyfo-section keyfo-band-cream">
+        <div class="keyfo-container">
+          <MenuSection
+            heading={CONTENT_NL.menuHeading}
+            categories={MENU.categories.map((c) => ({ ...c, title: c.titleNl }))}
+            formatPrice={formatPriceEurNl}
+            lastUpdatedLabel={CONTENT_NL.menuLastUpdatedLabel}
+            lastUpdated={MENU.lastUpdated}
+            notes={[CONTENT_NL.priceNote, CONTENT_NL.allergenNote]}
+          />
+        </div>
+      </section>
+    </div>
 
     <section class="keyfo-section keyfo-band-dark keyfo-band-dark--leather">
       <div class="keyfo-container">
@@ -248,7 +264,7 @@ const faqSchema = {
             `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
           ]}
           hoursLine={hoursLineNl}
-          parkingLine="Garage Nieuwe Passage, ingang Koemarkt · eerste uur gratis · ongeveer 3 minuten lopen"
+          parkingLine="Garage Nieuwe Passage, ingang Koemarkt · ongeveer 3 minuten lopen · controleer actuele parkeervoorwaarden"
           links={[
             { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill), isExternal: true, variant: 'primary' },
             { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },

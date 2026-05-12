@@ -71,7 +71,7 @@ export const CONTENT_TR = {
     },
     {
       q: 'Nerede park edebilirim?',
-      a: "Garage Nieuwe Passage'da park edebilirsiniz, giriş Koemarkt tarafındadır. İlk saat ücretsizdir; KEYFO'ya yürüyerek yaklaşık 3 dakikadır. Güncel park koşullarını her zaman kontrol edin."
+      a: "Garage Nieuwe Passage (Koemarkt girişi) yakındadır — KEYFO'ya yürüyerek yaklaşık 3 dakikadır. Park koşulları ve tarifeler değişebilir; güncel bilgiyi yerinde kontrol edin."
     },
     {
       q: 'Açılış saatleri nedir?',

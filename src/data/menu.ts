@@ -2,6 +2,8 @@ export type MenuItem = {
   name: string;
   priceEur: number;
   featured?: boolean;
+  descriptionNl?: string;
+  descriptionTr?: string;
 };
 
 export type MenuCategory = {
@@ -19,8 +21,20 @@ export const MENU = {
       titleNl: 'Starters & bijgerechten',
       titleTr: 'Başlangıçlar & yan ürünler',
       items: [
-        { name: 'Lentil Soup', priceEur: 7.0, featured: true },
-        { name: 'Manti', priceEur: 11.0, featured: true },
+        {
+          name: 'Lentil Soup',
+          priceEur: 7.0,
+          featured: true,
+          descriptionNl: 'Romige rode linzensoep met citroen, elke dag vers gekookt — een warme Turkse start.',
+          descriptionTr: 'Limonla servis edilen klasik kırmızı mercimek çorbası, her gün taze pişer.'
+        },
+        {
+          name: 'Manti',
+          priceEur: 11.0,
+          featured: true,
+          descriptionNl: 'Kleine Turkse deegpakketjes met gehakt, geserveerd met knoflookyoghurt en gesmolten boter met paprika.',
+          descriptionTr: 'El boyu küçük mantı; sarımsaklı yoğurt ve kırmızı biberli tereyağıyla servis edilir.'
+        },
         { name: 'Rice', priceEur: 7.0 },
         { name: 'Pasta', priceEur: 5.0 },
         { name: 'Chips', priceEur: 5.0 },
@@ -33,11 +47,23 @@ export const MENU = {
       titleNl: 'Döner',
       titleTr: 'Döner',
       items: [
-        { name: 'Döner sandwich', priceEur: 8.5, featured: true },
+        {
+          name: 'Döner sandwich',
+          priceEur: 8.5,
+          featured: true,
+          descriptionNl: 'Vers van de spies gesneden döner in een knapperig broodje, met salade en saus.',
+          descriptionTr: 'Şişten yeni kesilmiş döner; çıtır ekmek, taze salata ve sosla buluşur.'
+        },
         { name: 'Dürüm döner (wrap)', priceEur: 11.5 },
         { name: 'Keyfo special döner sandwich', priceEur: 10.0 },
         { name: 'Dürüm döner Keyfo special', priceEur: 12.5 },
-        { name: 'Kapsalon large', priceEur: 13.5, featured: true }
+        {
+          name: 'Kapsalon large',
+          priceEur: 13.5,
+          featured: true,
+          descriptionNl: 'Friet, döner, gesmolten kaas en frisse salade — oven-gegrild, een Schiedams favoriet.',
+          descriptionTr: 'Patates, döner, eritilmiş kaşar ve taze salata — fırında kızarmış Schiedam klasiği.'
+        }
       ]
     },
     {
