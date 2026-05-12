@@ -109,5 +109,35 @@ export const CONTENT_TR = {
       q: 'Alerjen bilgisi nerede?',
       a: 'Siparişten önce alerjen bilgisi için lütfen bize sorun.'
     }
-  ]
+  ],
+  // Gel-al (afhaal) WhatsApp mesaj hazırlayıcı stringleri. Site sadece
+  // WhatsApp mesajı hazırlar; talep KEYFO WhatsApp üzerinden onaylayana
+  // kadar kesinleşmez. Bu bir online sipariş sistemi DEĞİLDİR.
+  afhaal: {
+    drawerTitle: 'Gel-al listesi',
+    emptyText: 'Gel-al listeniz boş. Menüden ürün ekleyin.',
+    pickupTimeLabel: 'Almak istediğiniz saat',
+    nameLabel: 'İsim (opsiyonel)',
+    noteLabel: 'Not (opsiyonel)',
+    itemNoteLabel: 'Bu ürün için not',
+    quantityLabel: 'Adet',
+    totalLabel: 'Toplam',
+    indicativeTotalNote: 'yaklaşık — değişebilir',
+    disclaimer:
+      'Talebiniz, KEYFO WhatsApp üzerinden onayladıktan sonra kesinleşir.',
+    submitLabel: 'WhatsApp ile gönder',
+    clearLabel: 'Listeyi temizle',
+    closeLabel: 'Kapat',
+    addLabel: 'Ekle',
+    addedLabel: 'Eklendi',
+    summaryLabel: 'Gel-al listesi',
+    messageIntro: 'Merhaba KEYFO, gel-al için bir mesaj göndermek istiyorum.',
+    messageNameLabel: 'İsim',
+    messagePickupLabel: 'Almak istediğim saat',
+    messageListLabel: 'Liste',
+    messageNoteLabel: 'Not',
+    messageTotalLabel: 'Yaklaşık toplam',
+    messageDisclaimer:
+      'KEYFO WhatsApp üzerinden onayından sonra kesinleşir.'
+  }
 } as const;

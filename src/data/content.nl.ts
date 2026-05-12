@@ -109,5 +109,35 @@ export const CONTENT_NL = {
       q: 'Waar vind ik allergeneninformatie?',
       a: 'Vraag ons naar allergeneninformatie voordat u bestelt.'
     }
-  ]
+  ],
+  // Afhaal (pickup) message builder strings. The site only prepares a
+  // WhatsApp message; the request is finalized after KEYFO confirms via
+  // WhatsApp. This is NOT an online ordering system.
+  afhaal: {
+    drawerTitle: 'Afhaallijst',
+    emptyText: 'Je afhaallijst is leeg. Voeg gerechten toe vanuit het menu.',
+    pickupTimeLabel: 'Gewenste afhaaltijd',
+    nameLabel: 'Naam (optioneel)',
+    noteLabel: 'Opmerking (optioneel)',
+    itemNoteLabel: 'Notitie bij dit gerecht',
+    quantityLabel: 'Aantal',
+    totalLabel: 'Totaal',
+    indicativeTotalNote: 'indicatief — kan afwijken',
+    disclaimer:
+      'Je aanvraag is pas definitief nadat KEYFO je via WhatsApp heeft bevestigd.',
+    submitLabel: 'Stuur via WhatsApp',
+    clearLabel: 'Lijst wissen',
+    closeLabel: 'Sluiten',
+    addLabel: 'Toevoegen',
+    addedLabel: 'Toegevoegd',
+    summaryLabel: 'Afhaallijst',
+    messageIntro: 'Hallo KEYFO, ik wil graag een afhaalbericht sturen.',
+    messageNameLabel: 'Naam',
+    messagePickupLabel: 'Gewenste afhaaltijd',
+    messageListLabel: 'Lijst',
+    messageNoteLabel: 'Opmerking',
+    messageTotalLabel: 'Indicatief totaal',
+    messageDisclaimer:
+      'Pas definitief na bevestiging van KEYFO via WhatsApp.'
+  }
 } as const;
