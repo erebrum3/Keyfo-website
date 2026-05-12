@@ -1880,6 +1880,12 @@
     color: rgba(255, 247, 232, 0.82);
   }
 
+  .keyfo-footer-link--with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   .keyfo-footer-link:hover {
     color: rgb(var(--keyfo-amber));
     text-decoration: underline;

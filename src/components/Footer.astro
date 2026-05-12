@@ -1,4 +1,6 @@
 ---
+import SocialIcon from './SocialIcon.astro';
+
 type Props = {
   brand: string;
   napLines: string[];
@@ -50,9 +52,10 @@ const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
                   href={l.href}
                   target={l.isExternal ? '_blank' : undefined}
                   rel={l.isExternal ? 'noopener noreferrer' : undefined}
-                  class="keyfo-footer-link"
+                  class="keyfo-footer-link keyfo-footer-link--with-icon"
                 >
-                  {l.label}
+                  <SocialIcon href={l.href} size={16} />
+                  <span>{l.label}</span>
                 </a>
               </li>
             ))}

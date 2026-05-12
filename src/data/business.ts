@@ -41,7 +41,10 @@ export const BUSINESS = {
   googleReviewsUrl: 'https://maps.google.com/?cid=6959290857801238836',
   social: {
     instagram: 'https://www.instagram.com/keyfo.schiedam/',
-    facebook: 'https://www.facebook.com/hanife.isleyen.1/photos',
+    facebook: 'https://www.facebook.com/profile.php?id=61589404211645',
+    tiktok: 'https://www.tiktok.com/@keyfo.schiedam',
+    twitter: 'https://x.com/KeyfoRestaurant',
+    pinterest: 'https://www.pinterest.com/keyforestaurant/',
     thuisbezorgd: 'https://www.thuisbezorgd.nl/da/menu/keyfo'
   },
   website: {

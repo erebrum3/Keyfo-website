@@ -1,0 +1,66 @@
+---
+type Props = {
+  href: string;
+  size?: number;
+  class?: string;
+};
+
+const { href, size = 16, class: extraClass = '' } = Astro.props;
+
+function detect(url: string): 'instagram' | 'facebook' | 'tiktok' | 'twitter' | 'pinterest' | null {
+  const u = url.toLowerCase();
+  if (u.includes('instagram.com')) return 'instagram';
+  if (u.includes('facebook.com')) return 'facebook';
+  if (u.includes('tiktok.com')) return 'tiktok';
+  if (u.includes('x.com') || u.includes('twitter.com')) return 'twitter';
+  if (u.includes('pinterest.')) return 'pinterest';
+  return null;
+}
+
+const brand = detect(href);
+const style = `width:${size}px;height:${size}px;display:inline-block;flex-shrink:0;vertical-align:middle;`;
+---
+
+{brand === 'instagram' && (
+  <svg viewBox="0 0 24 24" aria-hidden="true" style={style} class={extraClass}>
+    <defs>
+      <radialGradient id="ig-grad" cx="30%" cy="110%" r="130%">
+        <stop offset="0%" stop-color="#fdf497" />
+        <stop offset="5%" stop-color="#fdf497" />
+        <stop offset="45%" stop-color="#fd5949" />
+        <stop offset="60%" stop-color="#d6249f" />
+        <stop offset="90%" stop-color="#285AEB" />
+      </radialGradient>
+    </defs>
+    <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig-grad)" />
+    <path fill="#fff" d="M12 7.3a4.7 4.7 0 110 9.4 4.7 4.7 0 010-9.4zm0 1.8a2.9 2.9 0 100 5.8 2.9 2.9 0 000-5.8zm5.05-2.1a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z" />
+  </svg>
+)}
+
+{brand === 'facebook' && (
+  <svg viewBox="0 0 24 24" aria-hidden="true" style={style} class={extraClass}>
+    <rect width="24" height="24" rx="5" fill="#1877F2" />
+    <path fill="#fff" d="M13.5 21.95v-8.6h2.9l.43-3.36h-3.33V7.85c0-.97.27-1.63 1.66-1.63h1.78V3.21c-.31-.04-1.37-.13-2.6-.13-2.57 0-4.33 1.57-4.33 4.45v2.46H7.1v3.36h2.91v8.6h3.49z"/>
+  </svg>
+)}
+
+{brand === 'tiktok' && (
+  <svg viewBox="0 0 24 24" aria-hidden="true" style={style} class={extraClass}>
+    <rect width="24" height="24" rx="5" fill="#000" />
+    <path d="M16.6 8.82a4.83 4.83 0 01-3.36-1.4 4.83 4.83 0 01-1.4-3.27V4h-3.18v13.06a2.6 2.6 0 11-2.6-2.6c.18 0 .35.02.52.05v-3.24a5.83 5.83 0 00-.52-.02 5.78 5.78 0 105.78 5.78v-5.17a8.02 8.02 0 004.76 1.55V8.23z" fill="#fff"/>
+  </svg>
+)}
+
+{brand === 'twitter' && (
+  <svg viewBox="0 0 24 24" aria-hidden="true" style={style} class={extraClass}>
+    <rect width="24" height="24" rx="5" fill="#000" />
+    <path fill="#fff" d="M17.7 5.5h2.3l-5 5.72 5.88 7.78H16.3l-3.6-4.72-4.13 4.72H6.27l5.35-6.12L5.97 5.5h4.72l3.26 4.31zM16.9 17.7h1.27L9.16 6.83H7.8z"/>
+  </svg>
+)}
+
+{brand === 'pinterest' && (
+  <svg viewBox="0 0 24 24" aria-hidden="true" style={style} class={extraClass}>
+    <rect width="24" height="24" rx="5" fill="#E60023" />
+    <path fill="#fff" d="M12.5 5.5c-3.6 0-5.5 2.42-5.5 5.05 0 1.23.65 2.76 1.7 3.25.16.07.24.04.28-.11.03-.12.18-.74.25-1.02.02-.09.01-.17-.06-.25-.35-.43-.63-1.22-.63-1.95 0-1.88 1.42-3.7 3.84-3.7 2.09 0 3.55 1.43 3.55 3.46 0 2.3-1.16 3.9-2.67 3.9-.83 0-1.46-.69-1.26-1.54.24-1.01.7-2.1.7-2.83 0-.65-.35-1.2-1.07-1.2-.85 0-1.53.88-1.53 2.05 0 .75.25 1.25.25 1.25l-1 4.27c-.3 1.27-.05 2.82-.03 2.98.01.1.13.12.18.05.07-.1 1.04-1.29 1.36-2.48.09-.34.53-2.07.53-2.07.26.5.99.94 1.78.94 2.34 0 3.93-2.13 3.93-4.99 0-2.16-1.83-4.16-4.6-4.16z"/>
+  </svg>
+)}

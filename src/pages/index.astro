@@ -85,6 +85,9 @@ const restaurantSchema = {
   sameAs: [
     BUSINESS.social.instagram,
     BUSINESS.social.facebook,
+    BUSINESS.social.tiktok,
+    BUSINESS.social.twitter,
+    BUSINESS.social.pinterest,
     BUSINESS.social.thuisbezorgd
   ],
   paymentAccepted: BUSINESS.paymentAccepted
@@ -311,7 +314,10 @@ const faqSchema = {
         label: 'Sociaal',
         links: [
           { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
-          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true }
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true },
+          { label: 'TikTok', href: BUSINESS.social.tiktok, isExternal: true },
+          { label: 'X', href: BUSINESS.social.twitter, isExternal: true },
+          { label: 'Pinterest', href: BUSINESS.social.pinterest, isExternal: true }
         ]
       },
       {
