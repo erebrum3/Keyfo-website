@@ -136,6 +136,19 @@ const breadcrumbSchema = {
 
     <section class="keyfo-section keyfo-band-cream">
       <div class="keyfo-container">
+        <nav aria-label="Populaire gerechten in Schiedam" class="keyfo-popular-strip">
+          <span class="keyfo-popular-strip-label">Populaire gerechten in Schiedam:</span>
+          <a class="keyfo-popular-strip-link" href="/doner-schiedam/">Döner afhalen</a>
+          <span aria-hidden="true" class="keyfo-popular-strip-sep">·</span>
+          <a class="keyfo-popular-strip-link" href="/kapsalon-schiedam/">Kapsalon</a>
+          <span aria-hidden="true" class="keyfo-popular-strip-sep">·</span>
+          <a class="keyfo-popular-strip-link" href="/turkse-pizza-schiedam/">Turkse pizza</a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
         <MenuSection
           heading={CONTENT_NL.menuHeading}
           categories={MENU.categories.map((c) => ({ ...c, title: c.titleNl }))}
@@ -181,7 +194,10 @@ const breadcrumbSchema = {
       {
         label: 'Lokaal',
         links: [
-          { label: 'Turks restaurant Schiedam', href: '/turks-restaurant-schiedam/' }
+          { label: 'Turks restaurant Schiedam', href: '/turks-restaurant-schiedam/' },
+          { label: 'Döner Schiedam', href: '/doner-schiedam/' },
+          { label: 'Kapsalon Schiedam', href: '/kapsalon-schiedam/' },
+          { label: 'Turkse pizza Schiedam', href: '/turkse-pizza-schiedam/' }
         ]
       }
     ]}
