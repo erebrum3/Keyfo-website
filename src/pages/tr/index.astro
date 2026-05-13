@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import InfoBar from '../../components/InfoBar.astro';
 import PopularDishes from '../../components/PopularDishes.astro';
-import MenuSection from '../../components/MenuSection.astro';
+import MenuTeaser from '../../components/MenuTeaser.astro';
 import Gallery from '../../components/Gallery.astro';
 import Reviews from '../../components/Reviews.astro';
 import Location from '../../components/Location.astro';
@@ -63,23 +63,8 @@ const restaurantSchema = {
     '@type': 'Menu',
     '@id': `${SITE_ORIGIN}/#menu`,
     name: 'KEYFO menü',
-    url: `${BUSINESS.website.trUrl}#menu`,
-    inLanguage: ['tr', 'nl'],
-    hasMenuSection: {
-      '@type': 'MenuSection',
-      name: 'Popüler',
-      hasMenuItem: featured.map((item) => ({
-        '@type': 'MenuItem',
-        name: item.name,
-        description: item.descriptionTr,
-        offers: {
-          '@type': 'Offer',
-          price: item.priceEur.toFixed(2),
-          priceCurrency: 'EUR',
-          availability: 'https://schema.org/InStock'
-        }
-      }))
-    }
+    url: `${SITE_ORIGIN}/tr/menu/`,
+    inLanguage: ['tr', 'nl']
   },
   hasMap: BUSINESS.googleMapsDirectionsUrl,
   sameAs: [
@@ -221,15 +206,18 @@ const faqSchema = {
         </div>
       </section>
 
-      <section class="keyfo-section keyfo-band-cream">
+      <section id="menu" class="keyfo-section keyfo-band-cream">
         <div class="keyfo-container">
-          <MenuSection
-            heading={CONTENT_TR.menuHeading}
+          <MenuTeaser
+            heading={CONTENT_TR.menuPage.teaserHeading}
+            eyebrow={CONTENT_TR.menuPage.teaserEyebrow}
+            lead={CONTENT_TR.menuPage.teaserLead}
             categories={MENU.categories.map((c) => ({ ...c, title: c.titleTr }))}
             formatPrice={formatPriceEurNl}
-            lastUpdatedLabel={CONTENT_TR.menuLastUpdatedLabel}
-            lastUpdated={MENU.lastUpdated}
-            notes={[CONTENT_TR.priceNote, CONTENT_TR.allergenNote]}
+            itemCountLabel={CONTENT_TR.menuPage.teaserItemCountLabel}
+            priceRangeLabel={CONTENT_TR.menuPage.teaserPriceRangeLabel}
+            ctaLabel={CONTENT_TR.menuPage.teaserCtaLabel}
+            ctaHref="/tr/menu/"
           />
         </div>
       </section>

@@ -1,0 +1,62 @@
+---
+import type { MenuCategory } from '../data/menu';
+
+type Props = {
+  heading: string;
+  eyebrow?: string;
+  lead?: string;
+  categories: Array<MenuCategory & { title: string }>;
+  formatPrice: (priceEur: number) => string;
+  itemCountLabel: (count: number) => string;
+  priceRangeLabel: string;
+  ctaLabel: string;
+  ctaHref: string;
+};
+
+const { heading, eyebrow, lead, categories, formatPrice, itemCountLabel, priceRangeLabel, ctaLabel, ctaHref } = Astro.props;
+
+const summary = categories.map((cat) => {
+  const prices = cat.items.map((i) => i.priceEur);
+  const min = Math.min(...prices);
+  return {
+    id: cat.id,
+    title: cat.title,
+    count: cat.items.length,
+    minPrice: min
+  };
+});
+---
+
+<section aria-labelledby="menu-teaser-heading" class="keyfo-menu-frame">
+  <div class="keyfo-menu">
+    <div class="keyfo-menu-head">
+      <div>
+        {eyebrow ? <span class="keyfo-menu-eyebrow">{eyebrow}</span> : null}
+        <h2 id="menu-teaser-heading" class="keyfo-menu-title keyfo-brand">{heading}</h2>
+      </div>
+    </div>
+
+    {lead ? <p class="keyfo-menu-intro">{lead}</p> : null}
+
+    <ul class="keyfo-menu-teaser-list">
+      {summary.map((cat) => (
+        <li class="keyfo-menu-teaser-item">
+          <a class="keyfo-menu-teaser-link" href={`${ctaHref}#cat-${cat.id}`}>
+            <span class="keyfo-menu-teaser-title keyfo-brand">{cat.title}</span>
+            <span class="keyfo-menu-teaser-meta">
+              <span class="keyfo-menu-teaser-count">{itemCountLabel(cat.count)}</span>
+              <span aria-hidden="true" class="keyfo-menu-teaser-sep">·</span>
+              <span class="keyfo-menu-teaser-price keyfo-tabular">
+                {priceRangeLabel} {formatPrice(cat.minPrice)}
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="keyfo-menu-teaser-cta">
+      <a class="keyfo-btn-secondary" href={ctaHref}>{ctaLabel} →</a>
+    </div>
+  </div>
+</section>
