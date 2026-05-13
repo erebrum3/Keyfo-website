@@ -13,9 +13,10 @@ type Props = {
   lastUpdated: string;
   notes: string[];
   showDescriptions?: boolean;
+  showAfhaalActions?: boolean;
 };
 
-const { heading, eyebrow, categories, formatPrice, lastUpdatedLabel, lastUpdated, notes, showDescriptions = false } = Astro.props;
+const { heading, eyebrow, categories, formatPrice, lastUpdatedLabel, lastUpdated, notes, showDescriptions = false, showAfhaalActions = false } = Astro.props;
 
 const isTr = Astro.url.pathname.startsWith('/tr');
 const descKey = isTr ? 'Tr' : 'Nl';
@@ -29,6 +30,8 @@ const localeContent = isTr ? CONTENT_TR : CONTENT_NL;
 const menuCta = localeContent.menuCta;
 const whatsappHref = BUSINESS.getWhatsAppUrl(localeContent.whatsappPrefill);
 const callHref = BUSINESS.phoneTel;
+const addLabel = localeContent.afhaal.addLabel;
+const addedLabel = localeContent.afhaal.addedLabel;
 ---
 
 <section id="menu" aria-labelledby="menu-heading" class="keyfo-menu-frame">
@@ -68,11 +71,24 @@ const callHref = BUSINESS.phoneTel;
           {cat.items.map((item) => {
             const desc = getDescription(item);
             return (
-              <li class={`keyfo-menu-row${desc ? ' keyfo-menu-row--with-desc' : ''}`}>
+              <li class={`keyfo-menu-row${desc ? ' keyfo-menu-row--with-desc' : ''}${showAfhaalActions ? ' keyfo-menu-row--with-action' : ''}`}>
                 <span class="keyfo-menu-name">{item.name}</span>
                 <span aria-hidden="true" class="keyfo-menu-leader"></span>
                 <span class="keyfo-menu-price keyfo-tabular">{formatPrice(item.priceEur)}</span>
                 {desc ? <p class="keyfo-menu-desc">{desc}</p> : null}
+                {showAfhaalActions ? (
+                  <button
+                    type="button"
+                    class="keyfo-add-btn"
+                    data-afhaal-add
+                    data-item-id={item.id}
+                    data-label-default={addLabel}
+                    data-label-added={addedLabel}
+                    aria-label={`${addLabel} — ${isTr ? item.nameTr : item.nameNl}`}
+                  >
+                    <span class="keyfo-add-btn-text">{addLabel}</span>
+                  </button>
+                ) : null}
               </li>
             );
           })}
@@ -121,4 +137,31 @@ const callHref = BUSINESS.phoneTel;
     }, { rootMargin: '-104px 0px -55% 0px', threshold: 0 });
     targets.forEach((t) => observer.observe(t));
   })();
+</script>
+
+<script>
+  import { addItem } from '../scripts/afhaal-cart';
+
+  const ADDED_FEEDBACK_MS = 1500;
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as Element | null;
+    if (!target) return;
+    const btn = target.closest<HTMLButtonElement>('[data-afhaal-add]');
+    if (!btn) return;
+    const itemId = btn.getAttribute('data-item-id');
+    if (!itemId) return;
+    addItem(itemId, 1);
+    const textEl = btn.querySelector<HTMLElement>('.keyfo-add-btn-text');
+    const defaultLabel = btn.getAttribute('data-label-default') ?? '';
+    const addedLabel = btn.getAttribute('data-label-added') ?? defaultLabel;
+    if (textEl && !btn.classList.contains('is-added')) {
+      btn.classList.add('is-added');
+      textEl.textContent = addedLabel;
+      window.setTimeout(() => {
+        btn.classList.remove('is-added');
+        textEl.textContent = defaultLabel;
+      }, ADDED_FEEDBACK_MS);
+    }
+  });
 </script>

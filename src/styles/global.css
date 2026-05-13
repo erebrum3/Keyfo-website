@@ -1367,6 +1367,54 @@
     color: rgba(34, 24, 18, 0.72);
   }
 
+  .keyfo-menu-row--with-action {
+    flex-wrap: wrap;
+  }
+
+  .keyfo-add-btn {
+    @apply inline-flex items-center gap-1 text-[0.78rem] font-semibold uppercase sm:text-[0.8rem];
+    margin-left: auto;
+    padding: 0.25rem 0.5rem;
+    letter-spacing: 0.1em;
+    color: rgb(122, 34, 24);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(122, 34, 24, 0.28);
+    cursor: pointer;
+    transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  }
+
+  .keyfo-menu-row--with-action .keyfo-add-btn {
+    flex-basis: auto;
+  }
+
+  .keyfo-menu-row--with-desc.keyfo-menu-row--with-action .keyfo-add-btn {
+    flex-basis: auto;
+    margin-top: 0.25rem;
+  }
+
+  .keyfo-add-btn:hover,
+  .keyfo-add-btn:focus-visible {
+    color: rgb(78, 22, 16);
+    border-bottom-color: rgb(122, 34, 24);
+    outline: none;
+  }
+
+  .keyfo-add-btn:focus-visible {
+    background-color: rgba(242, 176, 43, 0.14);
+  }
+
+  .keyfo-add-btn.is-added {
+    color: rgb(46, 92, 36);
+    border-bottom-color: rgb(46, 92, 36);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .keyfo-add-btn {
+      transition: none;
+    }
+  }
+
   .keyfo-breadcrumb {
     @apply flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.16em];
     color: rgba(255, 247, 232, 0.6);
