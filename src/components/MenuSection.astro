@@ -84,6 +84,10 @@ const addedLabel = `✓ ${localeContent.afhaal.addedLabel}`;
                     data-item-id={item.id}
                     data-label-default={addLabel}
                     data-label-added={addedLabel}
+                    data-event="add_to_afhaal"
+                    data-cta-location="menu_section"
+                    data-item-name={isTr ? item.nameTr : item.nameNl}
+                    data-item-category={cat.id}
                     aria-label={`${addLabel} — ${isTr ? item.nameTr : item.nameNl}`}
                   >
                     <span class="keyfo-add-btn-text">{addLabel}</span>
@@ -108,8 +112,8 @@ const addedLabel = `✓ ${localeContent.afhaal.addedLabel}`;
   <div class="keyfo-menu-cta" role="group" aria-label={menuCta.heading}>
     <p class="keyfo-menu-cta-heading">{menuCta.heading}</p>
     <div class="keyfo-menu-cta-actions">
-      <a class="keyfo-btn-primary" href={whatsappHref} target="_blank" rel="noopener noreferrer">{menuCta.whatsappLabel}</a>
-      <a class="keyfo-btn-secondary" href={callHref}>{menuCta.callLabel}</a>
+      <a class="keyfo-btn-primary" href={whatsappHref} target="_blank" rel="noopener noreferrer" data-event="click_whatsapp" data-cta-location="menu_section">{menuCta.whatsappLabel}</a>
+      <a class="keyfo-btn-secondary" href={callHref} data-event="click_phone" data-cta-location="menu_section">{menuCta.callLabel}</a>
     </div>
   </div>
 

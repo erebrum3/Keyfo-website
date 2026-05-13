@@ -122,15 +122,15 @@ const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').t
     ) : null}
 
     <div class="keyfo-hero-ctas keyfo-anim-fade-up keyfo-anim-delay-4">
-      <a href={ctas.whatsapp.href} class="keyfo-btn-primary keyfo-btn-hero keyfo-glow-amber keyfo-motion">
+      <a href={ctas.whatsapp.href} class="keyfo-btn-primary keyfo-btn-hero keyfo-glow-amber keyfo-motion" data-event="click_whatsapp" data-cta-location="hero">
         {ctas.whatsapp.label}
       </a>
       <div class="keyfo-hero-cta-group">
-        <a href={ctas.viewMenu.href} class="keyfo-btn-secondary keyfo-motion">{ctas.viewMenu.label}</a>
-        <a href={ctas.phone.href} class="keyfo-btn-secondary keyfo-motion">{ctas.phone.label}</a>
-        <a href={ctas.route.href} class="keyfo-btn-secondary keyfo-motion">{ctas.route.label}</a>
+        <a href={ctas.viewMenu.href} class="keyfo-btn-secondary keyfo-motion" data-event="click_menu" data-cta-location="hero">{ctas.viewMenu.label}</a>
+        <a href={ctas.phone.href} class="keyfo-btn-secondary keyfo-motion" data-event="click_phone" data-cta-location="hero">{ctas.phone.label}</a>
+        <a href={ctas.route.href} class="keyfo-btn-secondary keyfo-motion" data-event="click_route" data-cta-location="hero">{ctas.route.label}</a>
       </div>
-      <a href={ctas.delivery.href} class="keyfo-delivery-link keyfo-motion">{ctas.delivery.label}</a>
+      <a href={ctas.delivery.href} class="keyfo-delivery-link keyfo-motion" data-event="click_thuisbezorgd" data-cta-location="hero">{ctas.delivery.label}</a>
     </div>
   </div>
 </section>

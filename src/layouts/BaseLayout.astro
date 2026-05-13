@@ -62,6 +62,7 @@ const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.starts
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
 ---
 
 <!doctype html>
@@ -127,6 +128,17 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
     {jsonLd.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
+
+    {ga4MeasurementId ? (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}></script>
+        <script
+          is:inline
+          define:vars={{ ga4MeasurementId }}
+          set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',ga4MeasurementId,{anonymize_ip:true});`}
+        />
+      </>
+    ) : null}
   </head>
   <body class="min-h-screen pb-24 sm:pb-0">
     <a
@@ -143,16 +155,18 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
         class="keyfo-mobile-cta fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-zinc-950/95 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/78 sm:hidden"
       >
         <div class="grid grid-cols-4 divide-x divide-white/10">
-          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.menu}>{mobileCta.labels.menu}</a>
-          <a class="keyfo-mobile-cta-link keyfo-mobile-cta-primary" href={mobileCta.hrefs.whatsapp}>{mobileCta.labels.whatsapp}</a>
-          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.call}>{mobileCta.labels.call}</a>
-          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.route}>{mobileCta.labels.route}</a>
+          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.menu} data-event="click_menu" data-cta-location="mobile_bar">{mobileCta.labels.menu}</a>
+          <a class="keyfo-mobile-cta-link keyfo-mobile-cta-primary" href={mobileCta.hrefs.whatsapp} data-event="click_whatsapp" data-cta-location="mobile_bar">{mobileCta.labels.whatsapp}</a>
+          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.call} data-event="click_phone" data-cta-location="mobile_bar">{mobileCta.labels.call}</a>
+          <a class="keyfo-mobile-cta-link" href={mobileCta.hrefs.route} data-event="click_route" data-cta-location="mobile_bar">{mobileCta.labels.route}</a>
         </div>
       </nav>
     ) : null}
 
     <script>
       import '../scripts/reveal.ts';
+      import { bindAutoTracking } from '../scripts/analytics';
+      bindAutoTracking();
     </script>
 
     <Analytics />

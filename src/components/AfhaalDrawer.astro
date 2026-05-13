@@ -92,6 +92,7 @@ const titleId = 'afhaal-drawer-title';
     type AfhaalState,
     type Locale
   } from '../scripts/afhaal-cart';
+  import { trackEvent } from '../scripts/analytics';
   import { MENU } from '../data/menu';
   import {
     validPickupSlotsForNext24h,
@@ -249,6 +250,15 @@ const titleId = 'afhaal-drawer-title';
     submitEl.addEventListener('click', () => {
       const state = getState();
       if (state.items.length === 0) return;
+      const itemCount = state.items.reduce((sum, it) => sum + it.quantity, 0);
+      trackEvent('submit_afhaal_whatsapp', {
+        cta_location: 'afhaal_drawer',
+        item_count: itemCount,
+        line_count: state.items.length,
+        pickup_set: Boolean(state.pickupTimeIso),
+        name_set: Boolean(state.name),
+        note_set: Boolean(state.orderNote)
+      });
       const url = buildWhatsAppUrl(state, locale);
       window.open(url, '_blank', 'noopener,noreferrer');
     });
