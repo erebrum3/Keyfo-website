@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FAQ from '../components/FAQ.astro';
+import Location from '../components/Location.astro';
+
+import { BUSINESS } from '../data/business';
+import { CONTENT_NL } from '../data/content.nl';
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const PAGE_PATH = '/doner-schiedam/';
+const PAGE_URL = `${SITE_ORIGIN}${PAGE_PATH}`;
+
+const PAGE_TITLE = 'Döner afhalen in Schiedam Centrum | KEYFO Broersveld';
+const PAGE_DESCRIPTION =
+  'Döner afhalen bij KEYFO aan Broersveld 103 in Schiedam Centrum. Sandwich, dürüm en plate. Bestelling doorgeven via WhatsApp of telefoon.';
+
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
+
+const whatsappUrl = BUSINESS.getWhatsAppUrl('Hallo KEYFO, ik wil graag döner afhalen');
+const hoursRange = `${BUSINESS.openingHours.opens}–${BUSINESS.openingHours.closes}`;
+const hoursLineNl = `Elke dag behalve dinsdag ${hoursRange}`;
+
+const FAQ_ITEMS = [
+  {
+    q: 'Welke soorten döner kan ik bij KEYFO afhalen?',
+    a: 'U kunt kiezen tussen döner in een broodje, in een dürüm-wrap of als plate met rijst, friet of salade. Vermeld bij uw bestelling welke variant u wilt — dan zetten we het zo voor u klaar.'
+  },
+  {
+    q: 'Kan ik mijn döner aanpassen, bijvoorbeeld zonder ui of met extra saus?',
+    a: 'Ja, geef bij uw WhatsApp-bericht of telefoongesprek door wat u wilt weglaten of extra wilt. We verwerken aanpassingen waar mogelijk; bij twijfel laten we het u even weten.'
+  },
+  {
+    q: 'Hoe lang van tevoren moet ik bellen of appen voor afhaal?',
+    a: 'Een korte voorbereidingstijd is fijn — meestal volstaat het om kort van tevoren door te geven dat u onderweg bent. We laten u via WhatsApp of telefoon weten wanneer uw döner klaarstaat.'
+  }
+] as const;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_ORIGIN}/` },
+    { '@type': 'ListItem', position: 2, name: 'Döner Schiedam', item: PAGE_URL }
+  ]
+};
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  name: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  inLanguage: 'nl-NL',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': `${SITE_ORIGIN}/#website`,
+    url: SITE_ORIGIN + '/',
+    name: BUSINESS.canonicalName
+  },
+  breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` }
+};
+---
+
+<BaseLayout
+  lang="nl"
+  title={PAGE_TITLE}
+  description={PAGE_DESCRIPTION}
+  skipLinkLabel={CONTENT_NL.skipLinkLabel}
+  canonicalUrl={PAGE_URL}
+  alternateLanguages={[
+    { hreflang: 'nl-NL', href: PAGE_URL },
+    { hreflang: 'x-default', href: PAGE_URL }
+  ]}
+  openGraph={{
+    type: 'website',
+    locale: 'nl_NL',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO Restaurant & Cafe in Schiedam',
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageSecureUrl: ogImageUrl
+  }}
+  jsonLd={[{ ...breadcrumbSchema, '@id': `${PAGE_URL}#breadcrumb` }, webPageSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
+    labels: CONTENT_NL.mobileCtaShort,
+    hrefs: {
+      menu: '/menu/',
+      whatsapp: whatsappUrl,
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="TR"
+    langAriaLabel="Wissel naar Turks"
+    langHref="/tr/"
+    navAriaLabel={CONTENT_NL.navAriaLabel}
+    nav={{
+      menu: CONTENT_NL.nav.menu,
+      popular: 'Populair',
+      gallery: 'Galerij',
+      location: CONTENT_NL.nav.locatie
+    }}
+    cta={{
+      whatsapp: { label: 'Bestellen', href: whatsappUrl },
+      phone: { label: 'Bellen', href: BUSINESS.phoneTel }
+    }}
+    linkPrefix="/"
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container pt-28 sm:pt-32">
+        <nav aria-label="Breadcrumb" class="keyfo-breadcrumb mb-4">
+          <a href="/">Home</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">Döner Schiedam</span>
+        </nav>
+        <p class="text-xs uppercase tracking-[0.2em] text-amber-300/80 mb-3">Schiedam Centrum · Broersveld 103</p>
+        <h1 class="keyfo-brand text-4xl sm:text-5xl font-semibold text-white">
+          Döner afhalen in Schiedam Centrum
+        </h1>
+        <p class="keyfo-hero-intro mt-5 max-w-2xl">
+          Zoekt u döner om af te halen in Schiedam Centrum? KEYFO aan Broersveld 103 zet uw döner
+          graag voor u klaar — als broodje, dürüm of plate. Geef uw bestelling door via WhatsApp of
+          telefoon en wij laten weten wanneer u kunt langskomen.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            Afhalen? Stuur ons een WhatsApp-bericht
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">Bel KEYFO</a>
+          <a
+            class="keyfo-btn-secondary"
+            href={BUSINESS.googleMapsDirectionsUrl}
+            target="_blank"
+            rel="noopener"
+            data-event="click_route"
+          >
+            Route bekijken
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Onze döner-opties</h2>
+        <p>
+          Bij KEYFO maken we döner in een paar vertrouwde vormen. Een
+          <strong>döner sandwich</strong> is handig om snel mee te nemen — vlees, salade en saus in
+          een vers broodje. Een <strong>dürüm döner</strong> is in een dunne wrap gerold, fijn voor
+          onderweg of als u liever geen broodkruim heeft. En voor wie meer wil zitten en eten is er
+          de <strong>döner plate</strong> met rijst, friet of salade ernaast.
+        </p>
+        <p>
+          Houdt u van een wat steviger gerecht in dezelfde lijn? Kijk dan eens naar onze
+          <a class="underline" href="/kapsalon-schiedam/">kapsalon</a> — friet met döner, kaas en
+          salade in één bakje. Of bekijk de
+          <a class="underline" href="/menu/" data-event="click_menu">volledige menukaart</a> voor
+          het actuele aanbod en prijzen.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Hoe werkt afhalen bij KEYFO?</h2>
+        <p>
+          Afhalen werkt het prettigst in een paar korte stappen. U stuurt een WhatsApp of belt ons,
+          u vertelt wat u wilt — bijvoorbeeld twee dürüm döner zonder ui — en wij bevestigen wat
+          het kost en wanneer het klaarstaat. Bij KEYFO aan Broersveld haalt u uw bestelling op,
+          rekent u ter plaatse af en gaat u verder met uw dag.
+        </p>
+        <p>
+          Wij gebruiken WhatsApp en telefoon om uw bestelling te begrijpen en met u te bevestigen.
+          Het is geen automatisch systeem — u krijgt steeds direct met ons contact. Daardoor kunnen
+          we ook vragen of voorkeuren makkelijk meenemen.
+        </p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ons
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">Bel KEYFO</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Location
+          heading="Locatie en parkeren"
+          eyebrow="Vinden en ophalen"
+          intro="KEYFO Restaurant & Cafe vindt u aan Broersveld 103, midden in Schiedam Centrum. Op loopafstand van station Schiedam Centrum en de Nieuwe Passage."
+          addressLines={[
+            `${BUSINESS.canonicalName}`,
+            `${BUSINESS.address.streetAddress}`,
+            `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
+          ]}
+          hoursLine={hoursLineNl}
+          parkingLine="Parkeermogelijkheden kunnen per moment verschillen; controleer vooraf de actuele parkeerinfo."
+          links={[
+            { label: 'Afhalen? Stuur ons een WhatsApp-bericht', href: whatsappUrl, isExternal: true, variant: 'primary' },
+            { label: 'Bel KEYFO', href: BUSINESS.phoneTel, variant: 'secondary' },
+            { label: 'Route bekijken', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' },
+            { label: 'Bekijk volledige menukaart', href: '/menu/', variant: 'tertiary' }
+          ]}
+          mapEmbedUrl={BUSINESS.googleMapsEmbedUrl}
+          mapDirectionsUrl={BUSINESS.googleMapsDirectionsUrl}
+          mapCtaLabel="Route openen in Google Maps"
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Vragen over döner bij KEYFO" items={FAQ_ITEMS} />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Klaar om door te geven wat u wilt?</h2>
+        <p>
+          Stuur ons gerust een WhatsApp-bericht of bel ons. Wilt u eerst rondkijken? Bekijk de
+          <a class="underline" href="/menu/" data-event="click_menu">volledige menukaart</a> of de
+          pagina <a class="underline" href="/kapsalon-schiedam/">kapsalon afhalen in Schiedam</a>.
+        </p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            Afhalen? Stuur ons een WhatsApp-bericht
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">Bel KEYFO</a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.googleMapsDirectionsUrl} target="_blank" rel="noopener" data-event="click_route">
+            Route bekijken
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_NL.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefoon/WhatsApp: ${BUSINESS.phone}`,
+      `E-mail: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'Acties',
+        links: [
+          { label: 'Afhalen? Stuur ons een WhatsApp-bericht', href: whatsappUrl, isExternal: true },
+          { label: 'Bel KEYFO', href: BUSINESS.phoneTel },
+          { label: 'Route bekijken', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
+          { label: 'Bekijk volledige menukaart', href: '/menu/' }
+        ]
+      },
+      {
+        label: 'Sociaal',
+        links: [
+          { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true },
+          { label: 'TikTok', href: BUSINESS.social.tiktok, isExternal: true },
+          { label: 'X', href: BUSINESS.social.twitter, isExternal: true },
+          { label: 'Pinterest', href: BUSINESS.social.pinterest, isExternal: true }
+        ]
+      },
+      {
+        label: 'Lokaal',
+        links: [
+          { label: 'Turks restaurant Schiedam', href: '/turks-restaurant-schiedam/' },
+          { label: 'Kapsalon Schiedam', href: '/kapsalon-schiedam/' },
+          { label: 'Turkse pizza Schiedam', href: '/turkse-pizza-schiedam/' }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>

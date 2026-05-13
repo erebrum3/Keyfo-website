@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FAQ from '../components/FAQ.astro';
+import Location from '../components/Location.astro';
+
+import { BUSINESS } from '../data/business';
+import { CONTENT_NL } from '../data/content.nl';
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const PAGE_PATH = '/turkse-pizza-schiedam/';
+const PAGE_URL = `${SITE_ORIGIN}${PAGE_PATH}`;
+
+const PAGE_TITLE = 'Turkse pizza afhalen in Schiedam | KEYFO Broersveld';
+const PAGE_DESCRIPTION =
+  'Turkse pizza afhalen bij KEYFO aan Broersveld 103 in Schiedam Centrum. Dunne, langwerpige Turkse pizza om mee te nemen. Bestelling doorgeven via WhatsApp of telefoon.';
+
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
+
+const whatsappUrl = BUSINESS.getWhatsAppUrl('Hallo KEYFO, ik wil graag Turkse pizza afhalen');
+const hoursRange = `${BUSINESS.openingHours.opens}–${BUSINESS.openingHours.closes}`;
+const hoursLineNl = `Elke dag behalve dinsdag ${hoursRange}`;
+
+const FAQ_ITEMS = [
+  {
+    q: 'Wat is het verschil tussen Turkse pizza en een gewone pizza?',
+    a: 'Turkse pizza heeft een dunne, langwerpige bodem en wordt vaak zonder kaas en tomatensaus belegd, met gekruid gehakt en verse groenten erop. De smaak en textuur zijn anders dan een Italiaanse pizza — eerder licht en hartig dan dik en kaasrijk.'
+  },
+  {
+    q: 'Welke varianten Turkse pizza zijn er bij KEYFO af te halen?',
+    a: 'We maken verschillende varianten. Vraag bij uw bestelling welke opties op dat moment beschikbaar zijn, bijvoorbeeld met gehakt, of in een combinatie met döner als invulling.'
+  },
+  {
+    q: 'Is Turkse pizza geschikt om mee te nemen als lunch?',
+    a: 'Ja, doordat de bodem dun en langwerpig is, eet een Turkse pizza zich makkelijk onderweg of als snelle lunch. We rollen of vouwen hem op verzoek, zodat hij praktisch mee te nemen is.'
+  }
+] as const;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${PAGE_URL}#breadcrumb`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_ORIGIN}/` },
+    { '@type': 'ListItem', position: 2, name: 'Turkse pizza Schiedam', item: PAGE_URL }
+  ]
+};
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  name: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  inLanguage: 'nl-NL',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': `${SITE_ORIGIN}/#website`,
+    url: SITE_ORIGIN + '/',
+    name: BUSINESS.canonicalName
+  },
+  breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` }
+};
+---
+
+<BaseLayout
+  lang="nl"
+  title={PAGE_TITLE}
+  description={PAGE_DESCRIPTION}
+  skipLinkLabel={CONTENT_NL.skipLinkLabel}
+  canonicalUrl={PAGE_URL}
+  alternateLanguages={[
+    { hreflang: 'nl-NL', href: PAGE_URL },
+    { hreflang: 'x-default', href: PAGE_URL }
+  ]}
+  openGraph={{
+    type: 'website',
+    locale: 'nl_NL',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO Restaurant & Cafe in Schiedam',
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageSecureUrl: ogImageUrl
+  }}
+  jsonLd={[breadcrumbSchema, webPageSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
+    labels: CONTENT_NL.mobileCtaShort,
+    hrefs: {
+      menu: '/menu/',
+      whatsapp: whatsappUrl,
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="TR"
+    langAriaLabel="Wissel naar Turks"
+    langHref="/tr/"
+    navAriaLabel={CONTENT_NL.navAriaLabel}
+    nav={{
+      menu: CONTENT_NL.nav.menu,
+      popular: 'Populair',
+      gallery: 'Galerij',
+      location: CONTENT_NL.nav.locatie
+    }}
+    cta={{
+      whatsapp: { label: 'Bestellen', href: whatsappUrl },
+      phone: { label: 'Bellen', href: BUSINESS.phoneTel }
+    }}
+    linkPrefix="/"
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container pt-28 sm:pt-32">
+        <nav aria-label="Breadcrumb" class="keyfo-breadcrumb mb-4">
+          <a href="/">Home</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">Turkse pizza Schiedam</span>
+        </nav>
+        <p class="text-xs uppercase tracking-[0.2em] text-amber-300/80 mb-3">Schiedam Centrum · Broersveld 103</p>
+        <h1 class="keyfo-brand text-4xl sm:text-5xl font-semibold text-white">
+          Turkse pizza afhalen in Schiedam
+        </h1>
+        <p class="keyfo-hero-intro mt-5 max-w-2xl">
+          Op zoek naar Turkse pizza om af te halen in Schiedam Centrum? KEYFO aan Broersveld 103
+          maakt de dunne, langwerpige Turkse pizza vers klaar — handig voor een snelle lunch of om
+          mee te nemen onderweg. Geef uw bestelling door via WhatsApp of telefoon.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            Afhalen? Stuur ons een WhatsApp-bericht
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">Bel KEYFO</a>
+          <a
+            class="keyfo-btn-secondary"
+            href={BUSINESS.googleMapsDirectionsUrl}
+            target="_blank"
+            rel="noopener"
+            data-event="click_route"
+          >
+            Route bekijken
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Wat is Turkse pizza?</h2>
+        <p>
+          Turkse pizza is in vorm en gevoel anders dan een klassieke Italiaanse pizza. De bodem is
+          dun en langwerpig en wordt vaak belegd met gekruid gehakt, peterselie, ui en stukjes
+          tomaat. Tomatensaus en kaas blijven vaak achterwege — de smaak komt vooral uit het
+          beleg en de kruiden zelf.
+        </p>
+        <p>
+          Veel mensen kennen het gerecht onder de naam <em>lahmacun</em>. Bij ons rolt u de Turkse
+          pizza desgewenst op met salade en saus erbij, zodat hij makkelijk te eten is — ook
+          onderweg.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Onze Turkse pizza-opties</h2>
+        <p>
+          We maken de Turkse pizza in verschillende varianten. De klassieke versie met gekruid
+          gehakt is de meest voor de hand liggende keuze. Daarnaast werken we ook met combinaties,
+          bijvoorbeeld een Turkse pizza waar wat döner doorheen of overheen wordt verwerkt — een
+          stevigere variant voor wie meer trek heeft.
+        </p>
+        <p>
+          Welke opties op dat moment beschikbaar zijn, bevestigen we graag bij uw bericht. Voor het
+          actuele aanbod en de prijzen kunt u terecht op de
+          <a class="underline" href="/menu/" data-event="click_menu">volledige menukaart</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Snelle lunch of afhaal in Schiedam Centrum</h2>
+        <p>
+          Een Turkse pizza leent zich goed voor een lunchpauze of een snelle stop tussendoor. De
+          bodem is dun, het beleg licht — en doordat hij langwerpig is, kunt u hem oprollen om hem
+          praktisch onderweg te eten. KEYFO ligt midden in het centrum, op loopafstand van de
+          Nieuwe Passage en station Schiedam Centrum.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-200">
+        <h2 class="keyfo-section-title text-white">Afhalen via WhatsApp</h2>
+        <p>
+          U stuurt ons een WhatsApp of belt ons. U geeft door hoeveel Turkse pizza's u wilt en of u
+          ze met salade en saus erbij wilt. Wij bevestigen wat het kost en wanneer u kunt
+          langskomen om af te halen. U rekent ter plaatse af.
+        </p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ons
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">Bel KEYFO</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Location
+          heading="Locatie en parkeren"
+          eyebrow="Vinden en ophalen"
+          intro="Adres en route naar KEYFO aan Broersveld 103 in Schiedam Centrum."
+          addressLines={[
+            `${BUSINESS.canonicalName}`,
+            `${BUSINESS.address.streetAddress}`,
+            `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
+          ]}
+          hoursLine={hoursLineNl}
+          parkingLine="Parkeermogelijkheden kunnen per moment verschillen; controleer vooraf de actuele parkeerinfo."
+          links={[
+            { label: 'Afhalen? Stuur ons een WhatsApp-bericht', href: whatsappUrl, isExternal: true, variant: 'primary' },
+            { label: 'Bel KEYFO', href: BUSINESS.phoneTel, variant: 'secondary' },
+            { label: 'Route bekijken', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' },
+            { label: 'Bekijk volledige menukaart', href: '/menu/', variant: 'tertiary' }
+          ]}
+          mapEmbedUrl={BUSINESS.googleMapsEmbedUrl}
+          mapDirectionsUrl={BUSINESS.googleMapsDirectionsUrl}
+          mapCtaLabel="Route openen in Google Maps"
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Vragen over Turkse pizza bij KEYFO" items={FAQ_ITEMS} />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Trek gekregen?</h2>
+        <p>
+          Stuur ons een WhatsApp of bel ons en geef door welke Turkse pizza u wilt. Liever eerst
+          rondkijken? Bekijk de
+          <a class="underline" href="/menu/" data-event="click_menu">volledige menukaart</a> of de
+          pagina <a class="underline" href="/doner-schiedam/">döner afhalen in Schiedam</a>.
+        </p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            Afhalen? Stuur ons een WhatsApp-bericht
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_call">Bel KEYFO</a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.googleMapsDirectionsUrl} target="_blank" rel="noopener" data-event="click_route">
+            Route bekijken
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_NL.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefoon/WhatsApp: ${BUSINESS.phone}`,
+      `E-mail: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'Acties',
+        links: [
+          { label: 'Afhalen? Stuur ons een WhatsApp-bericht', href: whatsappUrl, isExternal: true },
+          { label: 'Bel KEYFO', href: BUSINESS.phoneTel },
+          { label: 'Route bekijken', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
+          { label: 'Bekijk volledige menukaart', href: '/menu/' }
+        ]
+      },
+      {
+        label: 'Sociaal',
+        links: [
+          { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true },
+          { label: 'TikTok', href: BUSINESS.social.tiktok, isExternal: true },
+          { label: 'X', href: BUSINESS.social.twitter, isExternal: true },
+          { label: 'Pinterest', href: BUSINESS.social.pinterest, isExternal: true }
+        ]
+      },
+      {
+        label: 'Lokaal',
+        links: [
+          { label: 'Turks restaurant Schiedam', href: '/turks-restaurant-schiedam/' },
+          { label: 'Döner Schiedam', href: '/doner-schiedam/' },
+          { label: 'Kapsalon Schiedam', href: '/kapsalon-schiedam/' }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>
