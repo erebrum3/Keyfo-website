@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
-import SocialRail from '../components/SocialRail.astro';
 
 type MobileCta = {
   ariaLabel: string;
@@ -137,8 +136,6 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
       {skipLinkLabel}
     </a>
     <slot />
-
-    <SocialRail lang={lang === 'tr' ? 'tr' : 'nl'} />
 
     {mobileCta ? (
       <nav
