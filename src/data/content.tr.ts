@@ -11,7 +11,7 @@ export const CONTENT_TR = {
   heroRatingLabel: 'Google yorumları',
   heroRatingAriaLabel: 'Google yorumları puanı',
   mobileCtaShort: { menu: 'Menü', whatsapp: 'WhatsApp', call: 'Ara', route: 'Route' },
-  whatsappPrefill: 'Merhaba KEYFO, gel-al sipariş vermek istiyorum.',
+  whatsappPrefill: 'Merhaba KEYFO, gel-al için bir mesaj göndermek istiyorum.',
   skipLinkLabel: 'İçeriğe atla',
   navAriaLabel: 'Ana gezinme',
   nav: {
@@ -39,7 +39,7 @@ export const CONTENT_TR = {
   menuIntro: 'Döner, ızgara çeşitleri, Türk pizzası, tatlılar ve içecekler. WhatsApp veya telefonla gel-al; teslimat Thuisbezorgd üzerinden (harici).',
   menuShortcutLabel: 'Kategoriye git',
   menuCta: {
-    heading: 'Sipariş vermeye hazır mısın? WhatsApp ile gel-al siparişini ilet.',
+    heading: 'Gel-al için WhatsApp üzerinden bize yazın.',
     whatsappLabel: 'WhatsApp ile Gel-Al',
     callLabel: 'Hemen Ara'
   },

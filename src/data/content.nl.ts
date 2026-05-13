@@ -11,7 +11,7 @@ export const CONTENT_NL = {
   heroRatingLabel: 'Google reviews',
   heroRatingAriaLabel: 'Google reviews beoordeling',
   mobileCtaShort: { menu: 'Menu', whatsapp: 'WhatsApp', call: 'Bel', route: 'Route' },
-  whatsappPrefill: 'Hallo KEYFO, ik wil graag een bestelling plaatsen voor afhalen.',
+  whatsappPrefill: 'Hallo KEYFO, ik wil graag een afhaalbericht sturen.',
   skipLinkLabel: 'Ga naar inhoud',
   navAriaLabel: 'Hoofdnavigatie',
   nav: {
@@ -39,7 +39,7 @@ export const CONTENT_NL = {
   menuIntro: 'Döner, grillgerechten, Turkse pizza, desserts en drankjes. Afhalen via WhatsApp of telefoon; bezorging via Thuisbezorgd (extern).',
   menuShortcutLabel: 'Snel naar categorie',
   menuCta: {
-    heading: 'Klaar om af te halen? Stuur je bestelling via WhatsApp.',
+    heading: 'Afhalen? Stuur ons een WhatsApp-bericht.',
     whatsappLabel: 'WhatsApp voor afhalen',
     callLabel: 'Bel direct'
   },
