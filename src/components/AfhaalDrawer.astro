@@ -1,0 +1,268 @@
+---
+import { CONTENT_NL } from '../data/content.nl';
+import { CONTENT_TR } from '../data/content.tr';
+
+type Props = {
+  locale: 'nl' | 'tr';
+};
+
+const { locale } = Astro.props;
+const c = (locale === 'tr' ? CONTENT_TR : CONTENT_NL).afhaal;
+const dialogId = 'afhaal-drawer';
+const titleId = 'afhaal-drawer-title';
+---
+
+<div
+  id={dialogId}
+  class="keyfo-afhaal-drawer"
+  data-locale={locale}
+  data-open="false"
+  aria-hidden="true"
+>
+  <div class="keyfo-afhaal-backdrop" data-afhaal-close></div>
+  <section
+    class="keyfo-afhaal-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby={titleId}
+    tabindex="-1"
+  >
+    <header class="keyfo-afhaal-head">
+      <h2 id={titleId} class="keyfo-afhaal-title keyfo-brand">{c.drawerTitle}</h2>
+      <button type="button" class="keyfo-afhaal-close" data-afhaal-close aria-label={c.closeLabel}>
+        <span aria-hidden="true">×</span>
+      </button>
+    </header>
+
+    <div class="keyfo-afhaal-body">
+      <p class="keyfo-afhaal-empty" data-afhaal-empty>{c.emptyText}</p>
+
+      <ul class="keyfo-afhaal-items" data-afhaal-items hidden></ul>
+
+      <div class="keyfo-afhaal-form" data-afhaal-form hidden>
+        <label class="keyfo-afhaal-field">
+          <span class="keyfo-afhaal-field-label">{c.pickupTimeLabel}</span>
+          <select class="keyfo-afhaal-select" data-afhaal-pickup>
+            <option value="">—</option>
+          </select>
+        </label>
+
+        <label class="keyfo-afhaal-field">
+          <span class="keyfo-afhaal-field-label">{c.nameLabel}</span>
+          <input class="keyfo-afhaal-input" type="text" autocomplete="name" data-afhaal-name maxlength="80" />
+        </label>
+
+        <label class="keyfo-afhaal-field">
+          <span class="keyfo-afhaal-field-label">{c.noteLabel}</span>
+          <textarea class="keyfo-afhaal-input" rows="2" data-afhaal-note maxlength="240"></textarea>
+        </label>
+
+        <div class="keyfo-afhaal-total">
+          <span class="keyfo-afhaal-total-label">{c.totalLabel}</span>
+          <span class="keyfo-afhaal-total-value" data-afhaal-total>—</span>
+        </div>
+        <p class="keyfo-afhaal-total-note">{c.indicativeTotalNote}</p>
+
+        <p class="keyfo-afhaal-disclaimer">{c.disclaimer}</p>
+
+        <div class="keyfo-afhaal-actions">
+          <button type="button" class="keyfo-btn-primary keyfo-afhaal-submit" data-afhaal-submit>
+            {c.submitLabel}
+          </button>
+          <button type="button" class="keyfo-afhaal-clear" data-afhaal-clear>{c.clearLabel}</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  import {
+    getState,
+    subscribe,
+    updateQuantity,
+    removeItem,
+    setItemNote,
+    setPickupTime,
+    setName,
+    setOrderNote,
+    clearList,
+    indicativeTotal,
+    buildWhatsAppUrl,
+    type AfhaalState,
+    type Locale
+  } from '../scripts/afhaal-cart';
+  import { MENU } from '../data/menu';
+  import {
+    validPickupSlotsForNext24h,
+    formatPickupLabel
+  } from '../lib/hours';
+
+  const drawer = document.getElementById('afhaal-drawer');
+  if (drawer) {
+    const locale = (drawer.getAttribute('data-locale') as Locale) || 'nl';
+    const itemsEl = drawer.querySelector<HTMLUListElement>('[data-afhaal-items]')!;
+    const emptyEl = drawer.querySelector<HTMLElement>('[data-afhaal-empty]')!;
+    const formEl = drawer.querySelector<HTMLElement>('[data-afhaal-form]')!;
+    const totalEl = drawer.querySelector<HTMLElement>('[data-afhaal-total]')!;
+    const pickupEl = drawer.querySelector<HTMLSelectElement>('[data-afhaal-pickup]')!;
+    const nameEl = drawer.querySelector<HTMLInputElement>('[data-afhaal-name]')!;
+    const noteEl = drawer.querySelector<HTMLTextAreaElement>('[data-afhaal-note]')!;
+    const submitEl = drawer.querySelector<HTMLButtonElement>('[data-afhaal-submit]')!;
+    const clearEl = drawer.querySelector<HTMLButtonElement>('[data-afhaal-clear]')!;
+    const panel = drawer.querySelector<HTMLElement>('.keyfo-afhaal-panel')!;
+
+    const itemIndex = new Map<string, { nameNl: string; nameTr: string; priceEur: number }>();
+    for (const cat of MENU.categories) {
+      for (const it of cat.items) {
+        itemIndex.set(it.id, { nameNl: it.nameNl, nameTr: it.nameTr, priceEur: it.priceEur });
+      }
+    }
+
+    const priceFmt = new Intl.NumberFormat(locale === 'tr' ? 'tr-TR' : 'nl-NL', {
+      style: 'currency',
+      currency: 'EUR'
+    });
+
+    const formatPrice = (n: number) => priceFmt.format(n);
+
+    let lastFocus: HTMLElement | null = null;
+
+    function refreshPickupOptions() {
+      const slots = validPickupSlotsForNext24h(new Date());
+      const current = pickupEl.value;
+      pickupEl.innerHTML = '<option value="">—</option>';
+      for (const slot of slots) {
+        const opt = document.createElement('option');
+        opt.value = slot.toISOString();
+        opt.textContent = formatPickupLabel(slot, locale);
+        pickupEl.appendChild(opt);
+      }
+      const state = getState();
+      if (state.pickupTimeIso && Array.from(pickupEl.options).some((o) => o.value === state.pickupTimeIso)) {
+        pickupEl.value = state.pickupTimeIso;
+      } else if (current && Array.from(pickupEl.options).some((o) => o.value === current)) {
+        pickupEl.value = current;
+      } else {
+        pickupEl.value = '';
+      }
+    }
+
+    function render(state: AfhaalState) {
+      const hasItems = state.items.length > 0;
+      emptyEl.hidden = hasItems;
+      itemsEl.hidden = !hasItems;
+      formEl.hidden = !hasItems;
+
+      itemsEl.innerHTML = '';
+      for (const line of state.items) {
+        const def = itemIndex.get(line.itemId);
+        if (!def) continue;
+        const name = locale === 'tr' ? def.nameTr : def.nameNl;
+        const li = document.createElement('li');
+        li.className = 'keyfo-afhaal-item';
+        li.innerHTML = `
+          <div class="keyfo-afhaal-item-row">
+            <span class="keyfo-afhaal-item-name">${escapeHtml(name)}</span>
+            <span class="keyfo-afhaal-item-price">${formatPrice(def.priceEur * line.quantity)}</span>
+          </div>
+          <div class="keyfo-afhaal-item-controls">
+            <button type="button" class="keyfo-afhaal-qty" data-afhaal-dec aria-label="−">−</button>
+            <span class="keyfo-afhaal-qty-value" data-afhaal-qty>${line.quantity}</span>
+            <button type="button" class="keyfo-afhaal-qty" data-afhaal-inc aria-label="+">+</button>
+            <button type="button" class="keyfo-afhaal-remove" data-afhaal-remove aria-label="✕">✕</button>
+          </div>
+          <input type="text" class="keyfo-afhaal-item-note" data-afhaal-item-note maxlength="120" value="${escapeAttr(line.note ?? '')}" />
+        `;
+        li.dataset.itemId = line.itemId;
+        const noteInput = li.querySelector<HTMLInputElement>('[data-afhaal-item-note]')!;
+        noteInput.placeholder = locale === 'tr' ? 'Bu ürün için not' : 'Notitie bij dit gerecht';
+        itemsEl.appendChild(li);
+      }
+
+      totalEl.textContent = formatPrice(indicativeTotal(state));
+      if (nameEl.value !== (state.name ?? '')) nameEl.value = state.name ?? '';
+      if (noteEl.value !== (state.orderNote ?? '')) noteEl.value = state.orderNote ?? '';
+    }
+
+    function escapeHtml(s: string) {
+      return s.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]!));
+    }
+    function escapeAttr(s: string) {
+      return escapeHtml(s);
+    }
+
+    function open() {
+      lastFocus = document.activeElement as HTMLElement | null;
+      refreshPickupOptions();
+      render(getState());
+      drawer!.dataset.open = 'true';
+      drawer!.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('keyfo-no-scroll');
+      panel.focus();
+    }
+
+    function close() {
+      drawer!.dataset.open = 'false';
+      drawer!.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('keyfo-no-scroll');
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    document.addEventListener('afhaal:open', () => open());
+    drawer.addEventListener('click', (e) => {
+      const target = e.target as Element | null;
+      if (!target) return;
+      if (target.closest('[data-afhaal-close]')) {
+        close();
+        return;
+      }
+      const inc = target.closest('[data-afhaal-inc]');
+      const dec = target.closest('[data-afhaal-dec]');
+      const rem = target.closest('[data-afhaal-remove]');
+      if (inc || dec || rem) {
+        const li = target.closest<HTMLLIElement>('.keyfo-afhaal-item');
+        const id = li?.dataset.itemId;
+        if (!id) return;
+        const state = getState();
+        const existing = state.items.find((i) => i.itemId === id);
+        if (!existing) return;
+        if (rem) removeItem(id);
+        else if (inc) updateQuantity(id, existing.quantity + 1);
+        else if (dec) updateQuantity(id, existing.quantity - 1);
+      }
+    });
+
+    itemsEl.addEventListener('input', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.matches('[data-afhaal-item-note]')) return;
+      const li = target.closest<HTMLLIElement>('.keyfo-afhaal-item');
+      const id = li?.dataset.itemId;
+      if (!id) return;
+      setItemNote(id, (target as HTMLInputElement).value);
+    });
+
+    pickupEl.addEventListener('change', () => setPickupTime(pickupEl.value || undefined));
+    nameEl.addEventListener('input', () => setName(nameEl.value));
+    noteEl.addEventListener('input', () => setOrderNote(noteEl.value));
+
+    submitEl.addEventListener('click', () => {
+      const state = getState();
+      if (state.items.length === 0) return;
+      const url = buildWhatsAppUrl(state, locale);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+
+    clearEl.addEventListener('click', () => clearList());
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer!.dataset.open === 'true') close();
+    });
+
+    subscribe((s) => {
+      if (drawer!.dataset.open === 'true') render(s);
+    });
+
+    render(getState());
+  }
+</script>

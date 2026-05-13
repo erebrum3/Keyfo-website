@@ -470,9 +470,317 @@
     box-shadow: 0 -14px 34px rgba(0, 0, 0, 0.28);
   }
 
+  body[data-afhaal-list-active="true"] .keyfo-mobile-cta {
+    display: none;
+  }
+
   .keyfo-mobile-cta-link {
     @apply flex min-h-[3.75rem] items-center justify-center px-2 py-2 text-[0.72rem] font-semibold;
     color: rgba(255, 247, 232, 0.78);
+  }
+
+  body.keyfo-no-scroll {
+    overflow: hidden;
+  }
+
+  /* Afhaal drawer + summary */
+  .keyfo-afhaal-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .keyfo-afhaal-drawer[data-open="true"] {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .keyfo-afhaal-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(12, 8, 6, 0.55);
+    opacity: 0;
+    transition: opacity 220ms ease;
+  }
+
+  .keyfo-afhaal-drawer[data-open="true"] .keyfo-afhaal-backdrop {
+    opacity: 1;
+  }
+
+  .keyfo-afhaal-panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: min(420px, 100vw);
+    background-color: rgb(var(--keyfo-cream, 255 246 229));
+    color: rgb(34, 24, 18);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: -16px 0 48px rgba(0, 0, 0, 0.28);
+  }
+
+  .keyfo-afhaal-drawer[data-open="true"] .keyfo-afhaal-panel {
+    transform: translateX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .keyfo-afhaal-backdrop,
+    .keyfo-afhaal-panel {
+      transition: none;
+    }
+  }
+
+  .keyfo-afhaal-head {
+    @apply flex items-center justify-between px-5 py-4;
+    border-bottom: 1px solid rgba(34, 24, 18, 0.12);
+  }
+
+  .keyfo-afhaal-title {
+    @apply text-xl font-semibold;
+  }
+
+  .keyfo-afhaal-close {
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-full text-xl;
+    color: rgb(34, 24, 18);
+    background-color: transparent;
+    border: 1px solid rgba(34, 24, 18, 0.16);
+    cursor: pointer;
+    transition: background-color 180ms ease;
+  }
+
+  .keyfo-afhaal-close:hover,
+  .keyfo-afhaal-close:focus-visible {
+    background-color: rgba(34, 24, 18, 0.06);
+    outline: none;
+  }
+
+  .keyfo-afhaal-body {
+    @apply flex-1 overflow-y-auto px-5 py-4;
+  }
+
+  .keyfo-afhaal-empty {
+    @apply py-8 text-center text-sm;
+    color: rgba(34, 24, 18, 0.7);
+  }
+
+  .keyfo-afhaal-items {
+    @apply flex flex-col gap-3;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+  }
+
+  .keyfo-afhaal-item {
+    @apply rounded-md p-3;
+    background-color: rgba(34, 24, 18, 0.04);
+    border: 1px solid rgba(34, 24, 18, 0.08);
+  }
+
+  .keyfo-afhaal-item-row {
+    @apply flex items-baseline justify-between gap-3;
+  }
+
+  .keyfo-afhaal-item-name {
+    @apply text-[0.96rem] font-medium;
+  }
+
+  .keyfo-afhaal-item-price {
+    @apply text-[0.95rem] font-semibold tabular-nums;
+    color: rgb(122, 34, 24);
+  }
+
+  .keyfo-afhaal-item-controls {
+    @apply mt-2 flex items-center gap-2;
+  }
+
+  .keyfo-afhaal-qty {
+    @apply inline-flex h-7 w-7 items-center justify-center rounded-md text-sm font-semibold;
+    background-color: rgba(34, 24, 18, 0.08);
+    color: rgb(34, 24, 18);
+    border: 0;
+    cursor: pointer;
+  }
+
+  .keyfo-afhaal-qty:hover,
+  .keyfo-afhaal-qty:focus-visible {
+    background-color: rgba(34, 24, 18, 0.16);
+    outline: none;
+  }
+
+  .keyfo-afhaal-qty-value {
+    @apply min-w-[2ch] text-center text-sm tabular-nums;
+  }
+
+  .keyfo-afhaal-remove {
+    @apply ml-auto inline-flex h-7 w-7 items-center justify-center rounded-md text-sm;
+    background-color: transparent;
+    color: rgba(34, 24, 18, 0.6);
+    border: 0;
+    cursor: pointer;
+  }
+
+  .keyfo-afhaal-remove:hover,
+  .keyfo-afhaal-remove:focus-visible {
+    color: rgb(122, 34, 24);
+    outline: none;
+  }
+
+  .keyfo-afhaal-item-note {
+    @apply mt-2 w-full rounded-md border px-2 py-1 text-[0.85rem];
+    border-color: rgba(34, 24, 18, 0.16);
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .keyfo-afhaal-form {
+    @apply flex flex-col gap-3;
+  }
+
+  .keyfo-afhaal-field {
+    @apply flex flex-col gap-1;
+  }
+
+  .keyfo-afhaal-field-label {
+    @apply text-xs uppercase tracking-[0.12em];
+    color: rgba(34, 24, 18, 0.7);
+  }
+
+  .keyfo-afhaal-select,
+  .keyfo-afhaal-input {
+    @apply rounded-md border px-3 py-2 text-sm;
+    border-color: rgba(34, 24, 18, 0.16);
+    background-color: rgba(255, 255, 255, 0.7);
+    color: rgb(34, 24, 18);
+  }
+
+  .keyfo-afhaal-total {
+    @apply flex items-baseline justify-between pt-2 text-base;
+    border-top: 1px solid rgba(34, 24, 18, 0.12);
+    margin-top: 0.5rem;
+  }
+
+  .keyfo-afhaal-total-label {
+    @apply font-semibold uppercase tracking-[0.08em] text-sm;
+  }
+
+  .keyfo-afhaal-total-value {
+    @apply font-semibold tabular-nums;
+    color: rgb(122, 34, 24);
+  }
+
+  .keyfo-afhaal-total-note {
+    @apply text-xs;
+    color: rgba(34, 24, 18, 0.62);
+  }
+
+  .keyfo-afhaal-disclaimer {
+    @apply mt-3 rounded-md p-3 text-xs leading-relaxed;
+    background-color: rgba(122, 34, 24, 0.06);
+    color: rgba(34, 24, 18, 0.84);
+  }
+
+  .keyfo-afhaal-actions {
+    @apply mt-3 flex flex-col gap-2;
+  }
+
+  .keyfo-afhaal-submit {
+    width: 100%;
+  }
+
+  .keyfo-afhaal-clear {
+    @apply text-xs uppercase tracking-[0.12em];
+    color: rgba(34, 24, 18, 0.62);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    align-self: center;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .keyfo-afhaal-clear:hover,
+  .keyfo-afhaal-clear:focus-visible {
+    color: rgb(122, 34, 24);
+    outline: none;
+  }
+
+  /* Afhaal summary (mobile + desktop) */
+  .keyfo-afhaal-summary {
+    position: fixed;
+    z-index: 45;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3.75rem;
+    padding: 0.75rem 1rem;
+    background-color: rgb(var(--keyfo-amber));
+    color: rgb(var(--keyfo-text-dark));
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 -14px 34px rgba(0, 0, 0, 0.28);
+  }
+
+  .keyfo-afhaal-summary[hidden] {
+    display: none;
+  }
+
+  .keyfo-afhaal-summary-label {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.78rem;
+  }
+
+  .keyfo-afhaal-summary-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.16);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .keyfo-afhaal-summary-sep {
+    opacity: 0.4;
+  }
+
+  .keyfo-afhaal-summary-total {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.92rem;
+  }
+
+  .keyfo-afhaal-summary-cta {
+    margin-left: auto;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (min-width: 640px) {
+    .keyfo-afhaal-summary {
+      left: auto;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      border-radius: 999px;
+      border-top: 0;
+      min-height: 3rem;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+    }
   }
 
   .keyfo-mobile-cta-primary {

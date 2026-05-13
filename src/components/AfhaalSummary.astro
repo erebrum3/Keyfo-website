@@ -1,0 +1,58 @@
+---
+import { CONTENT_NL } from '../data/content.nl';
+import { CONTENT_TR } from '../data/content.tr';
+
+type Props = {
+  locale: 'nl' | 'tr';
+};
+
+const { locale } = Astro.props;
+const c = (locale === 'tr' ? CONTENT_TR : CONTENT_NL).afhaal;
+---
+
+<button
+  type="button"
+  id="afhaal-summary"
+  class="keyfo-afhaal-summary"
+  data-locale={locale}
+  hidden
+  aria-haspopup="dialog"
+  aria-controls="afhaal-drawer"
+>
+  <span class="keyfo-afhaal-summary-label">{c.summaryLabel}</span>
+  <span class="keyfo-afhaal-summary-count" data-afhaal-summary-count>0</span>
+  <span aria-hidden="true" class="keyfo-afhaal-summary-sep">·</span>
+  <span class="keyfo-afhaal-summary-total" data-afhaal-summary-total>—</span>
+  <span class="keyfo-afhaal-summary-cta">{c.submitLabel}</span>
+</button>
+
+<script>
+  import { subscribe, getState, indicativeTotal, type AfhaalState, type Locale } from '../scripts/afhaal-cart';
+
+  const summary = document.getElementById('afhaal-summary');
+  if (summary) {
+    const locale = (summary.getAttribute('data-locale') as Locale) || 'nl';
+    const countEl = summary.querySelector<HTMLElement>('[data-afhaal-summary-count]')!;
+    const totalEl = summary.querySelector<HTMLElement>('[data-afhaal-summary-total]')!;
+    const priceFmt = new Intl.NumberFormat(locale === 'tr' ? 'tr-TR' : 'nl-NL', {
+      style: 'currency',
+      currency: 'EUR'
+    });
+
+    function render(state: AfhaalState) {
+      const count = state.items.reduce((sum, it) => sum + it.quantity, 0);
+      const active = count > 0;
+      summary!.hidden = !active;
+      document.body.dataset.afhaalListActive = active ? 'true' : 'false';
+      countEl.textContent = String(count);
+      totalEl.textContent = priceFmt.format(indicativeTotal(state));
+    }
+
+    summary.addEventListener('click', () => {
+      document.dispatchEvent(new CustomEvent('afhaal:open'));
+    });
+
+    subscribe(render);
+    render(getState());
+  }
+</script>
