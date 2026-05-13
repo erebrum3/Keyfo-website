@@ -7,6 +7,8 @@ export type MenuItem = {
   featured?: boolean;
   descriptionNl?: string;
   descriptionTr?: string;
+  longDescriptionNl?: string;
+  longDescriptionTr?: string;
 };
 
 export type MenuCategory = {
@@ -17,7 +19,7 @@ export type MenuCategory = {
 };
 
 export const MENU = {
-  lastUpdated: '2026-05-12',
+  lastUpdated: '2026-05-13',
   categories: [
     {
       id: 'starters-sides',

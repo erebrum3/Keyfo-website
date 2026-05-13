@@ -1357,6 +1357,54 @@
     color: rgb(122, 34, 24);
   }
 
+  .keyfo-menu-row--with-desc {
+    flex-wrap: wrap;
+  }
+
+  .keyfo-menu-desc {
+    @apply mt-1 text-[0.86rem] leading-relaxed sm:text-[0.9rem];
+    flex-basis: 100%;
+    color: rgba(34, 24, 18, 0.72);
+  }
+
+  .keyfo-breadcrumb {
+    @apply flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.16em];
+    color: rgba(255, 247, 232, 0.6);
+  }
+
+  .keyfo-breadcrumb a {
+    color: rgba(255, 247, 232, 0.78);
+  }
+
+  .keyfo-breadcrumb a:hover {
+    color: rgb(var(--keyfo-amber));
+    text-decoration: underline;
+  }
+
+  .keyfo-breadcrumb [aria-current='page'] {
+    color: rgba(255, 247, 232, 0.92);
+  }
+
+  .keyfo-menu-page-head {
+    @apply mt-6 flex flex-col gap-4 sm:mt-8;
+    max-width: 64rem;
+  }
+
+  .keyfo-menu-page-title {
+    @apply text-4xl sm:text-5xl;
+    color: rgba(255, 247, 232, 0.96);
+  }
+
+  .keyfo-menu-page-lead {
+    @apply text-base sm:text-lg;
+    color: rgba(255, 247, 232, 0.78);
+    max-width: 52rem;
+  }
+
+  .keyfo-menu-page-ctas {
+    @apply mt-2 flex flex-wrap items-center gap-3;
+  }
+
   .keyfo-menu-notes {
     @apply space-y-2 border-t pt-6 text-sm;
     border-color: rgba(34, 24, 18, 0.14);

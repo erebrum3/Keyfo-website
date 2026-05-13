@@ -43,6 +43,24 @@ export const CONTENT_TR = {
     whatsappLabel: 'WhatsApp ile Gel-Al',
     callLabel: 'Hemen Ara'
   },
+  menuPage: {
+    pageTitle: 'Menü | KEYFO Restaurant & Cafe Schiedam',
+    pageDescription:
+      "Schiedam'daki KEYFO Restaurant & Cafe'nin tüm menüsünü inceleyin: döner, kapsalon, ızgara çeşitleri, Türk pizzası, mantı, tatlılar ve içecekler. WhatsApp veya telefonla gel-al.",
+    eyebrow: 'Menü',
+    heading: 'KEYFO menüsü',
+    lead:
+      "Schiedam merkezde sunduğumuz Türk yemeklerinin tam listesi: döner, ızgara çeşitleri, Türk pizzası, mantı, kapsalon, tatlılar ve içecekler. Fiyatlar değişebilir.",
+    breadcrumbHome: 'Anasayfa',
+    breadcrumbMenu: 'Menü',
+    teaserHeading: 'Menüyü keşfedin',
+    teaserEyebrow: 'Menü',
+    teaserLead:
+      'Sekiz kategoride Türk yemekleri — açıklamalı tam menüyü inceleyin.',
+    teaserCtaLabel: 'Tüm menüyü görüntüle',
+    teaserItemCountLabel: (n: number) => `${n} ürün`,
+    teaserPriceRangeLabel: 'Başlangıç'
+  },
   galleryHeading: 'Fotoğraflar',
   galleryEyebrow: 'KEYFO’dan',
   galleryIntro: 'KEYFO Restaurant & Cafe’den kareler.',

@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import MenuSection from '../../components/MenuSection.astro';
+import Footer from '../../components/Footer.astro';
+
+import { BUSINESS } from '../../data/business';
+import { MENU, formatPriceEurNl, type MenuItem } from '../../data/menu';
+import { CONTENT_TR } from '../../data/content.tr';
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const CANONICAL = `${SITE_ORIGIN}/tr/menu/`;
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
+
+const menuSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Menu',
+  '@id': `${SITE_ORIGIN}/#menu-tr`,
+  name: 'KEYFO menüsü',
+  url: CANONICAL,
+  inLanguage: 'tr',
+  hasMenuSection: MENU.categories.map((cat) => ({
+    '@type': 'MenuSection',
+    name: cat.titleTr,
+    hasMenuItem: (cat.items as MenuItem[]).map((item) => ({
+      '@type': 'MenuItem',
+      name: item.nameTr,
+      ...(item.longDescriptionTr || item.descriptionTr
+        ? { description: item.longDescriptionTr ?? item.descriptionTr }
+        : {}),
+      offers: {
+        '@type': 'Offer',
+        price: item.priceEur.toFixed(2),
+        priceCurrency: 'EUR',
+        availability: 'https://schema.org/InStock'
+      }
+    }))
+  }))
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: CONTENT_TR.menuPage.breadcrumbHome,
+      item: BUSINESS.website.trUrl
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: CONTENT_TR.menuPage.breadcrumbMenu,
+      item: CANONICAL
+    }
+  ]
+};
+---
+
+<BaseLayout
+  lang="tr"
+  title={CONTENT_TR.menuPage.pageTitle}
+  description={CONTENT_TR.menuPage.pageDescription}
+  skipLinkLabel={CONTENT_TR.skipLinkLabel}
+  canonicalUrl={CANONICAL}
+  alternateLanguages={[
+    { hreflang: 'nl-NL', href: `${SITE_ORIGIN}/menu/` },
+    { hreflang: 'tr-TR', href: CANONICAL },
+    { hreflang: 'x-default', href: `${SITE_ORIGIN}/menu/` }
+  ]}
+  openGraph={{
+    type: 'website',
+    locale: 'tr_TR',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO menüsü Schiedam',
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageSecureUrl: ogImageUrl
+  }}
+  jsonLd={[menuSchema, breadcrumbSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_TR.mobileCtaAriaLabel,
+    labels: CONTENT_TR.mobileCtaShort,
+    hrefs: {
+      menu: '#menu',
+      whatsapp: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill),
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="NL"
+    langAriaLabel="Hollandacaya geç"
+    langHref="/menu/"
+    navAriaLabel={CONTENT_TR.navAriaLabel}
+    nav={{
+      menu: CONTENT_TR.nav.menu,
+      popular: 'Popüler',
+      gallery: 'Galeri',
+      location: CONTENT_TR.nav.konum
+    }}
+    cta={{
+      whatsapp: { label: 'Sipariş', href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill) },
+      phone: { label: 'Ara', href: BUSINESS.phoneTel }
+    }}
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <nav aria-label="Breadcrumb" class="keyfo-breadcrumb">
+          <a href="/tr/">{CONTENT_TR.menuPage.breadcrumbHome}</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">{CONTENT_TR.menuPage.breadcrumbMenu}</span>
+        </nav>
+        <header class="keyfo-menu-page-head">
+          <span class="keyfo-menu-eyebrow">{CONTENT_TR.menuPage.eyebrow}</span>
+          <h1 class="keyfo-menu-page-title keyfo-brand">{CONTENT_TR.menuPage.heading}</h1>
+          <p class="keyfo-menu-page-lead">{CONTENT_TR.menuPage.lead}</p>
+          <div class="keyfo-menu-page-ctas">
+            <a class="keyfo-btn-primary" href={BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill)} target="_blank" rel="noopener noreferrer">
+              {CONTENT_TR.ctas.whatsappPickup}
+            </a>
+            <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel}>
+              {CONTENT_TR.ctas.callNow}
+            </a>
+          </div>
+        </header>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <MenuSection
+          heading={CONTENT_TR.menuHeading}
+          categories={MENU.categories.map((c) => ({ ...c, title: c.titleTr }))}
+          formatPrice={formatPriceEurNl}
+          lastUpdatedLabel={CONTENT_TR.menuLastUpdatedLabel}
+          lastUpdated={MENU.lastUpdated}
+          notes={[CONTENT_TR.priceNote, CONTENT_TR.allergenNote]}
+          showDescriptions={true}
+        />
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_TR.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefon/WhatsApp: ${BUSINESS.phone}`,
+      `E-posta: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'Eylemler',
+        links: [
+          { label: CONTENT_TR.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill), isExternal: true },
+          { label: CONTENT_TR.ctas.callNow, href: BUSINESS.phoneTel },
+          { label: CONTENT_TR.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
+          { label: CONTENT_TR.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true }
+        ]
+      },
+      {
+        label: 'Sosyal',
+        links: [
+          { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true },
+          { label: 'TikTok', href: BUSINESS.social.tiktok, isExternal: true },
+          { label: 'X', href: BUSINESS.social.twitter, isExternal: true },
+          { label: 'Pinterest', href: BUSINESS.social.pinterest, isExternal: true }
+        ]
+      },
+      {
+        label: 'Yerel',
+        links: [
+          { label: 'Schiedam Türk restoranı', href: '/tr/turks-restoran-schiedam/' }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>

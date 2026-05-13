@@ -12,11 +12,19 @@ type Props = {
   lastUpdatedLabel: string;
   lastUpdated: string;
   notes: string[];
+  showDescriptions?: boolean;
 };
 
-const { heading, eyebrow, categories, formatPrice, lastUpdatedLabel, lastUpdated, notes } = Astro.props;
+const { heading, eyebrow, categories, formatPrice, lastUpdatedLabel, lastUpdated, notes, showDescriptions = false } = Astro.props;
 
 const isTr = Astro.url.pathname.startsWith('/tr');
+const descKey = isTr ? 'Tr' : 'Nl';
+const getDescription = (item: typeof categories[number]['items'][number]) => {
+  if (!showDescriptions) return null;
+  const longKey = `longDescription${descKey}` as 'longDescriptionNl' | 'longDescriptionTr';
+  const shortKey = `description${descKey}` as 'descriptionNl' | 'descriptionTr';
+  return item[longKey] ?? item[shortKey] ?? null;
+};
 const localeContent = isTr ? CONTENT_TR : CONTENT_NL;
 const menuCta = localeContent.menuCta;
 const whatsappHref = BUSINESS.getWhatsAppUrl(localeContent.whatsappPrefill);
@@ -57,13 +65,17 @@ const callHref = BUSINESS.phoneTel;
         </header>
 
         <ul class="keyfo-menu-list">
-          {cat.items.map((item) => (
-            <li class="keyfo-menu-row">
-              <span class="keyfo-menu-name">{item.name}</span>
-              <span aria-hidden="true" class="keyfo-menu-leader"></span>
-              <span class="keyfo-menu-price keyfo-tabular">{formatPrice(item.priceEur)}</span>
-            </li>
-          ))}
+          {cat.items.map((item) => {
+            const desc = getDescription(item);
+            return (
+              <li class={`keyfo-menu-row${desc ? ' keyfo-menu-row--with-desc' : ''}`}>
+                <span class="keyfo-menu-name">{item.name}</span>
+                <span aria-hidden="true" class="keyfo-menu-leader"></span>
+                <span class="keyfo-menu-price keyfo-tabular">{formatPrice(item.priceEur)}</span>
+                {desc ? <p class="keyfo-menu-desc">{desc}</p> : null}
+              </li>
+            );
+          })}
         </ul>
       </section>
     ))}

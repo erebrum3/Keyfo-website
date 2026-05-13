@@ -43,6 +43,24 @@ export const CONTENT_NL = {
     whatsappLabel: 'WhatsApp voor afhalen',
     callLabel: 'Bel direct'
   },
+  menuPage: {
+    pageTitle: 'Menu | KEYFO Restaurant & Cafe Schiedam',
+    pageDescription:
+      'Bekijk het volledige menu van KEYFO Restaurant & Cafe in Schiedam: döner, kapsalon, grillgerechten, Turkse pizza, manti, desserts en dranken. Afhalen via WhatsApp of telefoon.',
+    eyebrow: 'Menukaart',
+    heading: 'Menu van KEYFO',
+    lead:
+      'Een overzicht van onze Turkse gerechten in Schiedam Centrum: döner, grillgerechten, Turkse pizza, mantı, kapsalon, desserts en dranken. Prijzen kunnen wijzigen.',
+    breadcrumbHome: 'Home',
+    breadcrumbMenu: 'Menu',
+    teaserHeading: 'Ontdek het menu',
+    teaserEyebrow: 'Menu',
+    teaserLead:
+      'Acht categorieën met Turkse gerechten — bekijk de volledige menukaart met beschrijvingen.',
+    teaserCtaLabel: 'Volledig menu bekijken',
+    teaserItemCountLabel: (n: number) => `${n} gerecht${n === 1 ? '' : 'en'}`,
+    teaserPriceRangeLabel: 'Vanaf'
+  },
   galleryHeading: 'Foto’s',
   galleryEyebrow: 'Bij KEYFO',
   galleryIntro: 'Een kijkje bij KEYFO Restaurant & Cafe.',
