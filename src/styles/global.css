@@ -2395,10 +2395,10 @@
     inset: 0;
     z-index: -2;
     background-image: url('/assets/keyfo/footer-closing.webp');
-    background-position: left center;
+    background-position: right center;
     background-size: cover;
     background-repeat: no-repeat;
-    opacity: 0.68;
+    opacity: 0.95;
     pointer-events: none;
   }
 
@@ -2408,20 +2408,20 @@
     z-index: -1;
     pointer-events: none;
     background:
-      linear-gradient(90deg, rgba(12, 8, 6, 0.22) 0%, rgba(12, 8, 6, 0.76) 45%, rgba(12, 8, 6, 0.96) 100%),
-      linear-gradient(180deg, rgba(12, 8, 6, 0.15) 0%, rgba(12, 8, 6, 1) 65%);
+      linear-gradient(90deg, rgba(12, 8, 6, 0.94) 0%, rgba(12, 8, 6, 0.55) 55%, rgba(12, 8, 6, 0) 100%),
+      linear-gradient(180deg, rgba(12, 8, 6, 0.10) 0%, rgba(12, 8, 6, 0.35) 100%);
   }
 
   @media (max-width: 768px) {
     .keyfo-footer-bg {
       background-image: url('/assets/keyfo/footer-closing-mobile.webp');
-      background-position: 18% top;
-      background-size: 100% auto;
-      opacity: 0.35;
+      background-position: 82% top;
+      background-size: cover;
+      opacity: 0.20;
     }
     .keyfo-footer-overlay {
       background:
-        linear-gradient(180deg, rgba(12, 8, 6, 0.35) 0%, rgba(12, 8, 6, 0.92) 35%, rgba(12, 8, 6, 1) 60%);
+        linear-gradient(180deg, rgba(12, 8, 6, 0.70) 0%, rgba(12, 8, 6, 0.90) 50%, rgba(12, 8, 6, 0.97) 100%);
     }
   }
 
