@@ -149,6 +149,7 @@ export const CONTENT_TR = {
     addLabel: 'Ekle',
     addedLabel: 'Eklendi',
     summaryLabel: 'Gel-al listesi',
+    summaryItemsUnit: 'ürün',
     messageIntro: 'Merhaba KEYFO, gel-al için bir mesaj göndermek istiyorum.',
     messageNameLabel: 'İsim',
     messagePickupLabel: 'Almak istediğim saat',

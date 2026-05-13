@@ -30,8 +30,8 @@ const localeContent = isTr ? CONTENT_TR : CONTENT_NL;
 const menuCta = localeContent.menuCta;
 const whatsappHref = BUSINESS.getWhatsAppUrl(localeContent.whatsappPrefill);
 const callHref = BUSINESS.phoneTel;
-const addLabel = localeContent.afhaal.addLabel;
-const addedLabel = localeContent.afhaal.addedLabel;
+const addLabel = `+ ${localeContent.afhaal.addLabel}`;
+const addedLabel = `✓ ${localeContent.afhaal.addedLabel}`;
 ---
 
 <section id="menu" aria-labelledby="menu-heading" class="keyfo-menu-frame">

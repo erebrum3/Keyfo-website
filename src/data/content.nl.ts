@@ -149,6 +149,7 @@ export const CONTENT_NL = {
     addLabel: 'Toevoegen',
     addedLabel: 'Toegevoegd',
     summaryLabel: 'Afhaallijst',
+    summaryItemsUnit: 'items',
     messageIntro: 'Hallo KEYFO, ik wil graag een afhaalbericht sturen.',
     messageNameLabel: 'Naam',
     messagePickupLabel: 'Gewenste afhaaltijd',

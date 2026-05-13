@@ -15,15 +15,16 @@ const c = (locale === 'tr' ? CONTENT_TR : CONTENT_NL).afhaal;
   id="afhaal-summary"
   class="keyfo-afhaal-summary"
   data-locale={locale}
+  data-items-unit={c.summaryItemsUnit}
   hidden
   aria-haspopup="dialog"
   aria-controls="afhaal-drawer"
 >
   <span class="keyfo-afhaal-summary-label">{c.summaryLabel}</span>
-  <span class="keyfo-afhaal-summary-count" data-afhaal-summary-count>0</span>
+  <span aria-hidden="true" class="keyfo-afhaal-summary-sep">·</span>
+  <span class="keyfo-afhaal-summary-count" data-afhaal-summary-count>0 {c.summaryItemsUnit}</span>
   <span aria-hidden="true" class="keyfo-afhaal-summary-sep">·</span>
   <span class="keyfo-afhaal-summary-total" data-afhaal-summary-total>—</span>
-  <span class="keyfo-afhaal-summary-cta">{c.submitLabel}</span>
 </button>
 
 <script>
@@ -39,12 +40,14 @@ const c = (locale === 'tr' ? CONTENT_TR : CONTENT_NL).afhaal;
       currency: 'EUR'
     });
 
+    const unit = summary.getAttribute('data-items-unit') || 'items';
+
     function render(state: AfhaalState) {
       const count = state.items.reduce((sum, it) => sum + it.quantity, 0);
       const active = count > 0;
       summary!.hidden = !active;
       document.body.dataset.afhaalListActive = active ? 'true' : 'false';
-      countEl.textContent = String(count);
+      countEl.textContent = `${count} ${unit}`;
       totalEl.textContent = priceFmt.format(indicativeTotal(state));
     }
 
