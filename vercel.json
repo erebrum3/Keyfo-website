@@ -1,5 +1,9 @@
 {
   "redirects": [
-    { "source": "/tr", "destination": "/tr/", "permanent": true }
+    { "source": "/tr", "destination": "/tr/", "permanent": true },
+    { "source": "/menu", "destination": "/menu/", "permanent": true },
+    { "source": "/tr/menu", "destination": "/tr/menu/", "permanent": true },
+    { "source": "/turks-restaurant-schiedam", "destination": "/turks-restaurant-schiedam/", "permanent": true },
+    { "source": "/tr/turks-restoran-schiedam", "destination": "/tr/turks-restoran-schiedam/", "permanent": true }
   ]
 }
