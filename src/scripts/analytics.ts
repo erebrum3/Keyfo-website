@@ -12,18 +12,6 @@ declare global {
   }
 }
 
-const CONSENT_KEY = 'keyfo_cookie_consent';
-
-function hasAnalyticsConsent(): boolean {
-  if (typeof window === 'undefined') return false;
-  try {
-    if (window.keyfoCookieConsent) return window.keyfoCookieConsent.isAccepted();
-    return window.localStorage.getItem(CONSENT_KEY) === 'accepted';
-  } catch {
-    return false;
-  }
-}
-
 type EventParams = Record<string, unknown>;
 
 function basePageParams(): EventParams {
@@ -36,7 +24,6 @@ function basePageParams(): EventParams {
 
 export function trackEvent(name: string, params: EventParams = {}): void {
   if (typeof window === 'undefined') return;
-  if (!hasAnalyticsConsent()) return;
   try {
     const gtag = window.gtag;
     if (typeof gtag !== 'function') return;

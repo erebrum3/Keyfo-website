@@ -707,6 +707,108 @@
     outline: none;
   }
 
+  /* Reservation + groepsbestelling request forms */
+  .keyfo-req-container {
+    max-width: 48rem;
+  }
+
+  .keyfo-req-form {
+    @apply flex flex-col gap-4;
+  }
+
+  .keyfo-req-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .keyfo-req-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .keyfo-req-field-wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .keyfo-req-field {
+    @apply flex flex-col gap-1;
+  }
+
+  .keyfo-req-fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .keyfo-req-label {
+    @apply text-xs uppercase tracking-[0.12em];
+    color: rgba(34, 24, 18, 0.7);
+  }
+
+  .keyfo-req-input,
+  .keyfo-req-select {
+    @apply rounded-md border px-3 py-2 text-sm;
+    border-color: rgba(34, 24, 18, 0.16);
+    background-color: rgba(255, 255, 255, 0.8);
+    color: rgb(34, 24, 18);
+    font: inherit;
+    width: 100%;
+  }
+
+  .keyfo-req-input:focus,
+  .keyfo-req-select:focus {
+    outline: 2px solid rgba(122, 34, 24, 0.4);
+    outline-offset: 1px;
+  }
+
+  .keyfo-req-radios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 0.25rem;
+  }
+
+  .keyfo-req-radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: rgb(34, 24, 18);
+    cursor: pointer;
+  }
+
+  .keyfo-req-error {
+    @apply text-xs;
+    color: rgb(122, 34, 24);
+  }
+
+  .keyfo-req-availability {
+    @apply text-sm;
+    color: rgba(34, 24, 18, 0.78);
+  }
+
+  .keyfo-req-disclaimer {
+    @apply rounded-md p-3 text-xs leading-relaxed;
+    background-color: rgba(122, 34, 24, 0.06);
+    color: rgba(34, 24, 18, 0.84);
+  }
+
+  .keyfo-req-actions {
+    @apply flex flex-col gap-2;
+  }
+
+  .keyfo-req-submit {
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .keyfo-req-submit {
+      width: auto;
+      align-self: flex-start;
+    }
+  }
+
   /* Afhaal summary (mobile + desktop) */
   .keyfo-afhaal-summary {
     position: fixed;
@@ -2401,6 +2503,22 @@
     border-top: 1px solid rgba(255, 247, 232, 0.12);
     box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(8px);
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 220ms ease-out, opacity 220ms ease-out;
+  }
+
+  .keyfo-cookie-consent.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .keyfo-cookie-consent {
+      transition: none;
+      transform: none;
+      opacity: 1;
+    }
   }
 
   body[data-cookie-banner="open"] .keyfo-mobile-cta {
