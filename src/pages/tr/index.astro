@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
+import HeroQuickAccess from '../../components/HeroQuickAccess.astro';
 import InfoBar from '../../components/InfoBar.astro';
 import PopularDishes from '../../components/PopularDishes.astro';
 import MenuTeaser from '../../components/MenuTeaser.astro';
@@ -138,6 +139,7 @@ const faqSchema = {
       gallery: 'Galeri',
       location: CONTENT_TR.nav.konum
     }}
+    reserveLink={{ label: 'Rezervasyon', href: '/tr/rezervasyon/' }}
     cta={{
       whatsapp: { label: 'Gel-Al', href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill) },
       phone: { label: 'Ara', href: BUSINESS.phoneTel }
@@ -181,6 +183,8 @@ const faqSchema = {
         </div>
       </div>
     </section>
+
+    <HeroQuickAccess locale="tr" />
 
     <InfoBar
       ariaLabel="Temel bilgiler"

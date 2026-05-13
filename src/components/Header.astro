@@ -15,10 +15,11 @@ type Props = {
     whatsapp: { label: string; href: string };
     phone: { label: string; href: string };
   };
+  reserveLink?: { label: string; href: string };
   linkPrefix?: string;
 };
 
-const { brand, langLabel, langAriaLabel, langHref, navAriaLabel, nav, cta, linkPrefix = '' } = Astro.props;
+const { brand, langLabel, langAriaLabel, langHref, navAriaLabel, nav, cta, reserveLink, linkPrefix = '' } = Astro.props;
 const langSwitchAriaLabel = langAriaLabel ?? langLabel;
 const brandMain = brand.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || brand;
 const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
@@ -39,6 +40,9 @@ const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
         <a href={`${linkPrefix}#populair`} class="keyfo-header-link">{nav.popular}</a>
         <a href={`${linkPrefix}#gallery`} class="keyfo-header-link">{nav.gallery}</a>
         <a href={`${linkPrefix}#location`} class="keyfo-header-link">{nav.location}</a>
+        {reserveLink ? (
+          <a href={reserveLink.href} class="keyfo-header-link" data-event="click_reservation" data-cta-location="header">{reserveLink.label}</a>
+        ) : null}
       </nav>
 
       <div class="keyfo-header-actions">

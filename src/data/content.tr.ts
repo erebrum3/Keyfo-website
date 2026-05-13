@@ -105,7 +105,11 @@ export const CONTENT_TR = {
     },
     {
       q: 'Rezervasyon yapabilir miyim?',
-      a: 'Evet, telefon veya WhatsApp ile rezervasyon yapılabilir.'
+      a: 'Evet. /tr/rezervasyon/ üzerinden rezervasyon talebi gönderebilir veya bizi arayabilirsiniz. Uygunluğu WhatsApp üzerinden onaylarız.'
+    },
+    {
+      q: 'Toplu sipariş alıyor musunuz?',
+      a: 'Aile, ofis veya etkinlik için büyük siparişler için /tr/toplu-siparis-schiedam/ üzerinden talep gönderebilirsiniz. Detayları WhatsApp üzerinden onaylarız.'
     },
     {
       q: 'Hangi ödeme yöntemleri kabul ediliyor?',
@@ -158,5 +162,140 @@ export const CONTENT_TR = {
     messageTotalLabel: 'Toplam',
     messageDisclaimer:
       'KEYFO WhatsApp üzerinden onayından sonra kesinleşir.'
+  },
+  // Anasayfa hero hızlı erişim kartları. Form doldurmadan direkt WhatsApp
+  // mesajı açar. KEYFO yalnızca gel-al çalışır — adrese teslim / catering
+  // delivery / bezorgen dili burada YASAK.
+  heroQuickAccess: {
+    eyebrow: 'Hızlı talep',
+    group: {
+      title: 'Toplu gel-al talebi',
+      text: 'Birden fazla kişi için gel-al hazırlığı mı istiyorsunuz? Tarih, saat ve kişi sayısını WhatsApp üzerinden iletin.',
+      cta: 'Toplu talep gönder',
+      whatsappPrefill:
+        'Merhaba KEYFO, bir toplu gel-al talebi göndermek istiyorum. Lütfen WhatsApp üzerinden onaylar mısınız?'
+    },
+    reserve: {
+      title: 'Rezervasyon',
+      text: 'Aile veya arkadaşlarla gelecekseniz masa talebinizi WhatsApp üzerinden kolayca iletin.',
+      cta: 'Masa talebi gönder',
+      whatsappPrefill:
+        'Merhaba KEYFO, bir rezervasyon talebi göndermek istiyorum. Lütfen WhatsApp üzerinden onaylar mısınız?'
+    },
+    disclaimer:
+      'Talebiniz, KEYFO WhatsApp üzerinden onayladıktan sonra kesinleşir.'
+  },
+  // Rezervasyon talebi — yalnızca WhatsApp mesajı hazırlar.
+  // Uygunluk WhatsApp üzerinden onaylanır. Otomatik onay yoktur.
+  reservation: {
+    pageTitle: 'Rezervasyon talebi | KEYFO Restaurant & Cafe Schiedam',
+    pageDescription:
+      "Schiedam'daki KEYFO Restaurant & Cafe için masa rezervasyon talebi gönderin. Uygunluk WhatsApp üzerinden onaylanır.",
+    eyebrow: 'Rezervasyon',
+    heading: 'Rezervasyon talebi',
+    lead:
+      'Bilgilerinizi doldurun ve talebi WhatsApp ile gönderin. Uygunluğu en kısa sürede onaylarız.',
+    breadcrumbHome: 'Anasayfa',
+    breadcrumbCurrent: 'Rezervasyon',
+    form: {
+      nameLabel: 'İsim',
+      namePlaceholder: 'Adınız',
+      phoneLabel: 'Telefon numarası',
+      phonePlaceholder: '+31 6 …',
+      peopleLabel: 'Kişi sayısı',
+      dateLabel: 'Tarih',
+      timeLabel: 'Saat',
+      noteLabel: 'Not (opsiyonel)',
+      notePlaceholder: 'Örn. cam kenarı, çocuk sandalyesi, doğum günü',
+      submitLabel: 'Talebi WhatsApp ile gönder',
+      availabilityNote: 'Uygunluk WhatsApp üzerinden onaylanır.',
+      disclaimer:
+        'Rezervasyonunuz, KEYFO WhatsApp üzerinden onayladıktan sonra kesinleşir.',
+      errors: {
+        nameRequired: 'Lütfen adınızı girin.',
+        phoneRequired: 'Lütfen telefon numaranızı girin.',
+        peopleRequired: 'Lütfen kişi sayısını seçin.',
+        dateRequired: 'Lütfen bir tarih seçin.',
+        dateInPast: 'Lütfen ileri bir tarih seçin.',
+        timeRequired: 'Lütfen bir saat seçin.'
+      }
+    },
+    message: {
+      intro: 'Merhaba KEYFO, bir rezervasyon talebi göndermek istiyorum.',
+      nameLabel: 'İsim',
+      phoneLabel: 'Telefon',
+      peopleLabel: 'Kişi sayısı',
+      dateLabel: 'Tarih',
+      timeLabel: 'Saat',
+      noteLabel: 'Not',
+      closing: 'Lütfen WhatsApp üzerinden onaylar mısınız?'
+    }
+  },
+  // Toplu sipariş talebi — yalnızca WhatsApp mesajı hazırlar.
+  // Uygunluk ve detaylar WhatsApp üzerinden onaylanır.
+  groepsbestelling: {
+    pageTitle: 'Toplu sipariş talebi Schiedam | KEYFO Restaurant & Cafe',
+    pageDescription:
+      "Schiedam'daki KEYFO Restaurant & Cafe için toplu sipariş talebi gönderin. Aile, ofis ve etkinlikler için uygundur. Onay WhatsApp üzerinden yapılır.",
+    eyebrow: 'Toplu sipariş',
+    heading: 'Toplu sipariş talebi',
+    lead:
+      'Aile, ofis veya bir etkinlik için büyük bir sipariş mi? Bilgileri doldurun ve talebi WhatsApp ile gönderin.',
+    breadcrumbHome: 'Anasayfa',
+    breadcrumbCurrent: 'Toplu sipariş',
+    form: {
+      peopleLabel: 'Kişi sayısı',
+      dateLabel: 'Tarih',
+      timeLabel: 'İstenen saat',
+      orderTypeLabel: 'Nasıl almak istersiniz?',
+      orderTypeOptions: {
+        afhalen: 'Gel-al',
+        eatIn: 'Restoranda yemek',
+        unsure: 'Henüz emin değilim'
+      },
+      dishesLabel: 'Hangi ürünleri istersiniz?',
+      dishesPlaceholder: 'Örn. döner, kapsalon, grill mix, vejetaryen',
+      budgetLabel: 'Kişi başı bütçe (opsiyonel)',
+      budgetOptions: {
+        notSpecified: 'Belirtmek istemiyorum',
+        low: '€10 – €15',
+        mid: '€15 – €20',
+        high: '€20 ve üzeri'
+      },
+      nameLabel: 'İsim',
+      namePlaceholder: 'Adınız',
+      phoneLabel: 'Telefon numarası',
+      phonePlaceholder: '+31 6 …',
+      noteLabel: 'Not (opsiyonel)',
+      notePlaceholder: 'Alerjiler, özel istekler, etkinlik bilgisi',
+      submitLabel: 'Talebi WhatsApp ile gönder',
+      availabilityNote: 'Uygunluk ve detaylar WhatsApp üzerinden onaylanır.',
+      disclaimer:
+        'Talebiniz, KEYFO WhatsApp üzerinden onayladıktan sonra kesinleşir.',
+      errors: {
+        peopleRequired: 'Lütfen kişi sayısını girin.',
+        peopleMin: 'Toplu sipariş için lütfen en az minimum kişi sayısını seçin.',
+        dateRequired: 'Lütfen bir tarih seçin.',
+        dateInPast: 'Lütfen ileri bir tarih seçin.',
+        timeRequired: 'Lütfen bir saat seçin.',
+        orderTypeRequired: 'Lütfen nasıl almak istediğinizi seçin.',
+        dishesRequired: 'Lütfen istediğiniz ürünleri belirtin.',
+        nameRequired: 'Lütfen adınızı girin.',
+        phoneRequired: 'Lütfen telefon numaranızı girin.'
+      }
+    },
+    message: {
+      intro: 'Merhaba KEYFO, bir toplu sipariş talebi göndermek istiyorum.',
+      peopleLabel: 'Kişi sayısı',
+      dateLabel: 'Tarih',
+      timeLabel: 'İstenen saat',
+      orderTypeLabel: 'Tip',
+      dishesLabel: 'İstenen ürünler',
+      budgetLabel: 'Kişi başı bütçe',
+      nameLabel: 'İsim',
+      phoneLabel: 'Telefon',
+      noteLabel: 'Not',
+      closing: 'Lütfen WhatsApp üzerinden onaylar mısınız?'
+    }
   }
 } as const;

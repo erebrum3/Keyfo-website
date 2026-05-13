@@ -1,0 +1,281 @@
+---
+import { BUSINESS } from '../data/business';
+import { CONTENT_NL } from '../data/content.nl';
+import { CONTENT_TR } from '../data/content.tr';
+
+type Props = {
+  locale: 'nl' | 'tr';
+  sourcePage: string;
+};
+
+const { locale, sourcePage } = Astro.props;
+const c = (locale === 'tr' ? CONTENT_TR : CONTENT_NL).groepsbestelling;
+const f = c.form;
+
+const phonePattern = '^[+0-9 ()-]{6,20}$';
+
+const orderTypeKeys: Array<keyof typeof f.orderTypeOptions> = ['afhalen', 'eatIn', 'unsure'];
+const budgetKeys: Array<keyof typeof f.budgetOptions> = ['notSpecified', 'low', 'mid', 'high'];
+---
+
+<form class="keyfo-req-form" data-keyfo-catering data-locale={locale} novalidate>
+  <input type="hidden" data-source-page value={sourcePage} />
+
+  <div class="keyfo-req-grid">
+    <label class="keyfo-req-field">
+      <span class="keyfo-req-label">{f.peopleLabel}</span>
+      <input
+        type="number"
+        class="keyfo-req-input"
+        name="people"
+        min={BUSINESS.groepsbestelling.minPeople}
+        max={BUSINESS.groepsbestelling.maxPeople}
+        step="1"
+        inputmode="numeric"
+        required
+      />
+      <span class="keyfo-req-error" data-error-for="people" hidden></span>
+    </label>
+
+    <label class="keyfo-req-field">
+      <span class="keyfo-req-label">{f.dateLabel}</span>
+      <input type="date" class="keyfo-req-input" name="date" required />
+      <span class="keyfo-req-error" data-error-for="date" hidden></span>
+    </label>
+
+    <label class="keyfo-req-field">
+      <span class="keyfo-req-label">{f.timeLabel}</span>
+      <input type="time" class="keyfo-req-input" name="time" required />
+      <span class="keyfo-req-error" data-error-for="time" hidden>{f.errors.timeRequired}</span>
+    </label>
+
+    <fieldset class="keyfo-req-field keyfo-req-field-wide keyfo-req-fieldset">
+      <legend class="keyfo-req-label">{f.orderTypeLabel}</legend>
+      <div class="keyfo-req-radios">
+        {orderTypeKeys.map((key) => (
+          <label class="keyfo-req-radio">
+            <input type="radio" name="orderType" value={key} required />
+            <span>{f.orderTypeOptions[key]}</span>
+          </label>
+        ))}
+      </div>
+      <span class="keyfo-req-error" data-error-for="orderType" hidden>{f.errors.orderTypeRequired}</span>
+    </fieldset>
+
+    <label class="keyfo-req-field keyfo-req-field-wide">
+      <span class="keyfo-req-label">{f.dishesLabel}</span>
+      <textarea
+        class="keyfo-req-input"
+        name="dishes"
+        rows="3"
+        maxlength="500"
+        placeholder={f.dishesPlaceholder}
+        required
+      ></textarea>
+      <span class="keyfo-req-error" data-error-for="dishes" hidden>{f.errors.dishesRequired}</span>
+    </label>
+
+    <label class="keyfo-req-field">
+      <span class="keyfo-req-label">{f.budgetLabel}</span>
+      <select class="keyfo-req-select" name="budget">
+        {budgetKeys.map((key) => (
+          <option value={key} selected={key === 'notSpecified'}>{f.budgetOptions[key]}</option>
+        ))}
+      </select>
+    </label>
+
+    <label class="keyfo-req-field">
+      <span class="keyfo-req-label">{f.nameLabel}</span>
+      <input
+        type="text"
+        class="keyfo-req-input"
+        name="name"
+        autocomplete="name"
+        maxlength="80"
+        placeholder={f.namePlaceholder}
+        required
+      />
+      <span class="keyfo-req-error" data-error-for="name" hidden>{f.errors.nameRequired}</span>
+    </label>
+
+    <label class="keyfo-req-field">
+      <span class="keyfo-req-label">{f.phoneLabel}</span>
+      <input
+        type="tel"
+        class="keyfo-req-input"
+        name="phone"
+        autocomplete="tel"
+        maxlength="20"
+        placeholder={f.phonePlaceholder}
+        pattern={phonePattern}
+        required
+      />
+      <span class="keyfo-req-error" data-error-for="phone" hidden>{f.errors.phoneRequired}</span>
+    </label>
+
+    <label class="keyfo-req-field keyfo-req-field-wide">
+      <span class="keyfo-req-label">{f.noteLabel}</span>
+      <textarea
+        class="keyfo-req-input"
+        name="note"
+        rows="3"
+        maxlength="240"
+        placeholder={f.notePlaceholder}
+      ></textarea>
+    </label>
+  </div>
+
+  <p class="keyfo-req-availability">{f.availabilityNote}</p>
+  <p class="keyfo-req-disclaimer">{f.disclaimer}</p>
+
+  <div class="keyfo-req-actions">
+    <button type="submit" class="keyfo-btn-primary keyfo-req-submit">
+      {f.submitLabel}
+    </button>
+  </div>
+</form>
+
+<script>
+  import { trackEvent } from '../scripts/analytics';
+  import { BUSINESS } from '../data/business';
+  import { CONTENT_NL } from '../data/content.nl';
+  import { CONTENT_TR } from '../data/content.tr';
+
+  const WEEKDAY_TO_INDEX: Record<string, number> = {
+    Sunday: 0, Monday: 1, Tuesday: 2, Wednesday: 3,
+    Thursday: 4, Friday: 5, Saturday: 6
+  };
+  const CLOSED_DAY_INDICES = new Set(
+    (BUSINESS.openingHours.closedDays as readonly string[]).map((d) => WEEKDAY_TO_INDEX[d])
+  );
+
+  function todayIsoLocal(): string {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  }
+  function addDaysIso(base: string, days: number): string {
+    const [y, m, d] = base.split('-').map(Number);
+    const dt = new Date(y, m - 1, d);
+    dt.setDate(dt.getDate() + days);
+    const yy = dt.getFullYear();
+    const mm = String(dt.getMonth() + 1).padStart(2, '0');
+    const dd = String(dt.getDate()).padStart(2, '0');
+    return `${yy}-${mm}-${dd}`;
+  }
+
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-keyfo-catering]');
+  forms.forEach((form) => {
+    const locale = (form.getAttribute('data-locale') === 'tr' ? 'tr' : 'nl') as 'nl' | 'tr';
+    const c = (locale === 'tr' ? CONTENT_TR : CONTENT_NL).groepsbestelling;
+    const f = c.form;
+    const m = c.message;
+
+    const sourcePage = form.querySelector<HTMLInputElement>('[data-source-page]')?.value ?? '';
+
+    const dateInput = form.querySelector<HTMLInputElement>('input[name="date"]')!;
+    const today = todayIsoLocal();
+    const minLeadDays = Math.ceil(BUSINESS.groepsbestelling.minLeadHours / 24);
+    dateInput.min = addDaysIso(today, minLeadDays);
+    dateInput.max = addDaysIso(today, BUSINESS.groepsbestelling.maxAdvanceDays);
+
+    function showError(name: string, msg: string) {
+      const el = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+      if (!el) return;
+      el.textContent = msg;
+      el.hidden = false;
+    }
+    function clearErrors() {
+      form.querySelectorAll<HTMLElement>('[data-error-for]').forEach((el) => {
+        el.hidden = true;
+      });
+    }
+
+    function validate(): { ok: true; data: Record<string, string> } | { ok: false } {
+      clearErrors();
+      const fd = new FormData(form);
+      const people = String(fd.get('people') ?? '').trim();
+      const date = String(fd.get('date') ?? '').trim();
+      const time = String(fd.get('time') ?? '').trim();
+      const orderType = String(fd.get('orderType') ?? '').trim();
+      const dishes = String(fd.get('dishes') ?? '').trim();
+      const budget = String(fd.get('budget') ?? 'notSpecified').trim();
+      const name = String(fd.get('name') ?? '').trim();
+      const phone = String(fd.get('phone') ?? '').trim();
+      const note = String(fd.get('note') ?? '').trim();
+
+      let ok = true;
+      const peopleNum = Number(people);
+      if (!people || !Number.isFinite(peopleNum)) {
+        showError('people', f.errors.peopleRequired); ok = false;
+      } else if (peopleNum < BUSINESS.groepsbestelling.minPeople) {
+        showError('people', f.errors.peopleMin); ok = false;
+      }
+      if (!date) {
+        showError('date', f.errors.dateRequired); ok = false;
+      } else if (date < today) {
+        showError('date', f.errors.dateInPast); ok = false;
+      } else {
+        const [y, mo, d] = date.split('-').map(Number);
+        const dayIndex = new Date(y, mo - 1, d).getDay();
+        if (CLOSED_DAY_INDICES.has(dayIndex)) {
+          showError('date', f.availabilityNote); ok = false;
+        }
+      }
+      if (!time) { showError('time', f.errors.timeRequired); ok = false; }
+      if (!orderType) { showError('orderType', f.errors.orderTypeRequired); ok = false; }
+      if (!dishes) { showError('dishes', f.errors.dishesRequired); ok = false; }
+      if (!name) { showError('name', f.errors.nameRequired); ok = false; }
+      if (!phone) { showError('phone', f.errors.phoneRequired); ok = false; }
+
+      if (!ok) return { ok: false };
+      return { ok: true, data: { people, date, time, orderType, dishes, budget, name, phone, note } };
+    }
+
+    function orderTypeLabel(key: string): string {
+      const map = f.orderTypeOptions as Record<string, string>;
+      return map[key] ?? key;
+    }
+    function budgetLabel(key: string): string {
+      const map = f.budgetOptions as Record<string, string>;
+      return map[key] ?? key;
+    }
+
+    function buildMessage(d: Record<string, string>): string {
+      const lines: string[] = [m.intro, ''];
+      lines.push(`${m.peopleLabel}: ${d.people}`);
+      lines.push(`${m.dateLabel}: ${d.date}`);
+      lines.push(`${m.timeLabel}: ${d.time}`);
+      lines.push(`${m.orderTypeLabel}: ${orderTypeLabel(d.orderType)}`);
+      lines.push(`${m.dishesLabel}: ${d.dishes}`);
+      if (d.budget && d.budget !== 'notSpecified') {
+        lines.push(`${m.budgetLabel}: ${budgetLabel(d.budget)}`);
+      }
+      lines.push(`${m.nameLabel}: ${d.name}`);
+      lines.push(`${m.phoneLabel}: ${d.phone}`);
+      if (d.note) lines.push(`${m.noteLabel}: ${d.note}`);
+      lines.push('', m.closing);
+      return lines.join('\n');
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const result = validate();
+      if (!result.ok) return;
+
+      trackEvent('submit_group_order_whatsapp', {
+        language: locale,
+        people_count: Number(result.data.people) || undefined,
+        order_type: result.data.orderType,
+        budget_range: result.data.budget,
+        source_page: sourcePage
+      });
+
+      const message = buildMessage(result.data);
+      const url = BUSINESS.getWhatsAppUrl(message);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  });
+</script>

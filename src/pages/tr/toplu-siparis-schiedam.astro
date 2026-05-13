@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CateringForm from '../../components/CateringForm.astro';
+
+import { BUSINESS } from '../../data/business';
+import { CONTENT_TR } from '../../data/content.tr';
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const CANONICAL = `${SITE_ORIGIN}/tr/toplu-siparis-schiedam/`;
+const NL_URL = `${SITE_ORIGIN}/groepsbestelling-schiedam/`;
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
+
+const c = CONTENT_TR.groepsbestelling;
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${CANONICAL}#webpage`,
+  url: CANONICAL,
+  name: c.pageTitle,
+  description: c.pageDescription,
+  inLanguage: 'tr',
+  isPartOf: { '@id': `${SITE_ORIGIN}/#website` }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: c.breadcrumbHome, item: BUSINESS.website.trUrl },
+    { '@type': 'ListItem', position: 2, name: c.breadcrumbCurrent, item: CANONICAL }
+  ]
+};
+---
+
+<BaseLayout
+  lang="tr"
+  title={c.pageTitle}
+  description={c.pageDescription}
+  skipLinkLabel={CONTENT_TR.skipLinkLabel}
+  canonicalUrl={CANONICAL}
+  alternateLanguages={[
+    { hreflang: 'tr-TR', href: CANONICAL },
+    { hreflang: 'nl-NL', href: NL_URL },
+    { hreflang: 'x-default', href: NL_URL }
+  ]}
+  openGraph={{
+    type: 'website',
+    locale: 'tr_TR',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO Restaurant & Cafe Schiedam',
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageSecureUrl: ogImageUrl
+  }}
+  jsonLd={[webPageSchema, breadcrumbSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_TR.mobileCtaAriaLabel,
+    labels: CONTENT_TR.mobileCtaShort,
+    hrefs: {
+      menu: '/tr/menu/',
+      whatsapp: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill),
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="NL"
+    langAriaLabel="Hollandacaya geç"
+    langHref={NL_URL}
+    navAriaLabel={CONTENT_TR.navAriaLabel}
+    nav={{
+      menu: CONTENT_TR.nav.menu,
+      popular: 'Popüler',
+      gallery: 'Galeri',
+      location: CONTENT_TR.nav.konum
+    }}
+    cta={{
+      whatsapp: { label: 'Gel-Al', href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill) },
+      phone: { label: 'Ara', href: BUSINESS.phoneTel }
+    }}
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <nav aria-label="Breadcrumb" class="keyfo-breadcrumb">
+          <a href="/tr/">{c.breadcrumbHome}</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">{c.breadcrumbCurrent}</span>
+        </nav>
+        <header class="keyfo-menu-page-head">
+          <span class="keyfo-menu-eyebrow">{c.eyebrow}</span>
+          <h1 class="keyfo-menu-page-title keyfo-brand">{c.heading}</h1>
+          <p class="keyfo-menu-page-lead">{c.lead}</p>
+        </header>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container keyfo-req-container">
+        <CateringForm locale="tr" sourcePage="tr/toplu-siparis-schiedam" />
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_TR.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefon/WhatsApp: ${BUSINESS.phone}`,
+      `E-posta: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'İşlemler',
+        links: [
+          { label: CONTENT_TR.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_TR.whatsappPrefill), isExternal: true },
+          { label: CONTENT_TR.ctas.callNow, href: BUSINESS.phoneTel },
+          { label: CONTENT_TR.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true }
+        ]
+      },
+      {
+        label: 'Yerel',
+        links: [
+          { label: 'Schiedam Türk restoranı', href: '/tr/turks-restoran-schiedam/' },
+          { label: 'Rezervasyon', href: '/tr/rezervasyon/' },
+          { label: 'Toplu sipariş', href: '/tr/toplu-siparis-schiedam/' }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>

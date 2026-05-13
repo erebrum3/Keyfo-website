@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import HeroQuickAccess from '../components/HeroQuickAccess.astro';
 import InfoBar from '../components/InfoBar.astro';
 import PopularDishes from '../components/PopularDishes.astro';
 import MenuTeaser from '../components/MenuTeaser.astro';
@@ -138,6 +139,7 @@ const faqSchema = {
       gallery: 'Galerij',
       location: CONTENT_NL.nav.locatie
     }}
+    reserveLink={{ label: 'Reserveren', href: '/reserveren/' }}
     cta={{
       whatsapp: { label: 'Afhalen', href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill) },
       phone: { label: 'Bellen', href: BUSINESS.phoneTel }
@@ -181,6 +183,8 @@ const faqSchema = {
         </div>
       </div>
     </section>
+
+    <HeroQuickAccess locale="nl" />
 
     <InfoBar
       ariaLabel="Kerninfo"

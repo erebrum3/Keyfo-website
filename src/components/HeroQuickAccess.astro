@@ -1,0 +1,53 @@
+---
+import { BUSINESS } from '../data/business';
+import { CONTENT_NL } from '../data/content.nl';
+import { CONTENT_TR } from '../data/content.tr';
+
+type Props = {
+  locale: 'nl' | 'tr';
+};
+
+const { locale } = Astro.props;
+const c = (locale === 'tr' ? CONTENT_TR : CONTENT_NL).heroQuickAccess;
+
+const groupHref = BUSINESS.getWhatsAppUrl(c.group.whatsappPrefill);
+const reserveHref = BUSINESS.getWhatsAppUrl(c.reserve.whatsappPrefill);
+---
+
+<aside class="keyfo-hero-quick" aria-label={c.eyebrow}>
+  <div class="keyfo-container">
+    <div class="keyfo-hero-quick-grid">
+      <article class="keyfo-hero-quick-card">
+        <h2 class="keyfo-hero-quick-title">{c.group.title}</h2>
+        <p class="keyfo-hero-quick-text">{c.group.text}</p>
+        <a
+          class="keyfo-btn-primary keyfo-hero-quick-cta"
+          href={groupHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-event="click_group_order"
+          data-cta-location="hero_quick_access"
+        >
+          {c.group.cta}
+        </a>
+      </article>
+
+      <article class="keyfo-hero-quick-card">
+        <h2 class="keyfo-hero-quick-title">{c.reserve.title}</h2>
+        <p class="keyfo-hero-quick-text">{c.reserve.text}</p>
+        <a
+          class="keyfo-btn-primary keyfo-hero-quick-cta"
+          href={reserveHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-event="click_reservation"
+          data-cta-location="hero_quick_access"
+        >
+          {c.reserve.cta}
+        </a>
+      </article>
+    </div>
+
+    <p class="keyfo-hero-quick-disclaimer">{c.disclaimer}</p>
+  </div>
+</aside>

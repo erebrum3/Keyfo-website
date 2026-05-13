@@ -61,5 +61,24 @@ export const BUSINESS = {
     lastOrderBeforeCloseMinutes: 30,
     maxQuantityPerItem: 20,
     extraClosedDates: [] as readonly string[]
+  },
+  // Reservation request defaults. NOT an automated reservation system —
+  // the site only prepares a WhatsApp message; availability is confirmed
+  // by KEYFO via WhatsApp. Placeholders until owner sign-off.
+  reservation: {
+    minLeadHours: 2,
+    maxAdvanceDays: 30,
+    partySizeMin: 1,
+    partySizeMax: 12,
+    partySizeDefault: 2
+  },
+  // Group order (groepsbestelling / toplu sipariş) request defaults.
+  // Same principle: WhatsApp message builder only. No delivery to external
+  // location is offered until owner confirms.
+  groepsbestelling: {
+    minPeople: 10,
+    maxPeople: 80,
+    minLeadHours: 24,
+    maxAdvanceDays: 60
   }
 } as const;

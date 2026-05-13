@@ -105,7 +105,11 @@ export const CONTENT_NL = {
     },
     {
       q: 'Kan ik reserveren?',
-      a: 'Ja, reserveren is mogelijk via telefoon of WhatsApp.'
+      a: 'Ja. Stuur een reserveringsaanvraag via /reserveren/ of bel ons. We bevestigen de beschikbaarheid via WhatsApp.'
+    },
+    {
+      q: 'Doen jullie groepsbestellingen?',
+      a: 'Voor een grotere bestelling (familie, kantoor, gelegenheid) kun je een groepsaanvraag indienen via /groepsbestelling-schiedam/. We bevestigen de details via WhatsApp.'
     },
     {
       q: 'Welke betaalmethoden accepteren jullie?',
@@ -158,5 +162,140 @@ export const CONTENT_NL = {
     messageTotalLabel: 'Totaal',
     messageDisclaimer:
       'Pas definitief na bevestiging van KEYFO via WhatsApp.'
+  },
+  // Homepage hero quick-access cards. Direct WhatsApp prefilled messages
+  // for fast users who don't want to fill the full form. KEYFO is afhalen-
+  // only — no delivery / catering delivery / bezorgen wording allowed here.
+  heroQuickAccess: {
+    eyebrow: 'Snel aanvragen',
+    group: {
+      title: 'Groepsaanvraag',
+      text: 'Voor meerdere personen afhalen? Stuur je gewenste datum, tijd en aantal personen via WhatsApp.',
+      cta: 'Groepsaanvraag sturen',
+      whatsappPrefill:
+        'Hallo KEYFO, ik wil graag een groepsaanvraag voor afhalen versturen. Graag bevestigen via WhatsApp.'
+    },
+    reserve: {
+      title: 'Reserveren',
+      text: 'Kom je langs met familie of vrienden? Vraag eenvoudig een tafel aan via WhatsApp.',
+      cta: 'Tafel aanvragen',
+      whatsappPrefill:
+        'Hallo KEYFO, ik wil graag een reserveringsaanvraag versturen. Graag bevestigen via WhatsApp.'
+    },
+    disclaimer:
+      'Je aanvraag is pas definitief nadat KEYFO je via WhatsApp heeft bevestigd.'
+  },
+  // Reserveringsaanvraag — bereidt alleen een WhatsApp-bericht voor.
+  // KEYFO bevestigt beschikbaarheid via WhatsApp. Geen automatische bevestiging.
+  reservation: {
+    pageTitle: 'Reservering aanvragen | KEYFO Restaurant & Cafe Schiedam',
+    pageDescription:
+      'Vraag een tafelreservering aan bij KEYFO Restaurant & Cafe in Schiedam. We bevestigen de beschikbaarheid via WhatsApp.',
+    eyebrow: 'Reservering',
+    heading: 'Reserveringsaanvraag',
+    lead:
+      'Vul je gegevens in en verstuur de aanvraag via WhatsApp. We bevestigen de beschikbaarheid zo snel mogelijk.',
+    breadcrumbHome: 'Home',
+    breadcrumbCurrent: 'Reserveren',
+    form: {
+      nameLabel: 'Naam',
+      namePlaceholder: 'Je naam',
+      phoneLabel: 'Telefoonnummer',
+      phonePlaceholder: '+31 6 …',
+      peopleLabel: 'Aantal personen',
+      dateLabel: 'Datum',
+      timeLabel: 'Tijd',
+      noteLabel: 'Opmerking (optioneel)',
+      notePlaceholder: 'Bijv. bij het raam, kinderstoel, verjaardag',
+      submitLabel: 'Aanvraag via WhatsApp versturen',
+      availabilityNote: 'We bevestigen de beschikbaarheid via WhatsApp.',
+      disclaimer:
+        'Je reservering is pas definitief nadat KEYFO je via WhatsApp heeft bevestigd.',
+      errors: {
+        nameRequired: 'Vul je naam in.',
+        phoneRequired: 'Vul je telefoonnummer in.',
+        peopleRequired: 'Kies het aantal personen.',
+        dateRequired: 'Kies een datum.',
+        dateInPast: 'Kies een datum in de toekomst.',
+        timeRequired: 'Kies een tijd.'
+      }
+    },
+    message: {
+      intro: 'Hallo KEYFO, ik wil graag een reserveringsaanvraag versturen.',
+      nameLabel: 'Naam',
+      phoneLabel: 'Telefoon',
+      peopleLabel: 'Aantal personen',
+      dateLabel: 'Datum',
+      timeLabel: 'Tijd',
+      noteLabel: 'Opmerking',
+      closing: 'Graag bevestigen via WhatsApp.'
+    }
+  },
+  // Groepsaanvraag — bereidt alleen een WhatsApp-bericht voor.
+  // KEYFO bevestigt beschikbaarheid en details via WhatsApp.
+  groepsbestelling: {
+    pageTitle: 'Groepsbestelling aanvragen Schiedam | KEYFO Restaurant & Cafe',
+    pageDescription:
+      'Vraag een groepsbestelling aan bij KEYFO Restaurant & Cafe in Schiedam. Geschikt voor families, kantoor en evenementen. Bevestiging via WhatsApp.',
+    eyebrow: 'Groepsbestelling',
+    heading: 'Groepsaanvraag',
+    lead:
+      'Een grotere bestelling voor familie, kantoor of een gelegenheid? Vul de gegevens in en verstuur de aanvraag via WhatsApp.',
+    breadcrumbHome: 'Home',
+    breadcrumbCurrent: 'Groepsbestelling',
+    form: {
+      peopleLabel: 'Aantal personen',
+      dateLabel: 'Datum',
+      timeLabel: 'Gewenste tijd',
+      orderTypeLabel: 'Hoe wil je het ontvangen?',
+      orderTypeOptions: {
+        afhalen: 'Afhalen',
+        eatIn: 'Eten in restaurant',
+        unsure: 'Nog niet zeker'
+      },
+      dishesLabel: 'Welke gerechten wens je?',
+      dishesPlaceholder: 'Bijv. döner, kapsalon, grill mix, vegetarisch',
+      budgetLabel: 'Budget per persoon (optioneel)',
+      budgetOptions: {
+        notSpecified: 'Liever niet aangeven',
+        low: '€10 – €15',
+        mid: '€15 – €20',
+        high: '€20 of meer'
+      },
+      nameLabel: 'Naam',
+      namePlaceholder: 'Je naam',
+      phoneLabel: 'Telefoonnummer',
+      phonePlaceholder: '+31 6 …',
+      noteLabel: 'Opmerking (optioneel)',
+      notePlaceholder: 'Allergieën, gelegenheid, andere wensen',
+      submitLabel: 'Aanvraag via WhatsApp versturen',
+      availabilityNote: 'We bevestigen de beschikbaarheid en details via WhatsApp.',
+      disclaimer:
+        'Je aanvraag is pas definitief nadat KEYFO je via WhatsApp heeft bevestigd.',
+      errors: {
+        peopleRequired: 'Vul het aantal personen in.',
+        peopleMin: 'Voor groepsaanvragen graag minimaal het minimum aantal personen.',
+        dateRequired: 'Kies een datum.',
+        dateInPast: 'Kies een datum in de toekomst.',
+        timeRequired: 'Kies een tijd.',
+        orderTypeRequired: 'Kies hoe je het wilt ontvangen.',
+        dishesRequired: 'Geef aan welke gerechten je wenst.',
+        nameRequired: 'Vul je naam in.',
+        phoneRequired: 'Vul je telefoonnummer in.'
+      }
+    },
+    message: {
+      intro: 'Hallo KEYFO, ik wil graag een groepsaanvraag versturen.',
+      peopleLabel: 'Aantal personen',
+      dateLabel: 'Datum',
+      timeLabel: 'Gewenste tijd',
+      orderTypeLabel: 'Type',
+      dishesLabel: 'Gewenste gerechten',
+      budgetLabel: 'Budget per persoon',
+      nameLabel: 'Naam',
+      phoneLabel: 'Telefoon',
+      noteLabel: 'Opmerking',
+      closing: 'Graag bevestigen via WhatsApp.'
+    }
   }
 } as const;
