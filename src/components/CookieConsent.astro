@@ -1,0 +1,132 @@
+---
+type Props = {
+  lang: 'nl' | 'tr';
+  ga4MeasurementId?: string;
+};
+
+const { lang, ga4MeasurementId } = Astro.props;
+
+const copy = lang === 'tr'
+  ? {
+      message:
+        'Web sitesinin düzgün çalışması için gerekli çerezleri kullanıyoruz. İzin verirsen, web sitesinin nasıl kullanıldığını anonim olarak ölçmek için analitik çerezler de kullanırız.',
+      accept: 'Kabul et',
+      reject: 'Reddet',
+      ariaLabel: 'Çerez tercihleri'
+    }
+  : {
+      message:
+        'Wij gebruiken noodzakelijke cookies om de website goed te laten werken. Met jouw toestemming gebruiken we ook analytische cookies om anoniem te meten hoe de website wordt gebruikt.',
+      accept: 'Accepteren',
+      reject: 'Weigeren',
+      ariaLabel: 'Cookievoorkeuren'
+    };
+---
+
+<div
+  id="keyfo-cookie-consent"
+  class="keyfo-cookie-consent"
+  role="region"
+  aria-label={copy.ariaLabel}
+  data-ga4-id={ga4MeasurementId ?? ''}
+  hidden
+>
+  <div class="keyfo-cookie-consent-inner">
+    <p class="keyfo-cookie-consent-text">{copy.message}</p>
+    <div class="keyfo-cookie-consent-actions">
+      <button type="button" class="keyfo-cookie-btn keyfo-cookie-btn-reject" data-keyfo-cookie-action="reject">
+        {copy.reject}
+      </button>
+      <button type="button" class="keyfo-cookie-btn keyfo-cookie-btn-accept" data-keyfo-cookie-action="accept">
+        {copy.accept}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var STORAGE_KEY = 'keyfo_cookie_consent';
+    var banner = document.getElementById('keyfo-cookie-consent');
+    if (!banner) return;
+    var ga4Id = banner.getAttribute('data-ga4-id') || '';
+
+    function readChoice() {
+      try {
+        return localStorage.getItem(STORAGE_KEY);
+      } catch (_e) {
+        return null;
+      }
+    }
+    function writeChoice(v) {
+      try {
+        localStorage.setItem(STORAGE_KEY, v);
+      } catch (_e) {
+        // ignore
+      }
+    }
+    function showBanner() {
+      banner.hidden = false;
+      document.body.setAttribute('data-cookie-banner', 'open');
+    }
+    function hideBanner() {
+      banner.hidden = true;
+      document.body.removeAttribute('data-cookie-banner');
+    }
+
+    var ga4Loaded = false;
+    function loadGa4() {
+      if (ga4Loaded || !ga4Id) return;
+      ga4Loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga4Id);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', ga4Id, { anonymize_ip: true });
+    }
+
+    window.keyfoCookieConsent = {
+      get: readChoice,
+      open: showBanner,
+      isAccepted: function () { return readChoice() === 'accepted'; }
+    };
+
+    banner.addEventListener('click', function (e) {
+      var t = e.target;
+      if (!(t instanceof Element)) return;
+      var btn = t.closest('[data-keyfo-cookie-action]');
+      if (!btn) return;
+      var action = btn.getAttribute('data-keyfo-cookie-action');
+      if (action === 'accept') {
+        writeChoice('accepted');
+        loadGa4();
+        hideBanner();
+        document.dispatchEvent(new CustomEvent('keyfo:consent-changed', { detail: { consent: 'accepted' } }));
+      } else if (action === 'reject') {
+        writeChoice('rejected');
+        hideBanner();
+        document.dispatchEvent(new CustomEvent('keyfo:consent-changed', { detail: { consent: 'rejected' } }));
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      var t = e.target;
+      if (!(t instanceof Element)) return;
+      var trigger = t.closest('[data-keyfo-cookie-open]');
+      if (!trigger) return;
+      e.preventDefault();
+      showBanner();
+    });
+
+    var initial = readChoice();
+    if (initial === 'accepted') {
+      loadGa4();
+    } else if (initial !== 'rejected') {
+      showBanner();
+    }
+  })();
+</script>

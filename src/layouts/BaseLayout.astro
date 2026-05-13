@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 type MobileCta = {
   ariaLabel: string;
@@ -129,16 +130,6 @@ const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
 
-    {ga4MeasurementId ? (
-      <>
-        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}></script>
-        <script
-          is:inline
-          define:vars={{ ga4MeasurementId }}
-          set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config',ga4MeasurementId,{anonymize_ip:true});`}
-        />
-      </>
-    ) : null}
   </head>
   <body class="min-h-screen pb-24 sm:pb-0">
     <a
@@ -162,6 +153,8 @@ const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
         </div>
       </nav>
     ) : null}
+
+    <CookieConsent lang={lang === 'tr' ? 'tr' : 'nl'} ga4MeasurementId={ga4MeasurementId} />
 
     <script>
       import '../scripts/reveal.ts';

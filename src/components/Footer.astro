@@ -15,6 +15,8 @@ type Props = {
 const { brand, napLines, tagline, columns = [], legalLine } = Astro.props;
 const brandMain = brand.replace(/\s*Restaurant\s*&\s*Cafe\s*/i, '').trim() || brand;
 const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
+const isTr = Astro.url.pathname.startsWith('/tr');
+const cookieSettingsLabel = isTr ? 'Çerez ayarları' : 'Cookie instellingen';
 ---
 
 <footer class="keyfo-footer keyfo-footer--with-image keyfo-band-dark">
@@ -65,5 +67,11 @@ const brandSub = brandMain === brand ? '' : brand.replace(brandMain, '').trim();
     </div>
 
     {legalLine ? <p class="keyfo-footer-legal">{legalLine}</p> : null}
+
+    <p class="keyfo-footer-cookie">
+      <button type="button" class="keyfo-footer-cookie-btn" data-keyfo-cookie-open>
+        {cookieSettingsLabel}
+      </button>
+    </p>
   </div>
 </footer>

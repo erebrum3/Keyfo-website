@@ -2369,6 +2369,86 @@
     background-color: rgba(var(--keyfo-amber), 0.85);
     box-shadow: 0 0 0 4px rgb(var(--keyfo-text-dark));
   }
+
+  .keyfo-footer-cookie {
+    @apply mt-3 text-center text-xs;
+    color: rgba(255, 247, 232, 0.55);
+  }
+
+  .keyfo-footer-cookie-btn {
+    @apply inline-flex items-center underline underline-offset-4;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .keyfo-footer-cookie-btn:hover {
+    color: rgb(var(--keyfo-amber));
+  }
+
+  .keyfo-cookie-consent {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+    background-color: rgba(12, 8, 6, 0.96);
+    color: rgb(var(--keyfo-text-light));
+    border-top: 1px solid rgba(255, 247, 232, 0.12);
+    box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+  }
+
+  body[data-cookie-banner="open"] .keyfo-mobile-cta {
+    bottom: 100%;
+  }
+
+  .keyfo-cookie-consent[hidden] {
+    display: none;
+  }
+
+  .keyfo-cookie-consent-inner {
+    @apply mx-auto flex w-full max-w-[86rem] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .keyfo-cookie-consent-text {
+    @apply text-sm leading-snug;
+    color: rgba(255, 247, 232, 0.88);
+    margin: 0;
+  }
+
+  .keyfo-cookie-consent-actions {
+    @apply flex shrink-0 gap-2;
+  }
+
+  .keyfo-cookie-btn {
+    @apply inline-flex items-center justify-center rounded px-4 py-2 text-sm font-semibold;
+    border: 1px solid rgba(255, 247, 232, 0.25);
+    cursor: pointer;
+  }
+
+  .keyfo-cookie-btn-reject {
+    background: transparent;
+    color: rgb(var(--keyfo-text-light));
+  }
+
+  .keyfo-cookie-btn-reject:hover {
+    background-color: rgba(255, 247, 232, 0.08);
+  }
+
+  .keyfo-cookie-btn-accept {
+    background-color: rgb(var(--keyfo-amber));
+    color: rgb(var(--keyfo-text-dark));
+    border-color: rgb(var(--keyfo-amber));
+  }
+
+  .keyfo-cookie-btn-accept:hover {
+    filter: brightness(1.05);
+  }
 }
 
 @layer utilities {
