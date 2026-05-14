@@ -14,7 +14,6 @@ const copy = lang === 'tr'
       whatsapp: 'WhatsApp',
       call: 'Ara',
       route: 'Yol tarifi',
-      continue: 'Siteyi görüntüle',
       ariaLabel: 'KEYFO bakım modu bildirimi'
     }
   : {
@@ -25,7 +24,6 @@ const copy = lang === 'tr'
       whatsapp: 'WhatsApp',
       call: 'Bel ons',
       route: 'Route bekijken',
-      continue: 'Website bekijken',
       ariaLabel: 'KEYFO onderhoudsmelding'
     };
 
@@ -119,15 +117,6 @@ const routeHref = 'https://www.google.com/maps/dir/?api=1&destination=Broersveld
       </a>
     </div>
 
-    <button
-      type="button"
-      id="keyfo-maintenance-continue"
-      class="keyfo-maintenance-continue"
-      data-event="click_maintenance_continue"
-      data-cta-location="maintenance_overlay"
-    >
-      {copy.continue}
-    </button>
   </div>
 </div>
 
@@ -264,24 +253,6 @@ const routeHref = 'https://www.google.com/maps/dir/?api=1&destination=Broersveld
     justify-content: center;
   }
 
-  .keyfo-maintenance-continue {
-    align-self: flex-start;
-    margin-top: 0.9rem;
-    background: transparent;
-    border: none;
-    padding: 0;
-    color: rgba(255, 246, 229, 0.6);
-    font-size: 0.85rem;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-  .keyfo-maintenance-continue:hover {
-    color: #fff6e5;
-  }
-
   @media (max-width: 640px) {
     .keyfo-maintenance-bg img {
       object-position: 70% 88%;
@@ -303,7 +274,6 @@ const routeHref = 'https://www.google.com/maps/dir/?api=1&destination=Broersveld
     if (!overlay) return;
 
     const PREVIEW_KEY = 'keyfo_preview';
-    const SESSION_KEY = 'keyfo_maintenance_dismissed';
 
     let bypass = false;
     try {
@@ -312,9 +282,6 @@ const routeHref = 'https://www.google.com/maps/dir/?api=1&destination=Broersveld
         localStorage.setItem(PREVIEW_KEY, '1');
       }
       if (localStorage.getItem(PREVIEW_KEY) === '1') {
-        bypass = true;
-      }
-      if (sessionStorage.getItem(SESSION_KEY) === '1') {
         bypass = true;
       }
     } catch {
@@ -338,19 +305,6 @@ const routeHref = 'https://www.google.com/maps/dir/?api=1&destination=Broersveld
       } catch {
         // tracking must never break the page.
       }
-    }
-
-    const continueBtn = document.getElementById('keyfo-maintenance-continue');
-    if (continueBtn) {
-      continueBtn.addEventListener('click', () => {
-        try {
-          sessionStorage.setItem(SESSION_KEY, '1');
-        } catch {
-          // ignore.
-        }
-        overlay.setAttribute('data-hidden', 'true');
-        document.documentElement.style.overflow = '';
-      });
     }
   })();
 </script>
