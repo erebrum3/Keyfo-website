@@ -1,0 +1,356 @@
+---
+type Props = {
+  lang: 'nl' | 'tr';
+};
+
+const { lang } = Astro.props;
+
+const copy = lang === 'tr'
+  ? {
+      eyebrow: 'KEYFO Restaurant & Cafe',
+      heading: 'KEYFO yenileniyor.',
+      body: 'Web sitemiz yeni bir deneyim için geçici olarak bakım modunda.',
+      reassurance: 'Restoran her zamanki gibi açık — bize WhatsApp veya telefon üzerinden ulaşabilirsiniz.',
+      whatsapp: 'WhatsApp',
+      call: 'Ara',
+      route: 'Yol tarifi',
+      continue: 'Siteyi görüntüle',
+      ariaLabel: 'KEYFO bakım modu bildirimi'
+    }
+  : {
+      eyebrow: 'KEYFO Restaurant & Cafe',
+      heading: 'KEYFO wordt vernieuwd.',
+      body: 'De website is tijdelijk in onderhoudsmodus terwijl we werken aan een nieuwe ervaring.',
+      reassurance: 'Het restaurant is gewoon open — bereik ons direct via WhatsApp of telefoon.',
+      whatsapp: 'WhatsApp',
+      call: 'Bel ons',
+      route: 'Route bekijken',
+      continue: 'Website bekijken',
+      ariaLabel: 'KEYFO onderhoudsmelding'
+    };
+
+const whatsappHref = 'https://wa.me/31641014926';
+const phoneHref = 'tel:+31641014926';
+const routeHref = 'https://www.google.com/maps/dir/?api=1&destination=Broersveld%20103%2C%203111%20LE%20Schiedam';
+---
+
+<div
+  id="keyfo-maintenance-overlay"
+  class="keyfo-maintenance-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label={copy.ariaLabel}
+  data-hidden="false"
+>
+  <picture class="keyfo-maintenance-bg" aria-hidden="true">
+    <source
+      type="image/avif"
+      srcset="/assets/keyfo/maintenance-bg-480.avif 480w, /assets/keyfo/maintenance-bg-768.avif 768w, /assets/keyfo/maintenance-bg-1280.avif 1280w, /assets/keyfo/maintenance-bg-1920.avif 1920w"
+      sizes="100vw"
+    />
+    <source
+      type="image/webp"
+      srcset="/assets/keyfo/maintenance-bg-480.webp 480w, /assets/keyfo/maintenance-bg-768.webp 768w, /assets/keyfo/maintenance-bg-1280.webp 1280w, /assets/keyfo/maintenance-bg-1920.webp 1920w"
+      sizes="100vw"
+    />
+    <img
+      src="/assets/keyfo/maintenance-bg-1280.jpg"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      width="2912"
+      height="1632"
+    />
+  </picture>
+
+  <div class="keyfo-maintenance-scrim" aria-hidden="true"></div>
+
+  <div class="keyfo-maintenance-content">
+    <p class="keyfo-maintenance-eyebrow">{copy.eyebrow}</p>
+    <h1 class="keyfo-maintenance-heading">{copy.heading}</h1>
+    <p class="keyfo-maintenance-body">{copy.body}</p>
+    <p class="keyfo-maintenance-reassurance">{copy.reassurance}</p>
+
+    <div class="keyfo-maintenance-ctas">
+      <a
+        class="keyfo-maintenance-cta keyfo-maintenance-cta-primary"
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener"
+        data-event="click_maintenance_whatsapp"
+        data-cta-location="maintenance_overlay"
+      >
+        <span aria-hidden="true" class="keyfo-maintenance-cta-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.37 0 .02 5.36.02 11.99a11.94 11.94 0 0 0 1.6 5.99L0 24l6.18-1.62a11.97 11.97 0 0 0 5.82 1.49h.01c6.62 0 11.98-5.36 11.98-11.99 0-3.2-1.25-6.21-3.47-8.4zM12 21.79h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.67.96.98-3.58-.23-.37a9.81 9.81 0 0 1-1.5-5.23c0-5.43 4.42-9.85 9.85-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.96c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.37c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.16-.17.2-.34.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.45-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.66-1.6-.91-2.18-.24-.57-.49-.49-.66-.5h-.56c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.09 3.2 5.07 4.49.71.3 1.26.49 1.69.62.71.23 1.35.2 1.86.12.57-.08 1.75-.71 2-1.4.25-.69.25-1.27.17-1.4-.07-.13-.27-.2-.57-.34z"/>
+          </svg>
+        </span>
+        <span>{copy.whatsapp}</span>
+      </a>
+      <a
+        class="keyfo-maintenance-cta"
+        href={phoneHref}
+        data-event="click_maintenance_phone"
+        data-cta-location="maintenance_overlay"
+      >
+        <span aria-hidden="true" class="keyfo-maintenance-cta-icon">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.91.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </span>
+        <span>{copy.call}</span>
+      </a>
+      <a
+        class="keyfo-maintenance-cta"
+        href={routeHref}
+        target="_blank"
+        rel="noopener"
+        data-event="click_maintenance_route"
+        data-cta-location="maintenance_overlay"
+      >
+        <span aria-hidden="true" class="keyfo-maintenance-cta-icon">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </span>
+        <span>{copy.route}</span>
+      </a>
+    </div>
+
+    <button
+      type="button"
+      id="keyfo-maintenance-continue"
+      class="keyfo-maintenance-continue"
+      data-event="click_maintenance_continue"
+      data-cta-location="maintenance_overlay"
+    >
+      {copy.continue}
+    </button>
+  </div>
+</div>
+
+<style>
+  .keyfo-maintenance-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background-color: #0c0806;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .keyfo-maintenance-overlay[data-hidden='true'] {
+    display: none;
+  }
+
+  .keyfo-maintenance-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .keyfo-maintenance-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 75% 80%;
+  }
+
+  .keyfo-maintenance-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(105deg, rgba(12, 8, 6, 0.92) 0%, rgba(12, 8, 6, 0.78) 38%, rgba(12, 8, 6, 0.32) 62%, rgba(12, 8, 6, 0.08) 100%),
+      linear-gradient(180deg, rgba(12, 8, 6, 0.55) 0%, rgba(12, 8, 6, 0.05) 35%, rgba(12, 8, 6, 0.0) 65%, rgba(12, 8, 6, 0.55) 100%);
+  }
+
+  .keyfo-maintenance-content {
+    position: relative;
+    z-index: 1;
+    margin: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 4rem);
+    max-width: 38rem;
+    color: #fff6e5;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-self: flex-start;
+  }
+
+  .keyfo-maintenance-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #e7c39a;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .keyfo-maintenance-heading {
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5.2vw, 3.5rem);
+    line-height: 1.08;
+    margin: 0;
+    font-weight: 600;
+    color: #fff6e5;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+  }
+
+  .keyfo-maintenance-body {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.55;
+    margin: 0;
+    color: rgba(255, 246, 229, 0.92);
+  }
+
+  .keyfo-maintenance-reassurance {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    color: rgba(231, 195, 154, 0.92);
+    border-left: 2px solid rgba(231, 195, 154, 0.5);
+    padding-left: 0.85rem;
+  }
+
+  .keyfo-maintenance-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+  }
+
+  .keyfo-maintenance-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(255, 246, 229, 0.08);
+    border: 1px solid rgba(255, 246, 229, 0.22);
+    color: #fff6e5;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    backdrop-filter: blur(6px);
+  }
+
+  .keyfo-maintenance-cta:hover {
+    background: rgba(255, 246, 229, 0.16);
+    border-color: rgba(255, 246, 229, 0.4);
+  }
+
+  .keyfo-maintenance-cta:active {
+    transform: translateY(1px);
+  }
+
+  .keyfo-maintenance-cta-primary {
+    background: #1f8a4c;
+    border-color: #1f8a4c;
+    color: #fff;
+  }
+
+  .keyfo-maintenance-cta-primary:hover {
+    background: #25a25a;
+    border-color: #25a25a;
+  }
+
+  .keyfo-maintenance-cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .keyfo-maintenance-continue {
+    align-self: flex-start;
+    margin-top: 0.9rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: rgba(255, 246, 229, 0.6);
+    font-size: 0.85rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .keyfo-maintenance-continue:hover {
+    color: #fff6e5;
+  }
+
+  @media (max-width: 640px) {
+    .keyfo-maintenance-bg img {
+      object-position: 70% 88%;
+    }
+    .keyfo-maintenance-scrim {
+      background:
+        linear-gradient(180deg, rgba(12, 8, 6, 0.85) 0%, rgba(12, 8, 6, 0.55) 38%, rgba(12, 8, 6, 0.2) 60%, rgba(12, 8, 6, 0.05) 100%);
+    }
+    .keyfo-maintenance-content {
+      align-self: stretch;
+      margin: 1.5rem 1.25rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const overlay = document.getElementById('keyfo-maintenance-overlay');
+    if (!overlay) return;
+
+    const PREVIEW_KEY = 'keyfo_preview';
+    const SESSION_KEY = 'keyfo_maintenance_dismissed';
+
+    let bypass = false;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('preview') === '1') {
+        localStorage.setItem(PREVIEW_KEY, '1');
+      }
+      if (localStorage.getItem(PREVIEW_KEY) === '1') {
+        bypass = true;
+      }
+      if (sessionStorage.getItem(SESSION_KEY) === '1') {
+        bypass = true;
+      }
+    } catch {
+      // storage may be unavailable; ignore.
+    }
+
+    if (bypass) {
+      overlay.setAttribute('data-hidden', 'true');
+      document.documentElement.style.overflow = '';
+      return;
+    }
+
+    document.documentElement.style.overflow = 'hidden';
+
+    if (typeof window.gtag === 'function') {
+      try {
+        window.gtag('event', 'view_maintenance_overlay', {
+          page_path: window.location.pathname + window.location.search,
+          page_language: document.documentElement.lang || 'nl'
+        });
+      } catch {
+        // tracking must never break the page.
+      }
+    }
+
+    const continueBtn = document.getElementById('keyfo-maintenance-continue');
+    if (continueBtn) {
+      continueBtn.addEventListener('click', () => {
+        try {
+          sessionStorage.setItem(SESSION_KEY, '1');
+        } catch {
+          // ignore.
+        }
+        overlay.setAttribute('data-hidden', 'true');
+        document.documentElement.style.overflow = '';
+      });
+    }
+  })();
+</script>

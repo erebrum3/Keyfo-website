@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import MaintenanceOverlay from '../components/MaintenanceOverlay.astro';
 
 type MobileCta = {
   ariaLabel: string;
@@ -64,6 +65,8 @@ const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.starts
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
+const maintenanceOverlayActive = import.meta.env.PUBLIC_KEYFO_NOTICE_MODE === 'maintenance_overlay';
+const maintenanceOverlayLang: 'nl' | 'tr' = lang === 'tr' ? 'tr' : 'nl';
 ---
 
 <!doctype html>
@@ -155,6 +158,8 @@ const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
     ) : null}
 
     <CookieConsent lang={lang === 'tr' ? 'tr' : 'nl'} ga4MeasurementId={ga4MeasurementId} />
+
+    {maintenanceOverlayActive ? <MaintenanceOverlay lang={maintenanceOverlayLang} /> : null}
 
     <script>
       import '../scripts/reveal.ts';
