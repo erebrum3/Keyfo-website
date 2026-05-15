@@ -8,7 +8,7 @@ Build a production-quality, mobile-first, SEO-friendly and AI-readable one-page 
 - Also known as: Keyfo kip&grill
 - Address: Broersveld 103, 3111 LE Schiedam
 - Phone / WhatsApp: +31 6 41014926
-- Email: keyfo-grill@hotmail.com
+- Email: keyforestaurant@gmail.com
 - Opening hours: 11:30-22:00 Wednesday through Monday; closed Tuesday
 - Google score: 4.9
 - Google reviews: 22
@@ -82,7 +82,7 @@ Phone:
 tel:+31641014926
 
 Email:
-mailto:keyfo-grill@hotmail.com
+mailto:keyforestaurant@gmail.com
 
 Route:
 https://www.google.com/maps/dir/?api=1&destination=Broersveld%20103%2C%203111%20LE%20Schiedam
