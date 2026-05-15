@@ -32,7 +32,28 @@ const slugify = (s: string) =>
     {items.map((item, idx) => (
       <li class="keyfo-popular-card" data-reveal data-reveal-delay={String(Math.min(idx + 1, 5))}>
         <div class="keyfo-popular-card-image" aria-hidden="true">
-          <img src="/assets/keyfo/popular-hero.jpg" alt="" loading="lazy" />
+          <picture>
+            <source
+              type="image/avif"
+              srcset="/assets/keyfo/popular-hero-480.avif 480w, /assets/keyfo/popular-hero-768.avif 768w, /assets/keyfo/popular-hero-960.avif 960w"
+              sizes="(max-width: 640px) 45vw, 320px"
+            />
+            <source
+              type="image/webp"
+              srcset="/assets/keyfo/popular-hero-480.webp 480w, /assets/keyfo/popular-hero-768.webp 768w, /assets/keyfo/popular-hero-960.webp 960w"
+              sizes="(max-width: 640px) 45vw, 320px"
+            />
+            <img
+              src="/assets/keyfo/popular-hero-960.jpg"
+              srcset="/assets/keyfo/popular-hero-960.jpg 960w"
+              sizes="(max-width: 640px) 45vw, 320px"
+              width="960"
+              height="723"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
         <div class="keyfo-popular-card-body">
           {item.categoryTitle ? (
