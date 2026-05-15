@@ -72,7 +72,7 @@ const addedLabel = `✓ ${localeContent.afhaal.addedLabel}`;
             const desc = getDescription(item);
             return (
               <li class={`keyfo-menu-row${desc ? ' keyfo-menu-row--with-desc' : ''}${showAfhaalActions ? ' keyfo-menu-row--with-action' : ''}`}>
-                <span class="keyfo-menu-name">{item.name}</span>
+                <span class="keyfo-menu-name">{isTr ? item.nameTr : item.nameNl}</span>
                 <span aria-hidden="true" class="keyfo-menu-leader"></span>
                 <span class="keyfo-menu-price keyfo-tabular">{formatPrice(item.priceEur)}</span>
                 {desc ? <p class="keyfo-menu-desc">{desc}</p> : null}
