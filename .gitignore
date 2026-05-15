@@ -34,3 +34,7 @@ keyfowebsite/
 
 # Claude Code local state
 .claude/
+
+# Internal owner draft docs
+KEYFO-sunum.md
+owner-kararlari.md
