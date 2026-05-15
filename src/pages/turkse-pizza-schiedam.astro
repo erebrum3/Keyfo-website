@@ -51,6 +51,16 @@ const breadcrumbSchema = {
   ]
 };
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
+};
+
 const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -90,7 +100,7 @@ const webPageSchema = {
     imageHeight: 630,
     imageSecureUrl: ogImageUrl
   }}
-  jsonLd={[breadcrumbSchema, webPageSchema]}
+  jsonLd={[breadcrumbSchema, webPageSchema, faqSchema]}
   mobileCta={{
     ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
     labels: CONTENT_NL.mobileCtaShort,
