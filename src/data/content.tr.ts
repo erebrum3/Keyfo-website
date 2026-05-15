@@ -46,7 +46,7 @@ export const CONTENT_TR = {
   menuPage: {
     pageTitle: 'Menü | KEYFO Restaurant & Cafe Schiedam',
     pageDescription:
-      "Schiedam'daki KEYFO Restaurant & Cafe'nin tüm menüsünü inceleyin: döner, kapsalon, ızgara çeşitleri, Türk pizzası, mantı, tatlılar ve içecekler. WhatsApp veya telefonla gel-al.",
+      'KEYFO menüsü: döner, kapsalon, lahmacun, ızgara ve tatlılar. WhatsApp ile gel-al. Broersveld 103, Schiedam Merkez.',
     eyebrow: 'Menü',
     heading: 'KEYFO menüsü',
     lead:

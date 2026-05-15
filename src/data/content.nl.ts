@@ -46,7 +46,7 @@ export const CONTENT_NL = {
   menuPage: {
     pageTitle: 'Menu | KEYFO Restaurant & Cafe Schiedam',
     pageDescription:
-      'Bekijk het volledige menu van KEYFO Restaurant & Cafe in Schiedam: döner, kapsalon, grillgerechten, Turkse pizza, manti, desserts en dranken. Afhalen via WhatsApp of telefoon.',
+      'Bekijk het KEYFO menu in Schiedam Centrum: döner, kapsalon, Turkse pizza, grill, manti en desserts. Afhalen via WhatsApp.',
     eyebrow: 'Menukaart',
     heading: 'Menu van KEYFO',
     lead:
