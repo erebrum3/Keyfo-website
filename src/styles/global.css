@@ -2787,29 +2787,26 @@
     border-radius: inherit;
     pointer-events: none;
     z-index: -1;
-    box-shadow: 0 0 0 0 transparent;
+    will-change: opacity;
+    opacity: 0;
+    box-shadow:
+      0 0 0 var(--keyfo-invite-spread) var(--keyfo-invite-amber),
+      0 0 var(--keyfo-invite-blur) 0 var(--keyfo-invite-cream);
     animation: keyfo-warm-invite var(--keyfo-invite-duration) ease-in-out infinite;
   }
 
   .keyfo-hero-ctas > .keyfo-btn-primary:hover::after,
   .keyfo-hero-ctas > .keyfo-btn-primary:focus-visible::after {
     animation-play-state: paused;
+    opacity: 1;
     box-shadow:
       0 0 0 4px rgba(242, 176, 43, 0.20),
       0 0 28px 2px rgba(245, 230, 208, 0.20);
   }
 
   @keyframes keyfo-warm-invite {
-    0%, 100% {
-      box-shadow:
-        0 0 0 0 transparent,
-        0 0 0 0 transparent;
-    }
-    50% {
-      box-shadow:
-        0 0 0 var(--keyfo-invite-spread) var(--keyfo-invite-amber),
-        0 0 var(--keyfo-invite-blur) 0 var(--keyfo-invite-cream);
-    }
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
   }
 
   @media (max-width: 639px) {
@@ -2826,6 +2823,7 @@
 @media (prefers-reduced-motion: reduce) {
   .keyfo-hero-ctas > .keyfo-btn-primary::after {
     animation: none !important;
+    opacity: 0 !important;
     box-shadow: none !important;
   }
 }
