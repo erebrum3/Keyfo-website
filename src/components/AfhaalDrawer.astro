@@ -17,6 +17,10 @@ const titleId = 'afhaal-drawer-title';
   class="keyfo-afhaal-drawer"
   data-locale={locale}
   data-open="false"
+  data-decrease-label={c.decreaseLabel}
+  data-increase-label={c.increaseLabel}
+  data-remove-label={c.removeLabel}
+  data-item-note-placeholder={c.itemNoteLabel}
   aria-hidden="true"
 >
   <div class="keyfo-afhaal-backdrop" data-afhaal-close></div>
@@ -127,6 +131,10 @@ const titleId = 'afhaal-drawer-title';
 
     const formatPrice = (n: number) => priceFmt.format(n);
 
+    const decreaseLabel = drawer.getAttribute('data-decrease-label') || '';
+    const increaseLabel = drawer.getAttribute('data-increase-label') || '';
+    const removeLabel = drawer.getAttribute('data-remove-label') || '';
+
     let lastFocus: HTMLElement | null = null;
 
     function refreshPickupOptions() {
@@ -168,10 +176,10 @@ const titleId = 'afhaal-drawer-title';
             <span class="keyfo-afhaal-item-price">${formatPrice(def.priceEur * line.quantity)}</span>
           </div>
           <div class="keyfo-afhaal-item-controls">
-            <button type="button" class="keyfo-afhaal-qty" data-afhaal-dec aria-label="−">−</button>
+            <button type="button" class="keyfo-afhaal-qty" data-afhaal-dec aria-label="${escapeAttr(decreaseLabel)}"><span aria-hidden="true">−</span></button>
             <span class="keyfo-afhaal-qty-value" data-afhaal-qty>${line.quantity}</span>
-            <button type="button" class="keyfo-afhaal-qty" data-afhaal-inc aria-label="+">+</button>
-            <button type="button" class="keyfo-afhaal-remove" data-afhaal-remove aria-label="✕">✕</button>
+            <button type="button" class="keyfo-afhaal-qty" data-afhaal-inc aria-label="${escapeAttr(increaseLabel)}"><span aria-hidden="true">+</span></button>
+            <button type="button" class="keyfo-afhaal-remove" data-afhaal-remove aria-label="${escapeAttr(removeLabel)}"><span aria-hidden="true">✕</span></button>
           </div>
           <input type="text" class="keyfo-afhaal-item-note" data-afhaal-item-note maxlength="120" value="${escapeAttr(line.note ?? '')}" />
         `;

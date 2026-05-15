@@ -108,8 +108,8 @@ export const CONTENT_TR = {
       a: 'Evet. /tr/rezervasyon/ üzerinden rezervasyon talebi gönderebilir veya bizi arayabilirsiniz. Uygunluğu WhatsApp üzerinden onaylarız.'
     },
     {
-      q: 'Toplu sipariş alıyor musunuz?',
-      a: 'Aile, ofis veya etkinlik için büyük siparişler için /tr/toplu-siparis-schiedam/ üzerinden talep gönderebilirsiniz. Detayları WhatsApp üzerinden onaylarız.'
+      q: 'Toplu gel-al hazırlıyor musunuz?',
+      a: 'Aile, ofis veya etkinlik için kalabalık gel-al hazırlığı için /tr/toplu-gel-al-schiedam/ üzerinden talep gönderebilirsiniz. Detayları WhatsApp üzerinden onaylarız.'
     },
     {
       q: 'Hangi ödeme yöntemleri kabul ediliyor?',
@@ -152,6 +152,9 @@ export const CONTENT_TR = {
     closeLabel: 'Kapat',
     addLabel: 'Ekle',
     addedLabel: 'Eklendi',
+    decreaseLabel: 'Adet azalt',
+    increaseLabel: 'Adet artır',
+    removeLabel: 'Çıkar',
     summaryLabel: 'Gel-al listesi',
     summaryItemsUnit: 'ürün',
     messageIntro: 'Merhaba KEYFO, gel-al için bir mesaj göndermek istiyorum.',
@@ -231,18 +234,18 @@ export const CONTENT_TR = {
       closing: 'Lütfen WhatsApp üzerinden onaylar mısınız?'
     }
   },
-  // Toplu sipariş talebi — yalnızca WhatsApp mesajı hazırlar.
-  // Uygunluk ve detaylar WhatsApp üzerinden onaylanır.
+  // Toplu gel-al talebi — yalnızca WhatsApp mesajı hazırlar.
+  // Uygunluk ve detaylar WhatsApp üzerinden onaylanır. Adrese teslim YOK.
   groepsbestelling: {
-    pageTitle: 'Toplu sipariş talebi Schiedam | KEYFO Restaurant & Cafe',
+    pageTitle: 'Toplu gel-al talebi Schiedam | KEYFO Restaurant & Cafe',
     pageDescription:
-      "Schiedam'daki KEYFO Restaurant & Cafe için toplu sipariş talebi gönderin. Aile, ofis ve etkinlikler için uygundur. Onay WhatsApp üzerinden yapılır.",
-    eyebrow: 'Toplu sipariş',
-    heading: 'Toplu sipariş talebi',
+      "Schiedam'daki KEYFO Restaurant & Cafe için toplu gel-al talebi gönderin. Aile, ofis ve etkinlikler için uygundur. Uygunluk WhatsApp üzerinden onaylanır.",
+    eyebrow: 'Toplu gel-al',
+    heading: 'Toplu gel-al talebi',
     lead:
-      'Aile, ofis veya bir etkinlik için büyük bir sipariş mi? Bilgileri doldurun ve talebi WhatsApp ile gönderin.',
+      'Aile, ofis veya bir etkinlik için kalabalık bir gel-al hazırlığı mı? Bilgileri doldurun ve talebi WhatsApp ile gönderin.',
     breadcrumbHome: 'Anasayfa',
-    breadcrumbCurrent: 'Toplu sipariş',
+    breadcrumbCurrent: 'Toplu gel-al',
     form: {
       peopleLabel: 'Kişi sayısı',
       dateLabel: 'Tarih',
@@ -274,7 +277,7 @@ export const CONTENT_TR = {
         'Talebiniz, KEYFO WhatsApp üzerinden onayladıktan sonra kesinleşir.',
       errors: {
         peopleRequired: 'Lütfen kişi sayısını girin.',
-        peopleMin: 'Toplu sipariş için lütfen en az minimum kişi sayısını seçin.',
+        peopleMin: 'Toplu gel-al için lütfen en az minimum kişi sayısını seçin.',
         dateRequired: 'Lütfen bir tarih seçin.',
         dateInPast: 'Lütfen ileri bir tarih seçin.',
         timeRequired: 'Lütfen bir saat seçin.',
@@ -285,7 +288,7 @@ export const CONTENT_TR = {
       }
     },
     message: {
-      intro: 'Merhaba KEYFO, bir toplu sipariş talebi göndermek istiyorum.',
+      intro: 'Merhaba KEYFO, bir toplu gel-al talebi göndermek istiyorum.',
       peopleLabel: 'Kişi sayısı',
       dateLabel: 'Tarih',
       timeLabel: 'İstenen saat',

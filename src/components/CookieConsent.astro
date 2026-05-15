@@ -63,7 +63,10 @@ const copy = lang === 'tr'
       wait_for_update: 500
     });
 
-    if (ga4Id) {
+    var ga4Loaded = false;
+    function loadGa4() {
+      if (ga4Loaded || !ga4Id) return;
+      ga4Loaded = true;
       var s = document.createElement('script');
       s.async = true;
       s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga4Id);
@@ -92,6 +95,7 @@ const copy = lang === 'tr'
       document.body.removeAttribute('data-cookie-banner');
     }
     function grantAnalytics() {
+      loadGa4();
       gtag('consent', 'update', { analytics_storage: 'granted' });
     }
 
