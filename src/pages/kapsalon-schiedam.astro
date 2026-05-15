@@ -12,9 +12,9 @@ const SITE_ORIGIN = 'https://keyfo.nl';
 const PAGE_PATH = '/kapsalon-schiedam/';
 const PAGE_URL = `${SITE_ORIGIN}${PAGE_PATH}`;
 
-const PAGE_TITLE = 'Kapsalon eten afhalen in Schiedam Centrum | KEYFO Broersveld';
+const PAGE_TITLE = 'Kapsalon (gerecht) afhalen Schiedam Centrum — KEYFO';
 const PAGE_DESCRIPTION =
-  'Turkse kapsalon (gerecht) afhalen bij KEYFO aan Broersveld 103 in Schiedam Centrum. Friet, döner, gesmolten kaas en salade in één bakje. Bestelling doorgeven via WhatsApp of telefoon.';
+  'Kapsalon (gerecht) afhalen bij KEYFO in Schiedam Centrum: friet, döner, kaas en salade in één bakje. Broersveld 103, via WhatsApp.';
 
 const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
 
@@ -24,12 +24,20 @@ const hoursLineNl = `Elke dag behalve dinsdag ${hoursRange}`;
 
 const FAQ_ITEMS = [
   {
+    q: 'Is KEYFO een kapsalon of kapper?',
+    a: 'Nee. KEYFO is een Turks restaurant en cafe in Schiedam Centrum. Op deze pagina gaat het over de kapsalon als gerecht: friet, döner, kaas en salade in één bakje — niet over een kapper.'
+  },
+  {
     q: 'Wat zit er standaard in de kapsalon van KEYFO?',
     a: 'Onze kapsalon bestaat uit een laag verse friet, daarbovenop döner, gesmolten kaas en frisse salade. We serveren er saus naar keuze bij. Wilt u een variant zonder een van deze onderdelen? Geef het door bij uw bestelling.'
   },
   {
-    q: 'Welke saus past goed bij een kapsalon?',
-    a: 'De meeste gasten kiezen voor knoflooksaus of sambal — soms een combinatie van beide. Geef bij uw WhatsApp of telefoongesprek door welke saus u erbij wilt, dan voegen we die toe.'
+    q: 'Welke vleessoorten kan ik kiezen voor mijn kapsalon?',
+    a: 'Standaard maken we de kapsalon met onze döner. Geef bij uw bestelling door welke voorkeur u heeft, dan bevestigen we wat op dat moment beschikbaar is. We werken met 100% halal vlees.'
+  },
+  {
+    q: 'Met welke sauzen kan ik kapsalon bestellen?',
+    a: 'De meest gekozen sauzen zijn knoflooksaus en sambal — vaak ook een combinatie van beide. Geef bij uw WhatsApp of telefoongesprek door welke saus u erbij wilt, dan voegen we die toe.'
   },
   {
     q: 'Hoe lang blijft een kapsalon goed nadat ik hem heb afgehaald?',
@@ -61,7 +69,19 @@ const webPageSchema = {
     url: SITE_ORIGIN + '/',
     name: BUSINESS.canonicalName
   },
-  breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` }
+  breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` },
+  disambiguatingDescription:
+    'Met "kapsalon" wordt op deze pagina het Nederlandse afhaalgerecht bedoeld (friet, döner, gesmolten kaas en salade in één bakje), niet een kapper of kappersalon. KEYFO is een Turks restaurant en cafe in Schiedam Centrum.'
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
 };
 ---
 
@@ -86,7 +106,7 @@ const webPageSchema = {
     imageHeight: 630,
     imageSecureUrl: ogImageUrl
   }}
-  jsonLd={[breadcrumbSchema, webPageSchema]}
+  jsonLd={[breadcrumbSchema, webPageSchema, faqSchema]}
   mobileCta={{
     ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
     labels: CONTENT_NL.mobileCtaShort,
@@ -128,14 +148,13 @@ const webPageSchema = {
         </nav>
         <p class="text-xs uppercase tracking-[0.2em] text-amber-300/80 mb-3">Schiedam Centrum · Broersveld 103</p>
         <h1 class="keyfo-brand text-4xl sm:text-5xl font-semibold text-white">
-          Kapsalon eten afhalen in Schiedam Centrum
+          Kapsalon (gerecht) afhalen in Schiedam Centrum
         </h1>
         <p class="keyfo-hero-intro mt-5 max-w-2xl">
-          Op deze pagina vindt u informatie over de kapsalon als <strong>gerecht</strong> — een
-          Turks/Nederlands afhaalgerecht met friet, döner, gesmolten kaas en frisse salade in één
-          bakje. Bij KEYFO aan Broersveld 103 in Schiedam Centrum maken we de kapsalon ter plekke
-          klaar. Geef uw bestelling door via WhatsApp of telefoon; wij bevestigen wanneer het
-          klaarstaat.
+          Met kapsalon bedoelen we hier het bekende afhaalgerecht met friet, döner, gesmolten
+          kaas en frisse salade in één bakje — niet een kapper. Bij KEYFO aan Broersveld 103 in
+          Schiedam Centrum maken we de kapsalon ter plekke klaar. Geef uw bestelling door via
+          WhatsApp of telefoon; wij bevestigen wanneer het klaarstaat.
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
