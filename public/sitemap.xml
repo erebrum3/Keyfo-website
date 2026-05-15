@@ -48,7 +48,7 @@
   </url>
   <url>
     <loc>https://keyfo.nl/tr/turks-restoran-schiedam/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="nl-NL" href="https://keyfo.nl/turks-restaurant-schiedam/" />
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://keyfo.nl/doner-schiedam/</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="nl-NL" href="https://keyfo.nl/doner-schiedam/" />
@@ -65,7 +65,7 @@
   </url>
   <url>
     <loc>https://keyfo.nl/kapsalon-schiedam/</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="nl-NL" href="https://keyfo.nl/kapsalon-schiedam/" />
@@ -73,11 +73,27 @@
   </url>
   <url>
     <loc>https://keyfo.nl/turkse-pizza-schiedam/</loc>
-    <lastmod>2026-05-13</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="nl-NL" href="https://keyfo.nl/turkse-pizza-schiedam/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://keyfo.nl/turkse-pizza-schiedam/" />
+  </url>
+  <url>
+    <loc>https://keyfo.nl/halal-restaurant-schiedam/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl-NL" href="https://keyfo.nl/halal-restaurant-schiedam/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://keyfo.nl/halal-restaurant-schiedam/" />
+  </url>
+  <url>
+    <loc>https://keyfo.nl/afhalen-schiedam-centrum/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="nl-NL" href="https://keyfo.nl/afhalen-schiedam-centrum/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://keyfo.nl/afhalen-schiedam-centrum/" />
   </url>
   <url>
     <loc>https://keyfo.nl/reserveren/</loc>
