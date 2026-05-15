@@ -33,7 +33,7 @@ export const BUSINESS = {
   },
   currency: 'EUR',
   googleRating: 4.9,
-  googleReviewCount: 23,
+  googleReviewCount: 26,
   // TODO: Replace with official GBP review link when owner grants access.
   // Previous value was a desktop-only Google Search deep link (#lkt=LocalPoiReviews)
   // that did not open the Reviews tab on mobile. CID fallback routes to the
