@@ -23,9 +23,11 @@ const menuSchema = {
   inLanguage: 'nl',
   hasMenuSection: MENU.categories.map((cat) => ({
     '@type': 'MenuSection',
+    identifier: cat.id,
     name: cat.titleNl,
     hasMenuItem: (cat.items as MenuItem[]).map((item) => ({
       '@type': 'MenuItem',
+      '@id': `${CANONICAL}#${item.id}`,
       name: item.nameNl,
       ...(item.longDescriptionNl || item.descriptionNl
         ? { description: item.longDescriptionNl ?? item.descriptionNl }
