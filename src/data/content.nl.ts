@@ -30,7 +30,7 @@ export const CONTENT_NL = {
   priceNote:
     'Menuprijzen en beschikbaarheid kunnen wijzigen. Voor afhalen via telefoon of WhatsApp kun je ons direct bereiken. Bezorging loopt via Thuisbezorgd; prijzen en voorwaarden kunnen daar afwijken.',
   allergenNote: 'Heeft u een allergie? Vraag ons gerust naar allergeneninformatie voordat u bestelt.',
-  halalWording: 'Halal opties',
+  halalWording: '100% halal vlees',
   featuredHeading: 'Populaire gerechten',
   featuredEyebrow: 'Populair',
   featuredLead: 'Een greep uit ons aanbod.',
@@ -120,8 +120,8 @@ export const CONTENT_NL = {
       a: 'Ja. Linzen Soep, Salade, Pasta, Patat, Groenten mix, Rijst en Turkse pizza zijn vegetarisch. Manti bevat vlees.'
     },
     {
-      q: 'Zijn er halal opties?',
-      a: 'Er zijn halal opties. Vraag ons gerust naar de mogelijkheden.'
+      q: 'Is het vlees halal?',
+      a: 'Ja. Onze grillgerechten worden bereid met 100% halal vlees. Vraag ons gerust naar specifieke gerechten.'
     },
     {
       q: 'Hoe kan ik contact opnemen?',

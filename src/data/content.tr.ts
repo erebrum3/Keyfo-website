@@ -30,7 +30,7 @@ export const CONTENT_TR = {
   priceNote:
     'Menü fiyatları ve ürün uygunluğu değişebilir. Gel-al sipariş için telefon veya WhatsApp ile bize doğrudan ulaşabilirsiniz. Adrese teslim Thuisbezorgd üzerinden yapılır; fiyatlar ve koşullar orada farklı olabilir.',
   allergenNote: 'Alerjiniz varsa sipariş vermeden önce alerjen bilgisi için lütfen bize sorun.',
-  halalWording: 'Helal seçenekler',
+  halalWording: '%100 helal et',
   featuredHeading: 'Popüler ürünler',
   featuredEyebrow: 'Popüler',
   featuredLead: 'Menümüzden seçkiler.',
@@ -120,8 +120,8 @@ export const CONTENT_TR = {
       a: 'Evet. Mercimek çorbası, salata, makarna, patates, sebze karışımı, pirinç ve Türk pizzası vejetaryendir. Mantı et içerir.'
     },
     {
-      q: 'Helal seçenekler var mı?',
-      a: 'Helal seçenekler vardır. Detay için bize sorabilirsiniz.'
+      q: 'Et helal mi?',
+      a: 'Evet. Izgaralarımız %100 helal et ile hazırlanır. Belirli ürünler için bize sorabilirsiniz.'
     },
     {
       q: 'Nasıl iletişime geçebilirim?',
