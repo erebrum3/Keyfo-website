@@ -7,6 +7,8 @@
     { "source": "/tr/turks-restoran-schiedam", "destination": "/tr/turks-restoran-schiedam/", "permanent": true },
     { "source": "/doner-schiedam", "destination": "/doner-schiedam/", "permanent": true },
     { "source": "/kapsalon-schiedam", "destination": "/kapsalon-schiedam/", "permanent": true },
-    { "source": "/turkse-pizza-schiedam", "destination": "/turkse-pizza-schiedam/", "permanent": true }
+    { "source": "/turkse-pizza-schiedam", "destination": "/turkse-pizza-schiedam/", "permanent": true },
+    { "source": "/tr/toplu-siparis-schiedam", "destination": "/tr/toplu-gel-al-schiedam/", "permanent": true },
+    { "source": "/tr/toplu-siparis-schiedam/", "destination": "/tr/toplu-gel-al-schiedam/", "permanent": true }
   ]
 }

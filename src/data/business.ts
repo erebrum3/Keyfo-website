@@ -13,8 +13,8 @@ export const BUSINESS = {
   getWhatsAppUrl(message: string) {
     return `https://wa.me/${this.whatsappPhoneDigits}?text=${encodeURIComponent(message)}`;
   },
-  email: 'keyfo-grill@hotmail.com',
-  emailMailto: 'mailto:keyfo-grill@hotmail.com',
+  email: 'keyforestaurant@gmail.com',
+  emailMailto: 'mailto:keyforestaurant@gmail.com',
   openingHours: {
     days: ['Monday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     closedDays: ['Tuesday'],
@@ -72,7 +72,7 @@ export const BUSINESS = {
     partySizeMax: 12,
     partySizeDefault: 2
   },
-  // Group order (groepsbestelling / toplu sipariş) request defaults.
+  // Group order (groepsbestelling / toplu gel-al) request defaults.
   // Same principle: WhatsApp message builder only. No delivery to external
   // location is offered until owner confirms.
   groepsbestelling: {

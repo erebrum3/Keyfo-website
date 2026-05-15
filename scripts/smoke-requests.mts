@@ -142,7 +142,8 @@ const catTr = buildCateringMessage('tr', {
   note: ''
 });
 console.log(catTr);
-check('TR catering: contains "toplu sipariş talebi"', catTr.includes('toplu sipariş talebi'));
+check('TR catering: contains "toplu gel-al talebi"', catTr.includes('toplu gel-al talebi'));
+check('TR catering: does NOT contain "toplu sipariş"', !catTr.includes('toplu sipariş'));
 check('TR catering: order type "Restoranda yemek"', catTr.includes('Restoranda yemek'));
 check('TR catering: budget omitted when notSpecified', !catTr.includes('Kişi başı bütçe'));
 check('TR catering: no "op locatie"', !/op\s+locatie/i.test(catTr));
