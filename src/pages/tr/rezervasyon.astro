@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ReservationForm from '../../components/ReservationForm.astro';
+import FAQ from '../../components/FAQ.astro';
 
 import { BUSINESS } from '../../data/business';
 import { CONTENT_TR } from '../../data/content.tr';
@@ -13,6 +14,21 @@ const NL_URL = `${SITE_ORIGIN}/reserveren/`;
 const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
 
 const c = CONTENT_TR.reservation;
+
+const FAQ_ITEMS = [
+  {
+    q: 'Rezervasyon otomatik olarak onaylanır mı?',
+    a: 'Hayır. KEYFO\'da rezervasyonlar otomatik olarak onaylanmaz. Talebinizi inceleyip istediğiniz tarih ve saatin uygun olup olmadığını WhatsApp üzerinden onaylarız.'
+  },
+  {
+    q: 'Aynı gün için talep gönderebilir miyim?',
+    a: 'Evet. Bugün veya yarın için de talep gönderebilirsiniz. Yoğunluğa bağlı olarak yanıt süresi değişebilir; kısa süreli talepler için ayrıca telefonla aramanızı da öneririz.'
+  },
+  {
+    q: 'Kalabalık grup için nasıl bilgi vermeliyim?',
+    a: 'Kalabalık gruplar için bunu talebinizde belirtmeniz veya /tr/toplu-gel-al-schiedam/ üzerinden toplu talep göndermeniz işimizi kolaylaştırır. Böylece yeterli alan ve zaman ayırabiliriz.'
+  }
+] as const;
 
 const webPageSchema = {
   '@context': 'https://schema.org',
@@ -32,6 +48,16 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 1, name: c.breadcrumbHome, item: BUSINESS.website.trUrl },
     { '@type': 'ListItem', position: 2, name: c.breadcrumbCurrent, item: CANONICAL }
   ]
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
 };
 ---
 
@@ -57,7 +83,7 @@ const breadcrumbSchema = {
     imageHeight: 630,
     imageSecureUrl: ogImageUrl
   }}
-  jsonLd={[webPageSchema, breadcrumbSchema]}
+  jsonLd={[webPageSchema, breadcrumbSchema, faqSchema]}
   mobileCta={{
     ariaLabel: CONTENT_TR.mobileCtaAriaLabel,
     labels: CONTENT_TR.mobileCtaShort,
@@ -106,6 +132,36 @@ const breadcrumbSchema = {
     <section class="keyfo-section keyfo-band-cream">
       <div class="keyfo-container keyfo-req-container">
         <ReservationForm locale="tr" sourcePage="tr/rezervasyon" />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-8 leading-relaxed text-zinc-800">
+        <div class="space-y-3">
+          <h2 class="keyfo-section-title">KEYFO'da rezervasyon nasıl çalışır?</h2>
+          <ol class="list-decimal pl-6 space-y-2">
+            <li>Yukarıdaki form veya WhatsApp üzerinden talebinizi gönderin.</li>
+            <li>Tarih, saat, kişi sayısı ve varsa notlarınızı belirtin.</li>
+            <li>KEYFO talebi inceler.</li>
+            <li>Rezervasyonunuz, KEYFO WhatsApp üzerinden onayladıktan sonra kesinleşir.</li>
+          </ol>
+        </div>
+        <div class="space-y-3">
+          <h2 class="keyfo-section-title">Kalabalık gruplar için bilgi</h2>
+          <p>
+            Aile, ofis veya bir kutlama için kalabalık bir grupla mı geleceksiniz? Bu durumda
+            <a class="underline" href="/tr/toplu-gel-al-schiedam/">toplu gel-al talebi</a>
+            genellikle daha uygundur. Orada ürün, kişi sayısı ve gelecek detayları önceden
+            belirtebilirsiniz; biz de buna göre planlama yaparız. Standart masa rezervasyonu
+            elbette yukarıdaki form üzerinden de mümkündür.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Rezervasyon hakkında sıkça sorulan sorular" items={FAQ_ITEMS} />
       </div>
     </section>
   </main>

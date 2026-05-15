@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CateringForm from '../components/CateringForm.astro';
+import FAQ from '../components/FAQ.astro';
 
 import { BUSINESS } from '../data/business';
 import { CONTENT_NL } from '../data/content.nl';
@@ -13,6 +14,21 @@ const TR_URL = `${SITE_ORIGIN}/tr/toplu-gel-al-schiedam/`;
 const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
 
 const c = CONTENT_NL.groepsbestelling;
+
+const FAQ_ITEMS = [
+  {
+    q: 'Is een groepsaanvraag automatisch bevestigd?',
+    a: 'Nee. Groepsaanvragen worden niet automatisch bevestigd. Wij bekijken uw aanvraag en bevestigen via WhatsApp of de gewenste datum, tijd en gerechten haalbaar zijn.'
+  },
+  {
+    q: 'Welke informatie moet ik meesturen?',
+    a: 'Het helpt ons als u datum en gewenste tijd, het aantal personen en een idee van de gerechten of het type bestelling (afhalen of in het restaurant) meegeeft. Allergieën of de gelegenheid mag u ook gerust vermelden.'
+  },
+  {
+    q: 'Kan ik het menu eerst bekijken?',
+    a: 'Ja. Op de pagina /menu/ vindt u onze actuele kaart met döner, kapsalon, grillgerechten, Turkse pizza en meer. Voor grotere groepen denken we graag met u mee — voor grotere bestellingen is eerder aanvragen handig.'
+  }
+] as const;
 
 const webPageSchema = {
   '@context': 'https://schema.org',
@@ -32,6 +48,16 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 1, name: c.breadcrumbHome, item: BUSINESS.website.nlUrl },
     { '@type': 'ListItem', position: 2, name: c.breadcrumbCurrent, item: CANONICAL }
   ]
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
 };
 ---
 
@@ -57,7 +83,7 @@ const breadcrumbSchema = {
     imageHeight: 630,
     imageSecureUrl: ogImageUrl
   }}
-  jsonLd={[webPageSchema, breadcrumbSchema]}
+  jsonLd={[webPageSchema, breadcrumbSchema, faqSchema]}
   mobileCta={{
     ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
     labels: CONTENT_NL.mobileCtaShort,
@@ -106,6 +132,37 @@ const breadcrumbSchema = {
     <section class="keyfo-section keyfo-band-cream">
       <div class="keyfo-container keyfo-req-container">
         <CateringForm locale="nl" sourcePage="groepsbestelling-schiedam" />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-8 leading-relaxed text-zinc-800">
+        <div class="space-y-3">
+          <h2 class="keyfo-section-title">Wat valt onder een groepsbestelling?</h2>
+          <p>
+            Een groepsaanvraag bij KEYFO is geschikt voor familie-etentjes, kantoor- en
+            collega-bestellingen, vrienden die samen eten of een grotere afhaalbestelling voor
+            een gelegenheid. U geeft ons een idee van het aantal personen, de gerechten en hoe u
+            het wilt ontvangen — afhalen of in het restaurant — en wij denken met u mee.
+          </p>
+        </div>
+        <div class="space-y-3">
+          <h2 class="keyfo-section-title">Hoe werkt een groepsaanvraag via WhatsApp?</h2>
+          <p>
+            U vult het formulier hierboven in of stuurt rechtstreeks een WhatsApp. Vermeld het
+            aantal personen, de gewenste datum en tijd, de gerechten waaraan u denkt en eventuele
+            opmerkingen (allergieën, gelegenheid). KEYFO bekijkt de aanvraag en bevestigt de
+            details via WhatsApp. Voor grotere groepen is eerder aanvragen handig — zo kunnen we
+            voldoende voorbereiden. Liever inspiratie opdoen? Bekijk eerst de
+            <a class="underline" href="/menu/">volledige menukaart</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Veelgestelde vragen over groepsaanvragen" items={FAQ_ITEMS} />
       </div>
     </section>
   </main>

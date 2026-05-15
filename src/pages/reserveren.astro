@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ReservationForm from '../components/ReservationForm.astro';
+import FAQ from '../components/FAQ.astro';
 
 import { BUSINESS } from '../data/business';
 import { CONTENT_NL } from '../data/content.nl';
@@ -13,6 +14,21 @@ const TR_URL = `${SITE_ORIGIN}/tr/rezervasyon/`;
 const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
 
 const c = CONTENT_NL.reservation;
+
+const FAQ_ITEMS = [
+  {
+    q: 'Is mijn reservering automatisch bevestigd?',
+    a: 'Nee. Reserveringen bij KEYFO worden niet automatisch bevestigd. Wij bekijken uw aanvraag en bevestigen via WhatsApp wanneer de gevraagde datum en tijd voor u beschikbaar zijn.'
+  },
+  {
+    q: 'Kan ik voor dezelfde dag een aanvraag sturen?',
+    a: 'Ja, dat kan. Voor vandaag of morgen kunt u ook een aanvraag sturen. Bij drukte kan de reactietijd verschillen — voor korte termijn raden we ook aan om even te bellen.'
+  },
+  {
+    q: 'Kan ik met een groep langskomen?',
+    a: 'Voor grotere groepen is het handig om dat in uw aanvraag te vermelden, of een groepsaanvraag in te dienen via /groepsbestelling-schiedam/. Zo kunnen we voldoende ruimte en tijd voor uw gezelschap inplannen.'
+  }
+] as const;
 
 const webPageSchema = {
   '@context': 'https://schema.org',
@@ -32,6 +48,16 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 1, name: c.breadcrumbHome, item: BUSINESS.website.nlUrl },
     { '@type': 'ListItem', position: 2, name: c.breadcrumbCurrent, item: CANONICAL }
   ]
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
 };
 ---
 
@@ -57,7 +83,7 @@ const breadcrumbSchema = {
     imageHeight: 630,
     imageSecureUrl: ogImageUrl
   }}
-  jsonLd={[webPageSchema, breadcrumbSchema]}
+  jsonLd={[webPageSchema, breadcrumbSchema, faqSchema]}
   mobileCta={{
     ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
     labels: CONTENT_NL.mobileCtaShort,
@@ -106,6 +132,36 @@ const breadcrumbSchema = {
     <section class="keyfo-section keyfo-band-cream">
       <div class="keyfo-container keyfo-req-container">
         <ReservationForm locale="nl" sourcePage="reserveren" />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-8 leading-relaxed text-zinc-800">
+        <div class="space-y-3">
+          <h2 class="keyfo-section-title">Hoe werkt reserveren bij KEYFO?</h2>
+          <ol class="list-decimal pl-6 space-y-2">
+            <li>Stuur uw aanvraag via het formulier hierboven of via WhatsApp.</li>
+            <li>Vermeld datum, tijd, aantal personen en eventuele opmerkingen.</li>
+            <li>KEYFO bekijkt de aanvraag.</li>
+            <li>Uw reservering is pas definitief nadat KEYFO via WhatsApp heeft bevestigd.</li>
+          </ol>
+        </div>
+        <div class="space-y-3">
+          <h2 class="keyfo-section-title">Voor groepen of speciale momenten?</h2>
+          <p>
+            Komt u met een grotere groep — bijvoorbeeld familie, kantoor of een viering? Dan
+            werkt een <a class="underline" href="/groepsbestelling-schiedam/">groepsaanvraag</a>
+            vaak prettiger. Daarin geeft u alvast wensen, gerechten en de gelegenheid mee, zodat
+            we gericht met u kunnen meedenken. Een gewone tafelreservering blijft natuurlijk ook
+            mogelijk via het formulier hierboven.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Veelgestelde vragen over reserveren" items={FAQ_ITEMS} />
       </div>
     </section>
   </main>

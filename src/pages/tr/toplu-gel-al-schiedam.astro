@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CateringForm from '../../components/CateringForm.astro';
+import FAQ from '../../components/FAQ.astro';
 
 import { BUSINESS } from '../../data/business';
 import { CONTENT_TR } from '../../data/content.tr';
@@ -13,6 +14,21 @@ const NL_URL = `${SITE_ORIGIN}/groepsbestelling-schiedam/`;
 const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
 
 const c = CONTENT_TR.groepsbestelling;
+
+const FAQ_ITEMS = [
+  {
+    q: 'Toplu gel-al talebi otomatik onaylanır mı?',
+    a: 'Hayır. Toplu gel-al talepleri otomatik olarak onaylanmaz. Talebinizi inceleyip tarih, saat ve istenen ürünlerin uygun olup olmadığını WhatsApp üzerinden onaylarız.'
+  },
+  {
+    q: 'Hangi bilgileri göndermeliyim?',
+    a: 'Tarih ve istenen saat, kişi sayısı, hangi ürünleri istediğiniz ve nasıl almak istediğiniz (gel-al veya restoranda) bilgilerini iletmeniz işimizi kolaylaştırır. Alerjileri ve etkinlik bilgisini de eklemeniz faydalı olur.'
+  },
+  {
+    q: 'Menüyü önce inceleyebilir miyim?',
+    a: 'Evet. /tr/menu/ sayfasında döner, kapsalon, ızgara çeşitleri, Türk pizzası ve daha fazlasını içeren güncel menümüzü görebilirsiniz. Kalabalık gruplar için erken talep göndermeniz iyi olur.'
+  }
+] as const;
 
 const webPageSchema = {
   '@context': 'https://schema.org',
@@ -32,6 +48,16 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 1, name: c.breadcrumbHome, item: BUSINESS.website.trUrl },
     { '@type': 'ListItem', position: 2, name: c.breadcrumbCurrent, item: CANONICAL }
   ]
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
 };
 ---
 
@@ -57,7 +83,7 @@ const breadcrumbSchema = {
     imageHeight: 630,
     imageSecureUrl: ogImageUrl
   }}
-  jsonLd={[webPageSchema, breadcrumbSchema]}
+  jsonLd={[webPageSchema, breadcrumbSchema, faqSchema]}
   mobileCta={{
     ariaLabel: CONTENT_TR.mobileCtaAriaLabel,
     labels: CONTENT_TR.mobileCtaShort,
@@ -106,6 +132,37 @@ const breadcrumbSchema = {
     <section class="keyfo-section keyfo-band-cream">
       <div class="keyfo-container keyfo-req-container">
         <CateringForm locale="tr" sourcePage="tr/toplu-gel-al-schiedam" />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-8 leading-relaxed text-zinc-800">
+        <div class="space-y-3">
+          <h2 class="keyfo-section-title">Toplu gel-al talebi nasıl çalışır?</h2>
+          <p>
+            Yukarıdaki formu doldurun veya doğrudan WhatsApp ile bize yazın. Kişi sayısı,
+            istenen tarih ve saat, düşündüğünüz ürünler ve varsa notlarınızı (alerjiler,
+            gelecek bilgisi) belirtin. KEYFO talebi inceleyip detayları WhatsApp üzerinden
+            onaylar. Kalabalık gruplar için erken talep göndermeniz hazırlığımıza yardımcı
+            olur. İlham almak ister misiniz? Önce
+            <a class="underline" href="/tr/menu/">menümüzü</a> inceleyebilirsiniz.
+          </p>
+        </div>
+        <div class="space-y-3">
+          <h2 class="keyfo-section-title">Aile, ofis ve grup yemekleri için</h2>
+          <p>
+            KEYFO'da toplu gel-al talebi; aile yemekleri, ofis ve iş arkadaşları siparişleri,
+            arkadaş grupları veya bir gelecek için daha kalabalık bir gel-al hazırlığı için
+            uygundur. Kişi sayısı, ürünler ve nasıl almak istediğiniz hakkında bize bir fikir
+            verirsiniz, biz de buna göre sizinle birlikte düşünürüz.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Toplu gel-al hakkında sıkça sorulan sorular" items={FAQ_ITEMS} />
       </div>
     </section>
   </main>
