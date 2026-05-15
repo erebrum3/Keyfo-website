@@ -1,0 +1,372 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FAQ from '../components/FAQ.astro';
+import Location from '../components/Location.astro';
+
+import { BUSINESS } from '../data/business';
+import { CONTENT_NL } from '../data/content.nl';
+
+const SITE_ORIGIN = 'https://keyfo.nl';
+const PAGE_PATH = '/halal-restaurant-schiedam/';
+const PAGE_URL = `${SITE_ORIGIN}${PAGE_PATH}`;
+
+const PAGE_TITLE = 'Halal restaurant Schiedam — KEYFO Centrum | 100% halal vlees';
+const PAGE_DESCRIPTION =
+  'Halal Turks restaurant in Schiedam Centrum. 100% halal vlees, grill, döner en kapsalon. Loop binnen op Broersveld 103 of stuur een WhatsApp-afhaalverzoek.';
+
+const ogImageUrl = `${SITE_ORIGIN}/assets/keyfo/og-keyfo.jpg`;
+
+const whatsappUrl = BUSINESS.getWhatsAppUrl('Hallo KEYFO, ik heb een vraag over halal eten');
+const hoursRange = `${BUSINESS.openingHours.opens}–${BUSINESS.openingHours.closes}`;
+const hoursLineNl = `Elke dag behalve dinsdag ${hoursRange}`;
+
+const FAQ_ITEMS = [
+  {
+    q: 'Is het vlees bij KEYFO halal?',
+    a: 'Ja. Onze grillgerechten worden bereid met 100% halal vlees. Vraag bij twijfel over een specifiek gerecht gerust naar de details — we leggen het graag uit.'
+  },
+  {
+    q: 'Welke halal gerechten kan ik bij KEYFO afhalen?',
+    a: 'U kunt bij KEYFO terecht voor halal döner, kapsalon, Turkse pizza, grillgerechten en bijgerechten. Voor het actuele aanbod kunt u de menukaart bekijken.'
+  },
+  {
+    q: 'Wordt er alcohol geschonken bij KEYFO?',
+    a: 'KEYFO is een Turks familiecafé en restaurant; we richten ons op een rustige sfeer waarin families en groepen zich op hun gemak voelen. Geef bij uw bestelling of reservering door wat u wenst — we denken graag mee.'
+  },
+  {
+    q: 'Zijn er ook halal gerechten zonder vlees?',
+    a: 'Op de kaart staan ook gerechten zonder vlees. Vraag gerust naar de mogelijkheden bij uw bestelling — we helpen u verder.'
+  },
+  {
+    q: 'Kunnen we met een familie of grotere groep halal komen eten?',
+    a: 'Ja, families en groepen zijn welkom. Voor een grotere groep raden we aan om vooraf te bellen of een WhatsApp te sturen, zodat we rekening met u kunnen houden.'
+  },
+  {
+    q: 'Hoe geef ik een halal afhaalverzoek door?',
+    a: 'Het snelst is via WhatsApp of telefoon. U vertelt wat u wilt afhalen, wij bevestigen wanneer het klaarstaat. Een afhaalverzoek is pas definitief nadat KEYFO bevestigt.'
+  }
+] as const;
+
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  '@id': `${PAGE_URL}#restaurant`,
+  name: BUSINESS.canonicalName,
+  url: PAGE_URL,
+  image: `${SITE_ORIGIN}/assets/keyfo/hero-interior.webp`,
+  telephone: BUSINESS.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.address.streetAddress,
+    postalCode: BUSINESS.address.postalCode,
+    addressLocality: BUSINESS.address.addressLocality,
+    addressCountry: BUSINESS.address.addressCountry
+  },
+  servesCuisine: ['Turkish', 'Halal'],
+  areaServed: BUSINESS.areaServed.name,
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: [...BUSINESS.openingHours.days],
+    opens: BUSINESS.openingHours.opens,
+    closes: BUSINESS.openingHours.closes
+  }
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${PAGE_URL}#breadcrumb`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_ORIGIN}/` },
+    { '@type': 'ListItem', position: 2, name: 'Halal restaurant Schiedam', item: PAGE_URL }
+  ]
+};
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  name: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  inLanguage: 'nl-NL',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': `${SITE_ORIGIN}/#website`,
+    url: SITE_ORIGIN + '/',
+    name: BUSINESS.canonicalName
+  },
+  breadcrumb: { '@id': `${PAGE_URL}#breadcrumb` }
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a }
+  }))
+};
+---
+
+<BaseLayout
+  lang="nl"
+  title={PAGE_TITLE}
+  description={PAGE_DESCRIPTION}
+  skipLinkLabel={CONTENT_NL.skipLinkLabel}
+  canonicalUrl={PAGE_URL}
+  alternateLanguages={[
+    { hreflang: 'nl-NL', href: PAGE_URL },
+    { hreflang: 'x-default', href: PAGE_URL }
+  ]}
+  openGraph={{
+    type: 'website',
+    locale: 'nl_NL',
+    siteName: BUSINESS.canonicalName,
+    image: ogImageUrl,
+    imageAlt: 'KEYFO Restaurant & Cafe in Schiedam',
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageSecureUrl: ogImageUrl
+  }}
+  jsonLd={[restaurantSchema, breadcrumbSchema, webPageSchema, faqSchema]}
+  mobileCta={{
+    ariaLabel: CONTENT_NL.mobileCtaAriaLabel,
+    labels: CONTENT_NL.mobileCtaShort,
+    hrefs: {
+      menu: '/menu/',
+      whatsapp: whatsappUrl,
+      call: BUSINESS.phoneTel,
+      route: BUSINESS.googleMapsDirectionsUrl
+    }
+  }}
+>
+  <Header
+    brand={BUSINESS.canonicalName}
+    langLabel="TR"
+    langAriaLabel="Wissel naar Turks"
+    langHref="/tr/turks-restoran-schiedam/"
+    navAriaLabel={CONTENT_NL.navAriaLabel}
+    nav={{
+      menu: CONTENT_NL.nav.menu,
+      popular: 'Populair',
+      gallery: 'Galerij',
+      location: CONTENT_NL.nav.locatie
+    }}
+    reserveLink={{ label: 'Reserveren', href: '/reserveren/' }}
+    cta={{
+      whatsapp: { label: 'Bestellen', href: whatsappUrl },
+      phone: { label: 'Bellen', href: BUSINESS.phoneTel }
+    }}
+    linkPrefix="/"
+  />
+
+  <main id="main">
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container pt-28 sm:pt-32">
+        <nav aria-label="Breadcrumb" class="keyfo-breadcrumb mb-4">
+          <a href="/">Home</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">Halal restaurant Schiedam</span>
+        </nav>
+        <p class="text-xs uppercase tracking-[0.2em] text-amber-300/80 mb-3">Schiedam Centrum · Broersveld 103</p>
+        <h1 class="keyfo-brand text-4xl sm:text-5xl font-semibold text-white">
+          Halal restaurant in Schiedam Centrum
+        </h1>
+        <p class="keyfo-hero-intro mt-5 max-w-2xl">
+          Zoekt u een halal restaurant in Schiedam Centrum? KEYFO Restaurant &amp; Cafe aan
+          Broersveld 103 bereidt grillgerechten, döner, kapsalon en Turkse pizza met 100% halal
+          vlees. Loop binnen, bel ons of stuur een WhatsApp-afhaalverzoek — wij bevestigen wanneer
+          het klaarstaat.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ons
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_phone">Bel KEYFO</a>
+          <a
+            class="keyfo-btn-secondary"
+            href={BUSINESS.googleMapsDirectionsUrl}
+            target="_blank"
+            rel="noopener"
+            data-event="click_route"
+          >
+            Route bekijken
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">100% halal vlees bij KEYFO</h2>
+        <p>
+          Onze grillgerechten — döner, kapsalon, Turkse pizza en mix grill — worden bereid met
+          100% halal vlees. We werken met vaste leveranciers en houden de keuken bewust eenvoudig en
+          herkenbaar, zodat u weet wat er op uw bord ligt.
+        </p>
+        <p>
+          Twijfelt u over een specifiek gerecht of een ingrediënt? Vraag het gerust bij uw
+          bestelling — telefonisch, via WhatsApp of aan de balie. We leggen het graag uit.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Halal Turkse grill, döner en kapsalon</h2>
+        <p>
+          KEYFO is in de eerste plaats een Turkse grill en café. De klassiekers van de Turkse keuken
+          maken het grootste deel van de kaart uit. Bekijk de specifieke pagina's voor meer
+          informatie per gerecht:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><a class="underline" href="/doner-schiedam/">Halal döner afhalen in Schiedam</a></li>
+          <li><a class="underline" href="/kapsalon-schiedam/">Halal kapsalon afhalen in Schiedam</a></li>
+          <li><a class="underline" href="/turkse-pizza-schiedam/">Halal Turkse pizza afhalen in Schiedam</a></li>
+          <li><a class="underline" href="/turks-restaurant-schiedam/">Turks restaurant in Schiedam Centrum</a></li>
+        </ul>
+        <p>
+          Voor het volledige aanbod en de actuele prijzen kunt u terecht op de
+          <a class="underline" href="/menu/" data-event="click_menu">menukaart</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-200">
+        <h2 class="keyfo-section-title text-white">Halal eten afhalen via WhatsApp</h2>
+        <p>
+          Halal afhalen werkt het prettigst via WhatsApp of telefoon. U geeft door wat u wilt
+          afhalen, wij bevestigen de prijs en wanneer u kunt langskomen. Zo voorkomen we
+          vergissingen en kunnen we ook eventuele voorkeuren — bijvoorbeeld zonder ui of met extra
+          saus — meteen meenemen.
+        </p>
+        <p>
+          Een afhaalverzoek via WhatsApp is pas definitief nadat KEYFO bevestigt. U rekent ter
+          plaatse af bij het ophalen. Meer over het afhaalproces leest u op de pagina
+          <a class="underline" href="/afhalen-schiedam-centrum/">afhalen in Schiedam Centrum</a>.
+        </p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ons
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_phone">Bel KEYFO</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Voor families, groepen en reserveringen</h2>
+        <p>
+          KEYFO is een warm Turks familiecafé in het centrum van Schiedam. Families, vrienden en
+          collega's zijn welkom. Voor een rustige tafel binnen kunt u
+          <a class="underline" href="/reserveren/">reserveren via WhatsApp</a> — de reservering is
+          pas definitief nadat KEYFO bevestigt. Plant u iets groters, bijvoorbeeld een verjaardag of
+          een kantoorlunch? Bekijk dan de pagina
+          <a class="underline" href="/groepsbestelling-schiedam/">groepsbestelling Schiedam</a> voor
+          de aanpak en wat we vooraf graag van u willen weten.
+        </p>
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-dark">
+      <div class="keyfo-container">
+        <Location
+          heading="KEYFO op Broersveld 103 in Schiedam Centrum"
+          eyebrow="Halal restaurant in Schiedam"
+          intro="KEYFO Restaurant & Cafe vindt u aan Broersveld 103, midden in Schiedam Centrum — op loopafstand van station Schiedam Centrum en de Nieuwe Passage."
+          addressLines={[
+            `${BUSINESS.canonicalName}`,
+            `${BUSINESS.address.streetAddress}`,
+            `${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`
+          ]}
+          hoursLine={hoursLineNl}
+          parkingLine="Parkeermogelijkheden kunnen per moment verschillen; controleer vooraf de actuele parkeerinfo."
+          links={[
+            { label: 'WhatsApp ons', href: whatsappUrl, isExternal: true, variant: 'primary' },
+            { label: 'Bel KEYFO', href: BUSINESS.phoneTel, variant: 'secondary' },
+            { label: 'Route bekijken', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' },
+            { label: 'Bekijk volledige menukaart', href: '/menu/', variant: 'tertiary' }
+          ]}
+          mapEmbedUrl={BUSINESS.googleMapsEmbedUrl}
+          mapDirectionsUrl={BUSINESS.googleMapsDirectionsUrl}
+          mapCtaLabel="Route openen in Google Maps"
+        />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container">
+        <FAQ heading="Veelgestelde vragen over halal eten bij KEYFO" items={FAQ_ITEMS} />
+      </div>
+    </section>
+
+    <section class="keyfo-section keyfo-band-cream">
+      <div class="keyfo-container max-w-3xl space-y-4 leading-relaxed text-zinc-800">
+        <h2 class="keyfo-section-title">Klaar om halal af te halen of langs te komen?</h2>
+        <p>
+          Stuur ons een WhatsApp of bel ons. Wilt u eerst rondkijken? Bekijk de
+          <a class="underline" href="/menu/" data-event="click_menu">volledige menukaart</a>, of de
+          pagina <a class="underline" href="/afhalen-schiedam-centrum/">afhalen in Schiedam Centrum</a>.
+        </p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
+            WhatsApp ons
+          </a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_phone">Bel KEYFO</a>
+          <a class="keyfo-btn-secondary" href={BUSINESS.googleMapsDirectionsUrl} target="_blank" rel="noopener" data-event="click_route">
+            Route bekijken
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    brand={BUSINESS.canonicalName}
+    tagline={CONTENT_NL.heroSubheading}
+    napLines={[
+      `Adres: ${BUSINESS.address.streetAddress}, ${BUSINESS.address.postalCode} ${BUSINESS.address.addressLocality}`,
+      `Telefoon/WhatsApp: ${BUSINESS.phone}`,
+      `E-mail: ${BUSINESS.email}`
+    ]}
+    columns={[
+      {
+        label: 'Acties',
+        links: [
+          { label: 'WhatsApp ons', href: whatsappUrl, isExternal: true },
+          { label: 'Bel KEYFO', href: BUSINESS.phoneTel },
+          { label: 'Route bekijken', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
+          { label: 'Bekijk volledige menukaart', href: '/menu/' }
+        ]
+      },
+      {
+        label: 'Sociaal',
+        links: [
+          { label: 'Instagram', href: BUSINESS.social.instagram, isExternal: true },
+          { label: 'Facebook', href: BUSINESS.social.facebook, isExternal: true },
+          { label: 'TikTok', href: BUSINESS.social.tiktok, isExternal: true },
+          { label: 'X', href: BUSINESS.social.twitter, isExternal: true },
+          { label: 'Pinterest', href: BUSINESS.social.pinterest, isExternal: true }
+        ]
+      },
+      {
+        label: 'Lokaal',
+        links: [
+          { label: 'Turks restaurant Schiedam', href: '/turks-restaurant-schiedam/' },
+          { label: 'Döner Schiedam', href: '/doner-schiedam/' },
+          { label: 'Kapsalon Schiedam', href: '/kapsalon-schiedam/' },
+          { label: 'Turkse pizza Schiedam', href: '/turkse-pizza-schiedam/' },
+          { label: 'Afhalen Schiedam Centrum', href: '/afhalen-schiedam-centrum/' }
+        ]
+      }
+    ]}
+    legalLine={`© ${new Date().getFullYear()} ${BUSINESS.canonicalName}`}
+  />
+</BaseLayout>
