@@ -65,7 +65,7 @@ const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').t
               target="_blank"
               rel="noopener noreferrer"
               class="keyfo-hero-meta-rating"
-              aria-label={`${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count})`}
+              aria-label={`${ratingValueLabel} — ${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count} ${rating.label})`}
             >
               <span aria-hidden="true" class="keyfo-hero-meta-star">★</span>
               <span class="keyfo-hero-meta-value">{ratingValueLabel}</span>
@@ -75,7 +75,7 @@ const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').t
           ) : (
             <span
               class="keyfo-hero-meta-rating"
-              aria-label={`${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count})`}
+              aria-label={`${ratingValueLabel} — ${rating.ariaLabel}: ${ratingValueLabel} / 5 (${rating.count} ${rating.label})`}
             >
               <span aria-hidden="true" class="keyfo-hero-meta-star">★</span>
               <span class="keyfo-hero-meta-value">{ratingValueLabel}</span>
