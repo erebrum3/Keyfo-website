@@ -14,7 +14,7 @@ if (!existsSync(src)) {
 }
 
 const fmt = (n) => (n / 1024).toFixed(1) + 'KB';
-const widths = [480, 768, 960];
+const widths = [320, 480, 768, 960];
 
 const meta = await sharp(src).metadata();
 console.log(`Source: ${meta.width}x${meta.height} (${meta.format}) ${fmt(statSync(src).size)}\n`);
