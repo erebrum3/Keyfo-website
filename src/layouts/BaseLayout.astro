@@ -65,6 +65,7 @@ const ogImageSecureUrl = openGraph?.imageSecureUrl ?? (ogImage && ogImage.starts
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
+const clarityProjectId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID;
 const maintenanceOverlayActive = import.meta.env.PUBLIC_KEYFO_NOTICE_MODE === 'maintenance_overlay';
 const maintenanceOverlayLang: 'nl' | 'tr' = lang === 'tr' ? 'tr' : 'nl';
 ---
@@ -123,9 +124,9 @@ const maintenanceOverlayLang: 'nl' | 'tr' = lang === 'tr' ? 'tr' : 'nl';
     <link
       rel="preload"
       as="image"
-      href="/assets/keyfo/hero/hero-bg-desktop-1600.webp"
-      imagesrcset="/assets/keyfo/hero/hero-bg-mobile.webp 900w, /assets/keyfo/hero/hero-bg-desktop-1600.webp 1600w, /assets/keyfo/hero/hero-bg-desktop-2400.webp 2400w"
-      imagesizes="(max-width: 767px) 100vw, 100vw"
+      href="/assets/keyfo/hero/storefront-desktop-1200.webp"
+      imagesrcset="/assets/keyfo/hero/storefront-mobile-800.webp 800w, /assets/keyfo/hero/storefront-desktop-1200.webp 1200w, /assets/keyfo/hero/storefront-desktop-1600.webp 1600w"
+      imagesizes="(max-width: 767px) 100vw, (min-width: 1100px) 540px, 45vw"
       fetchpriority="high"
     />
 
@@ -166,6 +167,32 @@ const maintenanceOverlayLang: 'nl' | 'tr' = lang === 'tr' ? 'tr' : 'nl';
       import { bindAutoTracking } from '../scripts/analytics';
       bindAutoTracking();
     </script>
+
+    {clarityProjectId ? (
+      <script define:vars={{ clarityProjectId }}>
+        (function () {
+          var started = false;
+          async function startClarity() {
+            if (started) return;
+            started = true;
+            try {
+              var mod = await import('@microsoft/clarity');
+              var Clarity = mod.default || mod;
+              Clarity.init(clarityProjectId);
+            } catch (_e) { /* ignore */ }
+          }
+          var consent = null;
+          try { consent = localStorage.getItem('keyfo_cookie_consent'); } catch (_e) {}
+          if (consent === 'accepted') {
+            startClarity();
+          } else {
+            document.addEventListener('keyfo:consent-changed', function (e) {
+              if (e && e.detail && e.detail.consent === 'accepted') startClarity();
+            });
+          }
+        })();
+      </script>
+    ) : null}
 
     <Analytics />
     <SpeedInsights />

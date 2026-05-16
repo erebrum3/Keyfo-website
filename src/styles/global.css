@@ -287,8 +287,13 @@
   }
 
   .keyfo-hero-inner {
-    @apply relative flex max-w-4xl flex-col justify-center pt-4 pb-24 sm:py-10 lg:py-14;
-    min-height: clamp(28rem, 64svh, 42rem);
+    @apply relative flex max-w-4xl flex-col justify-center pt-4 pb-6 sm:py-10 lg:py-14;
+  }
+
+  @media (min-width: 900px) {
+    .keyfo-hero-inner {
+      min-height: clamp(26rem, 56svh, 38rem);
+    }
   }
 
   .keyfo-hero-meta {
