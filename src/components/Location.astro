@@ -78,14 +78,29 @@ const {
         </div>
       </div>
 
-      <div class="keyfo-location-map">
-        <iframe
-          src={mapEmbedUrl}
-          title={`${mapTitle} — ${addressLines.join(', ')}`}
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen
-        ></iframe>
+      <div
+        class="keyfo-location-map"
+        data-map-facade
+        data-map-src={mapEmbedUrl}
+        data-map-title={`${mapTitle} — ${addressLines.join(', ')}`}
+      >
+        <div class="keyfo-location-map-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="48" height="48" focusable="false" aria-hidden="true">
+            <path fill="rgba(242, 176, 43, 0.85)" d="M32 4c-9.94 0-18 8.06-18 18 0 13.5 18 38 18 38s18-24.5 18-38c0-9.94-8.06-18-18-18Zm0 25a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/>
+          </svg>
+          <span class="keyfo-location-map-placeholder-text">{addressLines[0]}</span>
+        </div>
+        <button
+          type="button"
+          class="keyfo-location-map-load"
+          data-map-load
+          aria-label={mapTitle ? `${mapTitle} — kaart laden` : 'Kaart laden'}
+        >
+          <span>Kaart bekijken</span>
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M9.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414-1.414L11.586 9H3a1 1 0 1 1 0-2h8.586L9.293 4.707a1 1 0 0 1 0-1.414Z"/>
+          </svg>
+        </button>
         <a
           class="keyfo-location-map-cta"
           href={mapDirectionsUrl}
@@ -102,3 +117,32 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  const facades = document.querySelectorAll<HTMLElement>('[data-map-facade]');
+  facades.forEach((facade) => {
+    const btn = facade.querySelector<HTMLButtonElement>('[data-map-load]');
+    const src = facade.getAttribute('data-map-src');
+    const title = facade.getAttribute('data-map-title') ?? 'Kaart';
+    if (!btn || !src) return;
+
+    let loaded = false;
+    const load = () => {
+      if (loaded) return;
+      loaded = true;
+      const iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.title = title;
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.className = 'keyfo-location-map-iframe';
+      const placeholder = facade.querySelector('.keyfo-location-map-placeholder');
+      placeholder?.remove();
+      btn.remove();
+      facade.prepend(iframe);
+    };
+
+    btn.addEventListener('click', load, { once: true });
+  });
+</script>
