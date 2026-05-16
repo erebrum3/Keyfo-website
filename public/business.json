@@ -41,10 +41,7 @@
       "channels": ["WhatsApp", "phone"]
     },
     "delivery": {
-      "available": true,
-      "via": "Thuisbezorgd",
-      "url": "https://www.thuisbezorgd.nl/da/menu/keyfo",
-      "external": true
+      "available": false
     },
     "dineIn": {
       "available": true
@@ -52,8 +49,7 @@
   },
   "social": {
     "instagram": "https://www.instagram.com/keyfokipgrill_/",
-    "facebook": "https://www.facebook.com/hanife.isleyen.1/photos",
-    "thuisbezorgd": "https://www.thuisbezorgd.nl/da/menu/keyfo"
+    "facebook": "https://www.facebook.com/hanife.isleyen.1/photos"
   },
   "menuUrl": "https://keyfo.nl/#menu",
   "menuJsonUrl": "https://keyfo.nl/menu.json"

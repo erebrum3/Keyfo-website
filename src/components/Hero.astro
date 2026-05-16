@@ -16,7 +16,6 @@ type Props = {
     whatsapp: { label: string; href: string };
     phone: { label: string; href: string };
     route: { label: string; href: string };
-    delivery: { label: string; href: string };
   };
   photoAlt?: string;
 };
@@ -118,7 +117,6 @@ const heroSubbrand = heroMain === heading ? '' : heading.replace(heroMain, '').t
         <a href={ctas.phone.href} class="keyfo-btn-secondary keyfo-motion" data-event="click_phone" data-cta-location="hero">{ctas.phone.label}</a>
         <a href={ctas.route.href} class="keyfo-btn-secondary keyfo-motion" data-event="click_route" data-cta-location="hero">{ctas.route.label}</a>
       </div>
-      <a href={ctas.delivery.href} class="keyfo-delivery-link keyfo-motion" data-event="click_thuisbezorgd" data-cta-location="hero">{ctas.delivery.label}</a>
     </div>
     </div>
 

@@ -32,10 +32,6 @@ const FAQ_ITEMS = [
     a: 'Het snelst is via WhatsApp of door ons te bellen. U geeft uw bestelling door en wij laten weten wanneer het klaarstaat.'
   },
   {
-    q: 'Bezorgen jullie ook?',
-    a: 'Bezorgen verloopt via Thuisbezorgd. Voor afhalen kunt u het beste rechtstreeks contact met ons opnemen.'
-  },
-  {
     q: 'Is het vlees halal?',
     a: 'Ja. Onze grillgerechten worden bereid met 100% halal vlees. Vraag bij uw bestelling gerust naar specifieke gerechten.'
   },
@@ -217,24 +213,11 @@ const faqSchema = {
           wij laten weten wanneer het klaarstaat. Meer over de werkwijze leest u op onze pagina
           <a class="underline" href="/afhalen-schiedam-centrum/">afhalen in Schiedam Centrum</a>.
         </p>
-        <p>
-          Liever bezorgen? Dat verloopt via Thuisbezorgd. Voor afhalen werken we het liefst direct
-          met u.
-        </p>
         <div class="mt-2 flex flex-wrap gap-3">
           <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
             WhatsApp ons
           </a>
           <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_phone">Bel KEYFO</a>
-          <a
-            class="keyfo-btn-ghost"
-            href={BUSINESS.social.thuisbezorgd}
-            target="_blank"
-            rel="nofollow noopener"
-            data-event="click_thuisbezorgd"
-          >
-            Bestel via Thuisbezorgd
-          </a>
         </div>
       </div>
     </section>
@@ -325,8 +308,7 @@ const faqSchema = {
         links: [
           { label: 'WhatsApp ons', href: whatsappUrl, isExternal: true },
           { label: 'Bel KEYFO', href: BUSINESS.phoneTel },
-          { label: 'Route in Google Maps', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
-          { label: 'Bestel via Thuisbezorgd', href: BUSINESS.social.thuisbezorgd, isExternal: true }
+          { label: 'Route in Google Maps', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true }
         ]
       },
       {

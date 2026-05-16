@@ -2,7 +2,7 @@ export const CONTENT_NL = {
   lang: 'nl',
   pageTitle: 'KEYFO Restaurant & Cafe - Turkse grill en döner in Schiedam',
   pageDescription:
-    'Bekijk het menu van KEYFO Restaurant & Cafe in Schiedam. Afhalen via WhatsApp of telefoon. Bezorging via Thuisbezorgd (extern).',
+    'Bekijk het menu van KEYFO Restaurant & Cafe in Schiedam. Afhalen via WhatsApp of telefoon.',
   heroSubheading: 'Turkse grill en döner in Schiedam.',
   heroIntro:
     'KEYFO Restaurant & Cafe is een lokaal Turks restaurant aan Broersveld 103 in Schiedam Centrum. Op het menu staan döner, grillgerechten, Turkse pizza, desserts en drankjes. Afhalen kan via WhatsApp of telefoon.',
@@ -23,12 +23,11 @@ export const CONTENT_NL = {
     viewMenu: 'Menu bekijken',
     whatsappPickup: 'WhatsApp voor afhalen',
     callNow: 'Bel direct',
-    viewRoute: 'Route bekijken',
-    thuisbezorgd: 'Bestel via Thuisbezorgd'
+    viewRoute: 'Route bekijken'
   },
-  serviceCopy: 'Binnen eten, afhalen via telefoon of WhatsApp, en bezorgen via Thuisbezorgd.',
+  serviceCopy: 'Binnen eten of afhalen via telefoon of WhatsApp.',
   priceNote:
-    'Menuprijzen en beschikbaarheid kunnen wijzigen. Voor afhalen via telefoon of WhatsApp kun je ons direct bereiken. Bezorging loopt via Thuisbezorgd; prijzen en voorwaarden kunnen daar afwijken.',
+    'Menuprijzen en beschikbaarheid kunnen wijzigen. Voor afhalen via telefoon of WhatsApp kun je ons direct bereiken.',
   allergenNote: 'Heeft u een allergie? Vraag ons gerust naar allergeneninformatie voordat u bestelt.',
   halalWording: '100% halal vlees',
   featuredHeading: 'Populaire gerechten',
@@ -36,7 +35,7 @@ export const CONTENT_NL = {
   featuredLead: 'Een greep uit ons aanbod.',
   menuHeading: 'Menu',
   menuLastUpdatedLabel: 'Laatste update',
-  menuIntro: 'Döner, grillgerechten, Turkse pizza, desserts en drankjes. Afhalen via WhatsApp of telefoon; bezorging via Thuisbezorgd (extern).',
+  menuIntro: 'Döner, grillgerechten, Turkse pizza, desserts en drankjes. Afhalen via WhatsApp of telefoon.',
   menuShortcutLabel: 'Snel naar categorie',
   menuCta: {
     heading: 'Afhalen? Stuur ons een WhatsApp-bericht.',
@@ -98,10 +97,6 @@ export const CONTENT_NL = {
     {
       q: 'Kan ik afhalen?',
       a: 'Ja. Afhalen kan via telefoon of WhatsApp.'
-    },
-    {
-      q: 'Is bezorgen mogelijk?',
-      a: 'Bezorging gaat via Thuisbezorgd (extern).'
     },
     {
       q: 'Kan ik reserveren?',

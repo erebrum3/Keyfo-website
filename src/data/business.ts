@@ -45,8 +45,7 @@ export const BUSINESS = {
     facebook: 'https://www.facebook.com/profile.php?id=61589404211645',
     tiktok: 'https://www.tiktok.com/@keyfo.schiedam',
     twitter: 'https://x.com/KeyfoRestaurant',
-    pinterest: 'https://www.pinterest.com/keyforestaurant/',
-    thuisbezorgd: 'https://www.thuisbezorgd.nl/da/menu/keyfo'
+    pinterest: 'https://www.pinterest.com/keyforestaurant/'
   },
   website: {
     nlUrl: 'https://keyfo.nl/',

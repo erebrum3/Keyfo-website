@@ -73,8 +73,7 @@ const restaurantSchema = {
     BUSINESS.social.facebook,
     BUSINESS.social.tiktok,
     BUSINESS.social.twitter,
-    BUSINESS.social.pinterest,
-    BUSINESS.social.thuisbezorgd
+    BUSINESS.social.pinterest
   ],
   paymentAccepted: BUSINESS.paymentAccepted
 };
@@ -165,8 +164,7 @@ const faqSchema = {
             viewMenu: { label: CONTENT_NL.ctas.viewMenu, href: '#menu' },
             whatsapp: { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill) },
             phone: { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel },
-            route: { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl },
-            delivery: { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd }
+            route: { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl }
           }}
         />
         <div class="keyfo-hero-foot">
@@ -270,8 +268,7 @@ const faqSchema = {
             { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill), isExternal: true, variant: 'primary' },
             { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel, variant: 'secondary' },
             { label: 'E-mail', href: BUSINESS.emailMailto },
-            { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' },
-            { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true, variant: 'tertiary' }
+            { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true, variant: 'secondary' }
           ]}
           mapEmbedUrl={BUSINESS.googleMapsEmbedUrl}
           mapDirectionsUrl={BUSINESS.googleMapsDirectionsUrl}
@@ -306,8 +303,7 @@ const faqSchema = {
         links: [
           { label: CONTENT_NL.ctas.whatsappPickup, href: BUSINESS.getWhatsAppUrl(CONTENT_NL.whatsappPrefill), isExternal: true },
           { label: CONTENT_NL.ctas.callNow, href: BUSINESS.phoneTel },
-          { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
-          { label: CONTENT_NL.ctas.thuisbezorgd, href: BUSINESS.social.thuisbezorgd, isExternal: true }
+          { label: CONTENT_NL.ctas.viewRoute, href: BUSINESS.googleMapsDirectionsUrl, isExternal: true }
         ]
       },
       {

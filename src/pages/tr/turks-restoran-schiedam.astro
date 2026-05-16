@@ -32,10 +32,6 @@ const FAQ_ITEMS = [
     a: 'En hızlısı WhatsApp veya telefon ile. Siparişinizi iletirsiniz, biz hazır olduğunda haber veririz.'
   },
   {
-    q: 'Adrese teslim yapıyor musunuz?',
-    a: 'Adrese teslim Thuisbezorgd üzerinden yapılır. Gel-al için bize doğrudan ulaşmanız en pratiğidir.'
-  },
-  {
     q: 'Et helal mi?',
     a: 'Evet. Izgaralarımız %100 helal et ile hazırlanır. Sipariş verirken belirli ürünleri bize sorabilirsiniz.'
   },
@@ -217,24 +213,11 @@ const faqSchema = {
           olduğunda size haber veririz. Bu şekilde yanlış anlaşılmaları önler ve siparişiniz
           tam zamanında hazır olur.
         </p>
-        <p>
-          Adrese teslim mi tercih edersiniz? Bu Thuisbezorgd üzerinden yapılır. Gel-al için bizimle
-          doğrudan iletişime geçmeniz en iyi yoldur.
-        </p>
         <div class="mt-2 flex flex-wrap gap-3">
           <a class="keyfo-btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-event="click_whatsapp">
             WhatsApp ile yaz
           </a>
           <a class="keyfo-btn-secondary" href={BUSINESS.phoneTel} data-event="click_phone">KEYFO'yu ara</a>
-          <a
-            class="keyfo-btn-ghost"
-            href={BUSINESS.social.thuisbezorgd}
-            target="_blank"
-            rel="nofollow noopener"
-            data-event="click_thuisbezorgd"
-          >
-            Thuisbezorgd üzerinden sipariş
-          </a>
         </div>
       </div>
     </section>
@@ -314,8 +297,7 @@ const faqSchema = {
         links: [
           { label: 'WhatsApp ile yaz', href: whatsappUrl, isExternal: true },
           { label: 'KEYFO\'yu ara', href: BUSINESS.phoneTel },
-          { label: 'Google Maps\'te yol tarifi', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true },
-          { label: 'Thuisbezorgd üzerinden sipariş', href: BUSINESS.social.thuisbezorgd, isExternal: true }
+          { label: 'Google Maps\'te yol tarifi', href: BUSINESS.googleMapsDirectionsUrl, isExternal: true }
         ]
       },
       {

@@ -2,7 +2,7 @@ export const CONTENT_TR = {
   lang: 'tr',
   pageTitle: "KEYFO Restaurant & Cafe - Schiedam’da Türk grill ve döner",
   pageDescription:
-    "Schiedam’daki KEYFO Restaurant & Cafe menüsünü görüntüleyin. Gel-al için WhatsApp veya telefon. Adrese teslim Thuisbezorgd üzerinden (harici).",
+    "Schiedam’daki KEYFO Restaurant & Cafe menüsünü görüntüleyin. Gel-al için WhatsApp veya telefon.",
   heroSubheading: "Schiedam’da Türk grill ve döner.",
   heroIntro:
     "KEYFO Restaurant & Cafe, Schiedam Centrum’da Broersveld 103 adresinde yerel bir Türk restoranıdır. Menüde döner, ızgara, Türk pizzası, tatlılar ve içecekler bulunur. Gel-al için WhatsApp veya telefonla iletişime geçebilirsiniz.",
@@ -23,12 +23,11 @@ export const CONTENT_TR = {
     viewMenu: 'Menüyü Gör',
     whatsappPickup: 'WhatsApp ile Gel-Al',
     callNow: 'Hemen Ara',
-    viewRoute: 'Yol Tarifi',
-    thuisbezorgd: 'Thuisbezorgd üzerinden sipariş ver'
+    viewRoute: 'Yol Tarifi'
   },
-  serviceCopy: 'İçeride servis, telefon/WhatsApp ile gel-al ve Thuisbezorgd üzerinden adrese teslim.',
+  serviceCopy: 'İçeride servis veya telefon/WhatsApp ile gel-al.',
   priceNote:
-    'Menü fiyatları ve ürün uygunluğu değişebilir. Gel-al sipariş için telefon veya WhatsApp ile bize doğrudan ulaşabilirsiniz. Adrese teslim Thuisbezorgd üzerinden yapılır; fiyatlar ve koşullar orada farklı olabilir.',
+    'Menü fiyatları ve ürün uygunluğu değişebilir. Gel-al sipariş için telefon veya WhatsApp ile bize doğrudan ulaşabilirsiniz.',
   allergenNote: 'Alerjiniz varsa sipariş vermeden önce alerjen bilgisi için lütfen bize sorun.',
   halalWording: '%100 helal et',
   featuredHeading: 'Popüler ürünler',
@@ -36,7 +35,7 @@ export const CONTENT_TR = {
   featuredLead: 'Menümüzden seçkiler.',
   menuHeading: 'Menü',
   menuLastUpdatedLabel: 'Son güncelleme',
-  menuIntro: 'Döner, ızgara çeşitleri, Türk pizzası, tatlılar ve içecekler. WhatsApp veya telefonla gel-al; teslimat Thuisbezorgd üzerinden (harici).',
+  menuIntro: 'Döner, ızgara çeşitleri, Türk pizzası, tatlılar ve içecekler. WhatsApp veya telefonla gel-al.',
   menuShortcutLabel: 'Kategoriye git',
   menuCta: {
     heading: 'Gel-al için WhatsApp üzerinden bize yazın.',
@@ -98,10 +97,6 @@ export const CONTENT_TR = {
     {
       q: 'Gel-al mümkün mü?',
       a: 'Evet. Gel-al için telefon veya WhatsApp ile sipariş verebilirsiniz.'
-    },
-    {
-      q: 'Paket servis var mı?',
-      a: 'Adrese teslim Thuisbezorgd üzerinden yapılır (harici).'
     },
     {
       q: 'Rezervasyon yapabilir miyim?',
