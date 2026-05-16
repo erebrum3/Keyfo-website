@@ -118,12 +118,12 @@ export const MENU = {
       titleNl: "Menu's (gerechten)",
       titleTr: 'Menüler (yemekler)',
       items: [
-        { id: 'menus__chicken-stew-menu', name: 'Chicken stew menu', nameNl: 'Kipstoofpot menu', nameTr: 'Tavuk yahnisi menü', priceEur: 21.0 },
+        { id: 'menus__chicken-stew-menu', name: 'Chicken stew menu', nameNl: 'Kipstoofpot menu', nameTr: 'Tavuk yahnisi menü', priceEur: 16.0 },
         { id: 'menus__kofte-menu', name: 'Köfte menu', nameNl: 'Köfte menu', nameTr: 'Köfte menü', priceEur: 16.0, featured: true },
         { id: 'menus__chicken-fillet-menu', name: 'Chicken Fillet Menu', nameNl: 'Kipfilet menu', nameTr: 'Tavuk fileto menü', priceEur: 16.0 },
         { id: 'menus__chicken-carbonade-menu', name: 'Chicken Carbonade Menu', nameNl: 'Kip carbonade menu', nameTr: 'Tavuk pirzola menü', priceEur: 16.0 },
         { id: 'menus__doner-menu', name: 'Döner menu', nameNl: 'Döner menu', nameTr: 'Döner menü', priceEur: 15.0 },
-        { id: 'menus__chicken-wings-menu', name: 'Chicken Wings Menu', nameNl: 'Kippenvleugels menu', nameTr: 'Tavuk kanat menü', priceEur: 21.0 }
+        { id: 'menus__chicken-wings-menu', name: 'Chicken Wings Menu', nameNl: 'Kippenvleugels menu', nameTr: 'Tavuk kanat menü', priceEur: 16.0 }
       ]
     },
     {
